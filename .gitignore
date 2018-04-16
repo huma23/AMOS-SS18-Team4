@@ -10,6 +10,11 @@
 /src/main/webapp/polyfills.bundle.js
 /src/main/webapp/styles.bundle.js
 /src/main/webapp/vendor.bundle.js
+src/main/webapp/inline.bundle.js.map
+/src/main/webapp/main.bundle.js.map
+/src/main/webapp/polyfills.bundle.js.map
+/src/main/webapp/styles.bundle.js.map
+/src/main/webapp/vendor.bundle.js.map
 
 # IDEs and editors
 /.idea
