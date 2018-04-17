@@ -1,0 +1,27 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+/target
+/ngtarget
+/src/main/angular/node_modules
+/src/main/webapp/WEB-INF/appengine-web.xml
+/src/main/webapp/favicon.ico
+/src/main/webapp/index.html
+/src/main/webapp/inline.bundle.js
+/src/main/webapp/main.bundle.js
+/src/main/webapp/polyfills.bundle.js
+/src/main/webapp/styles.bundle.js
+/src/main/webapp/vendor.bundle.js
+/src/main/webapp/inline.bundle.js.map
+/src/main/webapp/main.bundle.js.map
+/src/main/webapp/polyfills.bundle.js.map
+/src/main/webapp/styles.bundle.js.map
+/src/main/webapp/vendor.bundle.js.map
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+
+# System Files
+.DS_Store
+Thumbs.db
