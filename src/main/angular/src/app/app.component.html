@@ -1,0 +1,14 @@
+<mat-toolbar color="primary"><span>{{title}}</span></mat-toolbar>
+
+<div id="content">
+  <form (ngSubmit)="onSubmit(model)">
+    <mat-form-field>
+      <input matInput placeholder="Username" type="text" [(ngModel)]="model.name" name="name">
+    </mat-form-field>
+    <button type="submit" mat-button>Save</button>
+  </form>
+
+  <ul>
+    <li *ngFor="let user of users">{{user.name}}</li>
+  </ul>
+</div>
