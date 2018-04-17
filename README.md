@@ -1,27 +1,43 @@
-# Ngapp
+# Planungstafel
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+This project is an open source web application that let the user create a digital whiteboard for planing tasks in craft 
+businesses.
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Node.js
+- Maven
+- Java 1.8
+- Git
 
-## Code scaffolding
+## Setup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Run `git clone https://github.com/huma23/AMOS-SS18-Team4.git`
+2. Create a new Google App Engine Project
+3. Insert your project id into `src\main\webapp\WEB-INF\appengine-web.xml`
 
-## Build
+## Overview
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+- `src` - root source directory for backend and frontend
+- `src\main\java\` - source directory for the java backend
+- `src\main\angular\` - source directory for the angular frontend
+- `ngtarget` - output directory for the frontend application (will be copied to `src\main\webapp` on deployment)
+- `target` - output directory for the war-file
 
-## Running unit tests
+Note:
+- The dependencies of the backend application are controlled via maven in the project root directory
+- The dependencies of the frontend application are controlled via npm in the `src\main\angular\` directory.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Build & Deploy - Local
 
-## Running end-to-end tests
+Run `mvn appengine:devserver`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Note: Some features (like datastore) can not be used local at the moment.
 
-## Further help
+## Build & Deploy - App Engine
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Run `mvn appengine:update`
+
+## Tests
+
+TODO
