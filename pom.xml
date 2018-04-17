@@ -57,7 +57,7 @@
                         <id>exec-npm-install</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
                             <executable>npm</executable>
                             <arguments>
                                 <argument>install</argument>
@@ -71,7 +71,7 @@
                         <id>exec-npm-ng-build</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
+                            <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
                             <executable>ng</executable>
                             <arguments>
                                 <argument>build</argument>
@@ -110,7 +110,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <packagingExcludes>ngapp/**</packagingExcludes>
+                    <packagingExcludes>angular/**</packagingExcludes>
                 </configuration>
             </plugin>
 
@@ -119,7 +119,7 @@
                 <version>3.6.1</version>
                 <configuration>
                     <excludes>
-                        <exclude>ngapp/**</exclude>
+                        <exclude>angular/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
