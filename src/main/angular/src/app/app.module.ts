@@ -1,6 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import {MatButtonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatToolbarModule} from "@angular/material";
+import {MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatSidenavModule} from "@angular/material";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -22,7 +28,9 @@ import {NgModule} from "@angular/core";
     MatInputModule,
     HttpClientModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    FlexLayoutModule,
+    MatSidenavModule
   ],
   providers: [AppService],
   bootstrap: [AppComponent]
