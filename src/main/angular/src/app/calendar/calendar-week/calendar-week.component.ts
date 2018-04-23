@@ -17,7 +17,7 @@ export class CalendarWeekComponent implements OnInit {
 
   ngOnInit()
   { 
-
+ 
   }
 
 }
