@@ -5,7 +5,7 @@ export class CalendarWeek
     constructor(
         public weekOfTheYear        : number, 
         public year                 : number, 
-        public header               : Array<Date>,
+        public header               : Array<string>,
         public constructionManagers : ConstructionManager []
 
     ) { }

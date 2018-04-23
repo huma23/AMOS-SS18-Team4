@@ -1,6 +1,16 @@
+/**
+ *  
+ */
+
+
+
+
+
+
 
 import { Injectable } from '@angular/core';
 import { CalendarWeek} from './calender-week' ;
+import { ConstructionManager, CPlan } from './construction-manager';
 
 
 @Injectable()
@@ -8,50 +18,38 @@ export class CalenderStoreService
 {
 
   public today  : Date;
-  public cW     : CalendarWeek ;
-  static DaysOfTheWeek : Array<string> = ["Montag","Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"]; 
+  public cW     : Array<CalendarWeek> ;
+
+  public musterCPlan = new CPlan(17, "Musterstrasse", ["Max, Moritz, Frido"] );
+  public musterCPArr =
+  [
+    this.musterCPlan, 
+    this.musterCPlan, 
+    this.musterCPlan,
+    this.musterCPlan, 
+    this.musterCPlan, 
+    this.musterCPlan
+  ];
+
   constructor() 
   {
     this.today = new Date();
-    this.cW = new CalendarWeek(
-      this.createActualCalendarWeek(), 
-      2018, 
-      [], 
-      [],       
-    )
+    this.cW = [new CalendarWeek
+      (
+        17, 
+        2018, 
+        ["17", "23.04","24.04", "25.04", "26.04", "27.04", "28.04"], 
+        [ 
+          new ConstructionManager("Müller","Hans","Bauleiter" , this.musterCPArr),
+          new ConstructionManager("Schmidt","Uwe","Bauleiter" , this.musterCPArr), 
+          new ConstructionManager("Schulz","Peter","Bauleiter", this.musterCPArr)
+        ]       
+      )
+    ]
   }
-
-  createCalendarWeek() : Array<string>
-  {
-    let result : Array<string>;
-    result.push( "Kalenderwoche" + this.createCalendarWeek())
-    let firstDayofThisWeek = new Date (this.today) ;
-    for (let i = this.today.getDay(); i >= 0; i--)
-    {
-      firstDayofThisWeek.setDate(firstDayofThisWeek.getDate()-1);
-    }
-    for (let i = 0; i < 7; ++i)
-    {
-      result[i] = CalenderStoreService.DaysOfTheWeek[i] + firstDayofThisWeek.getDay();
-      firstDayofThisWeek.setDate(firstDayofThisWeek.getDate()+1);
-    }
-    
-    return result;
-  }
-  createActualCalendarWeek () : number 
-  {
-    return 15;
-    /*
-    let tmp = new Date ();
-    tmp.setHours(0,0,0);
-    tmp.setDate(tmp.getDate() + 4 - (tmp.getDay() || 7));
-    return Math.ceil((((tmp - new Date(tmp.getFullYear(), 0,1))/8.64e7)+1)/7);
-    */
-  }
-
   
   getCalendarWeeks() : Array<CalendarWeek>
   {
-    return [this.cW];
+    return this.cW;
   }
 }
