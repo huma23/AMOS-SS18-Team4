@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Input,Component, OnInit }  from '@angular/core';
+import { ConstructionManager}       from '../../shared/construction-manager';
+import { CalendarWeekItemComponent} from '../calendar-week-item/calendar-week-item.component' ;
 
 @Component({
   selector: 'pl-calendar-content',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarContentComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  public constructionManagers  : Array<ConstructionManager>;
 
-  ngOnInit() {
+
+  constructor( )
+  {
+    
+  }
+
+  ngOnInit()
+  {
+  
   }
 
 }

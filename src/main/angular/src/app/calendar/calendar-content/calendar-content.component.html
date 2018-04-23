@@ -1,29 +1,13 @@
-<mat-card>
-<mat-grid-list cols="7" rowHeight="50px">
-    <mat-grid-tile [style.border-right]="'1px solid '"><mat-card>Bauleiter 1</mat-card> </mat-grid-tile>  
-    <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 1 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 2</mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 3 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 4 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 5 </mat-grid-tile>
-        <mat-grid-tile >Baustelle 6 </mat-grid-tile>        
-</mat-grid-list>
-<mat-grid-list cols="7" rowHeight="50px">
-    <mat-grid-tile [style.border-right]="'1px solid '">Bauleiter 2 </mat-grid-tile>  
-    <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 1 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 2</mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 3 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 4 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 5 </mat-grid-tile>
-        <mat-grid-tile >Baustelle 6 </mat-grid-tile>        
-</mat-grid-list>
-<mat-grid-list cols="7" rowHeight="50px">
-    <mat-grid-tile [style.border-right]="'1px solid '">Bauleiter 3 </mat-grid-tile>  
-    <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 1 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 2</mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '" >Baustelle 3 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 4 </mat-grid-tile>
-        <mat-grid-tile [style.border-right]="'1px solid '">Baustelle 5 </mat-grid-tile>
-        <mat-grid-tile >Baustelle 6 </mat-grid-tile>        
-</mat-grid-list>
-</mat-card>
+
+<div *ngFor ="let cManager of constructionManagers">
+<mat-grid-list cols ="7" rowHeight="4:2">
+    <mat-grid-tile style="border-bottom: 2px solid">
+      {{cManager.foreName}}  {{cManager.name}}
+      <br/> {{cManager.title}}
+    </mat-grid-tile>  
+    <mat-grid-tile *ngFor="let dayPlan of cManager.constructionPlans" style = " border-right: 2px solid">
+       {{dayPlan.project}}<br/>
+       {{dayPlan.coWorkers}} 
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
