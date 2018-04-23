@@ -6,13 +6,13 @@ import { OnInit } from '@angular/core';
 import {MatTableDataSource} from "@angular/material";
 
 @Component({
-  selector: 'app-root',
+  selector: 'pl-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 
 export class AppComponent implements OnInit{
-  title = 'Planungstafel';
+
   model = new User("");
   users;
 
