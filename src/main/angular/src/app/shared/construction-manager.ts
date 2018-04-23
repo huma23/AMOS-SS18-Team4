@@ -26,14 +26,16 @@ export {CPlan} from './c-plan';
 
 
 
+
+/*
+ * Klasse Construction Manager stellt eine Testweise Abstraktion eines Bauleiters dar. 
+*/
 export class ConstructionManager
 {
-    constructor(
-        public name             : string, 
-        public foreName         : string, 
-        public title            : string, 
-        public constructionPlans : Array<CPlan>
-    )
-    
-    { }
+    constructor (
+        public name                 : string, 
+        public foreName             : string, 
+        public title                : string, 
+        public constructionPlans    : Array<CPlan>
+    ) { }
 }

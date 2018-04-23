@@ -36,7 +36,7 @@ import { CalendarWeek }               from '../../shared/calender-week';
 export class MainCalendarComponent implements OnInit
 {
   
-  private calWeeks              : Array<CalendarWeek>;
+  private calWeeks : Array<CalendarWeek>;
 
 
 

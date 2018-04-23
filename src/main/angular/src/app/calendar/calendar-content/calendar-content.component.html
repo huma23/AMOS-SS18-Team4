@@ -1,9 +1,10 @@
 
 <div *ngFor ="let cManager of constructionManagers">
-<mat-grid-list cols ="7" rowHeight="4:2">
+  <mat-grid-list cols ="7" rowHeight="4:2">
     <mat-grid-tile style="border-bottom: 2px solid">
       {{cManager.foreName}}  {{cManager.name}}
-      <br/> {{cManager.title}}
+        <br/>
+        {{cManager.title}}
     </mat-grid-tile>  
     <mat-grid-tile *ngFor="let dayPlan of cManager.constructionPlans" style = " border-right: 2px solid">
        {{dayPlan.project}}<br/>
