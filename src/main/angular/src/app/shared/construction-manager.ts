@@ -1,7 +1,7 @@
 
 import {CPlan}  from './c-plan';
 export {CPlan} from './c-plan';
-///
+
 
 
 export class ConstructionManager
@@ -10,7 +10,7 @@ export class ConstructionManager
         public name             : string, 
         public foreName         : string, 
         public title            : string, 
-        public constructionPlan : CPlan
+        public constructionPlans : Array<CPlan>
     )
     
     { }
