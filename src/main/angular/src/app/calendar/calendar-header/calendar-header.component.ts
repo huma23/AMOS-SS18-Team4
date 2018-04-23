@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Input , Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'pl-calendar-header',
@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarHeaderComponent implements OnInit {
 
+  @Input()
+  public currentWeekHeader  : Array<string> ; 
+  public daysOfTheWeek      : Array<string> = 
+  [ 
+      "filler",
+      "Montag",
+      "Dienstag",
+      "Mittwoch", 
+      "Donnerstag", 
+      "Freitag", 
+      "Samstag" 
+  ];
+
+
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

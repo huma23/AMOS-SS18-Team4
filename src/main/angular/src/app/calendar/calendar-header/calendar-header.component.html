@@ -1,17 +1,15 @@
-<mat-grid-list cols="7" rowHeight="50px" >
-    <mat-grid-tile>KW:42</mat-grid-tile>  
-    <mat-grid-tile>
-      <mat-grid-tile-header>
-        Montag
-      </mat-grid-tile-header>
-      <br>
-        23.04.2018
-      
-    </mat-grid-tile>
-        <mat-grid-tile ><mat-grid-tile-header>Dienstag</mat-grid-tile-header>24.04.2018</mat-grid-tile>
-        <mat-grid-tile ><mat-grid-tile-header>Mittwoch</mat-grid-tile-header>25.04.2018</mat-grid-tile>
-        <mat-grid-tile ><mat-grid-tile-header>Donnerstag</mat-grid-tile-header>26.04.2018</mat-grid-tile>
-        <mat-grid-tile ><mat-grid-tile-header>Freitag</mat-grid-tile-header>27.04.2018</mat-grid-tile>
-        <mat-grid-tile ><mat-grid-tile-header>Samstag</mat-grid-tile-header>28.04.2018 </mat-grid-tile>        
+<mat-grid-list cols ="7" rowHeight="4:2">
+  <mat-grid-tile style="color:red; border-right: 2px solid; border-bottom: 2px solid">
+    Kalenderwoche
+    <br/>{{currentWeekHeader[0]}}
+  </mat-grid-tile>
+  <div *ngFor="let headerItem of currentWeekHeader; let i = index">
+    <span *ngIf="i != 0">
+        <mat-grid-tile>
+           {{daysOfTheWeek[i]}} 
+           <br/> {{headerItem}}
+        </mat-grid-tile>
+    </span>
+  </div>
 </mat-grid-list>
-      
+  
