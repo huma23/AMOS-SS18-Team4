@@ -48,7 +48,8 @@ import { CalendarContentComponent } from './calendar/calendar-content/calendar-c
 import { CalenderStoreService } from './shared/calender-store.service';
 import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calendar-week-item.component';
 import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
-
+import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
+import { ResourceComponent } from './Resourcenpanel/resource/resource.component';
 
 @NgModule ({
   declarations: [
@@ -58,7 +59,9 @@ import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.co
     CalendarContentComponent,
     CalendarWeekItemComponent,
     CalendarWeekComponent,
-    PlToolbarComponent
+    PlToolbarComponent,
+    ResourceTypeComponent,
+    ResourceComponent
   ],
   imports: [
     BrowserModule,
