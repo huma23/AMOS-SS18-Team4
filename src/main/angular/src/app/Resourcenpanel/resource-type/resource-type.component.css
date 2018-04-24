@@ -1,0 +1,8 @@
+div.borderOutside{
+  border-style: ridge;
+  border-width: 1px;
+}
+input[type=text] {
+  border: none;
+  border-bottom: 1px solid grey;
+}
