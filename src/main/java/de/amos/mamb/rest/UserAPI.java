@@ -2,7 +2,9 @@ package de.amos.mamb.rest;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Result;
+import de.amos.mamb.model.PersistentObject;
 import de.amos.mamb.model.User;
+import de.amos.mamb.persistence.PersistenceManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,6 +16,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 @Path("user")
 public class UserAPI {
 
+    /*
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getAllUser() {
@@ -26,5 +29,22 @@ public class UserAPI {
     public Response addUser(User user){
         Key<User> userKey = ofy().save().entity(user).now();
         return Response.status(201).entity(user).build();
+    }
+    */
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response registerUser(User user){
+        PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+
+        //check if user with this mail is already registered
+        List<PersistentObject> list = manager.getEntityWithAttribute("email ==", user.getEmail(), User.class);
+        if(list.isEmpty()){
+            //save user
+            manager.saveObject(user);
+            return Response.status(201).build();
+        } else {
+            return Response.status(400).build();
+        }
     }
 }
