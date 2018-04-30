@@ -34,10 +34,9 @@ import { MatButtonModule,
   MatSidenavModule
 } from "@angular/material";
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AppService } from "./app.service";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -50,6 +49,8 @@ import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calenda
 import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
 import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
 import { ResourceComponent } from './Resourcenpanel/resource/resource.component';
+import {PlRegistrationPanelComponent} from "./registrationpanel/registrationpanel.component";
+import {PlRegistrationPanelService} from "./registrationpanel/registrationpanel.service";
 
 @NgModule ({
   declarations: [
@@ -61,7 +62,8 @@ import { ResourceComponent } from './Resourcenpanel/resource/resource.component'
     CalendarWeekComponent,
     PlToolbarComponent,
     ResourceTypeComponent,
-    ResourceComponent
+    ResourceComponent,
+    PlRegistrationPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +74,7 @@ import { ResourceComponent } from './Resourcenpanel/resource/resource.component'
     MatInputModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatCardModule,
     MatGridListModule,
@@ -79,7 +82,7 @@ import { ResourceComponent } from './Resourcenpanel/resource/resource.component'
     FlexLayoutModule,
     MatSidenavModule
   ],
-  providers: [AppService, CalenderStoreService],
+  providers: [AppService, CalenderStoreService, PlRegistrationPanelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
