@@ -11,8 +11,8 @@ import {RegistrationForm} from "../../model/registrationForm";
   styleUrls: ['./registrationpanel.component.css'],
 })
 
-export class PlRegistrationPanelComponent{
-
+export class PlRegistrationPanelComponent
+{
   constructor(private registrationService: PlRegistrationPanelService){}
 
   formContent = new RegistrationForm("", "", "");

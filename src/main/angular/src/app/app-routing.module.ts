@@ -9,8 +9,8 @@ import { PlRegistrationPanelComponent}  from './registrationpanel/registrationpa
 
 const routes: Routes = 
   [
-    { path: 'login', component: LoginComponent },
-    { path: 'app', component: MainviewComponent},
+    { path: 'login',    component: LoginComponent },
+    { path: 'app',      component: MainviewComponent},
     { path: 'register', component: PlRegistrationPanelComponent }
   ];
 
