@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'pl-mainview',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainviewComponent implements OnInit {
 
-  constructor() { }
+  public year:    number;
+  public calWeek: number;
 
-  ngOnInit() {
+
+  constructor(private route: ActivatedRoute) 
+  {
+
+  }
+
+  ngOnInit()
+  {
+    const params = this.route.snapshot.params;
+    this.calWeek = params['week'];
+    this.year    = params['year'];
   }
 
 }

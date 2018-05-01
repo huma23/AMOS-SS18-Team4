@@ -11,6 +11,7 @@ const routes: Routes =
   [
     { path: 'login',    component: LoginComponent },
     { path: 'app',      component: MainviewComponent},
+    { path: 'app/:year/:week', component:MainviewComponent},
     { path: 'register', component: PlRegistrationPanelComponent }
   ];
 
