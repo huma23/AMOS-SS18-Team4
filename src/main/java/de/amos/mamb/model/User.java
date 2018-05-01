@@ -1,9 +1,7 @@
 package de.amos.mamb.model;
 
-import com.google.appengine.repackaged.org.apache.commons.codec.digest.DigestUtils;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
-import java.security.NoSuchAlgorithmException;
 
 @Entity
 public class User extends PersistentObject{
@@ -15,7 +13,7 @@ public class User extends PersistentObject{
     public User(){
     }
 
-    public User(String email, String password) throws NoSuchAlgorithmException {
+    public User(String email, String password) {
 
         setEmail(email);
         setPassword(password);
@@ -36,9 +34,8 @@ public class User extends PersistentObject{
         return password;
     }
 
-    public void setPassword(String password) throws NoSuchAlgorithmException {
+    public void setPassword(String password) {
 
-        String hash = DigestUtils.sha256Hex(password);
-        this.password = hash;
+        this.password = password;
     }
 }

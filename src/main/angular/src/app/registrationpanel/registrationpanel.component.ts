@@ -15,11 +15,20 @@ export class PlRegistrationPanelComponent
 {
   constructor(private registrationService: PlRegistrationPanelService){}
 
+  submitted = false;
+  passwordMatch = true;
+  message = "";
   formContent = new RegistrationForm("", "", "");
-
   emailFormControl = new FormControl('', [Validators.required,
     Validators.email]);
+  passwordFormControl = new FormControl('', [Validators.required,
+    Validators.minLength(6)]);
 
+  getPasswordErrorMessage(){
+    return this.passwordFormControl.hasError('required')? 'Keine Passwort eingegeben':
+      this.passwordFormControl.hasError('minlength') ? 'Das Passwort muss aus mind. 6 Zeichen bestehen':
+        '';
+  }
 
   getEmailErrorMessage() {
     return this.emailFormControl.hasError('required')? 'Keine E-Mail Adresse eingegeben':
@@ -29,14 +38,22 @@ export class PlRegistrationPanelComponent
 
   onSubmit(form: RegistrationForm) {
 
-      this.registrationService.register(form).subscribe(
-      data => {
-        return true;
-      },
-      error1 => {
-        console.error("can not create user")
-      }
-    );
+    if(this.formContent.password !== this.formContent.password2){
+      this.passwordMatch = false;
+    } else {
 
+      this.submitted = true;
+
+      this.registrationService.register(form).subscribe(
+        data => {
+          this.message = "Der Benutzer wurde registriert";
+          return true;
+        },
+        error1 => {
+          this.message = "Der Benutzer konnte nicht erstellt werden";
+          console.error("can not create user")
+        }
+      );
+    }
   }
 }

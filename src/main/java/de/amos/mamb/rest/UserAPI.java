@@ -1,17 +1,15 @@
 package de.amos.mamb.rest;
 
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Result;
 import de.amos.mamb.model.PersistentObject;
 import de.amos.mamb.model.User;
 import de.amos.mamb.persistence.PersistenceManager;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @Path("user")
 public class UserAPI {
@@ -41,6 +39,8 @@ public class UserAPI {
         List<PersistentObject> list = manager.getEntityWithAttribute("email ==", user.getEmail(), User.class);
         if(list.isEmpty()){
             //save user
+            String hash = DigestUtils.shaHex(user.getPassword());
+            user.setPassword(hash);
             manager.saveObject(user);
             return Response.status(201).build();
         } else {
