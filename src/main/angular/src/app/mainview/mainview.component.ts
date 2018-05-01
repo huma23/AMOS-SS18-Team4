@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { CalenderStoreService } from '../shared/calender-store.service';
 @Component({
   selector: 'pl-mainview',
   templateUrl: './mainview.component.html',
@@ -8,20 +8,32 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MainviewComponent implements OnInit {
 
-  public year:    number;
+  public calYear: number;
   public calWeek: number;
 
 
-  constructor(private route: ActivatedRoute) 
-  {
-
-  }
+  constructor(private route: ActivatedRoute, private cSS : CalenderStoreService) 
+  { }
 
   ngOnInit()
   {
     const params = this.route.snapshot.params;
     this.calWeek = params['week'];
-    this.year    = params['year'];
+    this.calYear = params['year'];
+
+    // Wenn default Pfad aufgerufen wird, verwende aktuelles Jahr und die aktuelle
+    // Woche.
+    if (!this.calWeek)
+    {
+      this.calWeek = this.cSS.currentWeek;
+    }
+    
+    if(!this.calYear)
+    {
+      //setzt das aktuelle Jahr
+      this.calYear = new Date().getFullYear();
+    }
+
   }
 
 }

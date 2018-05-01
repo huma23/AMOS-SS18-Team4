@@ -21,7 +21,7 @@
  * 
  */
 
-import { Component, OnInit, Output }  from '@angular/core';
+import { Component, OnInit, Input }  from '@angular/core';
 import { CalendarContentComponent}    from '../calendar-content/calendar-content.component';
 import { CalendarHeaderComponent }    from '../calendar-header/calendar-header.component';
 import { CalenderStoreService}        from '../../shared/calender-store.service';
@@ -35,16 +35,19 @@ import { CalendarWeek }               from '../../shared/calender-week';
 })
 export class MainCalendarComponent implements OnInit
 {
+  @Input()
+  public calendarWeek : number;
   
+  @Input()
+  public calendarYear : number;
+
   private calWeeks : Array<CalendarWeek>;
-
-
 
   constructor(private csService : CalenderStoreService) { } 
 
   ngOnInit()
   {
-    this.calWeeks = this.csService.getCalendarWeeks();
+    this.calWeeks = this.csService.getCalendarWeek(this.calendarYear, this.calendarWeek);
   }
 
 }
