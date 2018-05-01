@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {User} from "../../model/user";
 import {PlRegistrationPanelService} from "./registrationpanel.service";
+export {PlRegistrationPanelService} from "./registrationpanel.service";
 import {AbstractControl, FormControl, ValidatorFn, Validators} from "@angular/forms";
 import {RegistrationForm} from "../../model/registrationForm";
 

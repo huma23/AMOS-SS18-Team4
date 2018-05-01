@@ -24,7 +24,8 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { MatButtonModule,
+import {
+  MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
@@ -33,10 +34,11 @@ import { MatButtonModule,
   MatListModule,
   MatSidenavModule
 } from "@angular/material";
-import { MatGridListModule } from '@angular/material/grid-list';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from "@angular/common/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
+import { MatGridListModule }  from '@angular/material/grid-list';
+import { AppComponent }       from './app.component';
+import { HttpClientModule }   from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AppService } from "./app.service";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -49,8 +51,12 @@ import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calenda
 import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
 import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
 import { ResourceComponent } from './Resourcenpanel/resource/resource.component';
-import {PlRegistrationPanelComponent} from "./registrationpanel/registrationpanel.component";
-import {PlRegistrationPanelService} from "./registrationpanel/registrationpanel.service";
+import { PlRegistrationPanelComponent, PlRegistrationPanelService} from "./registrationpanel/registrationpanel.component";
+import { AppRoutingModule } from './/app-routing.module';
+import { LoginComponent } from './login/login.component';
+import { MainviewComponent } from './mainview/mainview.component';
+import { RegisterComponent } from './register/register.component';
+
 
 @NgModule ({
   declarations: [
@@ -63,7 +69,10 @@ import {PlRegistrationPanelService} from "./registrationpanel/registrationpanel.
     PlToolbarComponent,
     ResourceTypeComponent,
     ResourceComponent,
-    PlRegistrationPanelComponent
+    PlRegistrationPanelComponent,
+    LoginComponent,
+    MainviewComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +89,8 @@ import {PlRegistrationPanelService} from "./registrationpanel/registrationpanel.
     MatGridListModule,
     MatListModule,
     FlexLayoutModule,
-    MatSidenavModule
+    MatSidenavModule,
+    AppRoutingModule
   ],
   providers: [AppService, CalenderStoreService, PlRegistrationPanelService],
   bootstrap: [AppComponent]
