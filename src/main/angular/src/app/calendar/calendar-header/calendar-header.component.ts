@@ -31,7 +31,15 @@ import {Input , Component, OnInit } from '@angular/core';
 export class CalendarHeaderComponent implements OnInit {
 
   @Input()
-  public currentWeekHeader  : Array<string> ; 
+  public currentWeekHeader  : Array<string> ;
+  @Input ()
+  public currentWeekNumber  : number;
+  @Input ()
+  public currentYear        : number;
+
+  private nextWeek          : number;
+  private lastWeek          : number;
+
   public daysOfTheWeek      : Array<string> = 
   [ 
       "filler",
@@ -46,7 +54,13 @@ export class CalendarHeaderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+    
+    this.lastWeek = this.currentWeekNumber - 1;
+    this.nextWeek = this.currentWeekNumber*1 + 1*1;
+    
+    
     
   }
 
