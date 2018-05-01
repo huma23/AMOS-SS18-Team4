@@ -24,7 +24,8 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'
-import { MatButtonModule,
+import {
+  MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
@@ -50,6 +51,10 @@ import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calenda
 import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
 import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
 import { ResourceComponent } from './Resourcenpanel/resource/resource.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { LoginComponent } from './login/login.component';
+import { MainviewComponent } from './mainview/mainview.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule ({
   declarations: [
@@ -61,7 +66,10 @@ import { ResourceComponent } from './Resourcenpanel/resource/resource.component'
     CalendarWeekComponent,
     PlToolbarComponent,
     ResourceTypeComponent,
-    ResourceComponent
+    ResourceComponent,
+    LoginComponent,
+    MainviewComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +85,8 @@ import { ResourceComponent } from './Resourcenpanel/resource/resource.component'
     MatGridListModule,
     MatListModule,
     FlexLayoutModule,
-    MatSidenavModule
+    MatSidenavModule,
+    AppRoutingModule
   ],
   providers: [AppService, CalenderStoreService],
   bootstrap: [AppComponent]
