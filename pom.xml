@@ -20,7 +20,7 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>1.9.63</version>
                 <configuration>
-                    <appId>planungstafel-200916</appId> <!-- Override appengine-web.xml <project> -->
+                    <appId>planungstafel-stone</appId> <!-- Override appengine-web.xml <project> -->
                     <version>1</version>
                     <fullScanSeconds>1</fullScanSeconds>
                     <retainUploadDir>true</retainUploadDir>
@@ -74,7 +74,8 @@
                             <workingDirectory>${project.basedir}/src/main/angular</workingDirectory>
                             <executable>ng</executable>
                             <arguments>
-                                <argument>build</argument>
+                                <argument>build</argument> 
+                                <argument>--prod</argument>                            
                             </arguments>
                         </configuration>
                         <goals>
