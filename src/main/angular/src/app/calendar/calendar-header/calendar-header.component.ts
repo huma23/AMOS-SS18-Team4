@@ -37,8 +37,8 @@ export class CalendarHeaderComponent implements OnInit {
   @Input ()
   public currentYear        : number;
 
-  private nextWeek          : number;
-  private lastWeek          : number;
+  public nextWeek          : number;
+  public lastWeek          : number;
 
   public daysOfTheWeek      : Array<string> = 
   [ 

@@ -41,7 +41,7 @@ export class MainCalendarComponent implements OnInit
   @Input()
   public calendarYear : number;
 
-  private calWeeks : Array<CalendarWeek>;
+  public calWeeks : Array<CalendarWeek>;
 
   constructor(private csService : CalenderStoreService) { } 
 

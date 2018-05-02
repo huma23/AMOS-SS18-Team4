@@ -1,7 +1,7 @@
 <mat-toolbar color="accent">
   <span>{{title}}</span>
   <span class="fill-space"> </span>
-  <form (submit)="validateUser(userName.value,userPassword.value)">
+  <form>
     <div class="form-group">
       <label for="userName">Benutzer:</label>
       <input type="text" class="form-control" id="userName"#userName>
@@ -10,7 +10,7 @@
       <label for="password">Password:</label>
       <input type="text" class="form-control" id="password" #userPassword>
     </div>
-    <button type="submit" mat-button [routerLink]="['/app']">Login</button>
+    <button type="submit" mat-button routerLink="/login">Login</button>
   </form>
   <button  mat-button routerLink="/register"> Registrieren</button>
 </mat-toolbar>
