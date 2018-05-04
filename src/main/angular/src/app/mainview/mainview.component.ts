@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CalenderStoreService } from '../shared/calender-store.service';
 @Component({
   selector: 'pl-mainview',
@@ -12,8 +12,13 @@ export class MainviewComponent implements OnInit {
   public calWeek: number;
 
 
-  constructor(private route: ActivatedRoute, private cSS : CalenderStoreService) 
-  { }
+  constructor( private route: ActivatedRoute, 
+               private cSS : CalenderStoreService, 
+               private router : Router) 
+  { 
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
+    
+  }
 
   ngOnInit()
   {
