@@ -1,1 +1,23 @@
+<div fxFill="" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card id="pl-login-card" >
+    <mat-card-title fxLayoutAlign="center center">Login</mat-card-title>
+    <mat-card-content>
 
+      <form fxLayout="column" (ngSubmit)="onSubmit(formContent)" fxLayoutGap="10px">
+        <mat-form-field>
+          <input matInput placeholder="E-Mail" [formControl]="emailFormControl" [(ngModel)]="formContent.email" required>
+          <mat-error *ngIf="emailFormControl.invalid">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Passwort" [formControl]="passwordFormControl" type="password" name="password" [(ngModel)]="formContent.password" required>
+          <mat-error *ngIf="passwordFormControl.invalid">{{getPasswordErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-around center" >
+          <button mat-button routerLink="/register">Registrieren</button>
+          <button mat-raised-button="" type="submit">Login</button>
+        </div>
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+</div>

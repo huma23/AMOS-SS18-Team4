@@ -9,4 +9,6 @@ html, body {
   padding: 0;
 }
 
-
+.pl-flex {
+  flex: 1;
+}

@@ -56,6 +56,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { MainviewComponent } from './mainview/mainview.component';
 import { RegisterComponent } from './register/register.component';
+import {PlLoginService} from "./login/login.service";
 
 
 @NgModule ({
@@ -92,7 +93,7 @@ import { RegisterComponent } from './register/register.component';
     MatSidenavModule,
     AppRoutingModule
   ],
-  providers: [AppService, CalenderStoreService, PlRegistrationPanelService],
+  providers: [AppService, CalenderStoreService, PlRegistrationPanelService, PlLoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

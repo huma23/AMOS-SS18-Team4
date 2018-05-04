@@ -9,6 +9,7 @@ import {RegistrationForm} from "../../model/registrationForm";
   selector: 'pl-registrationpanel',
   templateUrl: './registrationpanel.component.html',
   styleUrls: ['./registrationpanel.component.css'],
+  host: {'class': 'pl-flex'}
 })
 
 export class PlRegistrationPanelComponent
@@ -42,18 +43,21 @@ export class PlRegistrationPanelComponent
       this.passwordMatch = false;
     } else {
 
-      this.submitted = true;
+      if(this.emailFormControl.valid && this.passwordFormControl.valid){
 
-      this.registrationService.register(form).subscribe(
-        data => {
-          this.message = "Der Benutzer wurde registriert";
-          return true;
-        },
-        error1 => {
-          this.message = "Der Benutzer konnte nicht erstellt werden";
-          console.error("can not create user")
-        }
-      );
+        this.submitted = true;
+
+        this.registrationService.register(form).subscribe(
+          data => {
+            this.message = "Der Benutzer wurde registriert";
+            return true;
+          },
+          error1 => {
+            this.message = "Der Benutzer konnte nicht erstellt werden";
+            console.error("can not create user")
+          }
+        );
+      }
     }
   }
 }
