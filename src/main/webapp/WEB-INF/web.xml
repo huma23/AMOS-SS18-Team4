@@ -31,6 +31,7 @@
     <servlet-mapping>
         <servlet-name>Router</servlet-name>
         <url-pattern>/app</url-pattern>
+        <url-pattern>/app/*</url-pattern>
         <url-pattern>/register</url-pattern>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
