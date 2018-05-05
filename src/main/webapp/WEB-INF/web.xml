@@ -2,7 +2,7 @@
 <!-- This web.xml file is not required when using Servlet 3.0 container,
      see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html -->
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
+    
     <!-- Main Listener-->
     <listener>
         <listener-class>de.amos.mamb.apps.Planungstafel</listener-class>
@@ -21,6 +21,18 @@
     <servlet-mapping>
         <servlet-name>Jersey Web Application</servlet-name>
         <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Routing -->
+    <servlet>
+        <servlet-name>Router</servlet-name>
+        <servlet-class>de.amos.mamb.apps.RoutingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Router</servlet-name>
+        <url-pattern>/app</url-pattern>
+        <url-pattern>/register</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
     <!-- Objectify -->
