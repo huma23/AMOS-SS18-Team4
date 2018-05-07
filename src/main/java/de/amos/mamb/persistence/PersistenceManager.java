@@ -10,7 +10,7 @@ public abstract class PersistenceManager {
         OBJECTIFY_MANAGER
     }
 
-    public static PersistenceManager INSTANCE = null;
+    protected static PersistenceManager INSTANCE = null;
 
     protected PersistenceManager(){}
 
