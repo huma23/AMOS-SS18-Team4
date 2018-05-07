@@ -57,6 +57,7 @@ import { LoginComponent } from './login/login.component';
 import { MainviewComponent } from './mainview/mainview.component';
 import { RegisterComponent } from './register/register.component';
 import {PlLoginService} from "./login/login.service";
+import {ResourceService} from "./Resourcenpanel/resource.service";
 
 
 @NgModule ({
@@ -93,7 +94,7 @@ import {PlLoginService} from "./login/login.service";
     MatSidenavModule,
     AppRoutingModule
   ],
-  providers: [AppService, CalenderStoreService, PlRegistrationPanelService, PlLoginService],
+  providers: [AppService, CalenderStoreService, PlRegistrationPanelService, PlLoginService, ResourceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

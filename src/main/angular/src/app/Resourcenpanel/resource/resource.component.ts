@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {IEmployee} from "../IEmployee";
+import {IVehicle} from "../IVehicle";
+import {IMaterial} from "../IMaterial";
 
 @Component({
   selector: 'app-resource',
@@ -13,6 +16,10 @@ export class ResourceComponent implements OnInit {
   }
 
   @Input()
-  public resList: string[];
+  public employeeList: IEmployee[];
+  @Input()
+  public vehicleList:IVehicle[];
+  @Input()
+  public materialList:IMaterial[];
 
 }

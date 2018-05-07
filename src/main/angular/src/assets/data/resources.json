@@ -1,0 +1,20 @@
+[
+  {
+    "ResourceType": "Employee",
+    "Entities":[
+        {"id":1, "name":"Andrew", "age":25, "skills":["c#","java"]},
+        {"id":2, "name":"Ben", "age":26, "skills":["c#","java"]},
+        {"id":3, "name":"Manu", "age":27, "skills":["c#","java"]},
+        {"id":4, "name":"Alex", "age":28, "skills":["c#","java"] }
+    ]
+  },
+  {
+      "ResourceType": "Car",
+      "Entities":[
+        {"id":1, "name":"Car1", "size":"big"},
+
+        {"id":2, "name":"Car2", "size":"big"},
+
+        {"id":3, "name":"Car3", "size":"big"}]
+    }
+]

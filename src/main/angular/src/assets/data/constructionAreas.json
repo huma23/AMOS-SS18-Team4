@@ -1,0 +1,5 @@
+[
+  {"id":1, "name":"Baustelle Erlangen", "street":"Erlanger Str."},
+  {"id":2, "name":"Baustelle Nürnberg", "street":"Nürnberger Str."},
+  {"id":3, "name":"Baustelle Feucht", "street":"Feuchter Str."}
+]
