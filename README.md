@@ -15,6 +15,8 @@ businesses.
 1. Run `git clone https://github.com/huma23/AMOS-SS18-Team4.git`
 2. Create a new Google App Engine Project
 3. Insert your project id into `src\main\webapp\WEB-INF\appengine-web.xml`
+4. Insert your project id into `pom.xml`
+5. Insert your secret for token creation into the class `src\main\java\de\amos\mamb\session\TokenManager.java` 
 
 ## Overview
 
