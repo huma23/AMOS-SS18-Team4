@@ -22,26 +22,22 @@
  */
 
 
-import { Injectable }               from '@angular/core';
-import { HttpClient, HttpHeaders }  from '@angular/common/http';
-import { RegistrationForm }         from "../../model/registrationForm";
-import { Md5 }                      from  'ts-md5/dist/md5';
+ /**
+ * 
+ * @class Token
+ * 
+ * 
+ * Die Serviceklasse AuthService ist...... TODO 
+ * 
+ * 
+ */
+export class Token 
+{
+    public token      : string;
+    public timestampt : string;
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+    constructor()
+    {
 
-@Injectable()
-export class PlRegistrationPanelService {
-
-  constructor(private http:HttpClient) {}
-
-  register(form:RegistrationForm)
-  {
-    form.password = Md5.hashStr(form.password).toString();
-  
-    let body = JSON.stringify(form);
-    console.log(body);
-    return this.http.post('/api/user', body, httpOptions);
-  }
+    }
 }

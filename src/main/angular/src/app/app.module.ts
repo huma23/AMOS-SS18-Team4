@@ -50,14 +50,14 @@ import { CalenderStoreService } from './shared/calender-store.service';
 import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calendar-week-item.component';
 import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
 import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
-import { ResourceComponent } from './Resourcenpanel/resource/resource.component';
+import { ResourceComponent }  from './Resourcenpanel/resource/resource.component';
 import { PlRegistrationPanelComponent, PlRegistrationPanelService} from "./registrationpanel/registrationpanel.component";
-import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './login/login.component';
-import { MainviewComponent } from './mainview/mainview.component';
-import { RegisterComponent } from './register/register.component';
-import {PlLoginService} from "./login/login.service";
-
+import { AppRoutingModule }   from './app-routing.module';
+import { LoginComponent }     from './login/login.component';
+import { MainviewComponent }  from './mainview/mainview.component';
+import { RegisterComponent }  from './register/register.component';
+import { PlLoginService }     from './login/login.service';
+import { AuthService }        from './services/auth.service';
 
 @NgModule ({
   declarations: [
@@ -93,7 +93,14 @@ import {PlLoginService} from "./login/login.service";
     MatSidenavModule,
     AppRoutingModule
   ],
-  providers: [AppService, CalenderStoreService, PlRegistrationPanelService, PlLoginService],
+  providers:
+  [
+      AppService, 
+      CalenderStoreService, 
+      PlRegistrationPanelService, 
+      PlLoginService,
+      AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

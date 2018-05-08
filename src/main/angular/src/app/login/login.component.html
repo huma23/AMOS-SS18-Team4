@@ -16,6 +16,7 @@
           <button mat-button routerLink="/register">Registrieren</button>
           <button mat-raised-button="" type="submit">Login</button>
         </div>
+        <span *ngIf="errorOnSubmit">{{this.errorMessage}}</span>
       </form>
 
     </mat-card-content>
