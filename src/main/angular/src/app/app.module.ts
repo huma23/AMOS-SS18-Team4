@@ -58,6 +58,7 @@ import { MainviewComponent } from './mainview/mainview.component';
 import { RegisterComponent } from './register/register.component';
 import {PlLoginService} from "./login/login.service";
 import {ResourceService} from "./Resourcenpanel/resource.service";
+import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
 
 
 @NgModule ({
@@ -74,7 +75,8 @@ import {ResourceService} from "./Resourcenpanel/resource.service";
     PlRegistrationPanelComponent,
     LoginComponent,
     MainviewComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddResourceComponent
   ],
   imports: [
     BrowserModule,

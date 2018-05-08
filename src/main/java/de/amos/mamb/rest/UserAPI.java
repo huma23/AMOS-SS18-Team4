@@ -8,13 +8,16 @@ import org.apache.commons.codec.digest.DigestUtils;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 
 @Path("user")
 public class UserAPI {
 
-    /*
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getAllUser() {
@@ -22,13 +25,13 @@ public class UserAPI {
         return result;
     }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addUser(User user){
-        Key<User> userKey = ofy().save().entity(user).now();
-        return Response.status(201).entity(user).build();
-    }
-    */
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response addUser(User user){
+//        Key<User> userKey = ofy().save().entity(user).now();
+//        return Response.status(201).entity(user).build();
+//    }
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

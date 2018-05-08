@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ResourceItem} from "../ResourceItem";
 import {ResourceService} from "../resource.service";
 import {IEmployee} from "../IEmployee";
@@ -24,32 +24,17 @@ export class ResourceTypeComponent implements OnInit {
 
   public items: ResourceItem[];
 
-
-  constructor(private _resourceService: ResourceService) {
-
+  constructor( private _resourceService: ResourceService) {
   }
 
-  addResourceType(restype, res){
-      console.log(this.items.some(x => x.ResourceType === restype));
-      if(this.items.some(x => x.ResourceType === restype))
-      {
-        this.items.forEach((item) => {
-          if (item.ResourceType == restype)
-            item.Resources.push(res)
-        })
-      }
-      else{
-        this.items.push(new ResourceItem(restype, [res]))
-      }
 
 
-  }
   ngOnInit() {
     this._resourceService.getEmployees()
       .subscribe(data => this.employees = data);
     this._resourceService.getResources()
       .subscribe(data => this.resources = data);
-    this._resourceService.getCars()
+    this._resourceService.getVehicle()
       .subscribe(data=>this.vehicles = data);
     this._resourceService.getConstrunctionAreas()
       .subscribe(data=>this.constructionAreas = data);

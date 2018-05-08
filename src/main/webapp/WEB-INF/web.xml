@@ -34,6 +34,8 @@
         <url-pattern>/app/*</url-pattern>
         <url-pattern>/register</url-pattern>
         <url-pattern>/login</url-pattern>
+        <url-pattern>/employee</url-pattern>
+        <url-pattern>/resource</url-pattern>
     </servlet-mapping>
 
     <!-- Objectify -->

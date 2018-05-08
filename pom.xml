@@ -20,7 +20,7 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>1.9.63</version>
                 <configuration>
-                    <appId>planungstafel-stone</appId> <!-- Override appengine-web.xml <project> -->
+                    <appId>planungstafel-dev</appId> <!-- Override appengine-web.xml <project> -->
                     <version>1</version>
                     <fullScanSeconds>1</fullScanSeconds>
                     <retainUploadDir>true</retainUploadDir>
