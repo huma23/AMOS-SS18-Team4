@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Employee} from "../../../model/employee";
 import {ResourceService} from "../resource.service";
+import {Vehicle} from "../../../model/vehicle";
+import {Material} from "../../../model/material";
 
 @Component({
   selector: 'pl-add-resource',
@@ -18,14 +20,21 @@ export class AddResourceComponent implements OnInit {
     let emp = new Employee(id,name,age,[skills]);
     console.log(emp +","+JSON.stringify(emp));
     this._resourceService.saveEmployee(emp).subscribe((res:Employee)=>console.log(res));
-    // this.employees.push(emp);
+
   }
 
-  // addVehicle(id,name,size,modell){
-  //   let vehicle = new Vehicle(id,name,size,modell);
-  //   console.log(emp +","+JSON.stringify(emp));
-  //   this._resourceService.saveVehicle(emp).subscribe((res:Employee)=>console.log(res));
-  //   // this.employees.push(emp);
-  // }
+  addVehicle(id,name,size,modell){
+    let vehicle = new Vehicle(id,name,size,modell);
+    console.log(vehicle +","+JSON.stringify(vehicle));
+    this._resourceService.saveVehicle(vehicle).subscribe((res:Vehicle)=>console.log(res));
+
+  }
+
+  addMaterial(id,name,description,location){
+    let material = new Material(id,name,description,location);
+    console.log(material +","+JSON.stringify(material));
+    this._resourceService.saveMaterials(material).subscribe((res:Material)=>console.log(res));
+
+  }
 
 }

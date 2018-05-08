@@ -5,3 +5,6 @@ input[type=text] {
 mat-card{
 
 }
+mat-list-item{
+  font-size: 10px;
+}

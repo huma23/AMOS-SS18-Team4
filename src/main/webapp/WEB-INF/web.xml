@@ -36,6 +36,8 @@
         <url-pattern>/login</url-pattern>
         <url-pattern>/employee</url-pattern>
         <url-pattern>/resource</url-pattern>
+        <url-pattern>/vehicle</url-pattern>
+        <url-pattern>/material</url-pattern>
     </servlet-mapping>
 
     <!-- Objectify -->

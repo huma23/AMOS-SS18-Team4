@@ -1,6 +1,0 @@
-[
-  {"id":1, "name":"Andrew", "age":25, "skills":["Maler"]},
-  {"id":2, "name":"Ben", "age":26, "skills":["Trockenbauer","Maler"]},
-  {"id":3, "name":"Manu", "age":27, "skills":["Trockenbauer"]},
-  {"id":4, "name":"Alex", "age":28, "skills":["Tapezierer"]}
-]

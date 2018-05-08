@@ -1,7 +1,7 @@
 <mat-list>
       <mat-card *ngFor='let employee of employeeList'>
         <mat-card-content>
-          <mat-list-item>Name:{{employee.name}}</mat-list-item>
+          <mat-list-item>Name: {{employee.name}}</mat-list-item>
           <mat-list-item>Alter: {{employee.age}}</mat-list-item>
           <mat-list>Spezialisierung:
             <mat-list-item *ngFor="let skill of employee.skills">{{skill}}</mat-list-item>
@@ -10,13 +10,13 @@
       </mat-card>
       <mat-card *ngFor='let vehicle of vehicleList'>
         <mat-card-content>
-          <mat-list-item>{{vehicle.name}}</mat-list-item>
+          <mat-list-item>Name: {{vehicle.name}}</mat-list-item>
           <mat-list-item>Modell: {{vehicle.modell}}</mat-list-item>
         </mat-card-content>
       </mat-card>
   <mat-card *ngFor='let material of materialList'>
     <mat-card-content>
-      <mat-list-item>{{material.name}}</mat-list-item>
+      <mat-list-item>Name: {{material.name}}</mat-list-item>
       <mat-list-item>Beschreibung: {{material.description}}</mat-list-item>
       <mat-list-item>Ort: {{material.location}}</mat-list-item>
     </mat-card-content>

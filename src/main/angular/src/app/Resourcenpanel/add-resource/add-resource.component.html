@@ -6,16 +6,28 @@
     <input type="number" placeholder="Age" #age>
     <input type="text" placeholder="skills" #skills>
   </div>
-  <button type="submit" >Add Employee</button>
+  <button type="submit" >Hinzufügen</button>
 </form>
 
-<!--<form (submit)="addVehicle(id.value,name.value,size.value,modell.value)" >-->
-  <!--<label>Mitarbeiter hinzufügen</label>-->
-  <!--<div class="form-group">-->
-    <!--<input type="number" placeholder="Id" #id>-->
-    <!--<input type="text" placeholder="Name" #name>-->
-    <!--<input type="text" placeholder="Size" #size>-->
-    <!--<input type="text" placeholder="Modell" #modell>-->
-  <!--</div>-->
-  <!--<button type="submit" >Add Employee</button>-->
-<!--</form>-->
+<form (submit)="addVehicle(id.value,name.value,size.value,modell.value)" >
+  <label>Fahrzeug hinzufügen</label>
+  <div class="form-group">
+    <input type="number" placeholder="Id" #id>
+    <input type="text" placeholder="Name" #name>
+    <input type="text" placeholder="Size" #size>
+    <input type="text" placeholder="Modell" #modell>
+  </div>
+  <button type="submit" >Hinzufügen</button>
+</form>
+
+<form (submit)="addMaterial(id.value,name.value,description.value,location.value)" >
+  <label>Betriebsmittel hinzufügen</label>
+  <div class="form-group">
+    <input type="number" placeholder="Id" #id>
+    <input type="text" placeholder="Name" #name>
+    <input type="text" placeholder="description" #description>
+    <input type="text" placeholder="location" #location>
+  </div>
+  <button type="submit" >Hinzufügen</button>
+</form>
+

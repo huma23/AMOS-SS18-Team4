@@ -1,6 +1,0 @@
-[
-  {"id":1, "name":"Farbe", "description":"verschiedene Farben", "location":"Lager1"},
-  {"id":2, "name":"Tapeten", "description":"verschiedene Tapeten", "location":"Lager2"},
-  {"id":3, "name":"Klebstoff", "description":"unterschiedliche Klebstoffe", "location":"Lager1"},
-  {"id":4, "name":"Sonderwerkzeug", "description":"besonderes Werkzeug", "location": "Lager1"}
-]
