@@ -73,7 +73,7 @@ public class LoginAPI {
 
             String json = Json.createObjectBuilder()
                     .add("token", token)
-                    .add("timestampt", timestamp.toString())
+                    .add("timestamp", timestamp.toString())
                     .build()
                     .toString();
 
