@@ -51,7 +51,7 @@ const routes: Routes =
   [
     RouterModule
   ],
-  providers[AuthentificationGuard],
+  providers:[AuthentificationGuard],
   declarations: []
 })
 export class AppRoutingModule { }

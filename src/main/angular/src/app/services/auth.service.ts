@@ -47,10 +47,13 @@ export class AuthService
   //httpHandle needed for Server Communication 
   private httpClient : HttpClient;
 
+  // Only for feature Test, Logic for refresh and validate on Expiration will come
+  private gotValidToken : boolean;
   
   constructor(_httpClient:HttpClient) 
   { 
-    this.httpClient = _httpClient;
+    this.httpClient     = _httpClient;
+    this.gotValidToken  = false;
   }
 
   /**
@@ -103,13 +106,14 @@ export class AuthService
    * Caution there is no check if the Token is valid or has values. 
    * The old stored Token is overwritten.
    */
-
-
   public setToken(token : Token ) : boolean
   {
+    if (!token)
+      return false;
+    this.gotValidToken = true;
     localStorage.setItem(TokenIdentifier, token.token);
     localStorage.setItem(TokenExpiration, token.timestampt);
-    return false;
+    return true;
   }
  
   /**
@@ -143,5 +147,25 @@ export class AuthService
   {
 
     // Not Used currently
+  }
+
+  /**
+   * @method 
+   * hasValidToken 
+   * 
+   * @param 
+   * none
+   * 
+   * @return 
+   * true on success
+   * false otherwise 
+   *  
+   * @description
+   * 
+   * delivers if currently stored token is valid
+   */
+  public hasValidToken() : boolean 
+  {
+    return this.gotValidToken;
   }
 }

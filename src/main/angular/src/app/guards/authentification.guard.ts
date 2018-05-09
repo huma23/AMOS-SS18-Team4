@@ -24,6 +24,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router,ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../services/auth.service';
 
 
 /**
@@ -32,41 +33,36 @@ import { Observable } from 'rxjs/Observable';
  * 
  *  -> The Class represants the Guard to protect the app route from unauthorized 
  *     use. 
- *     The Guard checks the local Storage if already a valid Token from Server is accessible, 
+ *  
+ *     The Guard checks with help of authService 
+ *     on  the local Storage if already a valid Token from Server is accessible, 
  *     if not the user is redirected to the login Service. 
  *     
  *     If the token exists, the access on app is granted.  
  */
 
-const  TokenIdentifier : string = 'PlAccessToken';
 
 @Injectable()
 export class AuthentificationGuard implements CanActivate {
   
-  private accessToken : string;
   
-  constructor(private router:Router)
+  private authService : AuthService ;
+  private router      : Router;
+  
+  constructor( _router:Router, _authService : AuthService)
   {
-    localStorage.setItem(TokenIdentifier,"1234567444566855SSBBSjnuin");
+     this.authService = _authService;
+     this.router      = _router; 
   }
   
   canActivate() : boolean{
 
     console.log("Request on Auth Guard for App Module");
-    this.accessToken = window.localStorage.getItem("PlAccessToken");
-
-    if (null == this.accessToken)
+    
+    let validToken = this.authService.hasValidToken();
+    if (!validToken)
       this.router.navigateByUrl('/login');
     
-      return (this.accessToken != null);
-  }
-
-  storeToken( token:string ) : void 
-  {
-    localStorage.setItem(TokenIdentifier,token);
-  }
-  getToken() : string
-  {
-    return localStorage.getItem(TokenIdentifier);
+      return validToken;
   }
 }
