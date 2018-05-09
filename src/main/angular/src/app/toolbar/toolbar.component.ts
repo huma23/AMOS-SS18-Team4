@@ -6,8 +6,7 @@ import {Component} from "@angular/core";
   styleUrls: ['./toolbar.component.css'],
 })
 
-export class PlToolbarComponent {
-
+export class PlToolbarComponent
+{
   title = 'Planungstafel';
-
 }

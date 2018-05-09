@@ -48,11 +48,13 @@ export class PlRegistrationPanelComponent
         this.submitted = true;
 
         this.registrationService.register(form).subscribe(
-          data => {
+          data =>
+          {
             this.message = "Der Benutzer wurde registriert";
             return true;
           },
-          error1 => {
+          error1 =>
+          {
             this.message = "Der Benutzer konnte nicht erstellt werden";
             console.error("can not create user")
           }
