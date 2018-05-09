@@ -38,8 +38,7 @@ export class PlRegistrationPanelService {
 
   register(form:RegistrationForm)
   {
-    form.password = Md5.hashStr(form.password).toString();
-  
+   
     let body = JSON.stringify(form);
     console.log(body);
     return this.http.post('/api/user', body, httpOptions);

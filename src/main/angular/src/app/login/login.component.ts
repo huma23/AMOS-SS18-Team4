@@ -26,6 +26,8 @@ import { FormControl, Validators }from "@angular/forms";
 import { LoginForm }              from "../../model/loginForm";
 import { PlLoginService }         from "./login.service";
 import { Router }                 from '@angular/router';
+import { Token}                   from '../../model/token';
+import { AuthService } from '../services/auth.service';
 
 
 /**
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit
   public errorOnSubmit  : boolean;
   public loginTrys      : number;
 
-  constructor( private loginService: PlLoginService, private router:Router)
+  constructor( private loginService: PlLoginService, private router:Router, private authService : AuthService)
   {
     this.emailFormControl     = new FormControl('', [Validators.required, Validators.email]);
     this.passwordFormControl  = new FormControl('', [Validators.required,]);
@@ -68,26 +70,35 @@ export class LoginComponent implements OnInit
 
   onSubmit(form:LoginForm)
   {
-      var success = this.loginService.login(form);  
-      
-      if (success)
-      {
-        //Umleiten zu App. Token mittlerweile gesetzt
+      this.loginService.login(form).subscribe
+      (
+          (token :Token) => 
+          {
+            // Anfrage war erfolgreich, token speichern
+            //this.loggedIn = true;
+            //this._authService.setToken(token);
+        //    return true;
+        console.log("Received Token");
+        console.log ("token");
+        this.authService.setToken(token);
         this.router.navigateByUrl("/app");
-      }
-      else
-      {
-        //Fehler aufgetreten
-
-        this.loginTrys++;
-        this.errorOnSubmit = true;
-        this.errorMessage = 
-          "Login gescheitert. Bitte erneut versuchen. Gescheiterte Versuche : " 
-            + this.loginTrys ;
         
-        this.clearContent();
-        
-      }
+  
+         },
+          error =>
+          {
+            // Fehler beim Einloggen aufgetreten, der Grund ist aktuell nicht von Bedeutung
+            window.alert("Fehlerhafte Eingabe");
+            this.loginTrys++;
+            this.errorOnSubmit = true;
+            this.errorMessage = 
+              "Login gescheitert. Bitte erneut versuchen. Gescheiterte Versuche : " 
+                + this.loginTrys ;
+            
+            this.clearContent();
+           
+          }
+        );
   }
 
   getEmailErrorMessage()

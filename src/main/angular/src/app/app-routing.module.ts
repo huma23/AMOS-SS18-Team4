@@ -35,12 +35,12 @@ import { AuthentificationGuard }        from './guards/authentification.guard';
 
 const routes: Routes = 
   [
-    { path: '', redirectTo:'app', pathMatch:'full'},
-    { path: 'login',           component: LoginComponent },
-    { path: 'app',             component: MainviewComponent, canActivate:[AuthentificationGuard] },
-    { path: 'app/:year/:week', component: MainviewComponent },
-    { path: 'register',        component: PlRegistrationPanelComponent },
-    { path: 'resource',        component: AddResourceComponent}
+    { path: '',redirectTo:'app',  pathMatch:'full'},
+    { path: 'login',              component: LoginComponent },
+    { path: 'app',                component: MainviewComponent, canActivate:[AuthentificationGuard] },
+    { path: 'app/:year/:week',    component: MainviewComponent },
+    { path: 'register',           component: PlRegistrationPanelComponent },
+    { path: 'resource',           component: AddResourceComponent }
   ];
 
 @NgModule({

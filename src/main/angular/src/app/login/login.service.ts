@@ -30,8 +30,7 @@ import { Md5 }                      from  'ts-md5/dist/md5';
 import { Token }                    from '../../model/token';
 
 
-const httpOptions =
-{
+const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
@@ -40,11 +39,14 @@ export class PlLoginService
 {
 
   private httpClient : HttpClient;
+  private authService : AuthService;
   private loggedIn   : boolean;
 
-  constructor(private _httpClient:HttpClient, private _authService : AuthService )
+  constructor(_httpClient:HttpClient, _authService : AuthService )
   {
-    this.httpClient = _httpClient;
+    this.authService  = _authService;
+    this.httpClient   = _httpClient;
+    this.loggedIn     = false;
   }
 
 
@@ -52,32 +54,35 @@ export class PlLoginService
   {
     //simple hash
     console.log("USerPasswort = " +form.password);
-    form.password = Md5.hashStr(form.password).toString();
-    console.log("Hashed PWd = " +form.password);
+  
     let body : string = JSON.stringify(form);
     console.log("Stringified" + body);
 
-    this.httpClient.post('/api/login', body, httpOptions)
+    /*this.httpClient.post('/api/login', body, httpOptions)
     .subscribe
     (
         (token :Token) => 
         {
           // Anfrage war erfolgreich, token speichern
           this.loggedIn = true;
-          return this._authService.setToken(token);
+          this._authService.setToken(token);
+          return true;
+
         },
         error =>
         {
           // Fehler beim Einloggen aufgetreten, der Grund ist aktuell nicht von Bedeutung
+          console.log(error);
           return false;
         }
       )
-      ;
+      ;*/
+      return this.httpClient.post('/api/login',body,httpOptions);
   }
 // Ausloggen des Users. 
   logout() 
   {
-    if (this._authService.removeToken())
+    if (this.authService.removeToken())
       this.loggedIn = false;
   }
 // User Logout
