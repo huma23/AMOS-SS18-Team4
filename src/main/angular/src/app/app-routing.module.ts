@@ -29,6 +29,7 @@ import { MainviewComponent }            from "./mainview/mainview.component";
 import { PlToolbarComponent }           from "./toolbar/toolbar.component";
 import { RegisterComponent }            from "./register/register.component";
 import { PlRegistrationPanelComponent}  from './registrationpanel/registrationpanel.component';
+import { AddResourceComponent }         from "./Resourcenpanel/add-resource/add-resource.component";
 import { AuthentificationGuard }        from './guards/authentification.guard';
 
 
@@ -38,7 +39,8 @@ const routes: Routes =
     { path: 'login',           component: LoginComponent },
     { path: 'app',             component: MainviewComponent, canActivate:[AuthentificationGuard] },
     { path: 'app/:year/:week', component: MainviewComponent },
-    { path: 'register',        component: PlRegistrationPanelComponent }
+    { path: 'register',        component: PlRegistrationPanelComponent },
+    { path: 'resource',        component: AddResourceComponent}
   ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <application>planungstafel-stone</application>
+    <application>planungstafel-dev</application>
     <version>1</version>
     <runtime>java8</runtime>
     <threadsafe>true</threadsafe>

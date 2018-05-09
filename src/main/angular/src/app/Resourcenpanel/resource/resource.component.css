@@ -3,5 +3,8 @@ input[type=text] {
   border-bottom: 2px solid grey;
 }
 mat-card{
-  height: 20px;
+
+}
+mat-list-item{
+  font-size: 10px;
 }

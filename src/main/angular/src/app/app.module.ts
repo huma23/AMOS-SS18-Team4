@@ -51,13 +51,19 @@ import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calenda
 import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
 import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
 import { ResourceComponent }  from './Resourcenpanel/resource/resource.component';
-import { PlRegistrationPanelComponent, PlRegistrationPanelService} from "./registrationpanel/registrationpanel.component";
+import { PlRegistrationPanelComponent} from "./registrationpanel/registrationpanel.component";
+import { PlRegistrationPanelService } from './registrationpanel/registrationpanel.component';
 import { AppRoutingModule }   from './app-routing.module';
 import { LoginComponent }     from './login/login.component';
 import { MainviewComponent }  from './mainview/mainview.component';
 import { RegisterComponent }  from './register/register.component';
 import { PlLoginService }     from './login/login.service';
 import { AuthService }        from './services/auth.service';
+
+import { ResourceService} from "./Resourcenpanel/resource.service";
+import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
+
+
 
 @NgModule ({
   declarations: [
@@ -73,7 +79,8 @@ import { AuthService }        from './services/auth.service';
     PlRegistrationPanelComponent,
     LoginComponent,
     MainviewComponent,
-    RegisterComponent
+    RegisterComponent,
+    AddResourceComponent
   ],
   imports: [
     BrowserModule,
@@ -99,8 +106,10 @@ import { AuthService }        from './services/auth.service';
       CalenderStoreService, 
       PlRegistrationPanelService, 
       PlLoginService,
-      AuthService
+      AuthService,
+      ResourceService, 
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

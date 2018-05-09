@@ -20,7 +20,11 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>1.9.63</version>
                 <configuration>
+<<<<<<< HEAD
                     <appId>planungstafel-200916</appId> <!-- Override appengine-web.xml <project> -->
+=======
+                    <appId>planungstafel-dev</appId> <!-- Override appengine-web.xml <project> -->
+>>>>>>> origin/fb_entities
                     <version>1</version>
                     <fullScanSeconds>1</fullScanSeconds>
                     <retainUploadDir>true</retainUploadDir>
