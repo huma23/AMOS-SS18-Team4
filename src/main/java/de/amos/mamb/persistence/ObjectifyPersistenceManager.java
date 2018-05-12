@@ -23,6 +23,8 @@
 package de.amos.mamb.persistence;
 
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Work;
 import de.amos.mamb.model.PersistentObject;
 
 import java.util.List;
@@ -37,14 +39,32 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
     public PersistentObject getEntityWithId(Long id, Class clz) {
 
         Key key = Key.create(clz, id);
-        PersistentObject result = (PersistentObject) ofy().load().key(key).now();
-        return result;
+
+        //Objectify v6
+        //PersistentObject result = (PersistentObject) OfyService.ofy().load().key(key).now();
+
+        PersistentObject object = ObjectifyService.run(new Work<PersistentObject>() {
+
+            @Override
+            public PersistentObject run() {
+                return (PersistentObject) OfyService.ofy().load().key(key).now();
+            }
+        });
+
+        return object;
     }
 
     @Override
     public boolean saveObject(PersistentObject object) {
 
-        Key<PersistentObject> persistentKey = ofy().save().entity(object).now();
+        //Key<PersistentObject> persistentKey = OfyService.ofy().save().entity(object).now();
+
+        Key<PersistentObject> persistentKey = ObjectifyService.run(new Work<Key<PersistentObject>>() {
+            @Override
+            public Key<PersistentObject> run() {
+                return OfyService.ofy().save().entity(object).now();
+            }
+        });
 
         if(persistentKey != null)
             return true;
@@ -55,7 +75,15 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
     @Override
     public List<PersistentObject> getEntityWithAttribute(String attribute, Object value, Class clz){
 
-        List<PersistentObject> list = ofy().load().type(clz).filter(attribute, value).list();
+        //List<PersistentObject> list = OfyService.ofy().load().type(clz).filter(attribute, value).list();
+
+        List<PersistentObject> list = ObjectifyService.run(new Work<List<PersistentObject>>() {
+            @Override
+            public List<PersistentObject> run() {
+                return OfyService.ofy().load().type(clz).filter(attribute, value).list();
+            }
+        });
+
         return list;
     }
 }

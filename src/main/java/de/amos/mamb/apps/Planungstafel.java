@@ -15,11 +15,6 @@ public class Planungstafel implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-        ObjectifyService.init();
-        ObjectifyService.register(User.class);
-        ObjectifyService.register(Employee.class);
-        ObjectifyService.register(Vehicle.class);
-        ObjectifyService.register(Material.class);
     }
 
     @Override
