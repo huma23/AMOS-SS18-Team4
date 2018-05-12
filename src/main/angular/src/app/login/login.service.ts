@@ -54,14 +54,14 @@ export class PlLoginService
   {
     //simple hash
     console.log("USerPasswort = " +form.password);
-  
+
     let body : string = JSON.stringify(form);
     console.log("Stringified" + body);
 
     /*this.httpClient.post('/api/login', body, httpOptions)
     .subscribe
     (
-        (token :Token) => 
+        (token :Token) =>
         {
           // Anfrage war erfolgreich, token speichern
           this.loggedIn = true;
@@ -79,8 +79,8 @@ export class PlLoginService
       ;*/
       return this.httpClient.post('/api/login',body,httpOptions);
   }
-// Ausloggen des Users. 
-  logout() 
+// Ausloggen des Users.
+  logout()
   {
     if (this.authService.removeToken())
       this.loggedIn = false;
@@ -89,5 +89,5 @@ export class PlLoginService
   isLoggedIn() : boolean
   {
     return this.loggedIn;
-  } 
+  }
 }

@@ -1,7 +1,7 @@
 /**
- *  @license 
- *  
- * 
+ *  @license
+ *
+ *
  * Copyright [2018] [(MAMB Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)]
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +15,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Copyright (c) 2018 by MAMB (Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)
- * 
- * 
+ *
+ *
  */
 
 import { NgModule }                     from '@angular/core';
@@ -33,23 +33,23 @@ import { AddResourceComponent }         from "./Resourcenpanel/add-resource/add-
 import { AuthentificationGuard }        from './guards/authentification.guard';
 
 
-const routes: Routes = 
+const routes: Routes =
   [
     { path: '',redirectTo:'app',  pathMatch:'full'},
     { path: 'login',              component: LoginComponent },
     { path: 'app',                component: MainviewComponent, canActivate:[AuthentificationGuard] },
-    { path: 'app/:year/:week',    component: MainviewComponent },
+    { path: 'app/:year/:week',    component: MainviewComponent, canActivate:[AuthentificationGuard] },
     { path: 'register',           component: PlRegistrationPanelComponent },
     { path: 'resource',           component: AddResourceComponent }
   ];
 
 @NgModule({
-  imports: 
+  imports:
   [
     RouterModule.forRoot(routes),
     CommonModule
   ],
-  exports: 
+  exports:
   [
     RouterModule
   ],
