@@ -37,7 +37,7 @@ import {
 
 import { MatGridListModule }  from '@angular/material/grid-list';
 import { AppComponent }       from './app.component';
-import { HttpClientModule }   from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS }   from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AppService } from "./app.service";
 import { NgModule } from "@angular/core";
@@ -62,6 +62,7 @@ import { AuthService }        from './services/auth.service';
 
 import { ResourceService} from "./Resourcenpanel/resource.service";
 import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
+import { Interceptor } from './http/interceptor';
 
 
 
@@ -102,11 +103,16 @@ import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource
   ],
   providers:
   [
-      AppService, 
+      {
+        provide:HTTP_INTERCEPTORS,
+        useClass:Interceptor,
+        multi:true
+      },
+      AppService,
+      AuthService,
       CalenderStoreService, 
       PlRegistrationPanelService, 
       PlLoginService,
-      AuthService,
       ResourceService, 
   ],
 
