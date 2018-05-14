@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit
   public errorOnSubmit  : boolean;
   public loginTrys      : number;
 
-  constructor( private loginService: PlLoginService, private router:Router, private authService : AuthService)
+  constructor( private loginService: PlLoginService, private router:Router)
   {
     this.emailFormControl     = new FormControl('', [Validators.required, Validators.email]);
     this.passwordFormControl  = new FormControl('', [Validators.required,]);
@@ -70,49 +70,104 @@ export class LoginComponent implements OnInit
 
   onSubmit(form:LoginForm)
   {
-      this.loginService.login(form).subscribe
-      (
-          (token :Token) => 
-          {
-            // Anfrage war erfolgreich, token speichern
-            //this.loggedIn = true;
-            //this._authService.setToken(token);
-        //    return true;
-        console.log("Received Token");
-        console.log ("token");
-        this.authService.setToken(token);
+
+    // Wenn User bereits eingeloggt, weiterleiten auf app. 
+    // Möglicherweise unnötig.
+    if (this.loginService.isLoggedIn())
+      this.router.navigateByUrl("/app");
+
+  // Aufruf des LoginServices zum Einloggen, liefert das Ergebnis inform eines Observables
+  // Abbonnieren darauf und Ergebniss verarbeiten. 
+
+    this.loginService.login(form).subscribe(
+      (token:Token) =>
+      {
+        // Happy Path. Einloggen hat funktioniert. Token speichern und weiter zu App.
+        console.log("Token received \n " + token.token + "\n"+token.timestampt);
+        this.loginService.setToken(token);
+        this.loginService.setLogin(true);        
         this.router.navigateByUrl("/app");
+
+      },
+      (error: Error) => 
+      {
+        // Error Path. Logging Ausgabe sowie User via FensterError mitteilen dass Login 
+        // schiefgelaufen ist.
+        console.log("Error on Requestesting /api/login with Credentials \n User: " +form.email 
+          +"; . ");
+        console.log(error.message);
+
+        window.alert("Fehlerhafte Eingabe");
+        this.loginTrys++;
+        this.errorOnSubmit = true;
+        this.errorMessage = 
+          "Login gescheitert. Bitte erneut versuchen. Gescheiterte Versuche : " 
+            + this.loginTrys ;
         
-  
-         },
-          error =>
-          {
-            // Fehler beim Einloggen aufgetreten, der Grund ist aktuell nicht von Bedeutung
-            window.alert("Fehlerhafte Eingabe");
-            this.loginTrys++;
-            this.errorOnSubmit = true;
-            this.errorMessage = 
-              "Login gescheitert. Bitte erneut versuchen. Gescheiterte Versuche : " 
-                + this.loginTrys ;
-            
-            this.clearContent();
-           
-          }
-        );
+        this.clearLoginForm();
+
+      });
   }
 
+  /**
+   * @method 
+   * getEmailErrorMessage
+   * 
+   * @param 
+   * none
+   * 
+   * @return 
+   * none
+   *  
+   * @description
+   * 
+   * Methode leert die Eingabefelder des Logins nach gescheitertem Einloggversuch.
+   * 
+   */
   getEmailErrorMessage()
   {
     return this.emailFormControl.hasError('required')? 'Keine E-Mail Adresse eingegeben':
       this.emailFormControl.hasError('email') ? 'Keine valide E-Mail Adresse' : '';
   }
+  /**
+   * @method 
+   * getPasswordErrorMessage
+   * 
+   * @param 
+   * none
+   * 
+   * @return 
+   * none
+   *  
+   * @description
+   * 
+   * Methode leert die Eingabefelder des Logins nach gescheitertem Einloggversuch.
+   * 
+   */
+
 
   getPasswordErrorMessage()
   {
     return this.passwordFormControl.hasError('required')? 'Kein Passwort eingegeben': '';
   }
+  
+   /**
+   * @method 
+   * clearLoginForm
+   * 
+   * @param 
+   * none
+   * 
+   * @return 
+   * none
+   *  
+   * @description
+   * 
+   * Methode leert die Eingabefelder des Logins nach gescheitertem Einloggversuch.
+   * 
+   */
 
-  clearContent()
+  clearLoginForm()
   {
     this.emailFormControl.setValue("");
     this.passwordFormControl.setValue("");

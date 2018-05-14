@@ -22,25 +22,47 @@
  */
 
 
+
+
+
 import { Injectable }               from '@angular/core';
 import { HttpClient, HttpHeaders }  from '@angular/common/http';
 import { AuthService }              from '../services/auth.service';
 import { LoginForm }                from '../../model/loginForm';
 import { Md5 }                      from  'ts-md5/dist/md5';
 import { Token }                    from '../../model/token';
+import { Observable }               from 'rxjs/Observable';
+
 
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+
+ /**
+ * 
+ * @class LoginService
+ * 
+ * 
+ * Der LoginService ist beschreibt die Serviceroutine, die beim Ausfüllen und absenden
+ * des Login Formulars zur Anmeldung in Planungstafel den Call auf die Api ausführt und den 
+ * User verifiziert. 
+ * Nach dem erfolgreichen Einloggen wird der erhaltene Token mitHilfe des AuthService gespeichert 
+ * und der User wird umgeleitet auf den Inhalt von Planungstafel. 
+ * @see (central).Readme
+ * 
+ * 
+ * 
+ */
+
 @Injectable()
 export class PlLoginService
 {
 
-  private httpClient : HttpClient;
-  private authService : AuthService;
-  private loggedIn   : boolean;
+  private httpClient   : HttpClient;
+  private authService  : AuthService;
+  private loggedIn     : boolean;
 
   constructor(_httpClient:HttpClient, _authService : AuthService )
   {
@@ -49,45 +71,126 @@ export class PlLoginService
     this.loggedIn     = false;
   }
 
+   /**
+   * @method 
+   * hasValidToken 
+   * 
+   * @param 
+   * none
+   * 
+   * @return 
+   * true on success
+   * false otherwise 
+   *  
+   * @description
+   * 
+   * delivers if currently stored token is valid
+   */
 
-  login (form: LoginForm)
+  login (form: LoginForm) : Observable<Token>
   {
-    //simple hash
-    console.log("USerPasswort = " +form.password);
-
     let body : string = JSON.stringify(form);
-    console.log("Stringified" + body);
 
-    /*this.httpClient.post('/api/login', body, httpOptions)
-    .subscribe
-    (
-        (token :Token) =>
-        {
-          // Anfrage war erfolgreich, token speichern
-          this.loggedIn = true;
-          this._authService.setToken(token);
-          return true;
-
-        },
-        error =>
-        {
-          // Fehler beim Einloggen aufgetreten, der Grund ist aktuell nicht von Bedeutung
-          console.log(error);
-          return false;
-        }
-      )
-      ;*/
-      return this.httpClient.post('/api/login',body,httpOptions);
+    console.log("Calling Login");
+    return this.httpClient.post<Token>('/api/login', body, httpOptions);
   }
-// Ausloggen des Users.
+
+   /**
+   * @method 
+   * hasValidToken 
+   * 
+   * @param 
+   * none
+   * 
+   * @return 
+   * true on success
+   * false otherwise 
+   *  
+   * @description
+   * 
+   * delivers if currently stored token is valid
+   */
+
   logout()
   {
     if (this.authService.removeToken())
       this.loggedIn = false;
   }
-// User Logout
+
+   /**
+   * @method 
+   * hasValidToken 
+   * 
+   * @param 
+   * none
+   * 
+   * @return 
+   * true on success
+   * false otherwise 
+   *  
+   * @description
+   * 
+   * delivers if currently stored token is valid
+   */
   isLoggedIn() : boolean
   {
+    console.log("Logging called");
     return this.loggedIn;
+  }
+
+  
+   /**
+   * @method 
+   * setToken
+   * 
+   * @param 
+   * Token --> Token der gesetzt werden soll
+   * 
+   * @return 
+   * true on success
+   * false otherwise 
+   *  
+   * @description
+   * 
+   * Methode ist ein Wrapper auf die gleiche Methode im  Authenfizierungsservice.
+   * 
+   * 
+   */
+
+  setToken(token : Token) : boolean
+  {
+    return this.authService.setToken(token);
+  }
+
+   /**
+   * @method 
+   * RemoveToken
+   * 
+   * @param 
+   * none
+   * 
+   * @return 
+   * true on success
+   * false otherwise 
+   *  
+   * @description
+   * 
+   * Methode ist ein Wrapper auf die gleiche Methode im  Authenfizierungsservice. 
+   * 
+   * 
+   */
+  removeToken()
+  {
+    return this.authService.removeToken();
+  }
+
+  setLogin(loginStatus : boolean) : void
+  {
+    console.log("Called on setLogin");
+    this.loggedIn = loginStatus;
+  }
+  toString() : string
+  {
+    return String(this.loggedIn);
   }
 }
