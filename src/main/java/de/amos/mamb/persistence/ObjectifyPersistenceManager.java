@@ -73,6 +73,19 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
     }
 
     @Override
+    public List<PersistentObject> getAllEntities(Class clz) {
+
+        List<PersistentObject> list = ObjectifyService.run(new Work<List<PersistentObject>>() {
+            @Override
+            public List<PersistentObject> run() {
+                return OfyService.ofy().load().type(clz).list();
+            }
+        });
+
+        return list;
+    }
+
+    @Override
     public List<PersistentObject> getEntityWithAttribute(String attribute, Object value, Class clz){
 
         //List<PersistentObject> list = OfyService.ofy().load().type(clz).filter(attribute, value).list();
