@@ -23,8 +23,8 @@
 
 
 import { TestBed, inject, getTestBed }  from '@angular/core/testing';
-import { AuthService }      from './auth.service';
-import { Token }            from '../../model/token';
+import { AuthService }                  from './auth.service';
+import { Token }                        from '../../model/token';
 
 describe('MAMB Authentification Service Test', () => 
 {
