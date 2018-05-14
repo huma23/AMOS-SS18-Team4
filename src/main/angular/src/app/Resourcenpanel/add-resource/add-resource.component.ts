@@ -16,8 +16,8 @@ export class AddResourceComponent implements OnInit {
   ngOnInit() {
   }
 
-  addEmployee(id,name,age,skills){
-    let emp = new Employee(id,name,age,[skills]);
+  addEmployee(firstName,lastName,age,skills){
+    let emp = new Employee(firstName,lastName,age,[skills]);
     console.log(emp +","+JSON.stringify(emp));
     this._resourceService.saveEmployee(emp).subscribe((res:Employee)=>console.log(res));
 

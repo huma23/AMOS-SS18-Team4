@@ -33,8 +33,8 @@ export class ResourceService{
     return this.http.get<Employee[]>(this._url);
   }
 
-  saveEmployee(employe:Employee):Observable<Employee>{
-    let body = JSON.stringify(employe);
+  saveEmployee(employee:Employee):Observable<Employee>{
+    let body = JSON.stringify(employee);
     return this.http.post<Employee>(this._url, body, httpOptions).do(data => console.log(data));
 
   }

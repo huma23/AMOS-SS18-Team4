@@ -1,7 +1,8 @@
 <mat-list>
       <mat-card *ngFor='let employee of employeeList'>
         <mat-card-content>
-          <mat-list-item>Name: {{employee.name}}</mat-list-item>
+          <mat-list-item>Vorname: {{employee.firstName}}</mat-list-item>
+          <mat-list-item>Nachname: {{employee.lastName}}</mat-list-item>
           <mat-list-item>Alter: {{employee.age}}</mat-list-item>
           <mat-list>Spezialisierung:
             <mat-list-item *ngFor="let skill of employee.skills">{{skill}}</mat-list-item>

@@ -1,8 +1,8 @@
-<form (submit)="addEmployee(id.value,name.value,age.value,skills.value)" >
+<form (submit)="addEmployee(firstName.value,lastName.value,age.value,skills.value)" >
   <label>Mitarbeiter hinzufügen</label>
   <div class="form-group">
-    <input type="number" placeholder="id" #id>
-    <input type="text" placeholder="Name" #name>
+    <input type="text" placeholder="firstName" #firstName>
+    <input type="text" placeholder="lastName" #lastName>
     <input type="number" placeholder="Age" #age>
     <input type="text" placeholder="skills" #skills>
   </div>
