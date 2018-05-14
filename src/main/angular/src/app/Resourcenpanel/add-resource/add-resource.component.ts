@@ -23,15 +23,15 @@ export class AddResourceComponent implements OnInit {
 
   }
 
-  addVehicle(id,name,size,modell){
-    let vehicle = new Vehicle(id,name,size,modell);
+  addVehicle(bezeichnung,size,modell){
+    let vehicle = new Vehicle(bezeichnung,size,modell);
     console.log(vehicle +","+JSON.stringify(vehicle));
     this._resourceService.saveVehicle(vehicle).subscribe((res:Vehicle)=>console.log(res));
 
   }
 
-  addMaterial(id,name,description,location){
-    let material = new Material(id,name,description,location);
+  addMaterial(bezeichnung,description,location){
+    let material = new Material(bezeichnung,description,location);
     console.log(material +","+JSON.stringify(material));
     this._resourceService.saveMaterials(material).subscribe((res:Material)=>console.log(res));
 

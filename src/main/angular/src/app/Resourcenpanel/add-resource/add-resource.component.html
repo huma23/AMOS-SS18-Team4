@@ -9,22 +9,20 @@
   <button type="submit" >Hinzufügen</button>
 </form>
 
-<form (submit)="addVehicle(id.value,name.value,size.value,modell.value)" >
+<form (submit)="addVehicle(fahrzeugBezeichnung.value,size.value,modell.value)" >
   <label>Fahrzeug hinzufügen</label>
   <div class="form-group">
-    <input type="number" placeholder="Id" #id>
-    <input type="text" placeholder="Name" #name>
+    <input type="text" placeholder="Bezeichnung" #fahrzeugBezeichnung>
     <input type="text" placeholder="Size" #size>
     <input type="text" placeholder="Modell" #modell>
   </div>
   <button type="submit" >Hinzufügen</button>
 </form>
 
-<form (submit)="addMaterial(id.value,name.value,description.value,location.value)" >
+<form (submit)="addMaterial(betriebsmittelBezeichnung.value,description.value,location.value)" >
   <label>Betriebsmittel hinzufügen</label>
   <div class="form-group">
-    <input type="number" placeholder="Id" #id>
-    <input type="text" placeholder="Name" #name>
+    <input type="text" placeholder="Bezeichnung" #betriebsmittelBezeichnung>
     <input type="text" placeholder="description" #description>
     <input type="text" placeholder="location" #location>
   </div>

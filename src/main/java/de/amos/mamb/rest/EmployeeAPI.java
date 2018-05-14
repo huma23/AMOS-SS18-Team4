@@ -29,7 +29,7 @@ public class EmployeeAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response saveEmployee(Employee employee){
         PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
-        List<PersistentObject> list = manager.getEntityWithAttribute("name",employee.getLastName(), Employee.class);
+        List<PersistentObject> list = manager.getEntityWithAttribute("lastName",employee.getLastName(), Employee.class);
         if(list.isEmpty()){
             manager.saveObject(employee);
             return Response.status(201).build();
