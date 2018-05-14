@@ -21,7 +21,6 @@
  *
  */
 
-
  /**
  * 
  * @class Token
@@ -36,8 +35,10 @@ export class Token
     public token      : string;
     public timestampt : string;
 
-    constructor()
-    {
 
+    constructor(_token: string, _timeStamp : string)
+    {
+        this.token = _token;
+        this.timestampt = _timeStamp;
     }
 }

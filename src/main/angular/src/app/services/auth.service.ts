@@ -37,22 +37,20 @@ import { Token      } from '../../model/token';
  * 
  *  
  */
-const TokenIdentifier : string = 'PlAccessToken';
-const TokenExpiration : string = 'PLExpirationTime';
+
 
 @Injectable()
 export class AuthService
 {
-
-  //httpHandle needed for Server Communication 
-  private httpClient : HttpClient;
+  // Statische Variablen, verwendet als Keys innerhalb des localeStorages
+  static TokenIdentifier : string = 'PlAccessToken';
+  static TokenExpiration : string = 'PLExpirationTime';
 
   // Only for feature Test, Logic for refresh and validate on Expiration will come
   private gotValidToken : boolean;
   
-  constructor(_httpClient:HttpClient) 
+  constructor() 
   { 
-    this.httpClient     = _httpClient;
     this.gotValidToken  = false;
   }
 
@@ -73,13 +71,12 @@ export class AuthService
    */
   public getToken() : Token 
   {
-    let result : Token;
+    let result : Token  = new Token("","");
 
-    result.token      = localStorage.getItem(TokenIdentifier);
-    result.timestampt = localStorage.getItem(TokenExpiration);
+    result.token        = localStorage.getItem(AuthService.TokenIdentifier);
+    result.timestampt   = localStorage.getItem(AuthService.TokenExpiration);
     
     return result;
-    
   }
 
   // Not Implemented Yet
@@ -107,12 +104,13 @@ export class AuthService
    * The old stored Token is overwritten.
    */
   public setToken(token : Token ) : boolean
-  {
+  {  
     if (!token)
       return false;
+
     this.gotValidToken = true;
-    localStorage.setItem(TokenIdentifier, token.token);
-    localStorage.setItem(TokenExpiration, token.timestampt);
+    localStorage.setItem(AuthService.TokenIdentifier, token.token);
+    localStorage.setItem(AuthService.TokenExpiration, token.timestampt);
     return true;
   }
  
@@ -134,12 +132,16 @@ export class AuthService
 
   public removeToken() : boolean
   {
-    localStorage.removeItem(TokenIdentifier);
+    localStorage.removeItem(AuthService.TokenIdentifier);
+    localStorage.removeItem(AuthService.TokenExpiration);
     
-    if (localStorage.getItem == null)
-      return true;
-    else 
-      return false;
+
+    if (!localStorage.getItem(AuthService.TokenExpiration))
+      if (!localStorage.getItem(AuthService.TokenIdentifier))
+        return true;
+       
+    return false;
+   
   }
 
   //NotImplemented yet
