@@ -1,5 +1,5 @@
 export interface IConstructionArea{
+  id:number,
   name:string,
-  startDate: string,
-  endDate: string
+  street: string
 }

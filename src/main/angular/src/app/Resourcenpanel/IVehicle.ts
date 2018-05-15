@@ -1,5 +1,6 @@
 export interface IVehicle{
-  bezeichnung:string,
+  id:number,
+  name:string,
   size: string,
   modell:string
 }

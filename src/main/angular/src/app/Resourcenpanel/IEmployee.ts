@@ -1,6 +1,6 @@
 export interface IEmployee {
-  firstName: string,
-  lastName: string,
+  id: number,
+  name: string,
   age: number,
   skills: string[]
 }
