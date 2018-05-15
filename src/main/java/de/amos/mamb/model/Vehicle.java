@@ -9,14 +9,14 @@ public class Vehicle extends PersistentObject{
 
     @Index
     String bezeichnung;
-    int size;
+    String size;
     String modell;
 
     public Vehicle(){
 
     }
 
-    public Vehicle(String bezeichnung, int size, String modell){
+    public Vehicle(String bezeichnung, String size, String modell){
         this.bezeichnung = bezeichnung;
         this.size = size;
         this.modell = modell;
@@ -26,7 +26,7 @@ public class Vehicle extends PersistentObject{
         return bezeichnung;
     }
 
-    public int getSize() {
+    public String getSize() {
         return size;
     }
 
@@ -43,7 +43,7 @@ public class Vehicle extends PersistentObject{
     }
 
 
-    public void setSize(int size) {
+    public void setSize(String size) {
         this.size = size;
     }
 }
