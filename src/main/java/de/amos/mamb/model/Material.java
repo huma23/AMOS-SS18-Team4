@@ -7,8 +7,7 @@ import com.googlecode.objectify.annotation.Index;
 public class Material extends PersistentObject{
 
     @Index
-    int oldId;
-    String name;
+    String bezeichnung;
     String description;
     String location;
 
@@ -16,19 +15,14 @@ public class Material extends PersistentObject{
 
     }
 
-    public Material(int id, String name, String description, String location){
-        this.oldId = id;
-        this.name = name;
+    public Material( String bezeichnung, String description, String location){
+        this.bezeichnung = bezeichnung;
         this.description = description;
         this.location = location;
     }
 
-    public int getOldId() {
-        return oldId;
-    }
-
-    public String getName() {
-        return name;
+    public String getBezeichnung() {
+        return bezeichnung;
     }
 
     public String getDescription() {
@@ -39,14 +33,9 @@ public class Material extends PersistentObject{
         return location;
     }
 
-    public void setOldId(int oldId) {
-        this.oldId = oldId;
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }

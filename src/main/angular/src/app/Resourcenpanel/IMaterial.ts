@@ -1,6 +1,5 @@
 export interface IMaterial{
-  id:number,
-  name:string,
+  bezeichnung:string,
   description:string,
   location:string
 }

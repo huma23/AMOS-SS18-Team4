@@ -10,8 +10,8 @@ import java.util.List;
 public class Employee extends  PersistentObject{
 
     @Index
-    int oldId;
-    String name;
+    String firstName;
+    String lastName;
     int age;
     List<String> skills;
 
@@ -19,9 +19,9 @@ public class Employee extends  PersistentObject{
 
     }
 
-    public Employee(int id, String name, int age, List<String> skills){
-        this.oldId = id;
-        this.name = name;
+    public Employee(String firstName, String lastName, int age, List<String> skills){
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.skills = skills;
     }
@@ -30,28 +30,28 @@ public class Employee extends  PersistentObject{
         return age;
     }
 
-    public int getoldId() {
-        return oldId;
+    public String getFirstName() {
+        return firstName;
     }
 
     public List<String> getSkills() {
         return skills;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
 
-    public void setoldId(int id) {
-        this.oldId = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setSkills(List<String> skills) {

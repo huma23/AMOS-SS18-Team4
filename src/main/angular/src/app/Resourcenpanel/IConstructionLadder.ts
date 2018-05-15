@@ -1,4 +1,5 @@
 export interface IConstructionLadder{
-  id:number,
-  name: string
+
+  firstName: string,
+  lastName: string
 }

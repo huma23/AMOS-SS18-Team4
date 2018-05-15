@@ -64,8 +64,8 @@ public class ObjectifyPersistenceManagerTest extends TestBase {
 
         user1 = new User("unittest@test.de", "123456");
         user2 = new User("hans@gmail.com", "654321");
-        employee1 = new Employee(1, "Hans", 18, list);
-        employee2 = new Employee(2, "Peter", 25, list);
+        employee1 = new Employee("Hans", "Mustermann", 18, list);
+        employee2 = new Employee("Peter","Musterpeter", 25, list);
     }
 
     /**
