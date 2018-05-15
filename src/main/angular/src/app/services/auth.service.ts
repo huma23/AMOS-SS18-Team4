@@ -21,21 +21,21 @@
  *
  */
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; 
-import { Token      } from '../../model/token'; 
+import { HttpClient } from '@angular/common/http';
+import { Token      } from '../../model/token';
 //import { moment }     from 'moment/moment'; -> erst interessant wenn der Token auslaufen soll
 /**
- * 
+ *
  * @class AuthService
- * 
- * 
- * The AuthService is responsible to store and handle the currently Token, 
+ *
+ *
+ * The AuthService is responsible to store and handle the currently Token,
  * which the User  received after succesfull authenticate on server.
- * 
- * The token is saved within an key-value store statically, until it is removed. 
- * 
- * 
- *  
+ *
+ * The token is saved within an key-value store statically, until it is removed.
+ *
+ *
+ *
  */
 
 
@@ -48,63 +48,63 @@ export class AuthService
 
   // Only for feature Test, Logic for refresh and validate on Expiration will come
   private gotValidToken : boolean;
-  
-  constructor() 
-  { 
+
+  constructor()
+  {
     this.gotValidToken  = false;
   }
 
   /**
-   * @method 
-   * getToken 
-   * 
-   * @param 
+   * @method
+   * getToken
+   *
+   * @param
    * none
-   * 
-   * @return 
-   * Token 
-   *  
+   *
+   * @return
+   * Token
+   *
    * @description
-   * 
-   * The method delivers the currently stored token from Storage. 
+   *
+   * The method delivers the currently stored token from Storage.
    * If there is none, the delivered Token will be empty.
    */
-  public getToken() : Token 
+  public getToken() : Token
   {
     let result : Token  = new Token("","");
 
     result.token        = localStorage.getItem(AuthService.TokenIdentifier);
     result.timestampt   = localStorage.getItem(AuthService.TokenExpiration);
-    
+
     return result;
   }
 
   // Not Implemented Yet
-  public getExpirationTime() : string 
+  public getExpirationTime() : string
   {
     // Not Used currently
     return "";
   }
 
   /**
-   * @method 
-   * setToken 
-   * 
-   * @param 
+   * @method
+   * setToken
+   *
+   * @param
    * Token
-   * 
-   * @return 
+   *
+   * @return
    * true on success
-   * false otherwise 
-   *  
+   * false otherwise
+   *
    * @description
-   * 
-   * The method stores a token within the Webstorage. 
-   * Caution there is no check if the Token is valid or has values. 
+   *
+   * The method stores a token within the Webstorage.
+   * Caution there is no check if the Token is valid or has values.
    * The old stored Token is overwritten.
    */
   public setToken(token : Token ) : boolean
-  {  
+  {
     if (!token)
       return false;
 
@@ -113,20 +113,20 @@ export class AuthService
     localStorage.setItem(AuthService.TokenExpiration, token.timestampt);
     return true;
   }
- 
+
   /**
-   * @method 
-   * removeToken 
-   * 
-   * @param 
+   * @method
+   * removeToken
+   *
+   * @param
    * none
-   * 
-   * @return 
+   *
+   * @return
    * true on success
-   * false otherwise 
-   *  
+   * false otherwise
+   *
    * @description
-   * 
+   *
    * Removes the currently stored Token
    */
 
@@ -134,40 +134,46 @@ export class AuthService
   {
     localStorage.removeItem(AuthService.TokenIdentifier);
     localStorage.removeItem(AuthService.TokenExpiration);
-    
+
 
     if (!localStorage.getItem(AuthService.TokenExpiration))
       if (!localStorage.getItem(AuthService.TokenIdentifier))
         return true;
-       
+
     return false;
-   
+
   }
 
   //NotImplemented yet
-  public refreshToken() : void 
+  public refreshToken() : void
   {
 
     // Not Used currently
   }
 
   /**
-   * @method 
-   * hasValidToken 
-   * 
-   * @param 
+   * @method
+   * hasValidToken
+   *
+   * @param
    * none
-   * 
-   * @return 
+   *
+   * @return
    * true on success
-   * false otherwise 
-   *  
+   * false otherwise
+   *
    * @description
-   * 
+   *
    * delivers if currently stored token is valid
    */
-  public hasValidToken() : boolean 
+  public hasValidToken() : boolean
   {
-    return this.gotValidToken;
+    debugger;
+
+    if(localStorage.getItem(AuthService.TokenIdentifier) !== ""){
+      return true;
+    }
+
+    return false;
   }
 }
