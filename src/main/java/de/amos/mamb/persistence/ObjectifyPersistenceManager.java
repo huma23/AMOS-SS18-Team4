@@ -52,6 +52,14 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
             return false;
     }
 
+
+    @Override
+    public List<PersistentObject> getAllEntities(Class clz) {
+
+        List<PersistentObject> list = ofy().load().type(clz).list();
+        return list;
+    }
+
     @Override
     public List<PersistentObject> getEntityWithAttribute(String attribute, Object value, Class clz){
 

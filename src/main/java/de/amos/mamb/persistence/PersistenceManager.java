@@ -31,4 +31,6 @@ public abstract class PersistenceManager {
     public abstract List<PersistentObject> getEntityWithAttribute(String attribute, Object value, Class clz);
 
     public abstract boolean saveObject(PersistentObject object);
+
+    public abstract List<PersistentObject> getAllEntities(Class clz);
 }
