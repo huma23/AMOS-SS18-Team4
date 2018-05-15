@@ -63,7 +63,7 @@ public class TokenManager {
         return token;
     }
 
-    public String verifyTokenAndGetUserId(String token) throws UnsupportedEncodingException, JWTVerificationException {
+    public Long verifyTokenAndGetUserId(String token) throws UnsupportedEncodingException, JWTVerificationException {
 
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
         JWTVerifier verifier = JWT.require(algorithm)
@@ -71,13 +71,13 @@ public class TokenManager {
                 .build();
         DecodedJWT decodedJWT = verifier.verify(token);
         Claim claim = decodedJWT.getClaim("id");
-        return claim.asString();
+        return claim.asLong();
     }
 
     protected Date createExpirationDate(){
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.add(Calendar.HOUR, 1);
+        cal.add(Calendar.HOUR, 2);
         Date expirationDate = cal.getTime();
         return expirationDate;
     }
