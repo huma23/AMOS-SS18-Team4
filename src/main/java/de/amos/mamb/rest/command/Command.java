@@ -1,4 +1,4 @@
-package de.amos.mamb.rest;
+package de.amos.mamb.rest.command;
 
 public interface Command {
 

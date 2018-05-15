@@ -3,15 +3,17 @@ package de.amos.mamb.rest;
 import de.amos.mamb.model.PersistentObject;
 import de.amos.mamb.model.User;
 import de.amos.mamb.persistence.PersistenceManager;
+import de.amos.mamb.rest.command.ObjectCommand;
+import de.amos.mamb.rest.command.ResponseCommand;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.googlecode.objectify.ObjectifyService.ofy;
 
 
 @Path("user")
@@ -20,9 +22,9 @@ public class UserAPI extends AbstractAPI{
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUser() {
+    public List<User> getAllUser(@Context HttpHeaders httpHeaders, @Context HttpServletResponse response) {
 
-        return executeRequest(new Command() {
+        return executeRequestWithValidation(httpHeaders, response, new ObjectCommand<List<User>>() {
             @Override
             public int httpOnSuccess() {
                 return 200;
@@ -34,9 +36,9 @@ public class UserAPI extends AbstractAPI{
             }
 
             @Override
-            public Object execute() {
+            public List<User> execute() {
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
-                List<PersistentObject> userList = manager.getAllEntities(User.class);
+                List<User> userList = manager.getAllEntities(User.class);
                 return userList;
             }
         });
@@ -46,7 +48,7 @@ public class UserAPI extends AbstractAPI{
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerUser(User user){
 
-        return executeRequest(new Command() {
+        return executeRequest(new ResponseCommand() {
             @Override
             public int httpOnSuccess() {
                 return 201;
@@ -58,7 +60,7 @@ public class UserAPI extends AbstractAPI{
             }
 
             @Override
-            public Object execute() {
+            public String execute() {
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
 
                 //check if user with this mail is already registered
@@ -68,7 +70,7 @@ public class UserAPI extends AbstractAPI{
                     String hash = DigestUtils.shaHex(user.getPassword());
                     user.setPassword(hash);
                     manager.saveObject(user);
-                    return Result.NO_OBJECT;
+                    return Result.NO_STRING;
                 } else {
                     return Result.FAILED;
                 }
