@@ -39,6 +39,7 @@
         <url-pattern>/vehicle</url-pattern>
         <url-pattern>/material</url-pattern>
         <url-pattern>/constructionArea</url-pattern>
+        <url-pattern>/constructionLadder</url-pattern>
     </servlet-mapping>
 
     <!-- Objectify -->

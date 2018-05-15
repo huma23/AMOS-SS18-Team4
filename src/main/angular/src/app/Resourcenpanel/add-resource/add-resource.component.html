@@ -40,9 +40,21 @@
   <button type="submit" >Hinzufügen</button>
 </form>
 
+<form (submit)="addConstructionLadder(constructionLadderFirstName.value, constructionLadderLastName.value)" >
+  <label>Bauleiter hinzufügen</label>
+  <div class="form-group">
+    <input type="text" placeholder="Vorname" #constructionLadderFirstName>
+    <input type="text" placeholder="Nachname" #constructionLadderLastName>
+  </div>
+  <button type="submit" >Hinzufügen</button>
+</form>
 
 <div>
   <p>Baustelle</p>
   <p *ngFor='let construct of constructions'>Name: {{construct.name}} Startdatum: {{construct.startDate}} Enddatum: {{construct.endDate}}</p>
+</div>
+<div>
+  <p>Bauleiter</p>
+  <p *ngFor='let constructionLadder of [(constructionLadders)]'>Vorname: {{constructionLadder.firstName}} Nachname: {{constructionLadder.lastName}}</p>
 </div>
 

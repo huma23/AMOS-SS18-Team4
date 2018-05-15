@@ -12,6 +12,7 @@ import {Employee} from "../../model/employee";
 import {Vehicle} from "../../model/vehicle";
 import {Material} from "../../model/material";
 import {ConstructionArea} from "../../model/constructionArea";
+import {ConstructionLadder} from "../../model/constructionLadder";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,67 +22,65 @@ const httpOptions = {
 @Injectable()
 export class ResourceService{
 
-  private _url: string = "/api/employee";
-  private _url2: string = "/api/vehicle";
-  private _url3: string = "/api/material";
-  private _url4: string = "/api/constructionArea";
+  private _employeeUri: string = "/api/employee";
+  private _vehicleUri: string = "/api/vehicle";
+  private _materialUri: string = "/api/material";
+  private _constructionAreaUri: string = "/api/constructionArea";
+  private _constructionLadderUri: string = "/api/constructionLadder"
 
   constructor(private http: HttpClient){
 
   }
 
-  //Employee
+  //Mitarbeiter
   getEmployees():Observable<IEmployee[]>{
-    return this.http.get<Employee[]>(this._url);
+    return this.http.get<Employee[]>(this._employeeUri);
   }
 
   saveEmployee(employee:Employee):Observable<Employee>{
     let body = JSON.stringify(employee);
-    return this.http.post<Employee>(this._url, body, httpOptions).do(data => console.log(data));
+    return this.http.post<Employee>(this._employeeUri, body, httpOptions).do(data => console.log(data));
 
   }
 
-  //Vehicle
+  //Fahrzeug
   getVehicle():Observable<IVehicle[]>{
-    return this.http.get<IVehicle[]>(this._url2);
+    return this.http.get<IVehicle[]>(this._vehicleUri);
   }
 
   saveVehicle(vehicle:Vehicle):Observable<IVehicle> {
     let body = JSON.stringify(vehicle)
-    return this.http.post<Vehicle>(this._url2, body, httpOptions);
+    return this.http.post<Vehicle>(this._vehicleUri, body, httpOptions);
   }
 
-  //Material
+  //Betriebsmittel
   getMaterials():Observable<IMaterial[]>{
-    return this.http.get<IMaterial[]>(this._url3);
+    return this.http.get<IMaterial[]>(this._materialUri);
   }
 
   saveMaterials(material:Material):Observable<IMaterial>{
     let body = JSON.stringify(material);
-    return this.http.post<Material>(this._url3, body, httpOptions);
+    return this.http.post<Material>(this._materialUri, body, httpOptions);
   }
 
-
-
-  //ConstructionArea
+  //Baustelle
   getConstructionAreas():Observable<IConstructionArea[]>{
-    return this.http.get<IConstructionArea[]>(this._url4);
+    return this.http.get<IConstructionArea[]>(this._constructionAreaUri);
   }
 
   saveConstructionArea(construction:ConstructionArea):Observable<IConstructionArea>{
     let body = JSON.stringify(construction);
-    return this.http.post<ConstructionArea>(this._url4, body, httpOptions);
+    return this.http.post<ConstructionArea>(this._constructionAreaUri, body, httpOptions);
   }
 
+  //Bauleiter
+  getConstructionLadder():Observable<IConstructionLadder[]>{
+    return this.http.get<IConstructionLadder[]>(this._constructionLadderUri);
+  }
 
-
-  // //Constructionladder
-  // getConstructionLadder():Observable<IConstructionLadder[]>{
-  //   return this.http.get<IConstructionLadder[]>(this._url5);
-  // }
-
-  // getResources():Observable<IResource[]>{
-  //   return this.http.get<IResource[]>(this._url2)
-  // }
+  saveConstructionLadder(constructionLadder:ConstructionLadder):Observable<IConstructionLadder>{
+    let body = JSON.stringify(constructionLadder);
+    return this.http.post<ConstructionLadder>(this._constructionLadderUri, body, httpOptions);
+  }
 
 }

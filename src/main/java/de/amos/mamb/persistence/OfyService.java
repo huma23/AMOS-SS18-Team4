@@ -3,11 +3,7 @@ package de.amos.mamb.persistence;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
-import de.amos.mamb.model.User;
-import de.amos.mamb.model.Employee;
-import de.amos.mamb.model.Material;
-import de.amos.mamb.model.Vehicle;
-import de.amos.mamb.model.ConstructionArea;
+import de.amos.mamb.model.*;
 
 /**
  * Inspired by:
@@ -22,6 +18,7 @@ public class OfyService {
         factory().register(Material.class);
         factory().register(Vehicle.class);
         factory().register(ConstructionArea.class);
+        factory().register(ConstructionLadder.class);
     }
 
     public static Objectify ofy(){
