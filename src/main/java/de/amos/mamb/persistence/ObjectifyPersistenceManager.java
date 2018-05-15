@@ -52,11 +52,9 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
             return false;
     }
 
+    public <T extends PersistentObject> List<T> getAllEntities(Class<T> clz) {
 
-    @Override
-    public List<PersistentObject> getAllEntities(Class clz) {
-
-        List<PersistentObject> list = ofy().load().type(clz).list();
+        List<T> list = ofy().load().type(clz).list();
         return list;
     }
 

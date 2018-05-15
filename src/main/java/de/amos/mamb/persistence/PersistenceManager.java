@@ -32,5 +32,5 @@ public abstract class PersistenceManager {
 
     public abstract boolean saveObject(PersistentObject object);
 
-    public abstract List<PersistentObject> getAllEntities(Class clz);
+    public abstract <T extends PersistentObject> List<T> getAllEntities(Class<T> clz);
 }
