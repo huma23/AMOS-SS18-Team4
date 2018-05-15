@@ -54,11 +54,11 @@ public abstract class AbstractAPI {
         Object object = cmd.execute();
 
         if(object.equals(Command.Result.FAILED)){
-            createResponse(cmd.httpOnCommandFailed(), token);
+            return createResponse(cmd.httpOnCommandFailed(), token);
         } else if(object.equals(Command.Result.NO_OBJECT)){
-            createResponse(cmd.httpOnSuccess(), token);
+            return createResponse(cmd.httpOnSuccess(), token);
         } else {
-            createResponse(cmd.httpOnSuccess(), object, token);
+            return createResponse(cmd.httpOnSuccess(), object, token);
         }
     }
 
