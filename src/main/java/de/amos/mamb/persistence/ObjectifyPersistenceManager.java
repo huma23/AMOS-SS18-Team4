@@ -27,6 +27,7 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Work;
 import de.amos.mamb.model.PersistentObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -78,7 +79,13 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
         List<PersistentObject> list = ObjectifyService.run(new Work<List<PersistentObject>>() {
             @Override
             public List<PersistentObject> run() {
-                return OfyService.ofy().load().type(clz).list();
+
+                List<? extends PersistentObject> list = OfyService.ofy().load().type(clz).list();
+
+                if(list.size() == 0)
+                    return new ArrayList<>();
+
+                return (List<PersistentObject>) list;
             }
         });
 
@@ -93,7 +100,13 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
         List<PersistentObject> list = ObjectifyService.run(new Work<List<PersistentObject>>() {
             @Override
             public List<PersistentObject> run() {
-                return OfyService.ofy().load().type(clz).filter(attribute, value).list();
+
+                List<? extends PersistentObject> list = OfyService.ofy().load().type(clz).filter(attribute, value).list();
+
+                if(list.size() == 0)
+                    return new ArrayList<>();
+
+                return (List<PersistentObject>) list;
             }
         });
 
