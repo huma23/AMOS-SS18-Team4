@@ -1,10 +1,7 @@
 package de.amos.mamb.apps;
 
 import com.googlecode.objectify.ObjectifyService;
-import de.amos.mamb.model.Employee;
-import de.amos.mamb.model.Material;
-import de.amos.mamb.model.User;
-import de.amos.mamb.model.Vehicle;
+import de.amos.mamb.model.*;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -20,6 +17,8 @@ public class Planungstafel implements ServletContextListener {
         ObjectifyService.register(Employee.class);
         ObjectifyService.register(Vehicle.class);
         ObjectifyService.register(Material.class);
+        ObjectifyService.register(ConstructionArea.class);
+        ObjectifyService.register(ConstructionLadder.class);
     }
 
     @Override
