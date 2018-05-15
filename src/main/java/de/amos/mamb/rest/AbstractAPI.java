@@ -14,33 +14,35 @@ public abstract class AbstractAPI {
     final static String TOKEN_AUTHORIZATION = "Authorization";
 
     private Response createResponse(int httpStatus, Object entity, String refreshToken){
-        return Response
-                .status(httpStatus)
-                .entity(entity)
-                .type(MediaType.APPLICATION_JSON)
-                .header(REFRESH_TOKEN_NAME, refreshToken)
-                .build();
-    }
 
-    private Response createResponse(int httpStatus, Object entity){
-        return Response
-                .status(httpStatus)
-                .entity(entity)
-                .type(MediaType.APPLICATION_JSON)
-                .build();
+        if(refreshToken != null){
+            return Response
+                    .status(httpStatus)
+                    .entity(entity)
+                    .type(MediaType.APPLICATION_JSON)
+                    .header(REFRESH_TOKEN_NAME, refreshToken)
+                    .build();
+        } else {
+            return Response
+                    .status(httpStatus)
+                    .entity(entity)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
     }
 
     private Response createResponse(int httpStatus, String refreshToken){
-        return Response
-                .status(httpStatus)
-                .header(REFRESH_TOKEN_NAME, refreshToken)
-                .build();
-    }
 
-    private Response createResponse(int httpStatus){
-        return Response
-                .status(httpStatus)
-                .build();
+        if(refreshToken != null){
+            return Response
+                    .status(httpStatus)
+                    .header(REFRESH_TOKEN_NAME, refreshToken)
+                    .build();
+        } else {
+            return Response
+                    .status(httpStatus)
+                    .build();
+        }
     }
 
     protected Response executeRequest(Command cmd){
@@ -51,18 +53,12 @@ public abstract class AbstractAPI {
 
         Object object = cmd.execute();
 
-        if(object != null){
-            if(token != null){
-                return createResponse(cmd.httpOnSuccess(), object, token);
-            } else {
-                return createResponse(cmd.httpOnSuccess(), object);
-            }
+        if(object.equals(Command.Result.FAILED)){
+            createResponse(cmd.httpOnCommandFailed(), token);
+        } else if(object.equals(Command.Result.NO_OBJECT)){
+            createResponse(cmd.httpOnSuccess(), token);
         } else {
-            if (token != null) {
-                return createResponse(cmd.httpOnSuccess(), token);
-            } else {
-                return createResponse(cmd.httpOnSuccess());
-            }
+            createResponse(cmd.httpOnSuccess(), object, token);
         }
     }
 
