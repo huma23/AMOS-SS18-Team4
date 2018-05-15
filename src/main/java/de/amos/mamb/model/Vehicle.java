@@ -8,31 +8,25 @@ import com.googlecode.objectify.annotation.Index;
 public class Vehicle extends PersistentObject{
 
     @Index
-    int oldId;
-    String name;
-    int size;
+    String bezeichnung;
+    String size;
     String modell;
 
     public Vehicle(){
 
     }
 
-    public Vehicle(int id, String name, int size, String modell){
-        this.oldId = id;
-        this.name = name;
+    public Vehicle(String bezeichnung, String size, String modell){
+        this.bezeichnung = bezeichnung;
         this.size = size;
         this.modell = modell;
     }
 
-    public String getName() {
-        return name;
+    public String getBezeichnung() {
+        return bezeichnung;
     }
 
-    public int getOldId() {
-        return oldId;
-    }
-
-    public int getSize() {
+    public String getSize() {
         return size;
     }
 
@@ -40,19 +34,16 @@ public class Vehicle extends PersistentObject{
         return modell;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBezeichnung(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
     }
 
     public void setModell(String modell) {
         this.modell = modell;
     }
 
-    public void setOldId(int oldId) {
-        this.oldId = oldId;
-    }
 
-    public void setSize(int size) {
+    public void setSize(String size) {
         this.size = size;
     }
 }
