@@ -38,6 +38,7 @@
         <url-pattern>/resource</url-pattern>
         <url-pattern>/vehicle</url-pattern>
         <url-pattern>/material</url-pattern>
+        <url-pattern>/constructionArea</url-pattern>
     </servlet-mapping>
 
     <!-- Objectify -->

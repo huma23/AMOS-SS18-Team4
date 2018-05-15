@@ -9,7 +9,7 @@
   <button type="submit" >Hinzufügen</button>
 </form>
 
-<form (submit)="addVehicle(fahrzeugBezeichnung.value,size.value,modell.value)" >
+<form (submit)="addVehicle(fahrzeugBezeichnung.value, size.value, modell.value)" >
   <label>Fahrzeug hinzufügen</label>
   <div class="form-group">
     <input type="text" placeholder="Bezeichnung" #fahrzeugBezeichnung>
@@ -28,4 +28,21 @@
   </div>
   <button type="submit" >Hinzufügen</button>
 </form>
+
+
+<form (submit)="addConstruction(constructionName.value, startDate.value, endDate.value)" >
+  <label>Baustelle hinzufügen</label>
+  <div class="form-group">
+    <input type="text" placeholder="Name" #constructionName>
+    <input type="text" placeholder="Startdatum" #startDate>
+    <input type="text" placeholder="Enddatum" #endDate>
+  </div>
+  <button type="submit" >Hinzufügen</button>
+</form>
+
+
+<div>
+  <p>Baustelle</p>
+  <p *ngFor='let construct of constructions'>Name: {{construct.name}} Startdatum: {{construct.startDate}} Enddatum: {{construct.endDate}}</p>
+</div>
 

@@ -11,6 +11,7 @@ import {IMaterial} from "./IMaterial";
 import {Employee} from "../../model/employee";
 import {Vehicle} from "../../model/vehicle";
 import {Material} from "../../model/material";
+import {ConstructionArea} from "../../model/constructionArea";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,6 +24,7 @@ export class ResourceService{
   private _url: string = "/api/employee";
   private _url2: string = "/api/vehicle";
   private _url3: string = "/api/material";
+  private _url4: string = "/api/constructionArea";
 
   constructor(private http: HttpClient){
 
@@ -61,19 +63,25 @@ export class ResourceService{
 
 
 
-
-/*  //ConstructionArea
+  //ConstructionArea
   getConstructionAreas():Observable<IConstructionArea[]>{
     return this.http.get<IConstructionArea[]>(this._url4);
   }
 
-  //Constructionladder
-  getConstructionLadder():Observable<IConstructionLadder[]>{
-    return this.http.get<IConstructionLadder[]>(this._url5);
+  saveConstructionArea(construction:ConstructionArea):Observable<IConstructionArea>{
+    let body = JSON.stringify(construction);
+    return this.http.post<ConstructionArea>(this._url4, body, httpOptions);
   }
 
-  getResources():Observable<IResource[]>{
-    return this.http.get<IResource[]>(this._url2)
-  }*/
+
+
+  // //Constructionladder
+  // getConstructionLadder():Observable<IConstructionLadder[]>{
+  //   return this.http.get<IConstructionLadder[]>(this._url5);
+  // }
+
+  // getResources():Observable<IResource[]>{
+  //   return this.http.get<IResource[]>(this._url2)
+  // }
 
 }

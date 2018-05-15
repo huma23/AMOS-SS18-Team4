@@ -3,6 +3,8 @@ import {Employee} from "../../../model/employee";
 import {ResourceService} from "../resource.service";
 import {Vehicle} from "../../../model/vehicle";
 import {Material} from "../../../model/material";
+import {IConstructionArea} from "../IConstructionArea";
+import {ConstructionArea} from "../../../model/constructionArea";
 
 @Component({
   selector: 'pl-add-resource',
@@ -11,9 +13,15 @@ import {Material} from "../../../model/material";
 })
 export class AddResourceComponent implements OnInit {
 
-  constructor(private _resourceService:ResourceService) { }
+
+  constructions : IConstructionArea[];
+
+  constructor(private _resourceService:ResourceService) {
+  }
 
   ngOnInit() {
+    this._resourceService.getConstructionAreas()
+      .subscribe(data => this.constructions = data);
   }
 
   addEmployee(firstName,lastName,age,skills){
@@ -34,6 +42,13 @@ export class AddResourceComponent implements OnInit {
     let material = new Material(bezeichnung,description,location);
     console.log(material +","+JSON.stringify(material));
     this._resourceService.saveMaterials(material).subscribe((res:Material)=>console.log(res));
+
+  }
+
+  addConstruction(name, startDate, endDate){
+    let construction = new ConstructionArea(name, startDate, endDate);
+    console.log(construction + ", "+ JSON.stringify(construction)+","+this.constructions);
+    this._resourceService.saveConstructionArea(construction).subscribe((res:ConstructionArea) => console.log(res));
 
   }
 
