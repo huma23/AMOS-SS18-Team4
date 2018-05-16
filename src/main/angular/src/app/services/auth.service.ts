@@ -170,7 +170,7 @@ export class AuthService
   {
     debugger;
 
-    if(localStorage.getItem(AuthService.TokenIdentifier) !== ""){
+    if(localStorage.getItem(AuthService.TokenIdentifier) !== null){
       return true;
     }
 
