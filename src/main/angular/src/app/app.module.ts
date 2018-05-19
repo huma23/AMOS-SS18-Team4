@@ -63,6 +63,7 @@ import { AuthService }        from './services/auth.service';
 import { ResourceService} from "./Resourcenpanel/resource.service";
 import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
 import { Interceptor } from './http/interceptor';
+import {ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
 
 
 
@@ -81,7 +82,8 @@ import { Interceptor } from './http/interceptor';
     LoginComponent,
     MainviewComponent,
     RegisterComponent,
-    AddResourceComponent
+    AddResourceComponent,
+    ResourceTypeRightComponent
   ],
   imports: [
     BrowserModule,
@@ -110,10 +112,10 @@ import { Interceptor } from './http/interceptor';
       },
       AppService,
       AuthService,
-      CalenderStoreService, 
-      PlRegistrationPanelService, 
+      CalenderStoreService,
+      PlRegistrationPanelService,
       PlLoginService,
-      ResourceService, 
+      ResourceService,
   ],
 
   bootstrap: [AppComponent]
