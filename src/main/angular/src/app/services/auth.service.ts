@@ -168,7 +168,6 @@ export class AuthService
    */
   public hasValidToken() : boolean
   {
-    debugger;
 
     if(localStorage.getItem(AuthService.TokenIdentifier) !== null){
       return true;

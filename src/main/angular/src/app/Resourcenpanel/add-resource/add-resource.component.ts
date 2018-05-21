@@ -22,6 +22,8 @@ export class AddResourceComponent implements OnInit {
   constructor(private _resourceService:ResourceService) {
   }
 
+
+
   ngOnInit() {
     this._resourceService.getConstructionAreas()
       .subscribe(data => this.constructions = data);
@@ -54,8 +56,11 @@ export class AddResourceComponent implements OnInit {
   }
 
   //add "Baustelle" through POST Request to the DB
-  addConstruction(name, startDate, endDate){
-    let construction = new ConstructionArea(name, startDate, endDate);
+  //get the actual "Bauleiter" and saves it in the new "Baustelle" object
+  addConstruction(name, startDate, endDate, leiter){
+    let bauleiter = this.constructionLadders.find(myobject => myobject.lastName===leiter)
+    let construction = new ConstructionArea(name, startDate, endDate, bauleiter);
+    console.log(leiter);
     console.log(construction + ", "+ JSON.stringify(construction)+","+this.constructions);
     this._resourceService.saveConstructionArea(construction).subscribe((res:ConstructionArea) => console.log(res));
 

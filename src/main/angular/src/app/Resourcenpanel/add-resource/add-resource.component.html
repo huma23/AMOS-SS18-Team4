@@ -1,5 +1,5 @@
+<h3>Mitarbeiter hinzufügen</h3>
 <form (submit)="addEmployee(firstName.value,lastName.value,age.value,skills.value)" >
-  <label>Mitarbeiter hinzufügen</label>
   <div class="form-group">
     <input type="text" placeholder="firstName" #firstName>
     <input type="text" placeholder="lastName" #lastName>
@@ -9,8 +9,8 @@
   <button type="submit" >Hinzufügen</button>
 </form>
 
+<h3>Fahrzeug hinzufügen</h3>
 <form (submit)="addVehicle(fahrzeugBezeichnung.value, size.value, modell.value)" >
-  <label>Fahrzeug hinzufügen</label>
   <div class="form-group">
     <input type="text" placeholder="Bezeichnung" #fahrzeugBezeichnung>
     <input type="text" placeholder="Size" #size>
@@ -19,8 +19,8 @@
   <button type="submit" >Hinzufügen</button>
 </form>
 
+<h3>Betriebsmittel hinzufügen</h3>
 <form (submit)="addMaterial(betriebsmittelBezeichnung.value,description.value,location.value)" >
-  <label>Betriebsmittel hinzufügen</label>
   <div class="form-group">
     <input type="text" placeholder="Bezeichnung" #betriebsmittelBezeichnung>
     <input type="text" placeholder="description" #description>
@@ -30,18 +30,23 @@
 </form>
 
 
-<form (submit)="addConstruction(constructionName.value, startDate.value, endDate.value)" >
-  <label>Baustelle hinzufügen</label>
+<h3>Baustelle hinzufügen</h3>
+<form *ngIf="constructionLadders?.length > 0" (submit)="addConstruction(constructionName.value, startDate.value, endDate.value, selectedLevel)" >
   <div class="form-group">
     <input type="text" placeholder="Name" #constructionName>
     <input type="text" placeholder="Startdatum" #startDate>
     <input type="text" placeholder="Enddatum" #endDate>
+    <select type="text" [(ngModel)]="selectedLevel" [ngModelOptions]="{standalone: true}">
+      <option value="" disabled selected>>Wähle Bauleiter</option>
+      <option *ngFor="let ladder of constructionLadders" [ngValue]="ladder.lastName">{{ladder.firstName.concat(" ", ladder.lastName)}}</option>
+    </select>
   </div>
   <button type="submit" >Hinzufügen</button>
 </form>
+<p style="color:red" *ngIf="!constructionLadders?.length > 0">Anlegen einer Baustelle ist nicht möglich, weil kein Bauleiter angelegt ist!</p>
 
+<h3> Bauleiter hinzufügen</h3>
 <form (submit)="addConstructionLadder(constructionLadderFirstName.value, constructionLadderLastName.value)" >
-  <label>Bauleiter hinzufügen</label>
   <div class="form-group">
     <input type="text" placeholder="Vorname" #constructionLadderFirstName>
     <input type="text" placeholder="Nachname" #constructionLadderLastName>
@@ -51,7 +56,7 @@
 
 <div>
   <p>Baustelle</p>
-  <p *ngFor='let construct of constructions'>Name: {{construct.name}} Startdatum: {{construct.startDate}} Enddatum: {{construct.endDate}}</p>
+  <p *ngFor='let construct of constructions'>Name: {{construct.name}}, Startdatum: {{construct.startDate}}, Enddatum: {{construct.endDate}}, Bauleiter: {{construct.bauleiter.firstName+construct.bauleiter.lastName}}</p>
 </div>
 <div>
   <p>Bauleiter</p>
