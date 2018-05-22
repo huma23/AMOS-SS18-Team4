@@ -64,6 +64,7 @@ import { ResourceService} from "./Resourcenpanel/resource.service";
 import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
 import { Interceptor } from './http/interceptor';
 import {ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
+import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
 
 
 
@@ -83,7 +84,8 @@ import {ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/r
     MainviewComponent,
     RegisterComponent,
     AddResourceComponent,
-    ResourceTypeRightComponent
+    ResourceTypeRightComponent,
+    ResourcePipe
   ],
   imports: [
     BrowserModule,
