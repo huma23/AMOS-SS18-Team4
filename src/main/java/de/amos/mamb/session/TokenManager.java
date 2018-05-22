@@ -33,24 +33,36 @@ import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Manager-Klasse für die Erstellung und Prüfung von JWT-Tokens
+ */
 public class TokenManager {
 
     protected static TokenManager INSTANCE = null;
     private final String SECRET = "INSERT_SECRET_HERE";
     private final String ISSUER = "MAMB";
 
-    protected TokenManager(){
+    protected TokenManager(){}
 
-    }
-
+    /**
+     * Instanziierungsfunktion für das Singleton-Pattern
+     * @return
+     */
     public static synchronized  TokenManager getInstance(){
         if(INSTANCE == null){
             INSTANCE = new TokenManager();
         }
-
         return INSTANCE;
     }
 
+    /**
+     * Erstellt einen Token anhand der gegebenen user-id.
+     * Verwendet das in der Klasse definierte Geheimnis und HMAC256 Algorithmus
+     *
+     * @param userId
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     public String createToken(long userId) throws UnsupportedEncodingException {
 
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
@@ -63,6 +75,17 @@ public class TokenManager {
         return token;
     }
 
+    /**
+     * Verifiziert den gegebenen Token anhand des Issuers dieser Klasse und
+     * der gegebenen Expiration Time der Methode TokenManager#createExpirationDate().
+     * Im Erfolgsfall wird die Id des Benutzers zurückgegeben. Bei einer gescheiterten Validierung
+     * wird eine JWTVerificationException geworfen.
+     *
+     * @param token
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws JWTVerificationException
+     */
     public Long verifyTokenAndGetUserId(String token) throws UnsupportedEncodingException, JWTVerificationException {
 
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
@@ -74,6 +97,11 @@ public class TokenManager {
         return claim.asLong();
     }
 
+    /**
+     * Erstellt ein Datum, welches 2 Stunden in der Zukunft sich befindet.
+     *
+     * @return
+     */
     protected Date createExpirationDate(){
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
