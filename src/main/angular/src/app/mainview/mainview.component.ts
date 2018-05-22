@@ -50,7 +50,7 @@ import {MatDrawer} from "@angular/material";
  *
  */
 
- export class MainviewComponent implements OnInit, AfterViewInit{
+ export class MainviewComponent implements OnInit {
 
   /**
    *  @member calYear : beschreibt das Kalenderjahr für das die Verarbeitung erfolgen soll
@@ -71,8 +71,11 @@ import {MatDrawer} from "@angular/material";
                private cSS : CalenderStoreService,
                private router : Router)
   {
+    // sorgt dafür, dass die Komponente neugeladen wird, auch wenn sich nur die Parameter ändern
     this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
   }
+
+
 
   /**
    * @description
