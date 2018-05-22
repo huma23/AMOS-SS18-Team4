@@ -29,22 +29,28 @@ import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+/**
+ * Konkrete Implementierung eines PersistenceManagers für den Google Datastore gesteuert über
+ * das Open-Source Framework Objectify.
+ *
+ * Instanziierung über PersistenceManager#getInstance(ManagerType.OBJECTIFY_MANAGER)
+ */
 public class ObjectifyPersistenceManager extends PersistenceManager {
 
     protected ObjectifyPersistenceManager(){}
 
     @Override
-    public PersistentObject getEntityWithId(Long id, Class clz) {
+    public <T extends  PersistentObject> T getEntityWithId(Long id, Class<T> clz) {
 
         Key key = Key.create(clz, id);
-        PersistentObject result = (PersistentObject) ofy().load().key(key).now();
+        T result = (T) ofy().load().key(key).now();
         return result;
     }
 
     @Override
-    public boolean saveObject(PersistentObject object) {
+    public <T extends  PersistentObject> boolean saveObject(T object) {
 
-        Key<PersistentObject> persistentKey = ofy().save().entity(object).now();
+        Key<T> persistentKey = ofy().save().entity(object).now();
 
         if(persistentKey != null)
             return true;
@@ -59,9 +65,9 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
     }
 
     @Override
-    public List<PersistentObject> getEntityWithAttribute(String attribute, Object value, Class clz){
+    public <T extends PersistentObject> List<T> getEntityWithAttribute(String attribute, Object value, Class<T> clz){
 
-        List<PersistentObject> list = ofy().load().type(clz).filter(attribute, value).list();
+        List<T> list = ofy().load().type(clz).filter(attribute, value).list();
         return list;
     }
 }
