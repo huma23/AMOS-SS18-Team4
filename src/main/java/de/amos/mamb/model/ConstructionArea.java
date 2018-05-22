@@ -11,16 +11,18 @@ public class ConstructionArea extends PersistentObject{
     String startDate;
     String endDate;
     ConstructionLadder bauleiter;
+    boolean permanent;
 
     public ConstructionArea(){
 
     }
 
-    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter){
+    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent){
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.bauleiter = bauleiter;
+        this.permanent = permanent;
     }
 
     public String getName() {
@@ -54,4 +56,5 @@ public class ConstructionArea extends PersistentObject{
     public void setBauleiter(ConstructionLadder bauleiter) {
         this.bauleiter = bauleiter;
     }
+
 }

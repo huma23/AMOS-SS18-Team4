@@ -4,5 +4,6 @@ export interface IConstructionArea{
   name:string,
   startDate: string,
   endDate: string,
-  bauleiter: ConstructionLadder
+  bauleiter: ConstructionLadder,
+  permanent: boolean
 }
