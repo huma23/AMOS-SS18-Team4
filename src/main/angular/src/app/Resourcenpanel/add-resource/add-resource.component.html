@@ -31,12 +31,12 @@
 
 
 <h3>Baustelle hinzufügen</h3>
-<form *ngIf="constructionLadders?.length > 0" (submit)="addConstruction(constructionName.value, startDate.value, endDate.value, selectedLevel)" >
+<form *ngIf="constructionLadders?.length > 0" (submit)="addConstruction(constructionName.value, startDate.value, endDate.value, selectedLadder)" >
   <div class="form-group">
     <input type="text" placeholder="Name" #constructionName>
     <input type="text" placeholder="Startdatum" #startDate>
     <input type="text" placeholder="Enddatum" #endDate>
-    <select type="text" [(ngModel)]="selectedLevel" [ngModelOptions]="{standalone: true}">
+    <select type="text" [(ngModel)]="selectedLadder" [ngModelOptions]="{standalone: true}">
       <option value="" disabled selected>>Wähle Bauleiter</option>
       <option *ngFor="let ladder of constructionLadders" [ngValue]="ladder.lastName">{{ladder.firstName.concat(" ", ladder.lastName)}}</option>
     </select>
@@ -56,7 +56,8 @@
 
 <div>
   <p>Baustelle</p>
-  <p *ngFor='let construct of constructions'>Name: {{construct.name}}, Startdatum: {{construct.startDate}}, Enddatum: {{construct.endDate}}, Bauleiter: {{construct.bauleiter.firstName+construct.bauleiter.lastName}}</p>
+  <p *ngFor='let construct of constructions'>Name: {{construct.name}}, Startdatum: {{construct.startDate}}, Enddatum: {{construct.endDate}},
+    Bauleiter: {{construct.bauleiter | json}}</p>
 </div>
 <div>
   <p>Bauleiter</p>
