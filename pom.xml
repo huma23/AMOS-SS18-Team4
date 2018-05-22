@@ -318,6 +318,14 @@
             <artifactId>java-jwt</artifactId>
             <version>3.3.0</version>
         </dependency>
+
+        <!-- JSON Writer -->
+        <dependency>
+            <groupId>com.owlike</groupId>
+            <artifactId>genson</artifactId>
+            <version>1.4</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
