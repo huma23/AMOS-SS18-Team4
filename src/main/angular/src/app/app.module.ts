@@ -32,7 +32,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatListModule,
-  MatSidenavModule
+  MatSidenavModule, MatDatepickerModule, MatNativeDateModule
 } from "@angular/material";
 
 import { MatGridListModule }  from '@angular/material/grid-list';
@@ -103,7 +103,9 @@ import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
     MatListModule,
     FlexLayoutModule,
     MatSidenavModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers:
   [

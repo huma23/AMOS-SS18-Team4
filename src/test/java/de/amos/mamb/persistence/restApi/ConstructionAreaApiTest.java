@@ -35,9 +35,9 @@ public class ConstructionAreaApiTest extends TestBase {
         constructionAreaAPI = new ConstructionAreaAPI();
 
 
-        construction = new ConstructionArea("Neustadt","10.8.2017","10.9.2017", new ConstructionLadder("Max","Test"), true);
-        construction1 = new ConstructionArea("Nürnberg","10.8.2017","10.9.2017", new ConstructionLadder("Test","Test"), false);
-        construction2 = new ConstructionArea("Herzogenaurach","10.8.2017","10.9.2017", new ConstructionLadder("Test","Test"), true);
+        construction = new ConstructionArea("Neustadt","10.8.2017","10.9.2017", new ConstructionLadder("Max","Test"),true);
+        construction1 = new ConstructionArea("Nürnberg","10.8.2017","10.9.2017", new ConstructionLadder("Test","Test"),true);
+        construction2 = new ConstructionArea("Herzogenaurach","10.8.2017","10.9.2017", new ConstructionLadder("Test","Test"), false);
     }
 
     /**

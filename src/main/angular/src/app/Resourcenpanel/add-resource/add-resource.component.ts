@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import {Employee} from "../../../model/employee";
 import {ResourceService} from "../resource.service";
@@ -7,6 +8,8 @@ import {IConstructionArea} from "../IConstructionArea";
 import {ConstructionArea} from "../../../model/constructionArea";
 import {ConstructionLadder} from "../../../model/constructionLadder";
 import {IConstructionLadder} from "../IConstructionLadder";
+import {MatDatepickerInput, MatDatepickerInputEvent} from "@angular/material";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'pl-add-resource',
@@ -18,11 +21,26 @@ export class AddResourceComponent implements OnInit {
 
   constructions : IConstructionArea[];
   constructionLadders : IConstructionLadder[];
-  selectedLadder : string;
+
+
+  formContent = new ConstructionArea("", "", "", null, false);
+  startDate:string;
+  endDate:string;
+  selectedBauleiter:string;
+
+
 
   constructor(private _resourceService:ResourceService) {
+
+
   }
 
+  onStartDate(event){
+      this.startDate = event;
+  }
+  onEndDate(event){
+      this.endDate = event;
+  }
 
 
   ngOnInit() {
@@ -58,12 +76,24 @@ export class AddResourceComponent implements OnInit {
 
   //add "Baustelle" through POST Request to the DB
   //get the actual "Bauleiter" and saves it in the new "Baustelle" object
-  addConstruction(name, startDate, endDate, leiter){
-    let bauleiter = this.constructionLadders.find(myobject => myobject.lastName===leiter)
-    let construction = new ConstructionArea(name, startDate, endDate, bauleiter, true);
-    console.log(leiter);
-    console.log(construction + ", "+ JSON.stringify(construction)+","+this.constructions);
-    this._resourceService.saveConstructionArea(construction).subscribe((res:ConstructionArea) => console.log(res));
+  addConstruction(form:ConstructionArea){
+    debugger;
+
+    this.formContent.startDate = this.startDate;
+    this.formContent.endDate = this.endDate;
+
+    let startdateobject = new Date(this.startDate);
+    let endDateObject = new Date(this.endDate);
+    let diff = endDateObject.getDate()- startdateobject.getDate();
+    if(diff>5){
+      this.formContent.permanent = true;
+    }
+    else
+      this.formContent.permanent = false;
+
+    this.formContent.bauleiter = this.constructionLadders.find(ladder => ladder.lastName === this.selectedBauleiter);
+    console.log(this.formContent);
+    this._resourceService.saveConstructionArea(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
 
   }
   //add "Bauleiter" through POST Request to the DB
