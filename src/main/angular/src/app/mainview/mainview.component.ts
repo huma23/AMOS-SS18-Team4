@@ -64,6 +64,7 @@ import { CalenderStoreService } from '../shared/calender-store.service';
                private cSS : CalenderStoreService, 
                private router : Router) 
   { 
+    // sorgt dafür, dass die Komponente neugeladen wird, auch wenn sich nur die Parameter ändern
     this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
   }
 

@@ -24,6 +24,9 @@
 import { Injectable }   from '@angular/core';
 import { CalendarWeek}  from './calender-week' ;
 import { ConstructionManager, CPlan } from './construction-manager';
+import { ResourceService } from '../Resourcenpanel/resource.service';
+import { IConstructionLadder }  from '../Resourcenpanel/IConstructionLadder';
+
 
 
 @Injectable()
@@ -32,14 +35,19 @@ export class CalenderStoreService
 
   public today              : Date;
   
-  public cW                 : Array<CalendarWeek> ;
+ 
   public currentWeek        : number;
   public currentYear        : number;
 
   private weekInMS          : number  = 604800000;
   private currentYearHeader : Array<Date>;
+
+  // Zugriff auf den Ressource Service, nötig um die Bauleiter resp. Daten aus der 
+  // Ressource Api zu laden.
+  private ressService : ResourceService;
   
 
+  // BeispielWochenpläne der Bauleiter, reine Filler
   public musterCPlan = new CPlan(17, "Musterstrasse", ["Max, Moritz, Frido"] );
   public musterCPArr =
   [
@@ -51,26 +59,16 @@ export class CalenderStoreService
     this.musterCPlan
   ];
 
-  constructor() 
+  constructor(_resService : ResourceService) 
   {
     this.today              = new Date();
     this.currentYear        = this.today.getFullYear();
     this.currentYearHeader  = new Array<Date>();
     this.initCurrentYear();
     this.currentWeek        = this.getCurrentCalendarWeek();
+    
+    this.ressService = _resService;
     //------------------------------------------------------------------------------
-    this.cW = [new CalendarWeek
-      (
-        this.currentWeek, 
-        this.currentYear, 
-        [this.currentWeek.toString(), "23.04","24.04", "25.04", "26.04", "27.04", "28.04"], 
-        [ 
-          new ConstructionManager("Müller","Hans","Bauleiter" , this.musterCPArr),
-          new ConstructionManager("Schmidt","Uwe","Bauleiter" , this.musterCPArr), 
-          new ConstructionManager("Schulz","Peter","Bauleiter", this.musterCPArr)
-        ]       
-      )
-    ]
   }
   
   getCalendarWeek(year?:number, week?:number) : Array<CalendarWeek>
@@ -99,16 +97,20 @@ export class CalenderStoreService
          headerString.push((mondayOfSearchedWeek.getDate()+"."+(mondayOfSearchedWeek.getMonth()+1)).toString())
        }
         
+       let cLadders : ConstructionManager[] = new Array();
+       this.ressService.getConstructionLadder().subscribe((val : IConstructionLadder[]) =>
+       {
+         for (let tmp of val)
+         {
+           cLadders.push(new ConstructionManager(tmp,this.musterCPArr));
+         }
+       }); 
+
       result.push( new CalendarWeek(
         week,
         this.currentYear,
         headerString,
-        [ 
-          new ConstructionManager("Müller","Hans","Bauleiter" , this.musterCPArr),
-          new ConstructionManager("Schmidt","Uwe","Bauleiter" , this.musterCPArr), 
-          new ConstructionManager("Schulz","Peter","Bauleiter", this.musterCPArr)
-        ]       
-
+        cLadders
       ));
       
     }
