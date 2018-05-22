@@ -1,7 +1,7 @@
 /**
- *  @license 
- *  
- * 
+ *  @license
+ *
+ *
  * Copyright [2018] [(MAMB Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)]
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,15 +15,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Copyright (c) 2018 by MAMB (Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)
- * 
- * 
+ *
+ *
  */
 
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CalenderStoreService } from '../shared/calender-store.service';
+import {MatDrawer} from "@angular/material";
 
 
 
@@ -35,54 +36,58 @@ import { CalenderStoreService } from '../shared/calender-store.service';
 })
 
 /**
- * 
+ *
  * @class MainviewComponent
- * 
- * 
+ *
+ *
  * Klasse Mainviewkomponent ist für das Laden des Kalenders und der RessourceSidebar
- * verantwortlich. 
- * Desweiteren werden in dieser Klasse die Parameter der aufgerufenen Route abgefangen 
- * und entsprechend an die Kindsknoten im Komponentbaum weiterreicht 
+ * verantwortlich.
+ * Desweiteren werden in dieser Klasse die Parameter der aufgerufenen Route abgefangen
+ * und entsprechend an die Kindsknoten im Komponentbaum weiterreicht
  * @see (central).Readme
- * 
- * 
- * 
+ *
+ *
+ *
  */
 
- export class MainviewComponent implements OnInit {
+ export class MainviewComponent implements OnInit, AfterViewInit{
 
   /**
    *  @member calYear : beschreibt das Kalenderjahr für das die Verarbeitung erfolgen soll
    *  @member calWeek : beschreibt die KalenderWoche
-   *  
+   *
    */
   public calYear: number;
   public calWeek: number;
 
+  @ViewChild('drawerRight')
+  private drawerRight: MatDrawer;
 
-  constructor( private route: ActivatedRoute, 
-               private cSS : CalenderStoreService, 
-               private router : Router) 
-  { 
+  @ViewChild('drawerLeft')
+  private drawerLeft: MatDrawer;
+
+
+  constructor( private route: ActivatedRoute,
+               private cSS : CalenderStoreService,
+               private router : Router)
+  {
     this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
   }
-
-
 
   /**
    * @description
    * Initialisierungsfunktion der MainviewComponent
-   * Fängt die Parameter der Route ab und schreibt diese in die Klassenmember, 
+   * Fängt die Parameter der Route ab und schreibt diese in die Klassenmember,
    * damit diese weiterverarbeitet werden können
-   * 
+   *
    *  @param    --> none
    *  @returns  --> none
-   * 
+   *
    */
   ngOnInit()
   {
-   
-   
+
+
     // speichert die aktuelle Belegung der Parameter im Routenpfad /app/:year/:week
     const params = this.route.snapshot.params;
     this.calWeek = params['week'];
@@ -94,11 +99,19 @@ import { CalenderStoreService } from '../shared/calender-store.service';
     {
       this.calWeek = this.cSS.currentWeek;
     }
-    
+
     if(!this.calYear)
     {
       //setzt das aktuelle Jahr
       this.calYear = new Date().getFullYear();
     }
+  }
+
+  ngAfterViewInit()
+  {
+    setTimeout(() => {
+      this.drawerLeft.open();
+      this.drawerRight.open();
+    }, 250);
   }
 }

@@ -3,13 +3,13 @@
   <div fxFlex>
     <mat-drawer-container id="pl-drawer-container" fxFill>
 
-      <mat-drawer mode="side" opened="true" class="pl-drawer">
+      <mat-drawer #drawerLeft mode="side" opened="false" class="pl-drawer">
         <div id="content">
           <app-resource-type></app-resource-type>
         </div>
       </mat-drawer>
 
-      <mat-drawer mode="side" position="end" class="pl-drawer" opened="true">
+      <mat-drawer #drawerRight mode="side" position="end" class="pl-drawer" opened="false">
         <div id="contentRight">
           <app-resource-duration></app-resource-duration>
         </div>
