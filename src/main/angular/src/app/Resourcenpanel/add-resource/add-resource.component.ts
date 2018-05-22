@@ -18,6 +18,7 @@ export class AddResourceComponent implements OnInit {
 
   constructions : IConstructionArea[];
   constructionLadders : IConstructionLadder[];
+  selectedLadder : string;
 
   constructor(private _resourceService:ResourceService) {
   }
