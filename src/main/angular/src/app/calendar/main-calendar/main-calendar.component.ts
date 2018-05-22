@@ -41,13 +41,13 @@ export class MainCalendarComponent implements OnInit
   @Input()
   public calendarYear : number;
 
-  public calWeeks : Array<CalendarWeek>;
+  public calWeek : CalendarWeek;
 
   constructor(private csService : CalenderStoreService) { } 
 
   ngOnInit()
   {
-    this.calWeeks = this.csService.getCalendarWeek(this.calendarYear, this.calendarWeek);
+    this.calWeek = this.csService.getCalendarWeek(this.calendarYear, this.calendarWeek);
   }
 
 }
