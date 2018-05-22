@@ -22,4 +22,15 @@
       <mat-list-item>Ort: {{material.location}}</mat-list-item>
     </mat-card-content>
   </mat-card>
+  <mat-card class="pl-construction-area-card" *ngFor="let area of constructionAreaList | ascending">
+    <mat-card-content>
+      <mat-list-item>Bezeichnung: {{area.name}}</mat-list-item>
+      <mat-list-item>Start: {{area.startDate}}</mat-list-item>
+      <mat-list-item>Ende: {{area.endDate}}</mat-list-item>
+      <mat-list>Bauleiter:
+        <mat-list-item>Vorname: {{area.bauleiter.firstName}}</mat-list-item>
+        <mat-list-item>Nachname: {{area.bauleiter.lastName}}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </mat-list>

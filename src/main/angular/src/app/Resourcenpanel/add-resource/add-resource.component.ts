@@ -60,7 +60,7 @@ export class AddResourceComponent implements OnInit {
   //get the actual "Bauleiter" and saves it in the new "Baustelle" object
   addConstruction(name, startDate, endDate, leiter){
     let bauleiter = this.constructionLadders.find(myobject => myobject.lastName===leiter)
-    let construction = new ConstructionArea(name, startDate, endDate, bauleiter);
+    let construction = new ConstructionArea(name, startDate, endDate, bauleiter, true);
     console.log(leiter);
     console.log(construction + ", "+ JSON.stringify(construction)+","+this.constructions);
     this._resourceService.saveConstructionArea(construction).subscribe((res:ConstructionArea) => console.log(res));

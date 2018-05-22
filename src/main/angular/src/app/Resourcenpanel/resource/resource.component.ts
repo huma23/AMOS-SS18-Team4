@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {IEmployee} from "../IEmployee";
 import {IVehicle} from "../IVehicle";
 import {IMaterial} from "../IMaterial";
+import {IConstructionArea} from "../IConstructionArea";
 
 @Component({
   selector: 'app-resource',
@@ -21,5 +22,6 @@ export class ResourceComponent implements OnInit {
   public vehicleList:IVehicle[];
   @Input()
   public materialList:IMaterial[];
-
+  @Input()
+  public constructionAreaList:IConstructionArea[];
 }

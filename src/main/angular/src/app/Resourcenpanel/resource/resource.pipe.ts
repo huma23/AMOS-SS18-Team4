@@ -21,32 +21,28 @@
  *
  */
 
-import {Component, OnInit} from "@angular/core";
+import {Pipe, PipeTransform} from "@angular/core";
 import {IConstructionArea} from "../IConstructionArea";
-import {ResourceService} from "../resource.service";
 
-@Component({
-  selector: 'app-resource-duration',
-  templateUrl: './resource-type-right.component.html',
-  styleUrls: ['./resource-type-right.component.css']
+@Pipe({
+  name: "ascending"
 })
+export class ResourcePipe implements PipeTransform {
 
-/**
- *  @class
- *
- *  Klasse ResourceTypeRightComponent ist für das rechte Panel im Hauptview verantwortlich.
- *  In diesem Sidepanel werden Ressourcen wie Dauerbaustellen angezeigt.
- */
-export class ResourceTypeRightComponent implements OnInit{
+  transform(areas: IConstructionArea[]): any {
 
-  public constructionAreas :IConstructionArea[];
+    debugger;
 
-  constructor(private _resourceService: ResourceService){
+    if(areas) {
+      return areas.sort((a1, a2) => {
+        if (a1.startDate > a2.startDate)
+          return 1;
 
-  }
+        if (a1.startDate < a2.startDate)
+          return -1;
 
-  ngOnInit(): void {
-    this._resourceService.getConstructionAreasPermanent()
-      .subscribe(data => this.constructionAreas = data);
+        return 0;
+      });
+    }
   }
 }

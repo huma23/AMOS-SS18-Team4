@@ -27,6 +27,7 @@ export class ResourceService{
   private _materialUri: string = "/api/material";
   private _constructionAreaUri: string = "/api/constructionArea";
   private _constructionLadderUri: string = "/api/constructionLadder"
+  private _constructionAreaPermanentUri: string = "/api/constructionArea/permanent";
 
   constructor(private http: HttpClient){
 
@@ -70,9 +71,12 @@ export class ResourceService{
 
   saveConstructionArea(construction:ConstructionArea):Observable<IConstructionArea>{
     let body = JSON.stringify(construction);
-    return this.http.post<ConstructionArea>(this._constructionAreaUri, body, httpOptions);
+    return this.http.post<IConstructionArea>(this._constructionAreaUri, body, httpOptions);
   }
 
+  getConstructionAreasPermanent():Observable<IConstructionArea[]>{
+    return this.http.get<IConstructionArea[]>(this._constructionAreaPermanentUri);
+  }
   //Bauleiter
   getConstructionLadder():Observable<IConstructionLadder[]>{
     return this.http.get<IConstructionLadder[]>(this._constructionLadderUri);
