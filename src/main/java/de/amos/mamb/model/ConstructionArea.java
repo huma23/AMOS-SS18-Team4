@@ -58,7 +58,7 @@ public class ConstructionArea extends PersistentObject{
         this.bauleiter = bauleiter;
     }
 
-    public Boolean getPermanent() {return permanent;}
+    public boolean getPermanent() {return permanent;}
 
     public void setPermanent(boolean permanent) {this.permanent = permanent; }
 }
