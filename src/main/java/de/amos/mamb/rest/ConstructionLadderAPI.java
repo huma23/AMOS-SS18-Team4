@@ -25,7 +25,7 @@ public class ConstructionLadderAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response saveConstructionLadder(ConstructionLadder constructionLadder){
         PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
-        List<PersistentObject> list = manager.getEntityWithAttribute("lastName",constructionLadder.getLastName(), ConstructionLadder.class);
+        List<ConstructionLadder> list = manager.getEntityWithAttribute("lastName",constructionLadder.getLastName(), ConstructionLadder.class);
         if(list.isEmpty()){
             manager.saveObject(constructionLadder);
             return Response.status(201).build();

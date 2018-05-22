@@ -26,7 +26,7 @@ public class MaterialAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response saveMaterial(Material material){
         PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
-        List<PersistentObject> list = manager.getEntityWithAttribute("bezeichnung",material.getBezeichnung(), Material.class);
+        List<Material> list = manager.getEntityWithAttribute("bezeichnung",material.getBezeichnung(), Material.class);
         if(list.isEmpty()){
             manager.saveObject(material);
             return Response.status(201).build();

@@ -25,7 +25,7 @@ public class VehicleAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response saveVehicle(Vehicle vehicle){
         PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
-        List<PersistentObject> list = manager.getEntityWithAttribute("bezeichnung",vehicle.getBezeichnung(), Vehicle.class);
+        List<Vehicle> list = manager.getEntityWithAttribute("bezeichnung",vehicle.getBezeichnung(), Vehicle.class);
         if(list.isEmpty()){
             manager.saveObject(vehicle);
             return Response.status(201).build();

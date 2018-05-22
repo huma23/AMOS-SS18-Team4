@@ -38,9 +38,18 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * REST-Schnittstelle der url api/login
+ */
 @Path("login")
 public class LoginAPI {
 
+    /**
+     * Methode zur Generierung eines Tokens bei der url /api/login
+     *
+     * @param user
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response loginUser(User user){
@@ -51,7 +60,7 @@ public class LoginAPI {
 
         //Lookup for user with given email
         PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
-        List<PersistentObject> list = manager.getEntityWithAttribute("email ==", user.getEmail(), User.class);
+        List<User> list = manager.getEntityWithAttribute("email ==", user.getEmail(), User.class);
         if(list.isEmpty()){
             //Given User not found
             return Response.status(400).build();

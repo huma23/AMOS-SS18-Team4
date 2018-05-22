@@ -64,7 +64,7 @@ public class UserAPI extends AbstractAPI{
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
 
                 //check if user with this mail is already registered
-                List<PersistentObject> list = manager.getEntityWithAttribute("email ==", user.getEmail(), User.class);
+                List<User> list = manager.getEntityWithAttribute("email ==", user.getEmail(), User.class);
                 if(list.isEmpty()){
                     //save user
                     String hash = DigestUtils.shaHex(user.getPassword());

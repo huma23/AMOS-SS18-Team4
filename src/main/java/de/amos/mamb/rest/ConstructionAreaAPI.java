@@ -25,7 +25,7 @@ public class ConstructionAreaAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response saveConstructionArea(ConstructionArea constructionArea){
         PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
-        List<PersistentObject> list = manager.getEntityWithAttribute("name",constructionArea.getName(), ConstructionArea.class);
+        List<ConstructionArea> list = manager.getEntityWithAttribute("name",constructionArea.getName(), ConstructionArea.class);
         if(list.isEmpty()){
             manager.saveObject(constructionArea);
             return Response.status(201).build();
