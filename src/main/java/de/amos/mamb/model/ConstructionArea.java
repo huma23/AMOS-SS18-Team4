@@ -12,7 +12,7 @@ public class ConstructionArea extends PersistentObject{
     String endDate;
     ConstructionLadder bauleiter;
     @Index
-    Boolean permanent;
+    boolean permanent;
 
     public ConstructionArea(){
 

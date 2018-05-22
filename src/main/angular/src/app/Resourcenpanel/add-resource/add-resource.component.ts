@@ -23,7 +23,7 @@ export class AddResourceComponent implements OnInit {
   constructionLadders : IConstructionLadder[];
 
 
-  formContent = new ConstructionArea("", "", "", null, false);
+  formContent = new ConstructionArea("", "", "", null, true);
   startDate:string;
   endDate:string;
   selectedBauleiter:string;
@@ -85,14 +85,11 @@ export class AddResourceComponent implements OnInit {
     let startdateobject = new Date(this.startDate);
     let endDateObject = new Date(this.endDate);
     let diff = endDateObject.getDate()- startdateobject.getDate();
-    if(diff>5){
-      this.formContent.permanent = true;
-    }
-    else
+    if(diff < 5){
       this.formContent.permanent = false;
+    }
 
     this.formContent.bauleiter = this.constructionLadders.find(ladder => ladder.lastName === this.selectedBauleiter);
-    console.log(this.formContent);
     this._resourceService.saveConstructionArea(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
 
   }
