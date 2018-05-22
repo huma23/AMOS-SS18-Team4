@@ -1,10 +1,10 @@
 
   <!--<mat-card id = "mainCalendarViewComponent">
       <mat-card-title>Planungstool</mat-card-title> -->
-          <div class="pl-calender-content" *ngFor="let cw of calWeeks">
+          <div class="pl-calender-content">
               <mat-card>
                   <mat-card-content>
-                      <pl-calendar-week [calendarWeek]="cw"></pl-calendar-week>
+                      <pl-calendar-week [calendarWeek]="this.calWeek"></pl-calendar-week>
                   </mat-card-content>
               </mat-card>
           </div>

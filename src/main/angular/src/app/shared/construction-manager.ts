@@ -21,21 +21,40 @@
  * 
  */
 
-import {CPlan}  from './c-plan';
-export {CPlan} from './c-plan';
+import { CPlan }                from './c-plan';
+import { IConstructionLadder }  from '../Resourcenpanel/IConstructionLadder';
+export { CPlan }                from './c-plan';
 
-
-
-
-/*
- * Klasse Construction Manager stellt eine Testweise Abstraktion eines Bauleiters dar. 
-*/
-export class ConstructionManager
+ /**
+ * 
+ * @class ConstructionManager
+ * 
+ * Die Klasse/Modell ConstructionManager ist eine Abstraktion eines Bauleiters. 
+ * Die Klasse ist nur testweise aktiv, da noch zu entwickelnde Modelle zur exakten Abstraktion 
+ * eines Bauleiters und dessen Attribute fehlen. 
+ * 
+ * @see (central).Readme
+ * 
+ * 
+ * 
+ */
+export class ConstructionManager 
 {
-    constructor (
-        public name                 : string, 
-        public foreName             : string, 
-        public title                : string, 
-        public constructionPlans    : Array<CPlan>
-    ) { }
+    public firstName            : string;
+    public lastName             : string;
+    // loakale Member
+    public title                : string;
+    public constructionPlans    : Array<CPlan>;
+
+    
+    constructor
+    (   _cLadder    : IConstructionLadder, 
+        _cPlans     : CPlan[]      
+    )
+
+    {
+        this.firstName          = _cLadder.firstName;
+        this.lastName           = _cLadder.lastName;
+        this.constructionPlans  = _cPlans;
+    }
 }
