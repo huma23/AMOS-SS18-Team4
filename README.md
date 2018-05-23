@@ -36,9 +36,18 @@ Run `mvn appengine:devserver`
 
 Note: Some features (like datastore) can not be used local at the moment.
 
+
 ## Build & Deploy - App Engine
 
 Run `mvn appengine:update`
+
+## Running Frontend with FakeBackend
+
+Install Cors Extension to Allow Control-Allow-Origin to enable calls to extern Web Domains. 
+Run within angular folder 'ng serve'.
+The Application will forward your call from /api to an running Backend instance, 
+the adress can be modified within `environments/environment.ts` 
+
 
 ## Tests
 
