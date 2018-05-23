@@ -63,6 +63,7 @@ import { AuthService }        from './services/auth.service';
 import { ResourceService} from "./Resourcenpanel/resource.service";
 import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
 import { Interceptor } from './http/interceptor';
+import { FakeInterceptor} from './http/fake-interceptor';
 import {ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
 import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
 
@@ -112,6 +113,11 @@ import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
       {
         provide:HTTP_INTERCEPTORS,
         useClass:Interceptor,
+        multi:true
+      },
+      {
+        provide: HTTP_INTERCEPTORS, 
+        useClass:FakeInterceptor,
         multi:true
       },
       AppService,
