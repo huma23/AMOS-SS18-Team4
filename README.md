@@ -44,7 +44,7 @@ Run `mvn appengine:update`
 ## Running Frontend with FakeBackend
 
 Install Cors Extension to Allow Control-Allow-Origin to enable calls to extern Web Domains. 
-Run within angular folder 'ng serve'.
+Run `ng serve` within angular folder.
 The Application will forward your call from /api to an running Backend instance, 
 the adress can be modified within `environments/environment.ts` 
 
