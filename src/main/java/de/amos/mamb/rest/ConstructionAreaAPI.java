@@ -33,7 +33,11 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -72,6 +76,61 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 List<ConstructionArea> entities = manger.getEntityWithAttribute("permanent ==", true, ConstructionArea.class);
                 return entities;
             }
+        });
+    }
+
+    /**
+     * Diese Methode liefert alle Baustellen innerhalb einer bestimmten Kalenderwoche zurück
+     *
+     * @param response
+     * @param year
+     * @param week
+     * @return
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{year}/{week}")
+    public List<ConstructionArea> getConstructionAreasFromDate(@Context HttpServletResponse response, @PathParam("year") int year, @PathParam("week") int week){
+
+        return executeRequest(response, new ObjectCommand<List<ConstructionArea>>() {
+            @Override
+            public List<ConstructionArea> execute() {
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+                //Datum parsen
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.WEEK_OF_YEAR, week);
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                Date dateBegin = calendar.getTime();
+                String searchedDateBegin = formatter.format(dateBegin);
+
+                calendar.set(Calendar.WEEK_OF_YEAR, week);
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+                calendar.set(Calendar.HOUR_OF_DAY, 24);
+                Date dateEnd = calendar.getTime();
+                String searchedDateEnd = formatter.format(dateEnd);
+
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                List<ConstructionArea> listStartDateFilterd = manager.getEntityWithTwoAttributes("startDate >=", searchedDateBegin, "startDate <=", searchedDateEnd, ConstructionArea.class);
+                List<ConstructionArea> listEndDateFiltered = manager.getEntityWithTwoAttributes("endDate >=", searchedDateBegin, "endDate <=", searchedDateEnd, ConstructionArea.class);
+
+                for(ConstructionArea area : listEndDateFiltered){
+                    if(!listStartDateFilterd.contains(area))
+                        listStartDateFilterd.add(area);
+                }
+
+                return listStartDateFilterd;
+            }
+
+            @Override
+            public int httpOnSuccess() { return 200; }
+
+            @Override
+            public int httpOnCommandFailed() { return 400; }
         });
     }
 

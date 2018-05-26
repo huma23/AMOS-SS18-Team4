@@ -8,7 +8,9 @@ public class ConstructionArea extends PersistentObject{
 
     @Index
     String name;
+    @Index
     String startDate;
+    @Index
     String endDate;
     ConstructionLadder bauleiter;
     @Index
