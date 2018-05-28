@@ -9,8 +9,8 @@ import java.util.List;
 @Entity
 public class Employee extends  PersistentObject{
 
-    @Index
     String firstName;
+    @Index
     String lastName;
     int age;
     List<String> skills;

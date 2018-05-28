@@ -25,6 +25,7 @@ package de.amos.mamb.rest;
 import de.amos.mamb.model.ConstructionArea;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ObjectCommand;
+import de.amos.mamb.rest.command.ResponseCommand;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
@@ -36,7 +37,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.googlecode.objectify.ObjectifyService.ofy;
 
 /**
  * REST-Schnittstelle der URL /api/constructionArea/
@@ -130,22 +130,59 @@ public class ConstructionAreaAPI extends AbstractAPI{
         });
     }
 
+    /**
+     * Liefert eine Liste aller Bauleiter zurück
+     * @return
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ConstructionArea> getConstructionAreas(){
-        List<ConstructionArea> constructions = ofy().load().type(ConstructionArea.class).list();
-        return constructions;
-    }
+    public List<ConstructionArea> getConstructionAreas(@Context HttpServletResponse response) {
+        return executeRequest(response, new ObjectCommand<List<ConstructionArea>>() {
+            @Override
+            public int httpOnSuccess() {
+                return 200;
+            }
 
+            @Override
+            public int httpOnCommandFailed() {
+                return 500;
+            }
+
+            @Override
+            public List<ConstructionArea> execute() {
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                List<ConstructionArea> constructionAreaList = manager.getAllEntities(ConstructionArea.class);
+                return constructionAreaList;
+            }
+        });
+    }
+    /**
+     * API Endpoint zum speichern einer Baustelle über den PersistentManager
+     *
+     * @param constructionArea
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveConstructionArea(ConstructionArea constructionArea){
-        PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
-        List<ConstructionArea> list = manager.getEntityWithAttribute("name",constructionArea.getName(), ConstructionArea.class);
-        if(list.isEmpty()){
-            manager.saveObject(constructionArea);
-            return Response.status(201).build();
-        }
-        return Response.status(400).build();
+    public Response saveConstructionArea(ConstructionArea constructionArea) {
+        return executeRequest(new ResponseCommand() {
+            @Override
+            public int httpOnSuccess() {
+                return 201;
+            }
+
+            @Override
+            public int httpOnCommandFailed() {
+                return 400;
+            }
+
+            @Override
+            public String execute() {
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+
+                manager.saveObject(constructionArea);
+                return Result.NO_STRING;
+            }
+        });
     }
 }

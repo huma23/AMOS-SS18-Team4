@@ -5,8 +5,9 @@ import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class ConstructionLadder  extends PersistentObject{
-    @Index
+
     String firstName;
+    @Index
     String lastName;
 
     public ConstructionLadder(){
