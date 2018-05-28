@@ -23,8 +23,6 @@
 package de.amos.mamb.rest;
 
 import de.amos.mamb.model.ConstructionArea;
-import de.amos.mamb.model.PersistentObject;
-import de.amos.mamb.persistence.ObjectifyPersistenceManager;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ObjectCommand;
 
@@ -34,8 +32,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
