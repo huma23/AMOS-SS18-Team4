@@ -19,13 +19,14 @@ public class ConstructionArea extends PersistentObject{
     boolean permanent;
     List<Employee> employees;
     List<Vehicle> vehicles;
+    List<Material> materials;
 
 
     public ConstructionArea(){
 
     }
 
-    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, List<Employee> employees, List<Vehicle> vehicles){
+    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, List<Employee> employees, List<Vehicle> vehicles, List<Material> materials){
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -33,6 +34,7 @@ public class ConstructionArea extends PersistentObject{
         this.permanent = permanent;
         this.employees = employees;
         this.vehicles = vehicles;
+        this.materials = materials;
     }
 
     public String getName() {
@@ -85,5 +87,13 @@ public class ConstructionArea extends PersistentObject{
 
     public void setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
+    }
+
+    public List<Material> getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
     }
 }
