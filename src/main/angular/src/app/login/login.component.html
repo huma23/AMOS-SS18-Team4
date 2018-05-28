@@ -3,7 +3,7 @@
     <mat-card-title fxLayoutAlign="center center">Login</mat-card-title>
     <mat-card-content>
 
-      <form fxLayout="column" (ngSubmit)="onSubmit(formContent)" fxLayoutGap="10px">
+      <form fxLayout="column" (ngSubmit)="onSubmit(formContent)" fxLayoutGap="10px" *ngIf="!showProgress">
         <mat-form-field>
           <input matInput placeholder="E-Mail" [formControl]="emailFormControl" [(ngModel)]="formContent.email" required>
           <mat-error *ngIf="emailFormControl.invalid">{{getEmailErrorMessage()}}</mat-error>
@@ -18,6 +18,10 @@
         </div>
         <span *ngIf="errorOnSubmit">{{this.errorMessage}}</span>
       </form>
+
+      <div fxFill fxLayoutAlign="center center" >
+        <mat-spinner *ngIf="showProgress"></mat-spinner>
+      </div>
 
     </mat-card-content>
   </mat-card>

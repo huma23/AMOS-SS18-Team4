@@ -27,18 +27,19 @@ import { LoginForm }              from "../../model/loginForm";
 import { PlLoginService }         from "./login.service";
 import { Router }                 from '@angular/router';
 import { Token}                   from '../../model/token';
+import { MatProgressSpinner }     from "@angular/material";
 import { AuthService } from '../services/auth.service';
 
 
 /**
- * 
+ *
  * @class LoginComponent
- * 
- * 
- * 
- *  
- * 
- * 
+ *
+ *
+ *
+ *
+ *
+ *
  */
 
 @Component({
@@ -50,13 +51,13 @@ import { AuthService } from '../services/auth.service';
 
 export class LoginComponent implements OnInit
 {
-
   public emailFormControl;
   public passwordFormControl;
   public formContent;
   public errorMessage   : string;
   public errorOnSubmit  : boolean;
   public loginTrys      : number;
+  public showProgress   : boolean;
 
   constructor( private loginService: PlLoginService, private router:Router)
   {
@@ -64,20 +65,22 @@ export class LoginComponent implements OnInit
     this.passwordFormControl  = new FormControl('', [Validators.required,]);
     this.formContent          = new LoginForm("","");
     this.loginTrys            = 0;
+    this.showProgress         = false;
   }
 
   ngOnInit() { }
 
   onSubmit(form:LoginForm)
   {
+    this.showProgress = true;
 
-    // Wenn User bereits eingeloggt, weiterleiten auf app. 
+    // Wenn User bereits eingeloggt, weiterleiten auf app.
     // Möglicherweise unnötig.
     if (this.loginService.isLoggedIn())
       this.router.navigateByUrl("/app");
 
   // Aufruf des LoginServices zum Einloggen, liefert das Ergebnis inform eines Observables
-  // Abbonnieren darauf und Ergebniss verarbeiten. 
+  // Abbonnieren darauf und Ergebniss verarbeiten.
 
     this.loginService.login(form).subscribe(
       (token:Token) =>
@@ -85,44 +88,45 @@ export class LoginComponent implements OnInit
         // Happy Path. Einloggen hat funktioniert. Token speichern und weiter zu App.
         console.log("Token received \n " + token.token + "\n"+token.timestampt);
         this.loginService.setToken(token);
-        this.loginService.setLogin(true);        
+        this.loginService.setLogin(true);
         this.router.navigateByUrl("/app");
 
       },
-      (error: Error) => 
+      (error: Error) =>
       {
-        // Error Path. Logging Ausgabe sowie User via FensterError mitteilen dass Login 
+        // Error Path. Logging Ausgabe sowie User via FensterError mitteilen dass Login
         // schiefgelaufen ist.
-        console.log("Error on Requestesting /api/login with Credentials \n User: " +form.email 
+        console.log("Error on Requestesting /api/login with Credentials \n User: " +form.email
           +"; . ");
         console.log(error.message);
 
         window.alert("Fehlerhafte Eingabe");
         this.loginTrys++;
         this.errorOnSubmit = true;
-        this.errorMessage = 
-          "Login gescheitert. Bitte erneut versuchen. Gescheiterte Versuche : " 
+        this.errorMessage =
+          "Login gescheitert. Bitte erneut versuchen. Gescheiterte Versuche : "
             + this.loginTrys ;
-        
+
         this.clearLoginForm();
+        this.showProgress = false;
 
       });
   }
 
   /**
-   * @method 
+   * @method
    * getEmailErrorMessage
-   * 
-   * @param 
+   *
+   * @param
    * none
-   * 
-   * @return 
+   *
+   * @return
    * none
-   *  
+   *
    * @description
-   * 
+   *
    * Methode leert die Eingabefelder des Logins nach gescheitertem Einloggversuch.
-   * 
+   *
    */
   getEmailErrorMessage()
   {
@@ -130,19 +134,19 @@ export class LoginComponent implements OnInit
       this.emailFormControl.hasError('email') ? 'Keine valide E-Mail Adresse' : '';
   }
   /**
-   * @method 
+   * @method
    * getPasswordErrorMessage
-   * 
-   * @param 
+   *
+   * @param
    * none
-   * 
-   * @return 
+   *
+   * @return
    * none
-   *  
+   *
    * @description
-   * 
+   *
    * Methode leert die Eingabefelder des Logins nach gescheitertem Einloggversuch.
-   * 
+   *
    */
 
 
@@ -150,21 +154,21 @@ export class LoginComponent implements OnInit
   {
     return this.passwordFormControl.hasError('required')? 'Kein Passwort eingegeben': '';
   }
-  
+
    /**
-   * @method 
+   * @method
    * clearLoginForm
-   * 
-   * @param 
+   *
+   * @param
    * none
-   * 
-   * @return 
+   *
+   * @return
    * none
-   *  
+   *
    * @description
-   * 
+   *
    * Methode leert die Eingabefelder des Logins nach gescheitertem Einloggversuch.
-   * 
+   *
    */
 
   clearLoginForm()
