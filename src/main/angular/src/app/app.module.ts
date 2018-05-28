@@ -32,7 +32,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatListModule,
-  MatSidenavModule, MatDatepickerModule, MatNativeDateModule
+  MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule
 } from "@angular/material";
 
 import { MatGridListModule }  from '@angular/material/grid-list';
@@ -66,6 +66,12 @@ import { Interceptor } from './http/interceptor';
 import { FakeInterceptor} from './http/fake-interceptor';
 import {ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
 import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
+import {PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
+import {
+  EmployeeResolver,
+  MaterialResolver,
+  VehicleResolver
+} from "./Resourcenpanel/resource-type/resource-type-resolver.service";
 
 
 
@@ -106,7 +112,8 @@ import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
     MatSidenavModule,
     AppRoutingModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressSpinnerModule
   ],
   providers:
   [
@@ -116,7 +123,7 @@ import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
         multi:true
       },
       {
-        provide: HTTP_INTERCEPTORS, 
+        provide: HTTP_INTERCEPTORS,
         useClass:FakeInterceptor,
         multi:true
       },
@@ -126,6 +133,10 @@ import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
       PlRegistrationPanelService,
       PlLoginService,
       ResourceService,
+      PermanentConstructionAreaResolver,
+      EmployeeResolver,
+      MaterialResolver,
+      VehicleResolver
   ],
 
   bootstrap: [AppComponent]

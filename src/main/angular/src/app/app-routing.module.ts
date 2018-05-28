@@ -31,14 +31,38 @@ import { RegisterComponent }            from "./register/register.component";
 import { PlRegistrationPanelComponent}  from './registrationpanel/registrationpanel.component';
 import { AddResourceComponent }         from "./Resourcenpanel/add-resource/add-resource.component";
 import { AuthentificationGuard }        from './guards/authentification.guard';
+import {PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
+import {
+  EmployeeResolver,
+  MaterialResolver,
+  VehicleResolver
+} from "./Resourcenpanel/resource-type/resource-type-resolver.service";
 
 
 const routes: Routes =
   [
     { path: '',redirectTo:'app',  pathMatch:'full'},
     { path: 'login',              component: LoginComponent },
-    { path: 'app',                component: MainviewComponent, canActivate:[AuthentificationGuard] },
-    { path: 'app/:year/:week',    component: MainviewComponent, canActivate:[AuthentificationGuard] },
+    { path: 'app',
+      component: MainviewComponent,
+      canActivate:[AuthentificationGuard],
+      resolve: {
+        permanent: PermanentConstructionAreaResolver,
+        employees: EmployeeResolver,
+        vehicles: VehicleResolver,
+        materials: MaterialResolver
+      }
+    },
+    { path: 'app/:year/:week',
+      component: MainviewComponent,
+      canActivate:[AuthentificationGuard],
+      resolve: {
+        permanent: PermanentConstructionAreaResolver,
+        employees: EmployeeResolver,
+        vehicles: VehicleResolver,
+        materials: MaterialResolver
+      }
+    },
     { path: 'register',           component: PlRegistrationPanelComponent },
     { path: 'resource',           component: AddResourceComponent }
   ];

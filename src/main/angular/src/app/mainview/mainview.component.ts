@@ -60,13 +60,6 @@ import {MatDrawer} from "@angular/material";
   public calYear: number;
   public calWeek: number;
 
-  @ViewChild('drawerRight')
-  private drawerRight: MatDrawer;
-
-  @ViewChild('drawerLeft')
-  private drawerLeft: MatDrawer;
-
-
   constructor( private route: ActivatedRoute,
                private cSS : CalenderStoreService,
                private router : Router)
@@ -108,13 +101,5 @@ import {MatDrawer} from "@angular/material";
       //setzt das aktuelle Jahr
       this.calYear = new Date().getFullYear();
     }
-  }
-
-  ngAfterViewInit()
-  {
-    setTimeout(() => {
-      this.drawerLeft.open();
-      this.drawerRight.open();
-    }, 250);
   }
 }

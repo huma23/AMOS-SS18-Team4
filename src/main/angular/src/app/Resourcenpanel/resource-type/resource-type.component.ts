@@ -7,6 +7,7 @@ import {IVehicle} from "../IVehicle";
 import {IConstructionArea} from "../IConstructionArea";
 import {IConstructionLadder} from "../IConstructionLadder";
 import {IMaterial} from "../IMaterial";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-resource-type',
@@ -22,19 +23,15 @@ export class ResourceTypeComponent implements OnInit {
 
   public items: ResourceItem[];
 
-  constructor( private _resourceService: ResourceService) {
+  constructor(private route:ActivatedRoute) {
   }
 
 
 
   ngOnInit() {
-    this._resourceService.getEmployees()
-      .subscribe(data => this.employees = data);
-    this._resourceService.getVehicle()
-      .subscribe(data=>this.vehicles = data);
-    this._resourceService.getMaterials()
-      .subscribe(data=>this.materials= data);
+    this.employees = this.route.snapshot.data['employees'];
+    this.vehicles = this.route.snapshot.data['vehicles'];
+    this.materials = this.route.snapshot.data['materials'];
   }
-
 }
 

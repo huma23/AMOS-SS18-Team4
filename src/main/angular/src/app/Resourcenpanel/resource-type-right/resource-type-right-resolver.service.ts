@@ -21,32 +21,24 @@
  *
  */
 
-import {Component, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {IConstructionArea} from "../IConstructionArea";
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
+import {Observable} from "rxjs/Observable";
 import {ResourceService} from "../resource.service";
-import {ActivatedRoute} from "@angular/router";
-
-@Component({
-  selector: 'app-resource-duration',
-  templateUrl: './resource-type-right.component.html',
-  styleUrls: ['./resource-type-right.component.css']
-})
+import {observable} from "rxjs/symbol/observable";
 
 /**
- *  @class
- *
- *  Klasse ResourceTypeRightComponent ist für das rechte Panel im Hauptview verantwortlich.
- *  In diesem Sidepanel werden Ressourcen wie Dauerbaustellen angezeigt.
+ * Injectables für das Abfragen von Resourcen, vor dem Rendering der Hauptseite.
+ * Genutzt im rechten Resource-Panel.
  */
-export class ResourceTypeRightComponent implements OnInit{
+@Injectable()
+export class PermanentConstructionAreaResolver implements Resolve<IConstructionArea[]>{
 
-  public constructionAreas :IConstructionArea[];
+  constructor(private _resourceService: ResourceService) {}
 
-  constructor(private route:ActivatedRoute){
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IConstructionArea[]> {
 
-  }
-
-  ngOnInit(): void {
-    this.constructionAreas = this.route.snapshot.data['permanent'];
+    return this._resourceService.getConstructionAreasPermanent();
   }
 }
