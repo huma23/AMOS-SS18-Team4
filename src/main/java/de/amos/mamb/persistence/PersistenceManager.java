@@ -88,6 +88,19 @@ public abstract class PersistenceManager {
     public abstract <T extends PersistentObject> List<T> getEntityWithAttribute(String attribute, Object value, Class<T> clz);
 
     /**
+     * Suche nach einer Liste von Objekten mit zwei spezifischen Attributen
+     *
+     * @param attribute1
+     * @param value1
+     * @param attribute2
+     * @param value2
+     * @param clz
+     * @param <T>
+     * @return
+     */
+    public abstract <T extends PersistentObject> List<T> getEntityWithTwoAttributes(String attribute1, Object value1, String attribute2, Object value2, Class<T> clz);
+
+    /**
      * Sicherung eines Objekts der Klasse PersitentObject
      * @param object
      * @param <T>

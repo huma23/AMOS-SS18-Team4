@@ -22,6 +22,7 @@
  */
 package de.amos.mamb.persistence;
 
+import com.google.cloud.datastore.StructuredQuery;
 import com.googlecode.objectify.Key;
 import de.amos.mamb.model.PersistentObject;
 
@@ -68,6 +69,13 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
     public <T extends PersistentObject> List<T> getEntityWithAttribute(String attribute, Object value, Class<T> clz){
 
         List<T> list = ofy().load().type(clz).filter(attribute, value).list();
+        return list;
+    }
+
+    @Override
+    public <T extends PersistentObject> List<T> getEntityWithTwoAttributes(String attribute1, Object value1, String attribute2, Object value2, Class<T> clz) {
+
+        List<T> list = ofy().load().type(clz).filter(attribute1, value1).filter(attribute2, value2).list();
         return list;
     }
 }
