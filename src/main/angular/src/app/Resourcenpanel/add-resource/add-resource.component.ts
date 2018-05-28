@@ -9,6 +9,7 @@ import {ConstructionArea} from "../../../model/constructionArea";
 import {ConstructionLadder} from "../../../model/constructionLadder";
 import {IConstructionLadder} from "../IConstructionLadder";
 import {IEmployee} from "../IEmployee";
+import {IVehicle} from "../IVehicle";
 
 @Component({
   selector: 'pl-add-resource',
@@ -21,15 +22,18 @@ export class AddResourceComponent implements OnInit {
   constructions : IConstructionArea[];
   constructionLadders : IConstructionLadder[];
   employees: IEmployee[];
+  vehicles: IVehicle[];
 
 
 
 
-  formContent = new ConstructionArea("", "", "", null, true,[] );
+  formContent = new ConstructionArea("", "", "", null, true,[], []);
   startDate:string;
   endDate:string;
   selectedBauleiter:ConstructionLadder;
   selectedMitarbeiter:Employee;
+  selectedFahrzeug: Vehicle;
+  wrongDate:boolean = false;
 
 
 
@@ -42,6 +46,10 @@ export class AddResourceComponent implements OnInit {
       this.startDate = event;
   }
   onEndDate(event){
+    if(new Date(event).getDate() < new Date(this.startDate).getDate())
+    {
+      this.wrongDate = true;
+    }
       this.endDate = event;
   }
 
@@ -53,6 +61,8 @@ export class AddResourceComponent implements OnInit {
       .subscribe(data => this.constructionLadders = data);
     this._resourceService.getEmployees()
       .subscribe(data => this.employees = data);
+    this._resourceService.getVehicle()
+      .subscribe(data => this.vehicles = data);
   }
 
   //add "Mitarbeiter" through POST Request to the DB
@@ -96,6 +106,7 @@ export class AddResourceComponent implements OnInit {
 
     this.formContent.bauleiter = this.selectedBauleiter;
     this.formContent.employees.push(this.selectedMitarbeiter);
+    this.formContent.vehicles.push(this.selectedFahrzeug);
     JSON.stringify(this.formContent);
     this._resourceService.saveConstructionArea(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
 

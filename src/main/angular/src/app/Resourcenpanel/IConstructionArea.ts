@@ -1,5 +1,6 @@
 import {ConstructionLadder} from "../../model/constructionLadder";
 import {Employee} from "../../model/employee";
+import {Vehicle} from "../../model/vehicle";
 
 export interface IConstructionArea{
   name:string,
@@ -7,5 +8,6 @@ export interface IConstructionArea{
   endDate: string,
   bauleiter: ConstructionLadder,
   permanent: boolean
-  employees: Employee[]
+  employees: Employee[],
+  vehicles: Vehicle[]
 }

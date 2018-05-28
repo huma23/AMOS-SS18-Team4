@@ -1,6 +1,7 @@
 import {IConstructionArea} from "../app/Resourcenpanel/IConstructionArea";
 import {ConstructionLadder} from "./constructionLadder";
 import {Employee} from "./employee";
+import {Vehicle} from "./vehicle";
 
 export class ConstructionArea implements IConstructionArea{
 
@@ -9,5 +10,6 @@ export class ConstructionArea implements IConstructionArea{
               public endDate:string,
               public bauleiter: ConstructionLadder,
               public permanent: boolean,
-              public employees:Employee[]){}
+              public employees:Employee[],
+              public vehicles:Vehicle[]){}
 }

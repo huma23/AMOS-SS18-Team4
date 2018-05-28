@@ -58,6 +58,11 @@
         <option *ngFor="let employee of employees" [ngValue]="employee">{{employee.firstName.concat(" ", employee.lastName)}}</option>
       </select>
 
+      <select name="fahrzeug" [(ngModel)]="selectedFahrzeug" [ngModelOptions]="{standalone: true}">
+        <option value="" disabled selected>>Wähle ein Fahrzeug</option>
+        <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">{{vehicle.bezeichnung}}</option>
+      </select>
+
       <input type="submit"  value="Submit Form">
 </form>
 <p style="color:red" *ngIf="!constructionLadders?.length > 0">Anlegen einer Baustelle ist nicht möglich, weil kein Bauleiter angelegt ist!</p>
@@ -75,7 +80,7 @@
 <div>
   <p>Baustelle</p>
   <p *ngFor='let construct of constructions'>Name: {{construct.name}}, Startdatum: {{construct.startDate}}, Enddatum: {{construct.endDate}},
-    Bauleiter: {{construct.bauleiter | json}}, {{construct.permanent}}, Mitarbeiter: {{construct.employees | json}}</p>
+    Bauleiter: {{construct.bauleiter | json}}, {{construct.permanent}}, Mitarbeiter: {{construct.employees | json}}, Fahrzeuge: {{construct.vehicles | json}}</p>
 </div>
 <div>
   <p>Bauleiter</p>
