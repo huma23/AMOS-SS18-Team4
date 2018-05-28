@@ -8,8 +8,7 @@ import {IConstructionArea} from "../IConstructionArea";
 import {ConstructionArea} from "../../../model/constructionArea";
 import {ConstructionLadder} from "../../../model/constructionLadder";
 import {IConstructionLadder} from "../IConstructionLadder";
-import {MatDatepickerInput, MatDatepickerInputEvent} from "@angular/material";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {IEmployee} from "../IEmployee";
 
 @Component({
   selector: 'pl-add-resource',
@@ -21,19 +20,23 @@ export class AddResourceComponent implements OnInit {
 
   constructions : IConstructionArea[];
   constructionLadders : IConstructionLadder[];
+  employees: IEmployee[];
 
 
-  formContent = new ConstructionArea("", "", "", null, true);
+
+
+  formContent = new ConstructionArea("", "", "", null, true,[] );
   startDate:string;
   endDate:string;
-  selectedBauleiter:string;
+  selectedBauleiter:ConstructionLadder;
+  selectedMitarbeiter:Employee;
 
 
 
   constructor(private _resourceService:ResourceService) {
-
-
   }
+
+
 
   onStartDate(event){
       this.startDate = event;
@@ -48,6 +51,8 @@ export class AddResourceComponent implements OnInit {
       .subscribe(data => this.constructions = data);
     this._resourceService.getConstructionLadder()
       .subscribe(data => this.constructionLadders = data);
+    this._resourceService.getEmployees()
+      .subscribe(data => this.employees = data);
   }
 
   //add "Mitarbeiter" through POST Request to the DB
@@ -89,7 +94,9 @@ export class AddResourceComponent implements OnInit {
       this.formContent.permanent = false;
     }
 
-    this.formContent.bauleiter = this.constructionLadders.find(ladder => ladder.lastName === this.selectedBauleiter);
+    this.formContent.bauleiter = this.selectedBauleiter;
+    this.formContent.employees.push(this.selectedMitarbeiter);
+    JSON.stringify(this.formContent);
     this._resourceService.saveConstructionArea(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
 
   }

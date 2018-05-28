@@ -32,9 +32,8 @@
 
 <h3>Baustelle hinzufügen</h3>
 <form *ngIf="constructionLadders?.length > 0" (ngSubmit)="addConstruction(formContent)">
-      <label> Name
-        <input name="name" matInput placeholder="name"  [(ngModel)]="formContent.name" required>
-      </label>
+
+      <input name="name" matInput placeholder="name"  [(ngModel)]="formContent.name" required>
 
       <mat-form-field>
         <input matInput [matDatepicker]="pickerStart" placeholder="startdate" name="startDate">
@@ -49,9 +48,14 @@
       </mat-form-field>
 
 
-      <select name="bauleiter" type="text" [(ngModel)]="selectedBauleiter" [ngModelOptions]="{standalone: true}">
-      <option value="" disabled selected>>Wähle Bauleiter</option>
-      <option *ngFor="let ladder of constructionLadders" [ngValue]="ladder.lastName">{{ladder.firstName.concat(" ", ladder.lastName)}}</option>
+      <select name="bauleiter" [(ngModel)]="selectedBauleiter" [ngModelOptions]="{standalone: true}">
+      <option value="" disabled selected>>Wähle einen Mitarbeiter</option>
+      <option *ngFor="let ladder of constructionLadders" [ngValue]="ladder">{{ladder.firstName.concat(" ", ladder.lastName)}}</option>
+      </select>
+
+      <select name="mitarbeiter" [(ngModel)]="selectedMitarbeiter" [ngModelOptions]="{standalone: true}">
+        <option value="" disabled selected>>Wähle Bauleiter</option>
+        <option *ngFor="let employee of employees" [ngValue]="employee">{{employee.firstName.concat(" ", employee.lastName)}}</option>
       </select>
 
       <input type="submit"  value="Submit Form">
@@ -71,7 +75,7 @@
 <div>
   <p>Baustelle</p>
   <p *ngFor='let construct of constructions'>Name: {{construct.name}}, Startdatum: {{construct.startDate}}, Enddatum: {{construct.endDate}},
-    Bauleiter: {{construct.bauleiter | json}}, {{construct.permanent}}</p>
+    Bauleiter: {{construct.bauleiter | json}}, {{construct.permanent}}, Mitarbeiter: {{construct.employees | json}}</p>
 </div>
 <div>
   <p>Bauleiter</p>
