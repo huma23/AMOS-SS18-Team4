@@ -36,7 +36,6 @@ export class AddResourceComponent implements OnInit {
   selectedMitarbeiter:Employee;
   selectedFahrzeug: Vehicle;
   selectedBetriebsmittel: Material;
-  wrongDate:boolean = false;
 
 
 
@@ -49,10 +48,7 @@ export class AddResourceComponent implements OnInit {
       this.startDate = event;
   }
   onEndDate(event){
-    if(new Date(event).getDate() < new Date(this.startDate).getDate())
-    {
-      this.wrongDate = true;
-    }
+
       this.endDate = event;
   }
 
