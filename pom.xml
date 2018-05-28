@@ -79,7 +79,7 @@
                             <executable>ng</executable>
                             <arguments>
                                 <argument>build</argument> 
-
+                                <argument>--environment=prod</argument>
                             </arguments>
                         </configuration>
                         <goals>
