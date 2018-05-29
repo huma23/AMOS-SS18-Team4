@@ -12,6 +12,5 @@ deploy:
   on: dev
 before_install:
 - openssl aes-256-cbc -K $encrypted_0a4e2bcd68e9_key -iv $encrypted_0a4e2bcd68e9_iv
-  -in developer-planungstafel.json.enc -out developer-planungstafel.json -d
-- openssl aes-256-cbc -K $encrypted_0a4e2bcd68e9_key -iv $encrypted_0a4e2bcd68e9_iv
-  -in release-planungstafel.json.enc -out release-planungstafel.json -d
+  -in travis-sec.tar.enc -out travis-sec.tar -d
+- tar xvf travis-sec.tar.enc
