@@ -11,6 +11,5 @@ deploy:
   project: developer-planungstafel
   on: dev
 before_install:
-- openssl aes-256-cbc -K $encrypted_0a4e2bcd68e9_key -iv $encrypted_0a4e2bcd68e9_iv
-  -in travis-sec.tar.enc -out travis-sec.tar -d
+- openssl aes-256-cbc -K $encrypted_0a4e2bcd68e9_key -iv $encrypted_0a4e2bcd68e9_iv -in travis-sec.tar.enc -out travis-sec.tar -d
 - tar xvf travis-sec.tar.enc
