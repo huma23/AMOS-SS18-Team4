@@ -1,6 +1,6 @@
 language: java
 sudo: false
-script: mvn clean verify
+script: mvn appengine:update
 deploy:
 - provider: gae
   keyfile: release-planungstafel.json
@@ -12,6 +12,6 @@ deploy:
   on: dev
 before_install:
 - openssl aes-256-cbc -K $encrypted_34bf8776682b_key -iv $encrypted_34bf8776682b_iv
-  -in travis-sec.tar.enc -out travis-sec.tar -d
-- tar xvf travis-sec.tar
+  -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
 - npm install -g @angular/cli
