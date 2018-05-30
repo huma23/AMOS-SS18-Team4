@@ -322,7 +322,25 @@ export class CalenderStoreService
         console.log("DeineMutter");
       return aktiveConstructionAreas;
   }
-
+  /**
+   * @method 
+   * combineAreasWithManagers
+   * 
+   * @param 
+   * cArea:ConstructionArea
+   * cManager : ConstructionManager
+   *  
+   * 
+   * @return 
+   * ConstructionManager
+   *  
+   * @description
+   * Methode verknüpft eine Baustelle mit einem BaustellenManager aus dem FrontEnd Bereich. 
+   * Aus der übergebenen Baustelle wird bei passender Validierung des Datums ein neuer Cplan 
+   * erstellt und dem Manager in sein lokales Cplan Array eingetragen. 
+   * 
+   * 
+   */
   private combineAreasWithManagers 
   (cArea:ConstructionArea, cManager : ConstructionManager) : ConstructionManager  
   {
