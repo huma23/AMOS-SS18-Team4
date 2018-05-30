@@ -22,7 +22,7 @@
  */
 
 import { Input,Component, OnInit }  from '@angular/core';
-import { ConstructionManager}       from '../../shared/construction-manager';
+import { ConstructionManager, CPlan}       from '../../shared/construction-manager';
 import { CalendarWeekItemComponent} from '../calendar-week-item/calendar-week-item.component' ;
 
 @Component({
@@ -41,6 +41,20 @@ export class CalendarContentComponent implements OnInit {
   ngOnInit()
   {
   
+  }
+  hasPlanForToday(plan:CPlan) : boolean
+  {
+    if (plan === undefined || plan === null)
+      return false;
+
+    if(plan.projectName === undefined || plan.projectName === null)
+      return false;
+
+    if (plan.coWorkers === undefined || plan.coWorkers === null)
+      return false;
+    
+      
+    return true;
   }
 
 }
