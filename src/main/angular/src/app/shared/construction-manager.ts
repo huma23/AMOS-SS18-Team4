@@ -23,6 +23,7 @@
 
 import { CPlan }                from './c-plan';
 import { IConstructionLadder }  from '../Resourcenpanel/IConstructionLadder';
+import { ConstructionLadder } from '../../model/constructionLadder';
 export { CPlan }                from './c-plan';
 
  /**
@@ -48,13 +49,29 @@ export class ConstructionManager
 
     
     constructor
-    (   _cLadder    : IConstructionLadder, 
-        _cPlans     : CPlan[]      
+    (   
+        _cLadder    : IConstructionLadder   
     )
 
     {
         this.firstName          = _cLadder.firstName;
         this.lastName           = _cLadder.lastName;
-        this.constructionPlans  = _cPlans;
+        this.constructionPlans  = new Array(6);
+        
+        this.initConstructionPlans();
+    
+    }
+    getCLadder()
+    {
+        return new ConstructionLadder(this.firstName, this.lastName);
+    }
+    private initConstructionPlans()
+    {
+        
+        for(let i = 0; i < 6; i++)
+        {
+            this.constructionPlans[i] = CPlan.getEmptyCPlan();
+        }
+
     }
 }

@@ -1,6 +1,3 @@
-import { Employee } from "../../model/employee";
-import { Vehicle } from "../../model/vehicle";
-import { Material } from "../../model/material";
 
 /**
  *  @license 
@@ -25,21 +22,15 @@ import { Material } from "../../model/material";
  * 
  */
 
-export class CPlan {
+ /**
+ * 
+ * Exportiert ein Objekt, in dem die Pfade auf die REST-API hinterlegt sind.
+ * TODO Restlichen URLS eintragen
+ * 
+ */
 
-    constructor(
-        public projectName       : string, 
-        public coWorkers         : Array<Employee>,
-        public vehicles?         : Array<Vehicle>,
-        public materials?        : Array<Material>
-    )
-    { }
-
-    static getEmptyCPlan ()  : CPlan
-    {
-        return null;
-    }
-
-
-
-}
+export const BACKEND_URLS = 
+{
+     CONSTRUCTIONLADDER_URL : "/api/constructionLadder",
+     CONSTRUCTION_AREA_URL: "/api/constructionArea"
+};
