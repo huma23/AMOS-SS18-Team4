@@ -3,7 +3,9 @@ package de.amos.mamb.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class ConstructionArea extends PersistentObject{
@@ -17,24 +19,19 @@ public class ConstructionArea extends PersistentObject{
     ConstructionLadder bauleiter;
     @Index
     boolean permanent;
-    List<Employee> employees;
-    List<Vehicle> vehicles;
-    List<Material> materials;
-
+    Map<String, ConstructionAreaDay> days;
 
     public ConstructionArea(){
-
+        this.days = new HashMap<>();
     }
 
-    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, List<Employee> employees, List<Vehicle> vehicles, List<Material> materials){
+    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map){
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.bauleiter = bauleiter;
         this.permanent = permanent;
-        this.employees = employees;
-        this.vehicles = vehicles;
-        this.materials = materials;
+        this.days = map;
     }
 
     public String getName() {
@@ -72,28 +69,4 @@ public class ConstructionArea extends PersistentObject{
     public boolean getPermanent() {return permanent;}
 
     public void setPermanent(boolean permanent) {this.permanent = permanent; }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public List<Vehicle> getVehicles() {
-        return vehicles;
-    }
-
-    public void setVehicles(List<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
-
-    public List<Material> getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
-    }
 }
