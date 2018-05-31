@@ -1,7 +1,7 @@
 /**
- *  @license 
- *  
- * 
+ *  @license
+ *
+ *
  * Copyright [2018] [(MAMB Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)]
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,13 +15,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Copyright (c) 2018 by MAMB (Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)
- * 
- * 
+ *
+ *
  */
 
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ConstructionManager} from "../../shared/construction-manager";
+import {ActivatedRoute} from "@angular/router";
+import {IConstructionArea, IConstructionAreaDay} from "../../Resourcenpanel/IConstructionArea";
+import {IConstructionLadder} from "../../Resourcenpanel/IConstructionLadder";
 
 @Component({
   selector: 'pl-calendar-week-item',
@@ -30,9 +34,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarWeekItemComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  public date : string;
+
+  @Input()
+  public bauleiter: IConstructionLadder;
+
+  public constructionAreas: IConstructionArea[];
+
+  constructor(private route : ActivatedRoute) { }
 
   ngOnInit() {
+    let allAreas = this.route.snapshot.data['constructionAreas'];
+    this.constructionAreas = this.getMyAreas(allAreas);
   }
 
+  private getMyAreas(areas : IConstructionArea[]): IConstructionArea[]{
+
+    let array : IConstructionArea[] = new Array<IConstructionArea>();
+
+    for(let area of areas){
+      if(area.permanent === false) {
+        //bauleiter ist gleich
+        if (area.bauleiter.firstName === this.bauleiter.firstName && area.bauleiter.lastName === this.bauleiter.lastName) {
+          //Datum prüfen
+          if(area.days[this.date] !== undefined){
+            array.push(area);
+          }
+        }
+      }
+    }
+
+    return array;
+  }
 }

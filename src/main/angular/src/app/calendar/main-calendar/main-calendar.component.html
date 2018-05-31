@@ -1,13 +1,11 @@
+<div class="pl-calender-content">
+  <mat-card>
+    <mat-card-content>
 
-  <!--<mat-card id = "mainCalendarViewComponent">
-      <mat-card-title>Planungstool</mat-card-title> -->
-          <div class="pl-calender-content">
-              <mat-card>
-                  <mat-card-content>
-                      <pl-calendar-week [calendarWeek]="this.calWeek"></pl-calendar-week>
-                  </mat-card-content>
-              </mat-card>
-          </div>
-  <!--
+      <pl-calendar-header   [currentWeekHeader] = "this.calWeek.header" [currentWeekNumber]= "this.calWeek.weekOfTheYear" [currentYear] ="this.calWeek.year"></pl-calendar-header>
+
+      <pl-calendar-content  [calendarWeek] = "this.calWeek.weekOfTheYear" [calendarYear] ="this.calWeek.year"></pl-calendar-content>
+
+    </mat-card-content>
   </mat-card>
-    -->
+</div>

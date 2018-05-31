@@ -20,11 +20,26 @@
  *
  *
  */
-export class CalendarWeek
-{
-    constructor(
-        public weekOfTheYear        : number,
-        public year                 : number,
-        public header               : Array<string>,
-    ) { }
+
+import {Component, Input, OnInit} from "@angular/core";
+import {IConstructionArea, IConstructionAreaDay} from "../../Resourcenpanel/IConstructionArea";
+
+@Component({
+  selector: 'pl-calender-construction-area',
+  templateUrl: './calender-construction-area.component.html',
+  styleUrls: ['./calender-construction-area.component.css']
+})
+export class CalenderConstructionAreaComponent implements OnInit{
+
+  @Input()
+  public constructionArea : IConstructionArea;
+
+  @Input()
+  public  date : string;
+
+  public constructionAreaDay : IConstructionAreaDay;
+
+  ngOnInit(): void {
+    this.constructionAreaDay = this.constructionArea.days[this.date];
+  }
 }

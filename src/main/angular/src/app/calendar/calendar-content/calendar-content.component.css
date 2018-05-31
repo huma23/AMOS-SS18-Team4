@@ -1,0 +1,7 @@
+.pl-grid-list .mat-list-item{
+  height: auto;
+}
+
+mat-grid-list {
+  height: 100%;
+}

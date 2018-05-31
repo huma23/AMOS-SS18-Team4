@@ -48,7 +48,6 @@ import { CalendarHeaderComponent } from './calendar/calendar-header/calendar-hea
 import { CalendarContentComponent } from './calendar/calendar-content/calendar-content.component';
 import { CalenderStoreService } from './shared/calender-store.service';
 import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calendar-week-item.component';
-import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
 import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
 import { ResourceComponent }  from './Resourcenpanel/resource/resource.component';
 import { PlRegistrationPanelComponent} from "./registrationpanel/registrationpanel.component";
@@ -72,7 +71,11 @@ import {
   MaterialResolver,
   VehicleResolver
 } from "./Resourcenpanel/resource-type/resource-type-resolver.service";
-import {ConstructionAreaResolver} from "./calendar/main-calendar/main-calender-resolver.service";
+import {
+  ConstructionAreaResolver,
+  ConstructionLadderResolver
+} from "./calendar/main-calendar/main-calender-resolver.service";
+import {CalenderConstructionAreaComponent} from "./calendar/calender-construction-area/calender-construction-area.component";
 
 
 
@@ -81,9 +84,9 @@ import {ConstructionAreaResolver} from "./calendar/main-calendar/main-calender-r
     AppComponent,
     MainCalendarComponent,
     CalendarHeaderComponent,
+    CalenderConstructionAreaComponent,
     CalendarContentComponent,
     CalendarWeekItemComponent,
-    CalendarWeekComponent,
     PlToolbarComponent,
     ResourceTypeComponent,
     ResourceComponent,
@@ -138,7 +141,8 @@ import {ConstructionAreaResolver} from "./calendar/main-calendar/main-calender-r
       EmployeeResolver,
       MaterialResolver,
       VehicleResolver,
-      ConstructionAreaResolver
+      ConstructionAreaResolver,
+      ConstructionLadderResolver
   ],
 
   bootstrap: [AppComponent]
