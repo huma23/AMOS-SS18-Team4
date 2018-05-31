@@ -21,18 +21,36 @@
  * 
  */
 
-import { Injectable }                   from '@angular/core';
-import { CalendarWeek}                  from './calender-week' ;
-import { ConstructionManager, CPlan }   from './construction-manager';
-import { IConstructionLadder }          from '../Resourcenpanel/IConstructionLadder';
-import { HttpClient, HttpErrorResponse }                   from '@angular/common/http';
-import { ConstructionArea }             from '../../model/constructionArea';
-import { Employee }                     from '../../model/employee';
-import "../shared/backendUrls";
-import * as moment                      from 'moment';
+import { Injectable }                   
+from '@angular/core';
+
+import { CalendarWeek}                  
+from '../shared/calender-week' ;
+
+import { ConstructionManager, CPlan }   
+from '../shared/construction-manager';
+
+import { IConstructionLadder }          
+from '../Resourcenpanel/IConstructionLadder';
+
+import { HttpClient, HttpErrorResponse }
+from '@angular/common/http';
+
+import { ConstructionArea }
+from '../../model/constructionArea';
+
+import { Employee }
+from '../../model/employee';
+
+import {BACKEND_URLS}
+from  "../shared/backendUrls";
+
+import * as moment
+from 'moment';
+
 import 'moment/locale/pt-br';
-import { BACKEND_URLS } from '../shared/backendUrls';
-import { element } from 'protractor';
+
+
 
  /**
  * 

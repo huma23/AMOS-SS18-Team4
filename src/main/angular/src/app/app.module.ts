@@ -46,7 +46,7 @@ import { PlToolbarComponent } from "./toolbar/toolbar.component";
 import { MainCalendarComponent } from './calendar/main-calendar/main-calendar.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header/calendar-header.component';
 import { CalendarContentComponent } from './calendar/calendar-content/calendar-content.component';
-import { CalenderStoreService } from './shared/calender-store.service';
+import { CalenderStoreService } from './services/calender-store.service';
 import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calendar-week-item.component';
 import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
 import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
@@ -72,6 +72,8 @@ import {
   MaterialResolver,
   VehicleResolver
 } from "./Resourcenpanel/resource-type/resource-type-resolver.service";
+import { RedirectToAppWithParamsComponent } 
+from './redirect-to-app-with-params/redirect-to-app-with-params.component';
 
 
 
@@ -92,7 +94,8 @@ import {
     RegisterComponent,
     AddResourceComponent,
     ResourceTypeRightComponent,
-    ResourcePipe
+    ResourcePipe,
+    RedirectToAppWithParamsComponent
   ],
   imports: [
     BrowserModule,

@@ -21,12 +21,23 @@
  * 
  */
 
-import { Component, OnInit, Input }  from '@angular/core';
-import { CalendarContentComponent}    from '../calendar-content/calendar-content.component';
-import { CalendarHeaderComponent }    from '../calendar-header/calendar-header.component';
-import { CalenderStoreService}        from '../../shared/calender-store.service';
-import { CalendarWeekComponent}       from '../calendar-week/calendar-week.component';
-import { CalendarWeek }               from '../../shared/calender-week';
+import { Component, OnInit, Input }
+from '@angular/core';
+
+import { CalendarContentComponent}
+from '../calendar-content/calendar-content.component';
+
+import { CalendarHeaderComponent }
+from '../calendar-header/calendar-header.component';
+
+import { CalenderStoreService}
+from '../../services/calender-store.service';
+
+import { CalendarWeekComponent}
+from '../calendar-week/calendar-week.component';
+
+import { CalendarWeek }
+from '../../shared/calender-week';
 
 @Component({
   selector: 'pl-main-calendar',

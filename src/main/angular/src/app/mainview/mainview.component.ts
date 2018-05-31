@@ -21,10 +21,17 @@
  *
  */
 
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CalenderStoreService } from '../shared/calender-store.service';
-import {MatDrawer} from "@angular/material";
+import {AfterViewInit, Component, OnInit, ViewChild} 
+from '@angular/core';
+
+import { ActivatedRoute, Router }
+from '@angular/router';
+
+import { CalenderStoreService }
+from '../services/calender-store.service';
+
+import {MatDrawer}
+from "@angular/material";
 
 
 

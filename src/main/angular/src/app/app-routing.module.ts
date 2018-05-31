@@ -21,22 +21,44 @@
  *
  */
 
-import { NgModule }                     from '@angular/core';
-import { RouterModule, Routes}          from "@angular/router";
-import { CommonModule }                 from '@angular/common';
-import { LoginComponent }               from "./login/login.component";
-import { MainviewComponent }            from "./mainview/mainview.component";
-import { PlToolbarComponent }           from "./toolbar/toolbar.component";
-import { RegisterComponent }            from "./register/register.component";
-import { PlRegistrationPanelComponent}  from './registrationpanel/registrationpanel.component';
-import { AddResourceComponent }         from "./Resourcenpanel/add-resource/add-resource.component";
-import { AuthentificationGuard }        from './guards/authentification.guard';
-import {PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
-import {
-  EmployeeResolver,
-  MaterialResolver,
-  VehicleResolver
-} from "./Resourcenpanel/resource-type/resource-type-resolver.service";
+import { NgModule }  
+from '@angular/core';
+
+import { RouterModule, Routes}
+from "@angular/router";
+
+import { CommonModule }
+from '@angular/common';
+
+import { LoginComponent }
+from "./login/login.component";
+
+import { MainviewComponent }
+from "./mainview/mainview.component";
+
+import { PlToolbarComponent }
+from "./toolbar/toolbar.component";
+
+import { RegisterComponent }
+from "./register/register.component";
+
+import { PlRegistrationPanelComponent}
+from './registrationpanel/registrationpanel.component';
+
+import { AddResourceComponent }
+from "./Resourcenpanel/add-resource/add-resource.component";
+
+import { AuthentificationGuard }
+from './guards/authentification.guard';
+
+import { RedirectToAppWithParamsComponent }
+from './redirect-to-app-with-params/redirect-to-app-with-params.component'
+
+import {PermanentConstructionAreaResolver}
+from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
+
+import {EmployeeResolver, MaterialResolver, VehicleResolver}
+from "./Resourcenpanel/resource-type/resource-type-resolver.service";
 
 
 const routes: Routes =
@@ -44,14 +66,7 @@ const routes: Routes =
     { path: '',redirectTo:'app',  pathMatch:'full'},
     { path: 'login',              component: LoginComponent },
     { path: 'app',
-      component: MainviewComponent,
-      canActivate:[AuthentificationGuard],
-      resolve: {
-        permanent: PermanentConstructionAreaResolver,
-        employees: EmployeeResolver,
-        vehicles: VehicleResolver,
-        materials: MaterialResolver
-      }
+      component: RedirectToAppWithParamsComponent,
     },
     { path: 'app/:year/:week',
       component: MainviewComponent,
