@@ -32,7 +32,7 @@ import { LoginForm }                from '../../model/loginForm';
 import { Md5 }                      from  'ts-md5/dist/md5';
 import { Token }                    from '../../model/token';
 import { Observable }               from 'rxjs/Observable';
-
+import { environment }              from '../../environments/environment';
 
 
 const httpOptions = {
@@ -69,6 +69,7 @@ export class PlLoginService
     this.authService  = _authService;
     this.httpClient   = _httpClient;
     this.loggedIn     = false;
+  
   }
 
    /**

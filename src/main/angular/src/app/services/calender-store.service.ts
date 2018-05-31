@@ -178,9 +178,11 @@ export class CalenderStoreService
           cLadders[index] = this.combineAreasWithManagers(cArea, cManager);
       }
     
+      console.log(JSON.stringify(cLadders));
+      console.table(cLadders);
      // Hole den aktuellen Wochenheader und füge noch die Kalenderwoche hinzu 
       let calHeader : string [] = this.getCalenderWeekHeader(year,week);
-      console.log(aktiveConstructionAreas.length);
+      
       calHeader.unshift(week.toString());
     
         result = new CalendarWeek(
@@ -296,7 +298,7 @@ export class CalenderStoreService
         {          
           while (!constructionBegin.isSame(constructionEnd))
           {
-            result[constructionBegin.weekday()] = newConstPlan;   
+            result.constructionPlans[constructionBegin.weekday()] = newConstPlan;   
             constructionBegin.add(1,'day');
           }
       
@@ -306,7 +308,7 @@ export class CalenderStoreService
           const weekNr = constructionBegin.isoWeek();
           while(constructionBegin.isoWeek() == weekNr && constructionBegin.weekday() != 6 )
           {
-            result[constructionBegin.weekday()] = newConstPlan;
+            result.constructionPlans[constructionBegin.weekday()] = newConstPlan;
             constructionBegin.add(1, 'day');
           }
         }

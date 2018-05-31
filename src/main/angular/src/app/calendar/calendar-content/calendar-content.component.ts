@@ -40,15 +40,17 @@ export class CalendarContentComponent implements OnInit {
 
   ngOnInit()
   {
-  
+    console.table(this.constructionManagers);
   }
   hasPlanForToday(plan:CPlan) : boolean
   {
+   
+
     if (plan === undefined || plan === null)
       return false;
 
-    if(plan.projectName === undefined || plan.projectName === null)
-      return false;
+   // if(plan.projectName === undefined || plan.projectName === null)
+    //  return false;
 
     if (plan.coWorkers === undefined || plan.coWorkers === null)
       return false;

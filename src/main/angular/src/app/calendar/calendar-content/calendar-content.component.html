@@ -11,13 +11,13 @@
         <span *ngFor="let empl of dayPlan.coWorkers"> 
           {{empl.firstName}} {{empl.lastName}}
         </span>
-        <span *ngIf="dayPlan.materials">
+        <span *ngIf="dayPlan.hasMaterials()">
             Material: <br/>
           <span *ngFor="let material of dayPlan.materials">
-            {{material.description}}<br/>
+            {{material}}<br/>
           </span>
         </span>
-        <span *ngIf="dayPlan.vehicles">
+        <span *ngIf="dayPlan.hasVehicles()">
             Fahrzeuge: <br/>
           <span *ngFor="let vehicel of dayPlan.vehicles">
             {{vehicel.modell}}<br/>
