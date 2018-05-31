@@ -64,16 +64,21 @@ import { ResourceService} from "./Resourcenpanel/resource.service";
 import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
 import { Interceptor } from './http/interceptor';
 import { FakeInterceptor} from './http/fake-interceptor';
-import {ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
-import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
-import {PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
+import { ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
+import { ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
+import { PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
 import {
   EmployeeResolver,
   MaterialResolver,
   VehicleResolver
 } from "./Resourcenpanel/resource-type/resource-type-resolver.service";
+
 import { RedirectToAppWithParamsComponent } 
 from './redirect-to-app-with-params/redirect-to-app-with-params.component';
+
+import {ConstructionAreaResolver} 
+from "./calendar/main-calendar/main-calender-resolver.service";
+
 
 
 
@@ -139,7 +144,8 @@ from './redirect-to-app-with-params/redirect-to-app-with-params.component';
       PermanentConstructionAreaResolver,
       EmployeeResolver,
       MaterialResolver,
-      VehicleResolver
+      VehicleResolver,
+      ConstructionAreaResolver
   ],
 
   bootstrap: [AppComponent]

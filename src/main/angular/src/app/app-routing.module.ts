@@ -21,6 +21,7 @@
  *
  */
 
+
 import { NgModule }  
 from '@angular/core';
 
@@ -60,6 +61,9 @@ from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service"
 import {EmployeeResolver, MaterialResolver, VehicleResolver}
 from "./Resourcenpanel/resource-type/resource-type-resolver.service";
 
+import {ConstructionAreaResolver} 
+from "./calendar/main-calendar/main-calender-resolver.service";
+
 
 const routes: Routes =
   [
@@ -75,7 +79,8 @@ const routes: Routes =
         permanent: PermanentConstructionAreaResolver,
         employees: EmployeeResolver,
         vehicles: VehicleResolver,
-        materials: MaterialResolver
+        materials: MaterialResolver,
+        constructionAreas: ConstructionAreaResolver
       }
     },
     { path: 'register',           component: PlRegistrationPanelComponent },

@@ -50,6 +50,12 @@ from 'moment';
 
 import 'moment/locale/pt-br';
 
+import { IConstructionArea }
+from '../Resourcenpanel/IConstructionArea';
+
+import { Observable }
+from 'rxjs/Observable';
+
 
 
  /**
@@ -274,6 +280,20 @@ export class CalenderStoreService
     });
     return cLadders;
   }
+  
+   /**
+   * @method getConstructionAreas
+   *
+   * @param {number} year
+   * @param {number} week
+   * @returns {Observable<IConstructionArea[]>}
+   *
+   * @description Methode bekommt über REST API alle Baustellen einer bestimmten kw's + jahres
+   */
+  public getConstructionAreas(year: number, week: number):Observable<IConstructionArea[]>{
+    return this.httpClient.get<IConstructionArea[]>(BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + year + "/" + week);
+  }
+
     /**
    * @method 
    * getConstructionPlans
@@ -398,5 +418,4 @@ export class CalenderStoreService
       }
       return result;
   }
-
 }
