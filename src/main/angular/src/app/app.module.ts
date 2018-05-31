@@ -72,6 +72,7 @@ import {
   MaterialResolver,
   VehicleResolver
 } from "./Resourcenpanel/resource-type/resource-type-resolver.service";
+import {ConstructionAreaResolver} from "./calendar/main-calendar/main-calender-resolver.service";
 
 
 
@@ -136,7 +137,8 @@ import {
       PermanentConstructionAreaResolver,
       EmployeeResolver,
       MaterialResolver,
-      VehicleResolver
+      VehicleResolver,
+      ConstructionAreaResolver
   ],
 
   bootstrap: [AppComponent]

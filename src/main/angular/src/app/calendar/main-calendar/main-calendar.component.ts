@@ -1,7 +1,7 @@
 /**
- *  @license 
- *  
- * 
+ *  @license
+ *
+ *
  * Copyright [2018] [(MAMB Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)]
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,10 +15,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Copyright (c) 2018 by MAMB (Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)
- * 
- * 
+ *
+ *
  */
 
 import { Component, OnInit, Input }  from '@angular/core';
@@ -27,6 +27,8 @@ import { CalendarHeaderComponent }    from '../calendar-header/calendar-header.c
 import { CalenderStoreService}        from '../../shared/calender-store.service';
 import { CalendarWeekComponent}       from '../calendar-week/calendar-week.component';
 import { CalendarWeek }               from '../../shared/calender-week';
+import {ActivatedRoute} from "@angular/router";
+import {IConstructionArea} from "../../Resourcenpanel/IConstructionArea";
 
 @Component({
   selector: 'pl-main-calendar',
@@ -37,17 +39,23 @@ export class MainCalendarComponent implements OnInit
 {
   @Input()
   public calendarWeek : number;
-  
+
   @Input()
   public calendarYear : number;
 
   public calWeek : CalendarWeek;
 
-  constructor(private csService : CalenderStoreService) { } 
+  public constructionAreas : IConstructionArea[];
+
+  constructor(private csService : CalenderStoreService, private route : ActivatedRoute) { }
 
   ngOnInit()
   {
     this.calWeek = this.csService.getCalendarWeek(this.calendarYear, this.calendarWeek);
-  }
 
+    //Hier werden alle Daten mitgeliefert über die Route
+    this.constructionAreas = this.route.snapshot.data['constructionAreas'];
+
+    console.log('TEST CONSTRUCTION-AREAS: ' +  JSON.stringify(this.constructionAreas));
+  }
 }
