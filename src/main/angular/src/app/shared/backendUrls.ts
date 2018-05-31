@@ -25,12 +25,16 @@
  /**
  * 
  * Exportiert ein Objekt, in dem die Pfade auf die REST-API hinterlegt sind.
- * TODO Restlichen URLS eintragen
+ * 
  * 
  */
 
 export const BACKEND_URLS = 
 {
-     CONSTRUCTIONLADDER_URL : "/api/constructionLadder",
-     CONSTRUCTION_AREA_URL: "/api/constructionArea"
+     CONSTRUCTIONLADDER_URL         : "/api/constructionLadder",
+     CONSTRUCTION_AREA_URL          : "/api/constructionArea", 
+     CONSTRUCTION_AREA_PERMANENT_URL: "/api/constructionArea/permanent", 
+     EMPLOYEE_URL                   : "/api/employee", 
+     VEHICLE_URL                    : "/api/vehicle", 
+     MATERIAL_URL                   : "/api/material"
 };

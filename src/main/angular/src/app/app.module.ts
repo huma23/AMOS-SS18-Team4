@@ -79,6 +79,15 @@ from './redirect-to-app-with-params/redirect-to-app-with-params.component';
 import {ConstructionAreaResolver} 
 from "./calendar/main-calendar/main-calender-resolver.service";
 
+import { ConstructionAreaService } 
+from './services/construction-area.service';
+
+import {ConstructionLadderService}
+from './services/construction-ladder.service';
+
+import {ConstructionLadderResolver} 
+from "./calendar/main-calendar/main-calender-constLadder-resolver.service";
+
 
 
 
@@ -145,7 +154,11 @@ from "./calendar/main-calendar/main-calender-resolver.service";
       EmployeeResolver,
       MaterialResolver,
       VehicleResolver,
-      ConstructionAreaResolver
+      ConstructionAreaResolver,
+      ConstructionAreaService,
+      ConstructionLadderService,
+      ConstructionLadderResolver
+      
   ],
 
   bootstrap: [AppComponent]

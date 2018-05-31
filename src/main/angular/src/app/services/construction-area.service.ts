@@ -25,14 +25,14 @@ from '@angular/core';
 import { BACKEND_URLS } 
 from '../shared/backendUrls';
 
-import {Observable}
+import { Observable }
 from 'rxjs/Observable';
 
 import { HttpHeaders, HttpClient } 
 from '@angular/common/http';
 
-import { ConstructionArea }     
-from '../../model/constructionArea';
+import { IConstructionArea }
+from "../Resourcenpanel/IConstructionArea";
 
 import { CalenderStoreService } 
 from './calender-store.service';
@@ -95,7 +95,7 @@ export class ConstructionAreaService
    */
 
   public getConstructionAreasByWeekAndYear( year ? : string, week ? : string) 
-    : Observable<ConstructionArea[]> 
+    : Observable<IConstructionArea[]> 
   {
     if (year === null || year === undefined || year === "")
     {
@@ -106,7 +106,7 @@ export class ConstructionAreaService
       week = this.csService.currentWeek.toString();
     }
     let urlWithParams = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + year + "/" + week;
-    return this.httpClient.get<ConstructionArea[]>(urlWithParams, httpOptions);
+    return this.httpClient.get<IConstructionArea[]>(urlWithParams, httpOptions);
   }
 
   /**
@@ -130,9 +130,9 @@ export class ConstructionAreaService
    * als Dauerbaustellen angelegt wurden.
    * 
    */
-  getConstructionAreasPermanent():Observable<ConstructionArea[]>
+  getConstructionAreasPermanent():Observable<IConstructionArea[]>
   {
-    return this.httpClient.get<ConstructionArea[]>(BACKEND_URLS.CONSTRUCTION_AREA_PERMANENT_URL, httpOptions);
+    return this.httpClient.get<IConstructionArea[]>(BACKEND_URLS.CONSTRUCTION_AREA_PERMANENT_URL, httpOptions);
   }
  /**
    * @method 
@@ -153,8 +153,8 @@ export class ConstructionAreaService
    * abgespeichert wurden.
    * 
    */
-  public getAllSavedConstructionAreas () : Observable<ConstructionArea[]>
+  public getAllSavedConstructionAreas () : Observable<IConstructionArea[]>
   {
-    return this.httpClient.get<ConstructionArea[]>(BACKEND_URLS.CONSTRUCTION_AREA_URL, httpOptions);
+    return this.httpClient.get<IConstructionArea[]>(BACKEND_URLS.CONSTRUCTION_AREA_URL, httpOptions);
   }
 }

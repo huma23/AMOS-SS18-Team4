@@ -61,8 +61,11 @@ from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service"
 import {EmployeeResolver, MaterialResolver, VehicleResolver}
 from "./Resourcenpanel/resource-type/resource-type-resolver.service";
 
-import {ConstructionAreaResolver} 
+import { ConstructionAreaResolver } 
 from "./calendar/main-calendar/main-calender-resolver.service";
+
+import {ConstructionLadderResolver}
+from "./calendar/main-calendar/main-calender-constLadder-resolver.service";
 
 
 const routes: Routes =
@@ -80,7 +83,8 @@ const routes: Routes =
         employees: EmployeeResolver,
         vehicles: VehicleResolver,
         materials: MaterialResolver,
-        constructionAreas: ConstructionAreaResolver
+        constructionAreas: ConstructionAreaResolver,
+        constructionLadders : ConstructionLadderResolver
       }
     },
     { path: 'register',           component: PlRegistrationPanelComponent },

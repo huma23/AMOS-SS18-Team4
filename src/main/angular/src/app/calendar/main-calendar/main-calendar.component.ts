@@ -44,6 +44,7 @@ from "@angular/router";
 
 import {IConstructionArea} 
 from "../../Resourcenpanel/IConstructionArea";
+import { IConstructionLadder } from '../../Resourcenpanel/IConstructionLadder';
 
 
 @Component({
@@ -63,15 +64,17 @@ export class MainCalendarComponent implements OnInit
 
   public constructionAreas : IConstructionArea[];
 
+  public constructionLadders : IConstructionLadder[];
+
   constructor(private csService : CalenderStoreService, private route : ActivatedRoute) { }
 
   ngOnInit()
   {
-    this.calWeek = this.csService.getCalendarWeek(this.calendarYear, this.calendarWeek);
-
     //Hier werden alle Daten mitgeliefert über die Route
     this.constructionAreas = this.route.snapshot.data['constructionAreas'];
-
-    console.log('TEST CONSTRUCTION-AREAS: ' +  JSON.stringify(this.constructionAreas));
+    
+    this.constructionLadders = this.route.snapshot.data['constructionLadders'];
+    this.calWeek = this.csService.getCalendarWeek(this.calendarYear, this.calendarWeek,
+      this.constructionAreas, this.constructionLadders);
   }
 }

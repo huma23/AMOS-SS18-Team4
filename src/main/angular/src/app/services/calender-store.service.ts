@@ -58,6 +58,8 @@ from 'rxjs/Observable';
 
 
 
+
+
  /**
  * 
  * @class CalendarStoreService
@@ -122,9 +124,10 @@ export class CalenderStoreService
    */
 
 
-  getCalendarWeek(year?:number, week?:number) : CalendarWeek
+  getCalendarWeek(year?:number, week?:number, constructionAreas ?: IConstructionArea[], 
+  constructionLadders ?: IConstructionLadder[] ) : CalendarWeek
   {
-    let cAreas : ConstructionArea[];
+    let cAreas : ConstructionArea[] = constructionAreas;
     let result : CalendarWeek; 
 
     if (week)
@@ -140,47 +143,18 @@ export class CalenderStoreService
 
     let urlWithParam : string = (BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + year + "/" + week);
     let aktiveConstructionAreas : ConstructionArea[] =  new Array<ConstructionArea>();
-    let aktiveCplans : CPlan[] = new Array<CPlan>();
-    this.httpClient.get< ConstructionArea[]>(urlWithParam).subscribe((activeAreas : ConstructionArea[]) =>
+    
+    cAreas.forEach( element => 
     {
-      
-      for (let singleConstArea of activeAreas)
+      if (!element.permanent)
       {
-        if (!singleConstArea.permanent)
-        {
-          if (aktiveConstructionAreas == null)
-          aktiveConstructionAreas = new Array<ConstructionArea>();
-          let newPlan : CPlan = new CPlan(singleConstArea.name, singleConstArea.employees);
-          let element = singleConstArea;
-          let momStart = moment(element.startDate);
-          let momEnd = moment(element.endDate);
-          console.log("Erhaltenes Element");
-          console.log("Beginn = " + momStart.format("DoMMM"));
-          console.log("Ende = " +momEnd.format("DoMMM"));
-          aktiveCplans.push(newPlan);
-          let duration = 0;
-          while (!momStart.isSame(momEnd))
-          {
-            momStart.add(1,'day');
-            duration++;
-          }
-          console.log("Dauer der Baustelle  = " + duration);
-          
-          aktiveConstructionAreas.push(singleConstArea);
-        }
+        aktiveConstructionAreas.push(element);
       }
-    }, 
-    (errorVal:HttpErrorResponse ) =>
-    {
-      console.log("Fehler beim Holen der Baustellen für Kalenderwoche " + week + "; Kalenderjahr " + year);
-      window.alert("Ein Fehler ist aufgetreten. Die Werte sind entweder ungültig" 
-      + "oder der Service ist aktuell nicht erreichbar. Bitte nochmals versuchen.");
-      
     });
 
      
      // Hole alle Bauleiter       
-      let cLadders  : ConstructionManager[] = this.getConstructionManagers();
+      let cLadders  : ConstructionManager[] = this.getConstructionManagers(constructionLadders);
 
       // Kombiniere Bauleiter mit den Baustellen 
       for (let i = 0; i < aktiveConstructionAreas.length; i++ )
@@ -267,99 +241,20 @@ export class CalenderStoreService
    * 
    * 
    */
-  private getConstructionManagers() : ConstructionManager[]
+  private getConstructionManagers( ladders  : IConstructionLadder[] ) : ConstructionManager[]
   {
     
     let cLadders : ConstructionManager[] = new Array();
-    this.httpClient.get<IConstructionLadder[]>(BACKEND_URLS.CONSTRUCTIONLADDER_URL).subscribe((val : IConstructionLadder[]) =>
+    ladders.forEach( val =>
     {
-      for (let tmp of val)
-      {
-        cLadders.push(new ConstructionManager(tmp));
-      }
+      
+        cLadders.push(new ConstructionManager(val));
     });
+
     return cLadders;
   }
   
-   /**
-   * @method getConstructionAreas
-   *
-   * @param {number} year
-   * @param {number} week
-   * @returns {Observable<IConstructionArea[]>}
-   *
-   * @description Methode bekommt über REST API alle Baustellen einer bestimmten kw's + jahres
-   */
-  public getConstructionAreas(year: number, week: number):Observable<IConstructionArea[]>{
-    return this.httpClient.get<IConstructionArea[]>(BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + year + "/" + week);
-  }
-
-    /**
-   * @method 
-   * getConstructionPlans
-   * 
-   * @param 
-   * week: Kalenderwoche
-   * year: Kalenderjahr
-   * 
-   * 
-   * @return 
-   * ConstructionArea[]
-   *  
-   * @description
-   * Methode holt über die REST-API alle geplanten Baustellen der gewünschten Kalenderwoche. 
-   * Es werden nur Baustellen übergeben, die nicht als permanent ( Dauerbaustellen ) gekennzeichnet wurden.
-   * 
-   * 
-   */
-  private getConstructionPlans(year:number, week:number) : ConstructionArea[]
-  {
-    let urlWithParam : string = (BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + year + "/" + week);
-
-    let aktiveConstructionAreas : ConstructionArea[] = null;
-    this.httpClient.get(urlWithParam).subscribe((activeAreas : ConstructionArea[]) =>
-    {
-      
-      for (let singleConstArea of activeAreas)
-      {
-        if (!singleConstArea.permanent)
-        {
-          if (aktiveConstructionAreas == null)
-          aktiveConstructionAreas = new Array<ConstructionArea>();
-          let newPlan : CPlan = new CPlan(singleConstArea.name, singleConstArea.employees);
-          let element = singleConstArea;
-          let momStart = moment(element.startDate);
-          let momEnd = moment(element.endDate);
-          console.log("Erhaltenes Element");
-          console.log("Beginn = " + momStart.format("DoMMM"));
-          console.log("Ende = " +momEnd.format("DoMMM"));
-          
-          let duration = 0;
-          while (!momStart.isSame(momEnd))
-          {
-            momStart.add(1,'day');
-            duration++;
-          }
-          console.log("Dauer der Baustelle  = " + duration);
-          
-          aktiveConstructionAreas.push(singleConstArea);
-        }
-      }
-      if (aktiveConstructionAreas == null)
-        aktiveConstructionAreas = [];
-    }, 
-    (errorVal:HttpErrorResponse ) =>
-    {
-      console.log("Fehler beim Holen der Baustellen für Kalenderwoche " + week + "; Kalenderjahr " + year);
-      window.alert("Ein Fehler ist aufgetreten. Die Werte sind entweder ungültig" 
-      + "oder der Service ist aktuell nicht erreichbar. Bitte nochmals versuchen.");
-      
-    });
-
-      if (aktiveConstructionAreas===null)
-        console.log("DeineMutter");
-      return aktiveConstructionAreas;
-  }
+ 
   /**
    * @method 
    * combineAreasWithManagers
