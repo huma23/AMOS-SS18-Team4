@@ -1,7 +1,7 @@
 /**
- *  @license 
- *  
- * 
+ *  @license
+ *
+ *
  * Copyright [2018] [(MAMB Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)]
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,23 +15,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Copyright (c) 2018 by MAMB (Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)
- * 
- * 
+ *
+ *
  */
-
-import {ConstructionManager} from './construction-manager' ;
-
 export class CalendarWeek
 {
     constructor(
-        public weekOfTheYear        : number, 
-        public year                 : number, 
+        public weekOfTheYear        : number,
+        public year                 : number,
         public header               : Array<string>,
-        public constructionManagers : ConstructionManager []
-
     ) { }
-
-
 }

@@ -31,8 +31,6 @@ export class ResourcePipe implements PipeTransform {
 
   transform(areas: IConstructionArea[]): any {
 
-    debugger;
-
     if(areas) {
       return areas.sort((a1, a2) => {
         if (a1.startDate > a2.startDate)

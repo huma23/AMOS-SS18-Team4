@@ -25,7 +25,8 @@ import {Injectable} from "@angular/core";
 import {IConstructionArea} from "../../Resourcenpanel/IConstructionArea";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs/Observable";
-import {CalenderStoreService} from "../../shared/calender-store.service";
+import {IConstructionLadder} from "../../Resourcenpanel/IConstructionLadder";
+import {ConstructionAreaService} from "../../services/construction-area.service";
 
 /**
  * Resolver für den Calender zum Abfragen alle benötigten Baustellen
@@ -35,13 +36,23 @@ import {CalenderStoreService} from "../../shared/calender-store.service";
 @Injectable()
 export class ConstructionAreaResolver implements Resolve<IConstructionArea[]>{
 
-  constructor(private _calenderStoreService : CalenderStoreService) {}
+  constructor(private _constructionAreaService: ConstructionAreaService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IConstructionArea[]> | Promise<IConstructionArea[]> | IConstructionArea[] {
 
     let year = route.params['year'];
     let week = route.params['week'];
 
-    return this._calenderStoreService.getConstructionAreas(year, week);
+    return this._constructionAreaService.getConstructionAreasByWeekAndYear(year, week);
+  }
+}
+
+@Injectable()
+export class ConstructionLadderResolver implements Resolve<IConstructionLadder[]>{
+
+  constructor(private _constructionAreaService: ConstructionAreaService) {}
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IConstructionLadder[]> | Promise<IConstructionLadder[]> | IConstructionLadder[] {
+    return this._constructionAreaService.getConstructionLadders();
   }
 }

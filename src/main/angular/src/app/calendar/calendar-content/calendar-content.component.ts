@@ -1,7 +1,7 @@
 /**
- *  @license 
- *  
- * 
+ *  @license
+ *
+ *
  * Copyright [2018] [(MAMB Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)]
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,15 +15,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Copyright (c) 2018 by MAMB (Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)
- * 
- * 
+ *
+ *
  */
 
 import { Input,Component, OnInit }  from '@angular/core';
-import { ConstructionManager, CPlan}       from '../../shared/construction-manager';
-import { CalendarWeekItemComponent} from '../calendar-week-item/calendar-week-item.component' ;
+import {CalenderStoreService} from "../../services/calender-store.service";
+import {IConstructionLadder} from "../../Resourcenpanel/IConstructionLadder";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'pl-calendar-content',
@@ -33,28 +34,19 @@ import { CalendarWeekItemComponent} from '../calendar-week-item/calendar-week-it
 export class CalendarContentComponent implements OnInit {
 
   @Input()
-  public constructionManagers  : Array<ConstructionManager>;
+  public calendarWeek : number;
 
+  @Input()
+  public calendarYear : number;
 
-  constructor( ) { }
+  public calWeeks: string[];
+  public constructionManagers: IConstructionLadder[];
+
+  constructor(private csService : CalenderStoreService, private route : ActivatedRoute) { }
 
   ngOnInit()
   {
-  
+    this.calWeeks = this.csService.getCalenderWeekHeaderDBFormat(this.calendarYear, this.calendarWeek);
+    this.constructionManagers = this.route.snapshot.data['constructionLadders'];
   }
-  hasPlanForToday(plan:CPlan) : boolean
-  {
-    if (plan === undefined || plan === null)
-      return false;
-
-    if(plan.projectName === undefined || plan.projectName === null)
-      return false;
-
-    if (plan.coWorkers === undefined || plan.coWorkers === null)
-      return false;
-    
-      
-    return true;
-  }
-
 }

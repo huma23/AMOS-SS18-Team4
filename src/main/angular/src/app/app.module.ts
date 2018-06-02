@@ -48,7 +48,6 @@ import { CalendarHeaderComponent } from './calendar/calendar-header/calendar-hea
 import { CalendarContentComponent } from './calendar/calendar-content/calendar-content.component';
 import { CalenderStoreService } from './services/calender-store.service';
 import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calendar-week-item.component';
-import { CalendarWeekComponent } from './calendar/calendar-week/calendar-week.component';
 import { ResourceTypeComponent } from './Resourcenpanel/resource-type/resource-type.component';
 import { ResourceComponent }  from './Resourcenpanel/resource/resource.component';
 import { PlRegistrationPanelComponent} from "./registrationpanel/registrationpanel.component";
@@ -64,20 +63,23 @@ import { ResourceService} from "./Resourcenpanel/resource.service";
 import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
 import { Interceptor } from './http/interceptor';
 import { FakeInterceptor} from './http/fake-interceptor';
-import { ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
-import { ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
-import { PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
+import {ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
+import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
+import {PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
 import {
   EmployeeResolver,
   MaterialResolver,
   VehicleResolver
 } from "./Resourcenpanel/resource-type/resource-type-resolver.service";
+import {
+  ConstructionAreaResolver,
+  ConstructionLadderResolver
+} from "./calendar/main-calendar/main-calender-resolver.service";
+import {CalenderConstructionAreaComponent} from "./calendar/calender-construction-area/calender-construction-area.component";
 
-import { RedirectToAppWithParamsComponent } 
+import { RedirectToAppWithParamsComponent }
 from './redirect-to-app-with-params/redirect-to-app-with-params.component';
-
-import {ConstructionAreaResolver} 
-from "./calendar/main-calendar/main-calender-resolver.service";
+import {ConstructionAreaService} from "./services/construction-area.service";
 
 
 
@@ -87,9 +89,9 @@ from "./calendar/main-calendar/main-calender-resolver.service";
     AppComponent,
     MainCalendarComponent,
     CalendarHeaderComponent,
+    CalenderConstructionAreaComponent,
     CalendarContentComponent,
     CalendarWeekItemComponent,
-    CalendarWeekComponent,
     PlToolbarComponent,
     ResourceTypeComponent,
     ResourceComponent,
@@ -138,6 +140,7 @@ from "./calendar/main-calendar/main-calender-resolver.service";
       AppService,
       AuthService,
       CalenderStoreService,
+      ConstructionAreaService,
       PlRegistrationPanelService,
       PlLoginService,
       ResourceService,
@@ -145,7 +148,8 @@ from "./calendar/main-calendar/main-calender-resolver.service";
       EmployeeResolver,
       MaterialResolver,
       VehicleResolver,
-      ConstructionAreaResolver
+      ConstructionAreaResolver,
+      ConstructionLadderResolver
   ],
 
   bootstrap: [AppComponent]

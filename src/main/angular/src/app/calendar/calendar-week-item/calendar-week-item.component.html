@@ -1,3 +1,4 @@
-<p>
-  calendar-week-item works!
-</p>
+<div fxLayout="column" fxLayoutAlign="space-around center" *ngFor="let area of constructionAreas">
+  <pl-calender-construction-area [date]="this.date" [constructionArea]="area">
+  </pl-calender-construction-area>
+</div>

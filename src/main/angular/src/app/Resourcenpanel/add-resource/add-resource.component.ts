@@ -29,7 +29,7 @@ export class AddResourceComponent implements OnInit {
 
 
 
-  formContent = new ConstructionArea("", "", "", null, true,[], [], []);
+  //formContent = new ConstructionArea("", "", "", null, true,[], [], []);
   startDate:string;
   endDate:string;
   selectedBauleiter:ConstructionLadder;
@@ -90,6 +90,7 @@ export class AddResourceComponent implements OnInit {
 
   }
 
+  /*
   //add "Baustelle" through POST Request to the DB
   //get the actual "Bauleiter" and saves it in the new "Baustelle" object
   addConstruction(form:ConstructionArea){
@@ -111,7 +112,7 @@ export class AddResourceComponent implements OnInit {
     this.formContent.materials.push(this.selectedBetriebsmittel);
 
     JSON.stringify(this.formContent);
-    this._resourceService.saveConstructionArea(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
+    //this._resourceService.saveConstructionArea(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
 
   }
   //add "Bauleiter" through POST Request to the DB
@@ -122,6 +123,6 @@ export class AddResourceComponent implements OnInit {
 
   }
 
-
+*/
 
 }

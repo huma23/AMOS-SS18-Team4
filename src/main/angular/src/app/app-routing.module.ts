@@ -21,48 +21,26 @@
  *
  */
 
-
-import { NgModule }  
-from '@angular/core';
-
-import { RouterModule, Routes}
-from "@angular/router";
-
-import { CommonModule }
-from '@angular/common';
-
-import { LoginComponent }
-from "./login/login.component";
-
-import { MainviewComponent }
-from "./mainview/mainview.component";
-
-import { PlToolbarComponent }
-from "./toolbar/toolbar.component";
-
-import { RegisterComponent }
-from "./register/register.component";
-
-import { PlRegistrationPanelComponent}
-from './registrationpanel/registrationpanel.component';
-
-import { AddResourceComponent }
-from "./Resourcenpanel/add-resource/add-resource.component";
-
-import { AuthentificationGuard }
-from './guards/authentification.guard';
-
+import { NgModule }                     from '@angular/core';
+import { RouterModule, Routes}          from "@angular/router";
+import { CommonModule }                 from '@angular/common';
+import { LoginComponent }               from "./login/login.component";
+import { MainviewComponent }            from "./mainview/mainview.component";
+import { PlRegistrationPanelComponent}  from './registrationpanel/registrationpanel.component';
+import { AddResourceComponent }         from "./Resourcenpanel/add-resource/add-resource.component";
+import { AuthentificationGuard }        from './guards/authentification.guard';
+import {PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
+import {
+  EmployeeResolver,
+  MaterialResolver,
+  VehicleResolver
+} from "./Resourcenpanel/resource-type/resource-type-resolver.service";
+import {
+  ConstructionAreaResolver,
+  ConstructionLadderResolver
+} from "./calendar/main-calendar/main-calender-resolver.service";
 import { RedirectToAppWithParamsComponent }
-from './redirect-to-app-with-params/redirect-to-app-with-params.component'
-
-import {PermanentConstructionAreaResolver}
-from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
-
-import {EmployeeResolver, MaterialResolver, VehicleResolver}
-from "./Resourcenpanel/resource-type/resource-type-resolver.service";
-
-import {ConstructionAreaResolver} 
-from "./calendar/main-calendar/main-calender-resolver.service";
+  from './redirect-to-app-with-params/redirect-to-app-with-params.component'
 
 
 const routes: Routes =
@@ -80,7 +58,8 @@ const routes: Routes =
         employees: EmployeeResolver,
         vehicles: VehicleResolver,
         materials: MaterialResolver,
-        constructionAreas: ConstructionAreaResolver
+        constructionAreas: ConstructionAreaResolver,
+        constructionLadders: ConstructionLadderResolver
       }
     },
     { path: 'register',           component: PlRegistrationPanelComponent },

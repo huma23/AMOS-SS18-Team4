@@ -1,7 +1,7 @@
 /**
- *  @license 
- *  
- * 
+ *  @license
+ *
+ *
  * Copyright [2018] [(MAMB Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)]
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,32 +15,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Copyright (c) 2018 by MAMB (Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)
- * 
- * 
+ *
+ *
  */
 
-import { Component, OnInit, Input } from '@angular/core';
-import { CalendarWeek }             from '../../shared/calender-week';
-import { CalendarHeaderComponent }  from '../calendar-header/calendar-header.component';
-import { CalendarContentComponent } from '../calendar-content/calendar-content.component';
+import {Component, Input, OnInit} from "@angular/core";
+import {IConstructionArea, IConstructionAreaDay} from "../../Resourcenpanel/IConstructionArea";
 
 @Component({
-  selector: 'pl-calendar-week',
-  templateUrl: './calendar-week.component.html',
-  styleUrls: ['./calendar-week.component.css']
+  selector: 'pl-calender-construction-area',
+  templateUrl: './calender-construction-area.component.html',
+  styleUrls: ['./calender-construction-area.component.css']
 })
-export class CalendarWeekComponent implements OnInit {
+export class CalenderConstructionAreaComponent implements OnInit{
 
-  @Input ()
-  public calendarWeek : CalendarWeek ;
+  @Input()
+  public constructionArea : IConstructionArea;
 
-  constructor() { }
+  @Input()
+  public  date : string;
 
-  ngOnInit()
-  { 
- 
+  public constructionAreaDay : IConstructionAreaDay;
+
+  ngOnInit(): void {
+    this.constructionAreaDay = this.constructionArea.days[this.date];
   }
-
 }

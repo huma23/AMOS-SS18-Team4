@@ -21,30 +21,9 @@
  *
  */
 
-import { Component, OnInit, Input }
-from '@angular/core';
-
-import { CalendarContentComponent}
-from '../calendar-content/calendar-content.component';
-
-import { CalendarHeaderComponent }
-from '../calendar-header/calendar-header.component';
-
-import { CalenderStoreService}
-from '../../services/calender-store.service';
-
-import { CalendarWeekComponent}
-from '../calendar-week/calendar-week.component';
-
-import { CalendarWeek }
-from '../../shared/calender-week';
-
-import {ActivatedRoute} 
-from "@angular/router";
-
-import {IConstructionArea} 
-from "../../Resourcenpanel/IConstructionArea";
-
+import { Component, OnInit, Input }  from '@angular/core';
+import { CalenderStoreService}        from '../../services/calender-store.service';
+import { CalendarWeek }               from '../../shared/calender-week';
 
 @Component({
   selector: 'pl-main-calendar',
@@ -61,17 +40,10 @@ export class MainCalendarComponent implements OnInit
 
   public calWeek : CalendarWeek;
 
-  public constructionAreas : IConstructionArea[];
-
-  constructor(private csService : CalenderStoreService, private route : ActivatedRoute) { }
+  constructor(private csService : CalenderStoreService) { }
 
   ngOnInit()
   {
     this.calWeek = this.csService.getCalendarWeek(this.calendarYear, this.calendarWeek);
-
-    //Hier werden alle Daten mitgeliefert über die Route
-    this.constructionAreas = this.route.snapshot.data['constructionAreas'];
-
-    console.log('TEST CONSTRUCTION-AREAS: ' +  JSON.stringify(this.constructionAreas));
   }
 }
