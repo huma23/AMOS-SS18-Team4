@@ -192,6 +192,7 @@ public class ConstructionAreaAPI extends AbstractAPI{
             public String execute() {
                 Gson gson = new Gson();
                 ConstructionArea constructionArea = gson.fromJson(area, ConstructionArea.class);
+                constructionArea.setDays(constructionArea.getDays());
 
                 PersistenceManager instance = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 instance.saveObject(constructionArea);

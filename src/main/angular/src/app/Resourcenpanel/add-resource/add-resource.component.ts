@@ -11,6 +11,8 @@ import {IConstructionLadder} from "../IConstructionLadder";
 import {IEmployee} from "../IEmployee";
 import {IVehicle} from "../IVehicle";
 import {IMaterial} from "../IMaterial";
+import * as moment from "moment";
+import {ConstructionAreaForm} from "../../../model/constructionAreaForm";
 
 @Component({
   selector: 'pl-add-resource',
@@ -29,15 +31,10 @@ export class AddResourceComponent implements OnInit {
 
 
 
-  //formContent = new ConstructionArea("", "", "", null, true,[], [], []);
+  formContent = new ConstructionAreaForm("", "", "", null, true);
   startDate:string;
   endDate:string;
   selectedBauleiter:ConstructionLadder;
-  selectedMitarbeiter:Employee;
-  selectedFahrzeug: Vehicle;
-  selectedBetriebsmittel: Material;
-
-
 
   constructor(private _resourceService:ResourceService) {
   }
@@ -54,6 +51,7 @@ export class AddResourceComponent implements OnInit {
 
 
   ngOnInit() {
+    debugger;
     this._resourceService.getConstructionAreas()
       .subscribe(data => this.constructions = data);
     this._resourceService.getConstructionLadder()
@@ -90,14 +88,14 @@ export class AddResourceComponent implements OnInit {
 
   }
 
-  /*
+
   //add "Baustelle" through POST Request to the DB
   //get the actual "Bauleiter" and saves it in the new "Baustelle" object
   addConstruction(form:ConstructionArea){
-    debugger;
+  debugger;
+    this.formContent.startDate = moment(this.startDate).format("YYYY-MM-DD");
+    this.formContent.endDate = moment(this.endDate).format("YYYY-MM-DD");
 
-    this.formContent.startDate = this.startDate;
-    this.formContent.endDate = this.endDate;
 
     let startdateobject = new Date(this.startDate);
     let endDateObject = new Date(this.endDate);
@@ -107,22 +105,15 @@ export class AddResourceComponent implements OnInit {
     }
 
     this.formContent.bauleiter = this.selectedBauleiter;
-    this.formContent.employees.push(this.selectedMitarbeiter);
-    this.formContent.vehicles.push(this.selectedFahrzeug);
-    this.formContent.materials.push(this.selectedBetriebsmittel);
 
     JSON.stringify(this.formContent);
-    //this._resourceService.saveConstructionArea(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
-
+    this._resourceService.saveConstructionAreaForm(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
   }
+
   //add "Bauleiter" through POST Request to the DB
   addConstructionLadder(firstName, lastName){
     let constructionLadder = new ConstructionLadder(firstName, lastName);
     console.log(constructionLadder+ ", "+ JSON.stringify(constructionLadder)+","+this.constructionLadders);
     this._resourceService.saveConstructionLadder(constructionLadder).subscribe((res:ConstructionLadder) => console.log(res));
-
   }
-
-*/
-
 }

@@ -3,9 +3,9 @@ package de.amos.mamb.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 public class ConstructionArea extends PersistentObject{
@@ -31,7 +31,7 @@ public class ConstructionArea extends PersistentObject{
         this.endDate = endDate;
         this.bauleiter = bauleiter;
         this.permanent = permanent;
-        this.days = map;
+        setDays(map);
     }
 
     public String getName() {
@@ -69,4 +69,34 @@ public class ConstructionArea extends PersistentObject{
     public boolean getPermanent() {return permanent;}
 
     public void setPermanent(boolean permanent) {this.permanent = permanent; }
+
+    public Map<String, ConstructionAreaDay> getDays() {
+        return days;
+    }
+
+    public void setDays(Map<String, ConstructionAreaDay> map) {
+
+        this.days = map;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date startD = formatter.parse(this.startDate);
+            Date endD = formatter.parse(this.endDate);
+
+            Calendar start = Calendar.getInstance();
+            start.setTime(startD);
+            Calendar end = Calendar.getInstance();
+            end.setTime(endD);
+
+            for(Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()){
+                String key = formatter.format(date);
+                if(!days.containsKey(key)){
+                    days.put(key, new ConstructionAreaDay());
+                }
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 }

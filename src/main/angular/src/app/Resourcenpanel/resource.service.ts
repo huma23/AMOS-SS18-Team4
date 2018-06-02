@@ -13,6 +13,7 @@ import {Vehicle} from "../../model/vehicle";
 import {Material} from "../../model/material";
 import {ConstructionArea} from "../../model/constructionArea";
 import {ConstructionLadder} from "../../model/constructionLadder";
+import {ConstructionAreaForm} from "../../model/constructionAreaForm";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -72,6 +73,11 @@ export class ResourceService{
   saveConstructionArea(construction:ConstructionArea):Observable<IConstructionArea>{
     let body = JSON.stringify(construction);
     return this.http.post<IConstructionArea>(this._constructionAreaUri, body, httpOptions);
+  }
+
+  saveConstructionAreaForm(construction:ConstructionAreaForm){
+    let body = JSON.stringify(construction);
+    return this.http.post<ConstructionAreaForm>(this._constructionAreaUri, body, httpOptions);
   }
 
   getConstructionAreasPermanent():Observable<IConstructionArea[]>{
