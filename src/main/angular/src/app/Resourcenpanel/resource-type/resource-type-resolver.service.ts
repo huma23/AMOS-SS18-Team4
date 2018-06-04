@@ -54,8 +54,9 @@ export class MaterialResolver implements Resolve<IMaterial[]>{
   constructor(private _resourceService: ResourceService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMaterial[]> {
-
-    return this._resourceService.getMaterials();
+    let year = route.params['year'];
+    let week = route.params['week'];
+    return this._resourceService.getMaterialsWithinWeek(year,week);
   }
 }
 

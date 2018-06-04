@@ -78,7 +78,12 @@ public class EmployeeAPI extends AbstractAPI {
         });
     }
 
-
+    /**
+     * Liefert eine Liste von Mitarbeiter, welche in der gegebenen Jahr/Woche noch nicht zu einer Baustelle eingeplant wurden
+     * @param year
+     * @param week
+     * @return
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{year}/{week}")
@@ -107,7 +112,6 @@ public class EmployeeAPI extends AbstractAPI {
                 List<Employee> employees = manager.getAllEntities(Employee.class);
 
                 //Baustellen durchlaufen und Employee rauslöschen
-                List<Employee> resultEmployees = new ArrayList<>();
                 for(ConstructionArea area : list){
                     //Hole die Map aller ConstructionAreaDays, welche eine Liste von Employees enthält
                     Map<String, ConstructionAreaDay> map = area.getDays();

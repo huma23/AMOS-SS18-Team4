@@ -64,6 +64,10 @@ export class ResourceService{
     return this.http.get<IMaterial[]>(this._materialUri);
   }
 
+  getMaterialsWithinWeek(year, week):Observable<IMaterial[]>{
+    return this.http.get<Material[]>(this._materialUri+ "/" + year+ "/" + week);
+  }
+
   saveMaterials(material:Material):Observable<IMaterial>{
     let body = JSON.stringify(material);
     return this.http.post<Material>(this._materialUri, body, httpOptions);

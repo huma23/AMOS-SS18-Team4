@@ -3,6 +3,8 @@ package de.amos.mamb.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
+import java.util.Objects;
+
 @Entity
 public class Material extends PersistentObject{
 
@@ -42,5 +44,21 @@ public class Material extends PersistentObject{
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Material)) {
+            return false;
+        }
+        Material material = (Material) o;
+        return  Objects.equals(bezeichnung, material.bezeichnung);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(bezeichnung);
     }
 }
