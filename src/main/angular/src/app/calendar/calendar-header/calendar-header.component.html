@@ -1,13 +1,14 @@
 <mat-grid-list cols ="7" rowHeight="6:4">
   <mat-grid-tile style="color:red; border-right: 1px dashed ; border-bottom: 1px dashed">
     <mat-card>
-
     KW:{{currentWeekNumber}}
     <br/>
-
-    <a [routerLink]="['/app',currentYear, lastWeek]">{{lastWeek}}</a>
-    <a [routerLink]="['/app',currentYear, nextWeek]">{{nextWeek}}</a>
-
+    <span *ngIf= "hasLastWeek">
+      <a [routerLink]="['/app',currentYear, lastWeek]">{{lastWeek}}</a>
+    </span>
+    <span *ngIf="hasNextWeek">
+      <a [routerLink]="['/app',currentYear, nextWeek]">{{nextWeek}}</a>
+    </span>
     </mat-card>
   </mat-grid-tile>
   <div *ngFor="let headerItem of currentWeekHeader; let i = index">

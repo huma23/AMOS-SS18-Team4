@@ -21,7 +21,11 @@
  * 
  */
 
-import {Input , Component, OnInit } from '@angular/core';
+import {Input , Component, OnInit }
+from '@angular/core';
+
+import { CalenderStoreService } 
+from '../../services/calender-store.service';
 
 @Component({
   selector: 'pl-calendar-header',
@@ -37,8 +41,12 @@ export class CalendarHeaderComponent implements OnInit {
   @Input ()
   public currentYear        : number;
 
+  private csService         : CalenderStoreService;
+
   public nextWeek          : number;
   public lastWeek          : number;
+  public hasLastWeek       : boolean;
+  public hasNextWeek       : boolean;
 
   public daysOfTheWeek      : Array<string> = 
   [ 
@@ -52,16 +60,34 @@ export class CalendarHeaderComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor(_csService : CalenderStoreService )
+  {
+    this.csService = _csService;
+  }
 
   ngOnInit()
   {
-    
-    this.lastWeek = this.currentWeekNumber - 1;
-    this.nextWeek = this.currentWeekNumber*1 + 1*1;
-    
-    
-    
+    if (this.currentWeekNumber != 1)
+    {
+      this.lastWeek = this.currentWeekNumber - 1;
+      this.hasLastWeek = true;
+    }
+    else 
+    {
+      this.hasLastWeek = false;
+    }
+
+    let weeksOfTheYear = this.csService.getWeeksOfTheYear(this.currentYear);
+    if (this.currentWeekNumber < weeksOfTheYear)
+    {
+      this.nextWeek = this.currentWeekNumber*1 + 1*1;  
+      this.hasNextWeek = true;
+    }
+    else 
+    {
+      this.hasNextWeek = false;
+    } 
   }
+  
 
 }

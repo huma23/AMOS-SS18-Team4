@@ -25,6 +25,7 @@ import { Injectable }                   from '@angular/core';
 import { HttpClient}                   from '@angular/common/http';
 import "../shared/backendUrls";
 import * as moment                      from 'moment';
+
 import 'moment/locale/pt-br';
 import {CalendarWeek} from "../shared/calender-week";
 
@@ -142,11 +143,43 @@ export class CalenderStoreService
     return this.getCalenderWeekInFormat(year, week, "Do MMM");
   }
 
+  
+  /**
+   * @method
+   * 
+   *
+   * @param
+   *  
+   *
+   * @return
+   * String Array
+   *
+   * @description
+   *
+   *
+   */
   public getCalenderWeekHeaderDBFormat (year:number, week:number) : string []
   {
     return this.getCalenderWeekInFormat(year, week, "YYYY-MM-DD");
   }
 
+  
+  /**
+   * @method
+   * 
+   *
+   * @param
+   * 
+   * 
+   *
+   * @return
+   * 
+   *
+   * @description
+   *
+   *
+   *
+   */
   private getCalenderWeekInFormat(year:number, week:number, format:string) : string[]
   {
     let searchedWeekResult : string[] = new Array<string>();
@@ -159,5 +192,27 @@ export class CalenderStoreService
     }
 
     return searchedWeekResult;
+  }
+  
+  /**
+   * @method
+   * getWeeksOfTheYear
+   *
+   * @param
+   * year   :  Jahr für das die Wochen geholt werden soll
+   * 
+   *
+   * @return
+   * number
+   *
+   * @description
+   * Gibt die Anzahl der Wochen in dem angefragten Jahr zurück. 
+   *
+   *
+   */
+
+  public getWeeksOfTheYear(year : number ) : number
+  {
+    return moment().year(year).isoWeeksInYear();
   }
 }
