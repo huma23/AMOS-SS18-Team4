@@ -80,6 +80,9 @@ import {CalenderConstructionAreaComponent} from "./calendar/calender-constructio
 import { RedirectToAppWithParamsComponent }
 from './redirect-to-app-with-params/redirect-to-app-with-params.component';
 import {ConstructionAreaService} from "./services/construction-area.service";
+import { TestDdkomponentComponent } from './test-ddkomponent/test-ddkomponent.component';
+import {NgDragDropModule }
+from 'ng-drag-drop';
 
 
 
@@ -102,7 +105,8 @@ import {ConstructionAreaService} from "./services/construction-area.service";
     AddResourceComponent,
     ResourceTypeRightComponent,
     ResourcePipe,
-    RedirectToAppWithParamsComponent
+    RedirectToAppWithParamsComponent,
+    TestDdkomponentComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +127,8 @@ import {ConstructionAreaService} from "./services/construction-area.service";
     AppRoutingModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgDragDropModule.forRoot()
   ],
   providers:
   [
