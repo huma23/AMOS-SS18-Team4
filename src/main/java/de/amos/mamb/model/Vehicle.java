@@ -3,6 +3,8 @@ package de.amos.mamb.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Index;
 
+import java.util.Objects;
+
 
 @Entity
 public class Vehicle extends PersistentObject{
@@ -45,5 +47,21 @@ public class Vehicle extends PersistentObject{
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Vehicle)) {
+            return false;
+        }
+        Vehicle vehicle = (Vehicle) o;
+        return  Objects.equals(bezeichnung, vehicle.bezeichnung);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(bezeichnung);
     }
 }

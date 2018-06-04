@@ -34,13 +34,13 @@ export class ResourceService{
 
   }
 
-  //Mitarbeiter
+  //Mitarbeiter REST Service Requests
   getEmployees():Observable<IEmployee[]>{
     return this.http.get<Employee[]>(this._employeeUri);
   }
 
   getEmployeesWithinWeek(year, week):Observable<IEmployee[]>{
-    return this.http.get<Employee[]>(this._employeeUri+"/"+year+"/"+ week);
+    return this.http.get<Employee[]>(this._employeeUri+ "/" + year + "/" + week);
   }
 
   saveEmployee(employee:Employee):Observable<Employee>{
@@ -49,9 +49,13 @@ export class ResourceService{
 
   }
 
-  //Fahrzeug
+  //Fahrzeug REST Service Requests
   getVehicle():Observable<IVehicle[]>{
     return this.http.get<IVehicle[]>(this._vehicleUri);
+  }
+
+  getVehiclesWithinWeek(year, week):Observable<IVehicle[]>{
+    return this.http.get<Vehicle[]>(this._vehicleUri + "/" + year + "/" + week);
   }
 
   saveVehicle(vehicle:Vehicle):Observable<IVehicle> {
@@ -59,7 +63,7 @@ export class ResourceService{
     return this.http.post<Vehicle>(this._vehicleUri, body, httpOptions);
   }
 
-  //Betriebsmittel
+  //Betriebsmittel REST Service Requests
   getMaterials():Observable<IMaterial[]>{
     return this.http.get<IMaterial[]>(this._materialUri);
   }
@@ -73,7 +77,7 @@ export class ResourceService{
     return this.http.post<Material>(this._materialUri, body, httpOptions);
   }
 
-  //Baustelle
+  //Baustelle REST Service Requests
   getConstructionAreas():Observable<IConstructionArea[]>{
     return this.http.get<IConstructionArea[]>(this._constructionAreaUri);
   }
@@ -91,7 +95,7 @@ export class ResourceService{
   getConstructionAreasPermanent():Observable<IConstructionArea[]>{
     return this.http.get<IConstructionArea[]>(this._constructionAreaPermanentUri);
   }
-  //Bauleiter
+  //Bauleiter REST Service Requests
   getConstructionLadder():Observable<IConstructionLadder[]>{
     return this.http.get<IConstructionLadder[]>(this._constructionLadderUri);
   }

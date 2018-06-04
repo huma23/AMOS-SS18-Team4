@@ -67,6 +67,8 @@ export class VehicleResolver implements Resolve<IVehicle[]>{
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IVehicle[]> {
 
-    return this._resourceService.getVehicle();
+    let year = route.params['year'];
+    let week = route.params['week'];
+    return this._resourceService.getVehiclesWithinWeek(year, week);
   }
 }
