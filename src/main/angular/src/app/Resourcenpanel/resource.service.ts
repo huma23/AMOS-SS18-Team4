@@ -39,6 +39,10 @@ export class ResourceService{
     return this.http.get<Employee[]>(this._employeeUri);
   }
 
+  getEmployeesWithinWeek(year, week):Observable<IEmployee[]>{
+    return this.http.get<Employee[]>(this._employeeUri+"/"+year+"/"+ week);
+  }
+
   saveEmployee(employee:Employee):Observable<Employee>{
     let body = JSON.stringify(employee);
     return this.http.post<Employee>(this._employeeUri, body, httpOptions).do(data => console.log(data));

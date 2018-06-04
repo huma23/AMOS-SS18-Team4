@@ -5,6 +5,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Employee extends  PersistentObject{
@@ -57,4 +58,22 @@ public class Employee extends  PersistentObject{
     public void setSkills(List<String> skills) {
         this.skills = skills;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Employee)) {
+            return false;
+        }
+        Employee employee= (Employee) o;
+        return  Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(firstName, employee.firstName);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(lastName,firstName);
+    }
+
 }

@@ -28,6 +28,7 @@ import {Injectable} from "@angular/core";
 import {IEmployee} from "../IEmployee";
 import {IMaterial} from "../IMaterial";
 import {IVehicle} from "../IVehicle";
+import {CalenderStoreService} from "../../services/calender-store.service";
 
 
 /**
@@ -41,7 +42,9 @@ export class EmployeeResolver implements Resolve<IEmployee[]>{
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IEmployee[]> {
 
-    return this._resourceService.getEmployees();
+    let year = route.params['year'];
+    let week = route.params['week'];
+    return this._resourceService.getEmployeesWithinWeek(year,week);
   }
 }
 

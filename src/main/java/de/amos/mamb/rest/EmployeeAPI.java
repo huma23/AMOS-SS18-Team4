@@ -23,20 +23,29 @@
 
 package de.amos.mamb.rest;
 
+import com.google.appengine.repackaged.com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import de.amos.mamb.model.ConstructionArea;
+import de.amos.mamb.model.ConstructionAreaDay;
 import de.amos.mamb.model.Employee;
 
+import de.amos.mamb.model.PersistentObject;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ObjectCommand;
 import de.amos.mamb.rest.command.ResponseCommand;
+import org.glassfish.jersey.client.ClientResponse;
 
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
-
+import java.lang.reflect.Type;
+import java.util.*;
 
 
 /**
@@ -74,6 +83,68 @@ public class EmployeeAPI extends AbstractAPI {
             }
         });
     }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{year}/{week}")
+    public Response getEmployeeFromDate(@PathParam("year") int year, @PathParam("week") int week){
+
+        return executeRequest(new ResponseCommand() {
+            @Override
+            public String execute() {
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+
+                //Alle Baustellen gefilter nach Year/Week
+                ConstructionAreaAPI constructionAreaAPI = new ConstructionAreaAPI();
+                Response response = constructionAreaAPI.getConstructionAreasFromDate(year,week);
+
+                //Type um Gson parsen zu lassen in eine Liste
+                Type listType = new TypeToken<ArrayList<ConstructionArea>>(){}.getType();
+                Gson gson = new Gson();
+
+                //Datenstream vom Response
+                String areas = response.getEntity().toString();
+
+                //Konvertieren in eine Liste
+                List<ConstructionArea> list = gson.fromJson(areas, listType);
+
+                //Alle employees holen
+                List<Employee> employees = manager.getAllEntities(Employee.class);
+
+                //Baustellen durchlaufen und Employee rauslöschen
+                List<Employee> resultEmployees = new ArrayList<>();
+                for(ConstructionArea area : list){
+                    //Hole die Map aller ConstructionAreaDays, welche eine Liste von Employees enthält
+                    Map<String, ConstructionAreaDay> map = area.getDays();
+                    //Methode zum entfernen der schon genutzten Employees in einer Baustelle
+                    employees = deleteUsedEmployees(map,employees);
+                }
+                String json = gson.toJson(employees);
+                return json;
+            }
+
+            @Override
+            public int httpOnSuccess() {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed() {
+                return 400;
+            }
+        });
+    }
+
+    // entfernt einen Mitarbeiter aus der Gesamt-Mitarbeiterliste, wenn er in irgendeiner Baustelle schon eingesetzt ist
+    private List<Employee> deleteUsedEmployees(Map<String,ConstructionAreaDay> constructionAreas, List<Employee> employees){
+        for(Map.Entry<String, ConstructionAreaDay> entry : constructionAreas.entrySet()){
+            List<Employee> tmpEmployee = entry.getValue().getEmployeeList();
+            employees.removeAll(tmpEmployee);
+        }
+        return employees;
+    }
+
     /**
      * API Endpoint zum speichern eines Mitarbeiters über den PersistentManager
      *
