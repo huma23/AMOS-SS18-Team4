@@ -23,25 +23,19 @@
 
 package de.amos.mamb.rest;
 
-import com.google.appengine.repackaged.com.google.gson.Gson;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import de.amos.mamb.model.ConstructionArea;
 import de.amos.mamb.model.ConstructionAreaDay;
 import de.amos.mamb.model.Employee;
 
-import de.amos.mamb.model.PersistentObject;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ObjectCommand;
 import de.amos.mamb.rest.command.ResponseCommand;
-import org.glassfish.jersey.client.ClientResponse;
 
-
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.Type;
