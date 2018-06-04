@@ -1,0 +1,42 @@
+
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center" style="margin-bottom: 0.5%">
+  <mat-card droppable [dropScope]="'fahrzeuge'" (onDrop)="onDropFahrzeuge($event)">
+    <mat-card-title>Fahrzeuge</mat-card-title>
+    <mat-card-subtitle>1.Version</mat-card-subtitle>
+    <mat-card-content>
+    <mat-list>
+        <mat-list-item *ngFor="let x of Fahrzeuge" draggable [dragScope]="'fahrzeuge'" [dragData]="x">{{x.name}}</mat-list-item>
+    </mat-list> 
+    </mat-card-content>
+  </mat-card>       
+  <mat-card droppable [dropScope]="'betriebsmittel'" (onDrop)="onDropBM($event)">
+      <mat-card-title>Betriebsmittel</mat-card-title>
+      <mat-card-subtitle>1.Version</mat-card-subtitle>    
+      <mat-card-content>
+      <mat-list>
+          <mat-list-item *ngFor="let x of Betriebsmittel" draggable [dragScope]="'betriebsmittel'" [dragData]="x">{{x.name}}</mat-list-item>
+      </mat-list> 
+      </mat-card-content>
+    </mat-card>
+    <mat-card droppable [dropScope]="'mitarbeiter'" (onDrop)="onDropMitarbeiter($event)">
+        <mat-card-title>Mitarbeiter</mat-card-title>
+        <mat-card-subtitle>1.Version</mat-card-subtitle>    
+        <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let x of Mitarbeiter" draggable [dragScope]="'mitarbeiter'" [dragData]="x">{{x.name}}</mat-list-item>
+        </mat-list> 
+        </mat-card-content>
+      </mat-card>    
+</div>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center" >
+<mat-card droppable [dropScope]="['mitarbeiter','fahrzeuge', 'betriebsmittel']" (onDrop)="onItemDrop($event)" [dragOverClass]="'drag-target-border'">
+    <mat-card-title>Droppable Items</mat-card-title>
+    <mat-card-content>
+    <mat-list>
+        <div *ngFor="let x of dragItems1">
+        <mat-list-item draggable  [dragScope]="x.type.toLocaleLowerCase()" [dragData]="x">{{x.name}}</mat-list-item>       
+      </div>
+      </mat-list> 
+    </mat-card-content>
+</mat-card>
+</div>     

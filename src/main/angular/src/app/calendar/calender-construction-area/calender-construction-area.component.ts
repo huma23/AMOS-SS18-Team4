@@ -42,4 +42,29 @@ export class CalenderConstructionAreaComponent implements OnInit{
   ngOnInit(): void {
     this.constructionAreaDay = this.constructionArea.days[this.date];
   }
+
+  public hasEmployees() : boolean
+  {
+    if (this.constructionAreaDay.employees === null || this.constructionAreaDay.employees === undefined)
+      return false;
+    
+    return true;
+  }
+  public hasVehicles() : boolean
+  {
+    if (this.constructionAreaDay.vehicles === null || this.constructionAreaDay.vehicles === undefined)
+      return false;
+    
+    return true;
+  }
+  public hasMaterials() : boolean
+  {
+    if (this.constructionAreaDay.materials === null || this.constructionAreaDay.materials === undefined)
+      return false;
+    
+    return true;
+  } 
+
+
+
 }

@@ -40,8 +40,10 @@ import {
   ConstructionLadderResolver
 } from "./calendar/main-calendar/main-calender-resolver.service";
 import { RedirectToAppWithParamsComponent }
-  from './redirect-to-app-with-params/redirect-to-app-with-params.component'
+  from './redirect-to-app-with-params/redirect-to-app-with-params.component';
 
+import {TestDdkomponentComponent} 
+from './test-ddkomponent/test-ddkomponent.component';
 
 const routes: Routes =
   [
@@ -63,7 +65,8 @@ const routes: Routes =
       }
     },
     { path: 'register',           component: PlRegistrationPanelComponent },
-    { path: 'resource',           component: AddResourceComponent }
+    { path: 'resource',           component: AddResourceComponent },
+    { path: 'testDD', component: TestDdkomponentComponent }
   ];
 
 @NgModule({
