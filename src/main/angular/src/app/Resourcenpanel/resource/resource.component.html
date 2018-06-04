@@ -1,36 +1,32 @@
 <mat-list>
-      <mat-card *ngFor='let employee of employeeList'>
+      <mat-card class="ress-type-card" droppable [dropScope]="'mitarbeiter'" (onDrop)="onDropMitarbeiter($event)" >
+          <mat-card-title>Mitarbeiter</mat-card-title>
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item *ngFor='let employee of employeeList' draggable [dragScope]="'mitarbeiter'" [dragData]="employee">{{employee.firstName}} {{employee.lastName}}</mat-list-item>
+              </mat-list>
+            </mat-card-content>
+      </mat-card>
+      <mat-card class="ress-type-card" droppable  [dropScope]="'fahrzeuge'" (onDrop)="onDropFahrzeug($event)" >
+        <mat-card-title>Fahrzeuge</mat-card-title>
+          <mat-card-content>
+            <mat-list-item *ngFor='let vehicle of vehicleList' draggable [dragScope]="'fahrzeuge'" [dragData]="vehicle">{{vehicle.bezeichnung}}</mat-list-item>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="ress-type-card" droppable  [dropScope]="'betriebsmittel'" (onDrop)="onDropBetriebsmittel($event)" >
         <mat-card-content>
-          <mat-list-item>Vorname: {{employee.firstName}}</mat-list-item>
-          <mat-list-item>Nachname: {{employee.lastName}}</mat-list-item>
-          <mat-list-item>Alter: {{employee.age}}</mat-list-item>
-          <mat-list>Spezialisierung:
-            <mat-list-item *ngFor="let skill of employee.skills">{{skill}}</mat-list-item>
+          <mat-card-title>Betriebsmittel</mat-card-title>
+          <mat-list>
+            <mat-list-item *ngFor='let material of materialList'  draggable [dragScope]="'betriebsmittel'" [dragData]="material">{{material.bezeichnung}}</mat-list-item>
           </mat-list>
         </mat-card-content>
-      </mat-card>
-      <mat-card *ngFor='let vehicle of vehicleList'>
-        <mat-card-content>
-          <mat-list-item>Bezeichnung: {{vehicle.bezeichnung}}</mat-list-item>
-          <mat-list-item>Modell: {{vehicle.modell}}</mat-list-item>
-        </mat-card-content>
-      </mat-card>
-  <mat-card *ngFor='let material of materialList'>
-    <mat-card-content>
-      <mat-list-item>Bezeichnung: {{material.bezeichnung}}</mat-list-item>
-      <mat-list-item>Beschreibung: {{material.description}}</mat-list-item>
-      <mat-list-item>Ort: {{material.location}}</mat-list-item>
-    </mat-card-content>
-  </mat-card>
+        </mat-card>
   <mat-card class="pl-construction-area-card" *ngFor="let area of constructionAreaList | ascending">
     <mat-card-content>
-      <mat-list-item>Bezeichnung: {{area.name}}</mat-list-item>
-      <mat-list-item>Start: {{area.startDate | date:'mediumDate'}}</mat-list-item>
-      <mat-list-item>Ende: {{area.endDate | date:'mediumDate'}}</mat-list-item>
-      <mat-list>Bauleiter:
-        <mat-list-item>Vorname: {{area.bauleiter.firstName}}</mat-list-item>
-        <mat-list-item>Nachname: {{area.bauleiter.lastName}}</mat-list-item>
-      </mat-list>
+      <mat-list-item>{{area.name}}</mat-list-item>
+      <mat-list-item>Vom: {{area.startDate | date:'mediumDate'}}</mat-list-item>
+      <mat-list-item>Bis: {{area.endDate | date:'mediumDate'}}</mat-list-item>
+      <mat-list-item>Bauleiter: {{area.bauleiter.firstName}} {{area.bauleiter.lastName}} </mat-list-item>
     </mat-card-content>
   </mat-card>
 </mat-list>

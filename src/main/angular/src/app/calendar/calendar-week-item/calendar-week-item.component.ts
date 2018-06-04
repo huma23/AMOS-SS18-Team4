@@ -43,13 +43,14 @@ export class CalendarWeekItemComponent implements OnInit {
 
   constructor(private route : ActivatedRoute) { }
 
-  ngOnInit() {
-    let allAreas = this.route.snapshot.data['constructionAreas'];
-    this.constructionAreas = this.getMyAreas(allAreas);
+  ngOnInit()
+  {
+    let allAreas            = this.route.snapshot.data['constructionAreas'];
+    this.constructionAreas  = this.getMyAreas(allAreas);
   }
 
-  private getMyAreas(areas : IConstructionArea[]): IConstructionArea[]{
-
+  private getMyAreas(areas : IConstructionArea[]): IConstructionArea[]
+  {
     let array : IConstructionArea[] = new Array<IConstructionArea>();
 
     for(let area of areas){
@@ -63,7 +64,6 @@ export class CalendarWeekItemComponent implements OnInit {
         }
       }
     }
-
     return array;
   }
 }

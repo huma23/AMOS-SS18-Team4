@@ -23,6 +23,9 @@
 
 import {Component, Input, OnInit} from "@angular/core";
 import {IConstructionArea, IConstructionAreaDay} from "../../Resourcenpanel/IConstructionArea";
+import { Employee } from "../../../model/employee";
+import { Vehicle } from "../../../model/vehicle";
+import { Material } from "../../../model/material";
 
 @Component({
   selector: 'pl-calender-construction-area',
@@ -39,8 +42,18 @@ export class CalenderConstructionAreaComponent implements OnInit{
 
   public constructionAreaDay : IConstructionAreaDay;
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.constructionAreaDay = this.constructionArea.days[this.date];
+    
+    if (this.constructionAreaDay.employees === (null|| undefined))
+      this.constructionAreaDay.employees = new Array<Employee>();
+
+    if (this.constructionAreaDay.materials === (null || undefined))
+      this.constructionAreaDay.materials = new Array<Material>();
+
+    if (this.constructionAreaDay.vehicles === (null || undefined))
+      this.constructionAreaDay.vehicles = new Array<Vehicle>();
   }
 
   public hasEmployees() : boolean
@@ -63,7 +76,31 @@ export class CalenderConstructionAreaComponent implements OnInit{
       return false;
     
     return true;
-  } 
+  }
+  public onDropItem(e :any) : void
+  {
+    let droppedObject = e.dragData;
+    console.log("Data gedroppt");
+    console.log(typeof(droppedObject));
+
+    if (droppedObject.hasOwnProperty('skills') )
+    {
+      this.constructionAreaDay.employees.push(droppedObject);
+      console.log("mitarbeiter gedroppt");
+    }
+    if (droppedObject.hasOwnProperty('modell'))
+    {
+      this.constructionAreaDay.vehicles.push(droppedObject);
+      console.log("fahrzeug gedroppt");
+      
+    }
+    if (droppedObject.hasOwnProperty('description'))
+    {
+      this.constructionAreaDay.materials.push(droppedObject);
+      console.log("material gedroppt");
+      
+    }
+  }
 
 
 

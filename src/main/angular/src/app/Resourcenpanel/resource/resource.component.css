@@ -12,3 +12,7 @@ mat-list-item{
 .pl-construction-area-card {
   margin-top: 10px;
 }
+mat-card.ress-type-card
+{
+  margin:1%;
+}

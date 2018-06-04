@@ -11,17 +11,34 @@ import {IConstructionArea} from "../IConstructionArea";
 })
 export class ResourceComponent implements OnInit {
 
+  @Input()
+  public employeeList : IEmployee[];
+  @Input()
+  public vehicleList  : IVehicle[];
+  @Input()
+  public materialList : IMaterial[];
+  @Input()
+  public constructionAreaList:IConstructionArea[];
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  @Input()
-  public employeeList: IEmployee[];
-  @Input()
-  public vehicleList:IVehicle[];
-  @Input()
-  public materialList:IMaterial[];
-  @Input()
-  public constructionAreaList:IConstructionArea[];
+  public onDropMitarbeiter(e:any) : void
+  {
+    this.employeeList.push(e.dragData);
+  }
+
+  public onDropBetriebsmittel (e:any) : void
+  {
+    this.materialList.push(e.dragData);
+  }
+
+  public onDropFahrzeug (e:any) : void 
+  {
+    this.vehicleList.push(e.dragData);
+  }
+
+
 }

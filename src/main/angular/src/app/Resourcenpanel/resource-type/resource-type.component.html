@@ -1,17 +1,7 @@
 <h3>Verfügbare Ressourcen</h3>
-<mat-divider></mat-divider>
 <span style="width:2px;"></span>
 <div class = borderOutside>
-  <h3 >Mitarbeiter</h3>
-    <app-resource [employeeList]="employees">
-    </app-resource>
-  <h3 >Fahrzeuge</h3>
-  <app-resource [vehicleList]="vehicles">
+  <app-resource [employeeList]="employees" [vehicleList]="vehicles" [materialList]="materials">
   </app-resource>
-  <h3 >Betriebsmittel</h3>
-  <app-resource [materialList]="materials">
-  </app-resource>
-  <span style="width:2px;"></span>
-  <mat-divider></mat-divider>
 </div>
 

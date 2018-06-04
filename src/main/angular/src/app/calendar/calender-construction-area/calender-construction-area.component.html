@@ -1,11 +1,17 @@
-<mat-card id="pl-calender-construction-area-card">
+<mat-card id="pl-calender-construction-area-card" droppable [dropScope]="['mitarbeiter','fahrzeuge', 'betriebsmittel']" (onDrop)="onDropItem($event)">
   <mat-card-subtitle>{{constructionArea.name}}</mat-card-subtitle>
   <mat-card-content>
-  <div id ="pl-Calender-construction-area-Sections" *ngIf="hasEmployees()">
-    <div id ="area-section-content" *ngFor="let empl of constructionAreaDay.employees">
+  <mat-card-subtitle>Mitarbeiter</mat-card-subtitle>
+    <div id ="area-section-content" *ngFor="let empl of constructionAreaDay.employees" draggable [dragScope]="'mitarbeiter'" [dragData]="empl">
       {{empl.firstName}} {{empl.lastName}}
-
     </div>
-  </div>  
+    <mat-card-subtitle>Betriebsmittel</mat-card-subtitle>
+    <div id ="area-section-content" *ngFor="let material of constructionAreaDay.materials" draggable [dragScope]="'betriebsmittel'" [dragData]="material">
+        {{material.bezeichnung}}
+      </div>
+    <mat-card-subtitle>Fahrzeuge</mat-card-subtitle>
+    <div id ="area-section-content" *ngFor="let car of constructionAreaDay.vehicles"  draggable [dragScope]="'fahrzeuge'" [dragData]="car">
+        {{car.bezeichnung}}
+      </div>
   </mat-card-content>
 </mat-card>
