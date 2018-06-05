@@ -27,18 +27,19 @@ export class ResourceComponent implements OnInit {
 
   public onDropMitarbeiter(e:any) : void
   {
-    this.employeeList.push(e.dragData);
+    if(!this.employeeList.includes(e.dragData, 0))
+      this.employeeList.push(e.dragData);
   }
 
   public onDropBetriebsmittel (e:any) : void
   {
-    this.materialList.push(e.dragData);
+    if(!this.materialList.includes(e.dragData, 0))
+      this.materialList.push(e.dragData);
   }
 
-  public onDropFahrzeug (e:any) : void 
+  public onDropFahrzeug (e:any) : void
   {
-    this.vehicleList.push(e.dragData);
+    if(!this.vehicleList.includes(e.dragData, 0))
+      this.vehicleList.push(e.dragData);
   }
-
-
 }

@@ -21,12 +21,4 @@
           </mat-list>
         </mat-card-content>
         </mat-card>
-  <mat-card class="pl-construction-area-card" *ngFor="let area of constructionAreaList | ascending">
-    <mat-card-content>
-      <mat-list-item>{{area.name}}</mat-list-item>
-      <mat-list-item>Vom: {{area.startDate | date:'mediumDate'}}</mat-list-item>
-      <mat-list-item>Bis: {{area.endDate | date:'mediumDate'}}</mat-list-item>
-      <mat-list-item>Bauleiter: {{area.bauleiter.firstName}} {{area.bauleiter.lastName}} </mat-list-item>
-    </mat-card-content>
-  </mat-card>
 </mat-list>

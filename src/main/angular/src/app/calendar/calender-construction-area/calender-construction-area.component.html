@@ -2,16 +2,19 @@
   <mat-card-subtitle>{{constructionArea.name}}</mat-card-subtitle>
   <mat-card-content>
   <mat-card-subtitle>Mitarbeiter</mat-card-subtitle>
-    <div id ="area-section-content" *ngFor="let empl of constructionAreaDay.employees" draggable [dragScope]="'mitarbeiter'" [dragData]="empl">
+    <div class ="area-section-content" *ngFor="let empl of constructionAreaDay.employeeList" draggable [dragScope]="'mitarbeiter'" [dragData]="empl">
+      <mat-icon (click)="removeEmployee(constructionArea, empl)">clear</mat-icon>
       {{empl.firstName}} {{empl.lastName}}
     </div>
     <mat-card-subtitle>Betriebsmittel</mat-card-subtitle>
-    <div id ="area-section-content" *ngFor="let material of constructionAreaDay.materials" draggable [dragScope]="'betriebsmittel'" [dragData]="material">
-        {{material.bezeichnung}}
+    <div class ="area-section-content" *ngFor="let material of constructionAreaDay.materialList" draggable [dragScope]="'betriebsmittel'" [dragData]="material">
+      <mat-icon (click)="removeMaterial(constructionArea, material)">clear</mat-icon>
+      {{material.bezeichnung}}
       </div>
     <mat-card-subtitle>Fahrzeuge</mat-card-subtitle>
-    <div id ="area-section-content" *ngFor="let car of constructionAreaDay.vehicles"  draggable [dragScope]="'fahrzeuge'" [dragData]="car">
-        {{car.bezeichnung}}
+    <div class="area-section-content" *ngFor="let car of constructionAreaDay.vehicleList"  draggable [dragScope]="'fahrzeuge'" [dragData]="car">
+      <mat-icon (click)="removeCar(constructionArea, car)">clear</mat-icon>
+      {{car.bezeichnung}}
       </div>
   </mat-card-content>
 </mat-card>

@@ -26,6 +26,10 @@ import {IConstructionArea, IConstructionAreaDay} from "../../Resourcenpanel/ICon
 import { Employee } from "../../../model/employee";
 import { Vehicle } from "../../../model/vehicle";
 import { Material } from "../../../model/material";
+import {IEmployee} from "../../Resourcenpanel/IEmployee";
+import {IVehicle} from "../../Resourcenpanel/IVehicle";
+import {IMaterial} from "../../Resourcenpanel/IMaterial";
+import {AddResourceService} from "../../services/add-resource.service";
 
 @Component({
   selector: 'pl-calender-construction-area',
@@ -42,39 +46,45 @@ export class CalenderConstructionAreaComponent implements OnInit{
 
   public constructionAreaDay : IConstructionAreaDay;
 
+  private resourceService : AddResourceService;
+
+  constructor(_resService: AddResourceService){
+    this.resourceService = _resService;
+  }
+
   ngOnInit(): void
   {
     this.constructionAreaDay = this.constructionArea.days[this.date];
-    
-    if (this.constructionAreaDay.employees === (null|| undefined))
-      this.constructionAreaDay.employees = new Array<Employee>();
 
-    if (this.constructionAreaDay.materials === (null || undefined))
-      this.constructionAreaDay.materials = new Array<Material>();
+    if (this.constructionAreaDay.employeeList === (null|| undefined))
+      this.constructionAreaDay.employeeList = new Array<Employee>();
 
-    if (this.constructionAreaDay.vehicles === (null || undefined))
-      this.constructionAreaDay.vehicles = new Array<Vehicle>();
+    if (this.constructionAreaDay.materialList === (null || undefined))
+      this.constructionAreaDay.materialList = new Array<Material>();
+
+    if (this.constructionAreaDay.vehicleList === (null || undefined))
+      this.constructionAreaDay.vehicleList = new Array<Vehicle>();
   }
 
   public hasEmployees() : boolean
   {
-    if (this.constructionAreaDay.employees === null || this.constructionAreaDay.employees === undefined)
+    if (this.constructionAreaDay.employeeList === null || this.constructionAreaDay.employeeList === undefined)
       return false;
-    
+
     return true;
   }
   public hasVehicles() : boolean
   {
-    if (this.constructionAreaDay.vehicles === null || this.constructionAreaDay.vehicles === undefined)
+    if (this.constructionAreaDay.vehicleList === null || this.constructionAreaDay.vehicleList === undefined)
       return false;
-    
+
     return true;
   }
   public hasMaterials() : boolean
   {
-    if (this.constructionAreaDay.materials === null || this.constructionAreaDay.materials === undefined)
+    if (this.constructionAreaDay.materialList === null || this.constructionAreaDay.materialList === undefined)
       return false;
-    
+
     return true;
   }
   public onDropItem(e :any) : void
@@ -85,23 +95,52 @@ export class CalenderConstructionAreaComponent implements OnInit{
 
     if (droppedObject.hasOwnProperty('skills') )
     {
-      this.constructionAreaDay.employees.push(droppedObject);
+      if(!this.constructionAreaDay.employeeList.includes(droppedObject)) {
+        this.constructionAreaDay.employeeList.push(droppedObject);
+        this.resourceService.addEmployeeToArea(droppedObject, this.constructionArea.id, this.date, false);
+      }
+
       console.log("mitarbeiter gedroppt");
     }
     if (droppedObject.hasOwnProperty('modell'))
     {
-      this.constructionAreaDay.vehicles.push(droppedObject);
+      if(!this.constructionAreaDay.vehicleList.includes(droppedObject)) {
+        this.constructionAreaDay.vehicleList.push(droppedObject);
+        this.resourceService.addVehicleToArea(droppedObject, this.constructionArea.id, this.date, false);
+      }
       console.log("fahrzeug gedroppt");
-      
     }
     if (droppedObject.hasOwnProperty('description'))
     {
-      this.constructionAreaDay.materials.push(droppedObject);
+      if(!this.constructionAreaDay.materialList.includes(droppedObject)) {
+        this.constructionAreaDay.materialList.push(droppedObject);
+        this.resourceService.addMaterialToArea(droppedObject, this.constructionArea.id, this.date, false);
+      }
       console.log("material gedroppt");
-      
+
     }
   }
 
+  public removeMaterial(area : IConstructionArea, material : IMaterial): void {
+    this.removeItemFromList(area.days[this.date].materialList, material);
+    this.resourceService.removeMaterialFromArea(material, area.id, this.date, false);
+  }
 
+  public removeCar(area : IConstructionArea, car: IVehicle): void {
+    this.removeItemFromList(area.days[this.date].vehicleList, car);
+    this.resourceService.removeVehicleFromArea(car, area.id, this.date, false);
+  }
 
+  public removeEmployee(area : IConstructionArea, employee: IEmployee): void {
+    this.removeItemFromList(area.days[this.date].employeeList, employee);
+    this.resourceService.removeEmployeeFromArea(employee, area.id, this.date, false);
+  }
+
+  private removeItemFromList(list: any, item: any): void {
+    if(list.includes(item)){
+      list.forEach((x, index) => {
+        if(item === x) list.splice(index, 1);
+      });
+    }
+  }
 }

@@ -16,7 +16,7 @@ export interface IConstructionArea{
 }
 
 export interface IConstructionAreaDay{
-  employees: Employee[],
-  vehicles: Vehicle[],
-  materials: Material[]
+  employeeList: Employee[],
+  vehicleList: Vehicle[],
+  materialList: Material[]
 }

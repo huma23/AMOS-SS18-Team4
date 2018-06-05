@@ -32,7 +32,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatListModule,
-  MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule
+  MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatIconModule
 } from "@angular/material";
 
 import { MatGridListModule }  from '@angular/material/grid-list';
@@ -83,6 +83,8 @@ import {ConstructionAreaService} from "./services/construction-area.service";
 import { TestDdkomponentComponent } from './test-ddkomponent/test-ddkomponent.component';
 import {NgDragDropModule }
 from 'ng-drag-drop';
+import { ResourceConstructionAreaComponent } from './Resourcenpanel/resource-construction-area/resource-construction-area.component';
+import {AddResourceService} from "./services/add-resource.service";
 
 
 
@@ -106,7 +108,8 @@ from 'ng-drag-drop';
     ResourceTypeRightComponent,
     ResourcePipe,
     RedirectToAppWithParamsComponent,
-    TestDdkomponentComponent
+    TestDdkomponentComponent,
+    ResourceConstructionAreaComponent
   ],
   imports: [
     BrowserModule,
@@ -128,6 +131,7 @@ from 'ng-drag-drop';
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
+    MatIconModule,
     NgDragDropModule.forRoot()
   ],
   providers:
@@ -154,7 +158,8 @@ from 'ng-drag-drop';
       MaterialResolver,
       VehicleResolver,
       ConstructionAreaResolver,
-      ConstructionLadderResolver
+      ConstructionLadderResolver,
+      AddResourceService
   ],
 
   bootstrap: [AppComponent]
