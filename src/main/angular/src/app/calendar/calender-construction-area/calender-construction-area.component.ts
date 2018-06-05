@@ -122,17 +122,17 @@ export class CalenderConstructionAreaComponent implements OnInit{
   }
 
   public removeMaterial(area : IConstructionArea, material : IMaterial): void {
-    this.removeItemFromList(area.days[this.date].materialList, material);
+    this.removeItemFromList(this.constructionAreaDay.materialList, material);
     this.resourceService.removeMaterialFromArea(material, area.id, this.date, false);
   }
 
   public removeCar(area : IConstructionArea, car: IVehicle): void {
-    this.removeItemFromList(area.days[this.date].vehicleList, car);
+    this.removeItemFromList(this.constructionAreaDay.vehicleList, car);
     this.resourceService.removeVehicleFromArea(car, area.id, this.date, false);
   }
 
   public removeEmployee(area : IConstructionArea, employee: IEmployee): void {
-    this.removeItemFromList(area.days[this.date].employeeList, employee);
+    this.removeItemFromList(this.constructionAreaDay.employeeList, employee);
     this.resourceService.removeEmployeeFromArea(employee, area.id, this.date, false);
   }
 
