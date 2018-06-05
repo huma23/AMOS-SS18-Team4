@@ -1,0 +1,30 @@
+<mat-card id="pl-construction-area-card"
+          droppable
+          [dropScope]="['mitarbeiter','fahrzeuge', 'betriebsmittel']"
+          (onDrop)="onDropItem($event, area)"
+          *ngFor="let area of constructionAreaList | ascending">
+  <mat-card-subtitle>{{area.name}}</mat-card-subtitle>
+  <mat-card-content>
+    <mat-card-subtitle>Mitarbeiter</mat-card-subtitle>
+    <div class ="area-section-content"
+         *ngFor="let empl of area.days[area.startDate].employeeList"
+         draggable [dragScope]="'mitarbeiter'" [dragData]="empl">
+      <mat-icon (click)="removeEmployee(area, empl)">clear</mat-icon>
+      {{empl.firstName}} {{empl.lastName}}
+    </div>
+    <mat-card-subtitle>Betriebsmittel</mat-card-subtitle>
+    <div class ="area-section-content"
+         *ngFor="let material of area.days[area.startDate].materialList"
+         draggable [dragScope]="'betriebsmittel'" [dragData]="material">
+      <mat-icon (click)="removeMaterial(area, material)">clear</mat-icon>
+      {{material.bezeichnung}}
+    </div>
+    <mat-card-subtitle>Fahrzeuge</mat-card-subtitle>
+    <div class ="area-section-content"
+         *ngFor="let car of area.days[area.startDate].vehicleList"
+         draggable [dragScope]="'fahrzeuge'" [dragData]="car">
+      <mat-icon (click)="removeCar(area, car)">clear</mat-icon>
+      {{car.bezeichnung}}
+    </div>
+  </mat-card-content>
+</mat-card>
