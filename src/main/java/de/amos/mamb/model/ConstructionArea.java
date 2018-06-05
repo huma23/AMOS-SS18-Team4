@@ -99,4 +99,32 @@ public class ConstructionArea extends PersistentObject{
             e.printStackTrace();
         }
     }
+
+    public void addResourceToEveryDay(PersistentObject object){
+
+        for(String key : days.keySet()){
+            days.get(key).addResource(object);
+        }
+    }
+
+    public void addResourceToDay(PersistentObject object, String day){
+
+        if(days.keySet().contains(day)){
+            days.get(day).addResource(object);
+        }
+    }
+
+    public void removeResourceToEveryDay(PersistentObject object){
+
+        for(String key : days.keySet()){
+            days.get(key).removeResource(object);
+        }
+    }
+
+    public void removeResourceToDay(PersistentObject object, String day){
+
+        if(days.keySet().contains(day)){
+            days.get(day).removeResource(object);
+        }
+    }
 }

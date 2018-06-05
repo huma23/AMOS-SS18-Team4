@@ -44,4 +44,34 @@ public class ConstructionAreaDay {
     public void setVehicleList(List<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
     }
+
+    public void addResource(PersistentObject object){
+
+        if(object instanceof Employee){
+            employeeList.add((Employee) object);
+        }
+
+        if(object instanceof Material){
+            materialList.add((Material) object);
+        }
+
+        if(object instanceof Vehicle){
+            vehicleList.add((Vehicle) object);
+        }
+    }
+
+    public void removeResource(PersistentObject object){
+
+        if(object instanceof Employee){
+            employeeList.remove((Employee) object);
+        }
+
+        if(object instanceof Material){
+            materialList.remove((Material) object);
+        }
+
+        if(object instanceof Vehicle){
+            vehicleList.remove((Vehicle) object);
+        }
+    }
 }

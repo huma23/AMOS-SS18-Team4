@@ -23,9 +23,10 @@
 package de.amos.mamb.rest;
 
 import com.google.gson.Gson;
-import de.amos.mamb.model.ConstructionArea;
+import de.amos.mamb.model.*;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ResponseCommand;
+import de.amos.mamb.rest.json.AddResourceData;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -197,6 +198,114 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 PersistenceManager instance = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 instance.saveObject(constructionArea);
                 return Result.NO_STRING;
+            }
+        });
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}/addResource")
+    public Response addResource(@PathParam("id") String id, String addResourceData){
+
+        return executeRequest(new ResponseCommand() {
+            @Override
+            public String execute() {
+                Gson gson = new Gson();
+                AddResourceData data = gson.fromJson(addResourceData, AddResourceData.class);
+
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                Long idL = new Long(id);
+                ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
+                PersistentObject object = null;
+
+                if(data.getEmployee() != null){
+                    object = data.getEmployee();
+                }
+
+                if(data.getMaterial() != null){
+                    object = data.getMaterial();
+                }
+
+                if(data.getVehicle() != null){
+                    object = data.getVehicle();
+                }
+
+                if(object != null){
+                    if(data.isPermanent()){
+                        area.addResourceToEveryDay(object);
+                    } else {
+                        area.addResourceToDay(object, data.getDay());
+                    }
+
+                    manager.saveObject(area);
+                    return Result.NO_STRING;
+                }
+
+                return Result.FAILED;
+            }
+
+            @Override
+            public int httpOnSuccess() {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed() {
+                return 400;
+            }
+        });
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}/removeResource")
+    public Response removeResource(@PathParam("id") String id, String addResourceData){
+
+        return executeRequest(new ResponseCommand() {
+            @Override
+            public String execute() {
+                Gson gson = new Gson();
+                AddResourceData data = gson.fromJson(addResourceData, AddResourceData.class);
+
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                Long idL = new Long(id);
+                ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
+                PersistentObject object = null;
+
+                if(data.getEmployee() != null){
+                    object = data.getEmployee();
+                }
+
+                if(data.getMaterial() != null){
+                    object = data.getMaterial();
+                }
+
+                if(data.getVehicle() != null){
+                    object = data.getVehicle();
+                }
+
+                if(object != null){
+                    if(data.isPermanent()){
+                        area.removeResourceToEveryDay(object);
+                    } else {
+                        area.removeResourceToDay(object, data.getDay());
+                    }
+
+                    manager.saveObject(area);
+                    return Result.NO_STRING;
+                }
+
+                return Result.FAILED;
+            }
+
+            @Override
+            public int httpOnSuccess() {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed() {
+                return 400;
             }
         });
     }
