@@ -40,11 +40,15 @@ export class EmployeeResolver implements Resolve<IEmployee[]>{
 
   constructor(private _resourceService: ResourceService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IEmployee[]> {
+/*  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IEmployee[]> {
 
     let year = route.params['year'];
     let week = route.params['week'];
     return this._resourceService.getEmployeesWithinWeek(year,week);
+  }*/
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IEmployee[]> {
+    return this._resourceService.getEmployees();
   }
 }
 
@@ -53,10 +57,13 @@ export class MaterialResolver implements Resolve<IMaterial[]>{
 
   constructor(private _resourceService: ResourceService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMaterial[]> {
+  /*resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMaterial[]> {
     let year = route.params['year'];
     let week = route.params['week'];
     return this._resourceService.getMaterialsWithinWeek(year,week);
+  }*/
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMaterial[]> {
+    return this._resourceService.getMaterials();
   }
 }
 
@@ -65,10 +72,13 @@ export class VehicleResolver implements Resolve<IVehicle[]>{
 
   constructor(private _resourceService: ResourceService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IVehicle[]> {
+  /*resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IVehicle[]> {
 
     let year = route.params['year'];
     let week = route.params['week'];
     return this._resourceService.getVehiclesWithinWeek(year, week);
+  }*/
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IVehicle[]> {
+    return this._resourceService.getVehicle();
   }
 }
