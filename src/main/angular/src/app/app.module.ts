@@ -58,14 +58,13 @@ import { MainviewComponent }  from './mainview/mainview.component';
 import { RegisterComponent }  from './register/register.component';
 import { PlLoginService }     from './login/login.service';
 import { AuthService }        from './services/auth.service';
-
-import { ResourceService} from "./Resourcenpanel/resource.service";
+import { ResourceService } from "./Resourcenpanel/resource.service";
 import { AddResourceComponent } from './Resourcenpanel/add-resource/add-resource.component';
 import { Interceptor } from './http/interceptor';
 import { FakeInterceptor} from './http/fake-interceptor';
-import {ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
-import {ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
-import {PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
+import { ResourceTypeRightComponent} from "./Resourcenpanel/resource-type-right/resource-type-right.component";
+import { ResourcePipe} from "./Resourcenpanel/resource/resource.pipe";
+import { PermanentConstructionAreaResolver} from "./Resourcenpanel/resource-type-right/resource-type-right-resolver.service";
 import {
   EmployeeResolver,
   MaterialResolver,
@@ -76,15 +75,15 @@ import {
   ConstructionLadderResolver
 } from "./calendar/main-calendar/main-calender-resolver.service";
 import {CalenderConstructionAreaComponent} from "./calendar/calender-construction-area/calender-construction-area.component";
-
 import { RedirectToAppWithParamsComponent }
 from './redirect-to-app-with-params/redirect-to-app-with-params.component';
-import {ConstructionAreaService} from "./services/construction-area.service";
+import { ConstructionAreaService} from "./services/construction-area.service";
 import { TestDdkomponentComponent } from './test-ddkomponent/test-ddkomponent.component';
-import {NgDragDropModule }
+import { NgDragDropModule }
 from 'ng-drag-drop';
 import { ResourceConstructionAreaComponent } from './Resourcenpanel/resource-construction-area/resource-construction-area.component';
-import {AddResourceService} from "./services/add-resource.service";
+import { AddResourceService} from "./services/add-resource.service";
+import { DoubleDropRessourceComponent } from './calendar/double-drop-ressource/double-drop-ressource.component';
 
 
 
@@ -109,7 +108,8 @@ import {AddResourceService} from "./services/add-resource.service";
     ResourcePipe,
     RedirectToAppWithParamsComponent,
     TestDdkomponentComponent,
-    ResourceConstructionAreaComponent
+    ResourceConstructionAreaComponent,
+    DoubleDropRessourceComponent
   ],
   imports: [
     BrowserModule,
@@ -161,7 +161,7 @@ import {AddResourceService} from "./services/add-resource.service";
       ConstructionLadderResolver,
       AddResourceService
   ],
-
+  entryComponents:[DoubleDropRessourceComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

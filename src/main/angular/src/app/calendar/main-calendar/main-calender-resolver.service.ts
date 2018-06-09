@@ -47,6 +47,11 @@ export class ConstructionAreaResolver implements Resolve<IConstructionArea[]>{
   }
 }
 
+/**
+ * Resolver für den ConstructionAreaService  zum Abfragen aller 
+ * Bauleiter
+ */
+
 @Injectable()
 export class ConstructionLadderResolver implements Resolve<IConstructionLadder[]>{
 

@@ -21,21 +21,37 @@
  *
  */
 
-import {Component, Input, OnInit} from "@angular/core";
-import {IConstructionArea, IConstructionAreaDay} from "../../Resourcenpanel/IConstructionArea";
-import { Employee } from "../../../model/employee";
-import { Vehicle } from "../../../model/vehicle";
-import { Material } from "../../../model/material";
-import {IEmployee} from "../../Resourcenpanel/IEmployee";
-import {IVehicle} from "../../Resourcenpanel/IVehicle";
-import {IMaterial} from "../../Resourcenpanel/IMaterial";
-import {AddResourceService} from "../../services/add-resource.service";
+import { Component, Input, OnInit} from "@angular/core";
+import { IConstructionArea, IConstructionAreaDay} from "../../Resourcenpanel/IConstructionArea";
+import { Employee }           from "../../../model/employee";
+import { Vehicle }            from "../../../model/vehicle";
+import { Material }           from "../../../model/material";
+import { IEmployee}           from "../../Resourcenpanel/IEmployee";
+import { IVehicle}            from "../../Resourcenpanel/IVehicle";
+import { IMaterial}           from "../../Resourcenpanel/IMaterial";
+import { AddResourceService } from "../../services/add-resource.service";
+import { DoubleDropRessourceComponent } from "../double-drop-ressource/double-drop-ressource.component";
+
+//Material Stuff
+import { MatDialog } from '@angular/material';
+
+import {Observable}
+from 'rxjs/Observable';
+
+enum RessourceType
+{
+    Mitarbeiter, 
+    Fahrzeug, 
+    Material
+};
 
 @Component({
   selector: 'pl-calender-construction-area',
   templateUrl: './calender-construction-area.component.html',
   styleUrls: ['./calender-construction-area.component.css']
 })
+
+
 export class CalenderConstructionAreaComponent implements OnInit{
 
   @Input()
@@ -44,12 +60,19 @@ export class CalenderConstructionAreaComponent implements OnInit{
   @Input()
   public  date : string;
 
-  public constructionAreaDay : IConstructionAreaDay;
+  @Input()
+  public allAreasofThisDay    : IConstructionArea[];
 
-  private resourceService : AddResourceService;
+  public constructionAreaDay  : IConstructionAreaDay;
 
-  constructor(_resService: AddResourceService){
+  private resourceService     : AddResourceService;
+
+  
+
+  constructor(_resService: AddResourceService, public dialog: MatDialog)
+  {
     this.resourceService = _resService;
+
   }
 
   ngOnInit(): void
@@ -64,6 +87,7 @@ export class CalenderConstructionAreaComponent implements OnInit{
 
     if (this.constructionAreaDay.vehicleList === (null || undefined))
       this.constructionAreaDay.vehicleList = new Array<Vehicle>();
+
   }
 
   public hasEmployees() : boolean
@@ -89,35 +113,74 @@ export class CalenderConstructionAreaComponent implements OnInit{
   }
   public onDropItem(e :any) : void
   {
+   
     let droppedObject = e.dragData;
-    console.log("Data gedroppt");
-    console.log(typeof(droppedObject));
 
     if (droppedObject.hasOwnProperty('skills') )
     {
-      if(!this.constructionAreaDay.employeeList.includes(droppedObject)) {
-        this.constructionAreaDay.employeeList.push(droppedObject);
-        this.resourceService.addEmployeeToArea(droppedObject, this.constructionArea.id, this.date, false);
-      }
-
-      console.log("mitarbeiter gedroppt");
+      if(!this.constructionAreaDay.employeeList.includes(droppedObject))
+      {
+        if (this.checkIfRessourceIsDoubleUsed(RessourceType.Mitarbeiter, droppedObject))
+        {
+          this.dialogIfDropDoubleRessource(RessourceType.Mitarbeiter, droppedObject)
+            .subscribe((data : boolean) =>
+            {               
+              if(data)
+              {
+                this.constructionAreaDay.employeeList.push(droppedObject);
+                this.resourceService.addEmployeeToArea(droppedObject, this.constructionArea.id, this.date, false);
+              }            
+            });  
+        }
+        else
+        {
+          this.constructionAreaDay.employeeList.push(droppedObject);
+          this.resourceService.addEmployeeToArea(droppedObject, this.constructionArea.id, this.date, false);
+        }
+      } 
     }
     if (droppedObject.hasOwnProperty('modell'))
     {
-      if(!this.constructionAreaDay.vehicleList.includes(droppedObject)) {
-        this.constructionAreaDay.vehicleList.push(droppedObject);
-        this.resourceService.addVehicleToArea(droppedObject, this.constructionArea.id, this.date, false);
+      if(!this.constructionAreaDay.vehicleList.includes(droppedObject))
+      {
+        if (this.checkIfRessourceIsDoubleUsed(RessourceType.Fahrzeug, droppedObject))
+        {
+          this.dialogIfDropDoubleRessource(RessourceType.Fahrzeug, droppedObject)
+            .subscribe((data : boolean) =>
+            {               
+              if(data)
+              {
+                this.constructionAreaDay.vehicleList.push(droppedObject);
+                this.resourceService.addVehicleToArea(droppedObject, this.constructionArea.id, this.date, false);
+              }            
+            });  
+        }
+        else 
+        {
+          this.constructionAreaDay.vehicleList.push(droppedObject);
+          this.resourceService.addVehicleToArea(droppedObject, this.constructionArea.id, this.date, false);
+        }
       }
-      console.log("fahrzeug gedroppt");
     }
     if (droppedObject.hasOwnProperty('description'))
     {
-      if(!this.constructionAreaDay.materialList.includes(droppedObject)) {
+      if(!this.constructionAreaDay.materialList.includes(droppedObject))
+      {
+        if (this.checkIfRessourceIsDoubleUsed(RessourceType.Material, droppedObject))
+        {
+          this.dialogIfDropDoubleRessource(RessourceType.Material, droppedObject)
+          .subscribe((data : boolean) =>
+          {               
+            if(data)
+            {
+              this.constructionAreaDay.materialList.push(droppedObject);
+              this.resourceService.addMaterialToArea(droppedObject, this.constructionArea.id, this.date, false);
+            }            
+          });  
+        }
         this.constructionAreaDay.materialList.push(droppedObject);
         this.resourceService.addMaterialToArea(droppedObject, this.constructionArea.id, this.date, false);
       }
-      console.log("material gedroppt");
-
     }
   }
 
@@ -136,11 +199,50 @@ export class CalenderConstructionAreaComponent implements OnInit{
     this.resourceService.removeEmployeeFromArea(employee, area.id, this.date, false);
   }
 
-  private removeItemFromList(list: any, item: any): void {
+  private removeItemFromList(list: any, item: any): void
+  {
     if(list.includes(item)){
       list.forEach((x, index) => {
         if(item === x) list.splice(index, 1);
       });
     }
+  }
+  
+  private dialogIfDropDoubleRessource( type:RessourceType, droppedItem: any ) : Observable<any>
+  {
+    let injectObject = {type, droppedItem};
+    console.log(injectObject);
+    let dialogRef = this.dialog.open(DoubleDropRessourceComponent,
+    {
+      width: '350px',
+      data: injectObject,
+      disableClose:false
+    });
+
+    return dialogRef.beforeClose();
+  }
+  private checkIfRessourceIsDoubleUsed(type : RessourceType, ressource : any) : boolean
+  {
+    let result : boolean = false;
+
+    this.allAreasofThisDay.forEach(singleArea =>
+    {
+      switch (type)
+      {
+        case RessourceType.Material:
+          if (singleArea.days[this.date].materialList.includes(ressource))
+            result = true;
+        break;
+        case RessourceType.Fahrzeug:
+          if (singleArea.days[this.date].vehicleList.includes(ressource))
+            result = true;
+        break;
+        case RessourceType.Mitarbeiter:
+          if (singleArea.days[this.date].employeeList.includes(ressource))
+            result = true;
+        break;
+      }
+    });
+    return result;
   }
 }
