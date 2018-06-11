@@ -87,6 +87,7 @@ public class ConstructionArea extends PersistentObject{
             start.setTime(startD);
             Calendar end = Calendar.getInstance();
             end.setTime(endD);
+            end.add(Calendar.DATE, 1);
 
             for(Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()){
                 String key = formatter.format(date);
