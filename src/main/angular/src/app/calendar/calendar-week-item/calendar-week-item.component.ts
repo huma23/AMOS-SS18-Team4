@@ -41,29 +41,49 @@ export class CalendarWeekItemComponent implements OnInit {
 
   public constructionAreas: IConstructionArea[];
 
+  public allConstructionAreasOfThisDate : IConstructionArea[];
+
   constructor(private route : ActivatedRoute) { }
 
   ngOnInit()
   {
-    let allAreas            = this.route.snapshot.data['constructionAreas'];
-    this.constructionAreas  = this.getMyAreas(allAreas);
+    let allAreas                        = this.route.snapshot.data['constructionAreas'];
+    this.constructionAreas              = this.getMyAreas(allAreas);
+    this.allConstructionAreasOfThisDate = this.getAllAreasOnThisDay(allAreas);
   }
 
   private getMyAreas(areas : IConstructionArea[]): IConstructionArea[]
   {
     let array : IConstructionArea[] = new Array<IConstructionArea>();
 
-    for(let area of areas){
-      if(area.permanent === false) {
-        //bauleiter ist gleich
-        if (area.bauleiter.firstName === this.bauleiter.firstName && area.bauleiter.lastName === this.bauleiter.lastName) {
-          //Datum prüfen
-          if(area.days[this.date] !== undefined){
-            array.push(area);
-          }
-        }
+    for(let area of areas)
+    {
+      if(area.days[this.date] !== undefined)
+      {
+        if(area.permanent === false)
+        {    
+          //bauleiter ist gleich
+          if (area.bauleiter.firstName === this.bauleiter.firstName && 
+            area.bauleiter.lastName === this.bauleiter.lastName)
+            {
+              array.push(area);
+            }
+         }
       }
     }
     return array;
+  }
+  private getAllAreasOnThisDay (allAreas : IConstructionArea[]) : IConstructionArea[]
+  {
+    let result : IConstructionArea[] = new Array<IConstructionArea>();
+    
+    for(let singleArea of allAreas)
+    {
+      if(singleArea.days[this.date] !== undefined)
+      {
+        result.push(singleArea);
+      }
+    }
+    return result;
   }
 }

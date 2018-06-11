@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Achtung !</h1>
+<div mat-dialog-content>
+  <p>{{dialogText}}: </p>
+  <p style="color: red"> {{dialogSpecificType}}</p>
+  <p>{{dialogTextEnding}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCloseDialog(false)">Nein, nicht hinzufügen</button>
+  <button mat-button (click)="onCloseDialog(true)">Ja, hinzufügen</button>
+</div>
