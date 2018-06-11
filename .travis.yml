@@ -14,3 +14,4 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_34bf8776682b_key -iv $encrypted_34bf8776682b_iv -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
 - npm install -g @angular/cli
+
