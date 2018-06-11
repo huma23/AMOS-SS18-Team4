@@ -29,6 +29,18 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   templateUrl: './double-drop-ressource.component.html',
   styleUrls: ['./double-drop-ressource.component.css']
 })
+
+/**
+ *
+ * @class DoubleDropRessourceComponent
+ *
+ * 
+ * 
+ * @see (central).Readme
+ *
+ *
+ *
+ */
 export class DoubleDropRessourceComponent
 {
   public mitarbeiterString  : string = "Der ausgewählte Mitarbeiter";
@@ -38,6 +50,7 @@ export class DoubleDropRessourceComponent
   public dialogText          : string;
   public dialogSpecificType  : string;
 
+  public dialogTextEnding : string = "wurde bereits für ein anderes Projekt eingetragen.\n Dennoch zuordnen?";
 
 
   constructor(
@@ -61,6 +74,24 @@ export class DoubleDropRessourceComponent
       }
     }
 
+/**
+   * @method
+   * onCloseDialog
+   *
+   * 
+   * 
+   * @param
+   * result : boolean
+   * 
+   *
+   * @return
+   * void
+   *
+   * @description
+   *
+   *
+   *
+   */
     public onCloseDialog(result : boolean)
     {
       this.dialogRef.close(result);
