@@ -9,9 +9,8 @@ deploy:
 - provider: gae
   keyfile: developer-planungstafel.json
   project: developer-planungstafel
-  on: dev
+  on: fb_test_refactoring
 before_install:
-- openssl aes-256-cbc -K $encrypted_34bf8776682b_key -iv $encrypted_34bf8776682b_iv
-  -in secrets.tar.enc -out secrets.tar -d
+- openssl aes-256-cbc -K $encrypted_34bf8776682b_key -iv $encrypted_34bf8776682b_iv -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
 - npm install -g @angular/cli
