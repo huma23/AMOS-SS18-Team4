@@ -1,5 +1,6 @@
-<mat-card id="pl-calender-construction-area-card" droppable [dropScope]="['mitarbeiter','fahrzeuge', 'betriebsmittel']" (onDrop)="onDropItem($event)" (click)="openDetailDialog()">
-  <mat-card-subtitle>{{constructionArea.name}}</mat-card-subtitle>
+<mat-card id="pl-calender-construction-area-card" droppable [dropScope]="['mitarbeiter','fahrzeuge', 'betriebsmittel']" (onDrop)="onDropItem($event)">
+  <mat-card-subtitle >{{constructionArea.name}}
+    <mat-icon style="size: 5px; float:right;" (click) ="openDetailDialog()">open_in_new</mat-icon></mat-card-subtitle>
   <mat-card-content>
   <mat-card-subtitle>Mitarbeiter</mat-card-subtitle>
     <div class ="area-section-content" *ngFor="let empl of constructionAreaDay.employeeList" draggable [dragScope]="'mitarbeiter'" [dragData]="empl">
