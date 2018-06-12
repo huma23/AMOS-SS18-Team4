@@ -8,7 +8,7 @@
 
     <div *ngIf="data.employeeList.length > 0">
       <h4>Mitarbeiter: </h4>
-      <mat-list-item *ngFor='let empl of data.employeeList'> {{empl.lastName}}</mat-list-item>
+      <mat-list-item *ngFor='let empl of data.employeeList'> {{empl.firstName + ' ' + empl.lastName}}</mat-list-item>
     </div>
 
     <div *ngIf="data.materialList.length > 0">
