@@ -39,11 +39,12 @@ import {Observable}
 from 'rxjs/Observable';
 import { DropEvent } from "ng-drag-drop";
 import { element } from "protractor";
+import {DetailDialogComponent} from "../detail-dialog/detail-dialog.component";
 
 enum RessourceType
 {
-    Mitarbeiter, 
-    Fahrzeug, 
+    Mitarbeiter,
+    Fahrzeug,
     Material
 };
 
@@ -59,7 +60,7 @@ enum RessourceType
  *
  * @class CalenderConstructionAreaComponent
  *
- * Die Klasse CalenderConstructionAreaComponent ist für die Logik und den Inhalt einer einzelnen 
+ * Die Klasse CalenderConstructionAreaComponent ist für die Logik und den Inhalt einer einzelnen
  *
  * @see (central).Readme
  *
@@ -176,7 +177,7 @@ export class CalenderConstructionAreaComponent implements OnInit
    *
    * @param
    * droppedEvent : any
-   * 
+   *
    *
    * @return
    * void
@@ -204,17 +205,17 @@ export class CalenderConstructionAreaComponent implements OnInit
           {
             this.dialogIfDropDoubleRessource(RessourceType.Mitarbeiter, newRessource)
             .subscribe((dialogAnswer : boolean) =>
-            {               
+            {
               if(dialogAnswer)
               {
                 this.addRessourceToLists(RessourceType.Mitarbeiter, newRessource);
-              }            
-            });  
-          }  
+              }
+            });
+          }
           else
           {
             this.addRessourceToLists(RessourceType.Mitarbeiter, newRessource);
-          }      
+          }
         }
       }
       else if ( newRessource instanceof Material)
@@ -225,18 +226,18 @@ export class CalenderConstructionAreaComponent implements OnInit
           {
             this.dialogIfDropDoubleRessource(RessourceType.Material, newRessource)
             .subscribe((dialogAnswer : boolean) =>
-            {               
+            {
               if(dialogAnswer)
               {
                 this.addRessourceToLists(RessourceType.Material, newRessource);
-              }            
-            });  
-          }  
+              }
+            });
+          }
           else
           {
             this.addRessourceToLists(RessourceType.Material, newRessource);
-          }      
-        }    
+          }
+        }
       }
       else if (newRessource instanceof Vehicle)
       {
@@ -246,21 +247,21 @@ export class CalenderConstructionAreaComponent implements OnInit
           {
             this.dialogIfDropDoubleRessource(RessourceType.Fahrzeug, newRessource)
             .subscribe((dialogAnswer : boolean) =>
-            {               
+            {
               if(dialogAnswer)
               {
                 this.addRessourceToLists(RessourceType.Fahrzeug, newRessource);
-              }            
-            });  
-          }  
+              }
+            });
+          }
           else
           {
             this.addRessourceToLists(RessourceType.Fahrzeug, newRessource);
-          }      
-        }    
+          }
+        }
       }
   }
-    
+
 
 
 /**
@@ -269,13 +270,13 @@ export class CalenderConstructionAreaComponent implements OnInit
    *
    * @param
    * area     :  IConstructionArea
-   * material :  IMaterial 
+   * material :  IMaterial
    *
    * @return
    * void
    *
    * @description
-   
+
    *
    *
    */
@@ -290,7 +291,7 @@ export class CalenderConstructionAreaComponent implements OnInit
    * @param
    * area : IConstructionArea
    * car  : IVehicle
-   * 
+   *
    *
    * @return
    * void
@@ -306,22 +307,22 @@ export class CalenderConstructionAreaComponent implements OnInit
 /**
    * @method
    * removeEmployee
-   * 
-   * 
+   *
+   *
    *
    * @param
    * area     : IConstructionArea
    * employee : IEmployee
    *
-   * 
-   * 
+   *
+   *
    * @return
    * void
-   * 
-   * 
+   *
+   *
    *
    * @description
-   * 
+   *
    *
    *
    */
@@ -341,11 +342,11 @@ export class CalenderConstructionAreaComponent implements OnInit
    * item   :  any
    *
    * @return
-   * void 
+   * void
    *
    * @description
    *
-   * 
+   *
    *
    *
    */
@@ -372,7 +373,7 @@ export class CalenderConstructionAreaComponent implements OnInit
    *
    * @description
    *
-   * 
+   *
    *
    */
   private addRessourceToLists(type : RessourceType, ressource : any) : void
@@ -390,9 +391,9 @@ export class CalenderConstructionAreaComponent implements OnInit
       case RessourceType.Mitarbeiter:
         this.constructionAreaDay.employeeList.push(ressource);
         this.resourceService.addEmployeeToArea(ressource, this.constructionArea.id, this.date, false);
-        
+
       break;
-    } 
+    }
   }
   /**
    * @method
@@ -406,7 +407,7 @@ export class CalenderConstructionAreaComponent implements OnInit
    * Observable<any>
    *
    * @description
-   * 
+   *
    *
    *
    */
@@ -437,9 +438,9 @@ export class CalenderConstructionAreaComponent implements OnInit
    * boolean
    *
    * @description
-   * 
-   * 
-   * 
+   *
+   *
+   *
    *
    */
   private checkIfRessourceIsDoubleUsed(type : RessourceType, ressource : any) : boolean
@@ -461,7 +462,7 @@ export class CalenderConstructionAreaComponent implements OnInit
         break;
 
         case RessourceType.Fahrzeug:
-        let foundVehicel = 
+        let foundVehicel =
         singleArea.days[this.date].vehicleList.filter((element:Vehicle) =>
         {
           return ressource.equals(element);
@@ -469,22 +470,22 @@ export class CalenderConstructionAreaComponent implements OnInit
 
         if (foundVehicel.length > 0)
         result = true;
-        
+
         break;
-        
+
         case RessourceType.Mitarbeiter:
-        
-        let foundEmpl = 
+
+        let foundEmpl =
         singleArea.days[this.date].employeeList.filter((element:Employee) =>
         {
           return ressource.equals(element);
         });
-  
+
         if (foundEmpl.length > 0)
-          result = true;    
+          result = true;
         break;
       }
-      
+
     });
     return result;
   }
@@ -497,20 +498,20 @@ export class CalenderConstructionAreaComponent implements OnInit
   * @param
   * dropObject : any
   *
-  * 
-  * 
+  *
+  *
   * @return
   * Employee | Material | Vehicle
   *
-  * 
-  * 
-  * 
+  *
+  *
+  *
   * @description
-  * 
-  * 
-  * 
+  *
+  *
+  *
   */
-  
+
   private convertDragnDropObjectToRessource(dropObject : any) : Employee | Material | Vehicle
   {
     if (dropObject.hasOwnProperty('skills'))
@@ -530,22 +531,22 @@ export class CalenderConstructionAreaComponent implements OnInit
  /**
   * @method
   * checkIfRessourceAlreadyWithinProject
-  * 
+  *
   *
   * @param
   * type      : RessourceType
-  * ressource : any   
+  * ressource : any
   *
-  * 
-  * 
+  *
+  *
   * @return
   * boolean
   *
-  * 
-  * 
+  *
+  *
   * @description
-  * 
-  * 
+  *
+  *
   *
   */
   private checkIfRessourceAlreadyWithinProject(type: RessourceType, ressource : any) : boolean
@@ -554,12 +555,12 @@ export class CalenderConstructionAreaComponent implements OnInit
     switch(type)
     {
       case RessourceType.Fahrzeug:
-        result = this.constructionAreaDay.vehicleList.find( 
+        result = this.constructionAreaDay.vehicleList.find(
           (element: Vehicle) => ressource.equals(element));
       break;
 
       case RessourceType.Material:
-        result = this.constructionAreaDay.materialList.find( 
+        result = this.constructionAreaDay.materialList.find(
           (element: Material) => ressource.equals(element));
       break;
 
@@ -572,5 +573,36 @@ export class CalenderConstructionAreaComponent implements OnInit
       return false;
 
     return true;
+  }
+  /**
+   * @method
+   * openDetailDialog
+   *
+   *
+   * @param
+   * none
+   *
+   *
+   *
+   * @return
+   * none
+   *
+   *
+   *
+   * @description
+   *
+   *
+   *
+   */
+  openDetailDialog(): void {
+      this.dialog.open(DetailDialogComponent, {
+      width: '500px',
+      height: '800px',
+      data: {
+        constructionArea: this.constructionArea, employeeList: this.constructionAreaDay.employeeList,
+        vehicleList: this.constructionAreaDay.vehicleList,
+        materialList: this.constructionAreaDay.materialList
+      }
+    });
   }
 }

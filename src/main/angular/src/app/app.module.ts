@@ -84,6 +84,7 @@ from 'ng-drag-drop';
 import { ResourceConstructionAreaComponent } from './Resourcenpanel/resource-construction-area/resource-construction-area.component';
 import { AddResourceService} from "./services/add-resource.service";
 import { DoubleDropRessourceComponent } from './calendar/double-drop-ressource/double-drop-ressource.component';
+import {DetailDialogComponent} from "./calendar/detail-dialog/detail-dialog.component";
 
 
 
@@ -109,7 +110,8 @@ import { DoubleDropRessourceComponent } from './calendar/double-drop-ressource/d
     RedirectToAppWithParamsComponent,
     TestDdkomponentComponent,
     ResourceConstructionAreaComponent,
-    DoubleDropRessourceComponent
+    DoubleDropRessourceComponent,
+    DetailDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -161,7 +163,7 @@ import { DoubleDropRessourceComponent } from './calendar/double-drop-ressource/d
       ConstructionLadderResolver,
       AddResourceService
   ],
-  entryComponents:[DoubleDropRessourceComponent],
+  entryComponents:[DoubleDropRessourceComponent, DetailDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
