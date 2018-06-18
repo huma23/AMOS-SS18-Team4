@@ -74,25 +74,25 @@ public class ConstructionAreaApiTest extends TestBase {
                 "2018-01-25",
                 new ConstructionLadder("Max","Test"),
                 true,
-                new HashMap<String, ConstructionAreaDay>());
+                new HashMap<String, ConstructionAreaDay>(), new Customer());
         construction1 = new ConstructionArea("Nürnberg",
                 "2010-06-01",
                 "2010-06-08",
                 new ConstructionLadder("Test","Test"),
                 true,
-                new HashMap<String, ConstructionAreaDay>());
+                new HashMap<String, ConstructionAreaDay>(), new Customer());
         construction2 = new ConstructionArea("Herzogenaurach",
                 "2000-01-03",
                 "2018-05-07",
                 new ConstructionLadder("Test","Test"),
                 false,
-                new HashMap<String, ConstructionAreaDay>());
+                new HashMap<String, ConstructionAreaDay>(), new Customer());
         construction3 = new ConstructionArea("Erlangen",
                 "1999-02-01",
                 "2017-12-31",
                 new ConstructionLadder("Test", "Test2"),
                 true,
-                new HashMap<String, ConstructionAreaDay>());
+                new HashMap<String, ConstructionAreaDay>(), new Customer());
     }
 
     /**

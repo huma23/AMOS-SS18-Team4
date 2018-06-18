@@ -86,6 +86,8 @@ import { AddResourceService} from "./services/add-resource.service";
 import { DoubleDropRessourceComponent } from './calendar/double-drop-ressource/double-drop-ressource.component';
 import {DetailDialogComponent} from "./calendar/detail-dialog/detail-dialog.component";
 import { BaseInformationComponent } from './detail-construction-area/base-information/base-information.component';
+import { DetailDialogInfoComponent } from './calendar/detail-dialog-info/detail-dialog-info.component';
+
 
 
 
@@ -113,7 +115,8 @@ import { BaseInformationComponent } from './detail-construction-area/base-inform
     ResourceConstructionAreaComponent,
     DoubleDropRessourceComponent,
     DetailDialogComponent,
-    BaseInformationComponent
+    BaseInformationComponent,
+    DetailDialogInfoComponent
   ],
   imports: [
     BrowserModule,
