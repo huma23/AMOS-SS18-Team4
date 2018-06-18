@@ -1,4 +1,5 @@
 import {ConstructionLadder} from "./constructionLadder";
+import {Customer} from "./customer";
 
 export class ConstructionAreaForm{
 
@@ -7,6 +8,7 @@ export class ConstructionAreaForm{
     public startDate:string,
     public endDate:string,
     public bauleiter: ConstructionLadder,
-    public permanent: boolean
+    public permanent: boolean,
+    public customer: Customer
   ){}
 }

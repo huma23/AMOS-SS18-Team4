@@ -2,6 +2,7 @@ import {ConstructionLadder} from "../../model/constructionLadder";
 import {Employee} from "../../model/employee";
 import {Vehicle} from "../../model/vehicle";
 import {Material} from "../../model/material";
+import {Customer} from "../../model/customer";
 
 export interface IConstructionArea{
   id: string,
@@ -9,7 +10,8 @@ export interface IConstructionArea{
   startDate: string,
   endDate: string,
   bauleiter: ConstructionLadder,
-  permanent: boolean
+  permanent: boolean,
+  customer: Customer,
   days: {
     [key: string] : IConstructionAreaDay
   }

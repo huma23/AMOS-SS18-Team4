@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import {Employee} from "../../../model/employee";
+import {Customer} from "../../../model/customer";
 import {ResourceService} from "../resource.service";
 import {Vehicle} from "../../../model/vehicle";
 import {Material} from "../../../model/material";
@@ -13,6 +14,7 @@ import {IVehicle} from "../IVehicle";
 import {IMaterial} from "../IMaterial";
 import * as moment from "moment";
 import {ConstructionAreaForm} from "../../../model/constructionAreaForm";
+import {ICustomer} from "../ICustomer";
 
 @Component({
   selector: 'pl-add-resource',
@@ -27,14 +29,17 @@ export class AddResourceComponent implements OnInit {
   employees: IEmployee[];
   vehicles: IVehicle[];
   materials: IMaterial[];
+  customers: ICustomer[];
 
 
 
 
-  formContent = new ConstructionAreaForm("", "", "", null, true);
+
+  formContent = new ConstructionAreaForm("", "", "", null, true, null);
   startDate:string;
   endDate:string;
   selectedBauleiter:ConstructionLadder;
+  selectedCustomer: Customer;
 
   constructor(private _resourceService:ResourceService) {
   }
@@ -62,6 +67,8 @@ export class AddResourceComponent implements OnInit {
       .subscribe(data => this.vehicles = data);
     this._resourceService.getMaterials()
       .subscribe( data => this.materials = data);
+    this._resourceService.getCustomer()
+      .subscribe(data => this.customers = data);
   }
 
   //add "Mitarbeiter" through POST Request to the DB
@@ -105,6 +112,7 @@ export class AddResourceComponent implements OnInit {
     }
 
     this.formContent.bauleiter = this.selectedBauleiter;
+    this.formContent.customer = this.selectedCustomer;
 
     JSON.stringify(this.formContent);
     this._resourceService.saveConstructionAreaForm(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
@@ -115,5 +123,10 @@ export class AddResourceComponent implements OnInit {
     let constructionLadder = new ConstructionLadder(firstName, lastName);
     console.log(constructionLadder+ ", "+ JSON.stringify(constructionLadder)+","+this.constructionLadders);
     this._resourceService.saveConstructionLadder(constructionLadder).subscribe((res:ConstructionLadder) => console.log(res));
+  }
+
+  addCustomer(firstName, lastName, street, houseNumber, postalCode, city, email, phoneNumber, mobilePhone){
+    let customer = new Customer(firstName, lastName, street, houseNumber, postalCode, city, email, phoneNumber, mobilePhone)
+    this._resourceService.saveCustomer(customer).subscribe((res:Customer) => console.log(res));
   }
 }
