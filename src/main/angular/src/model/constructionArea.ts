@@ -3,6 +3,7 @@ import {ConstructionLadder} from "./constructionLadder";
 import {Employee} from "./employee";
 import {Vehicle} from "./vehicle";
 import {Material} from "./material";
+import {Customer} from "./customer";
 
 export class ConstructionArea implements IConstructionArea{
 
@@ -13,6 +14,7 @@ export class ConstructionArea implements IConstructionArea{
               public endDate:string,
               public bauleiter: ConstructionLadder,
               public permanent: boolean,
+              public customer: Customer,
               public days: {
                 [key: string] : IConstructionAreaDay
               }){}

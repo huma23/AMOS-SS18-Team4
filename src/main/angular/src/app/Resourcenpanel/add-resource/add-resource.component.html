@@ -53,6 +53,12 @@
       <option *ngFor="let ladder of constructionLadders" [ngValue]="ladder">{{ladder.firstName.concat(" ", ladder.lastName)}}</option>
       </select>
 
+      <select name="kunde" [(ngModel)]="selectedCustomer" [ngModelOptions]="{standalone: true}">
+        <option value="" disabled selected>>Wähle einen Kunden aus</option>
+        <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.firstName.concat(" ", customer.lastName)}}</option>
+      </select>
+
+
   <!--
       <select name="mitarbeiter" [(ngModel)]="selectedMitarbeiter" [ngModelOptions]="{standalone: true}">
         <option value="" disabled selected>>Wähle Bauleiter</option>
@@ -83,6 +89,26 @@
   <button type="submit" >Hinzufügen</button>
 </form>
 
+<h3> Kunde hinzufügen</h3>
+<form (submit)="addCustomer(customerFirstName.value, customerLastName.value,
+                            customerStreet.value, customerHouseNumber.value,
+                            customerPostalCode.value, customerCity.value,
+                            customerEmail.value, customerPhoneNumber.value, customerMobilePhone.value)">
+
+  <div class="form-group">
+    <input type="text" placeholder="Vorname" #customerFirstName>
+    <input type="text" placeholder="Nachname" #customerLastName>
+    <input type="text" placeholder="Straße" #customerStreet>
+    <input type="number" placeholder="Hausnummer" #customerHouseNumber>
+    <input type="number" placeholder="PLZ" #customerPostalCode>
+    <input type="text" placeholder="Stadt" #customerCity>
+    <input type="text" placeholder="Email" #customerEmail>
+    <input type="number" placeholder="Telefon" #customerPhoneNumber>
+    <input type="number" placeholder="Mobiltelefon" #customerMobilePhone>
+  </div>
+  <button type="submit">Hinzufügen</button>
+</form>
+
 <div>
   <p>Baustelle</p>
   <p *ngFor='let construct of constructions'>Name: {{construct.name}},
@@ -97,5 +123,10 @@
 <div>
   <p>Bauleiter</p>
   <p *ngFor='let constructionLadder of constructionLadders'>Vorname: {{constructionLadder.firstName}} Nachname: {{constructionLadder.lastName}}</p>
+</div>
+
+<div>
+  <p>Kunde</p>
+  <p *ngFor='let customer of customers'>Vorname: {{customer.firstName}} Nachname: {{customer.lastName}}</p>
 </div>
 

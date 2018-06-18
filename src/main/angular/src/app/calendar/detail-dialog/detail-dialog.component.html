@@ -5,6 +5,7 @@
     <mat-list-item>Bauleiter: {{data.constructionArea.bauleiter.firstName + ' ' + data.constructionArea.bauleiter.lastName }}</mat-list-item>
     <mat-list-item>Startdatum: {{data.constructionArea.startDate}}</mat-list-item>
     <mat-list-item>Enddatum: {{data.constructionArea.endDate}}</mat-list-item>
+    <mat-list-item>Kunde: {{data.constructionArea.customer.firstName + '' + data.constructionArea.customer.lastName}}</mat-list-item>
 
     <div *ngIf="data.employeeList.length > 0">
       <h4>Mitarbeiter: </h4>

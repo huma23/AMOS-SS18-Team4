@@ -24,6 +24,7 @@ public class Planungstafel implements ServletContextListener {
         ObjectifyService.register(Material.class);
         ObjectifyService.register(ConstructionArea.class);
         ObjectifyService.register(ConstructionLadder.class);
+        ObjectifyService.register(Customer.class);
     }
 
     @Override

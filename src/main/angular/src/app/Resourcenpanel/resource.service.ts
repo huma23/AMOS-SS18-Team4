@@ -14,6 +14,8 @@ import {Material} from "../../model/material";
 import {ConstructionArea} from "../../model/constructionArea";
 import {ConstructionLadder} from "../../model/constructionLadder";
 import {ConstructionAreaForm} from "../../model/constructionAreaForm";
+import {ICustomer} from "./ICustomer";
+import {Customer} from "../../model/customer";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,6 +31,7 @@ export class ResourceService{
   private _constructionAreaUri: string = "/api/constructionArea";
   private _constructionLadderUri: string = "/api/constructionLadder"
   private _constructionAreaPermanentUri: string = "/api/constructionArea/permanent";
+  private _customerUri: string ="/api/customer";
 
   constructor(private http: HttpClient){
 
@@ -103,6 +106,16 @@ export class ResourceService{
   saveConstructionLadder(constructionLadder:ConstructionLadder):Observable<IConstructionLadder>{
     let body = JSON.stringify(constructionLadder);
     return this.http.post<ConstructionLadder>(this._constructionLadderUri, body, httpOptions);
+  }
+
+  //Kunden REST Service Requests
+  getCustomer():Observable<ICustomer[]>{
+    return this.http.get<ICustomer[]>(this._customerUri);
+  }
+
+  saveCustomer(customer: ICustomer):Observable<ICustomer>{
+    let body = JSON.stringify(customer);
+    return this.http.post<Customer>(this._customerUri, body, httpOptions);
   }
 
 }
