@@ -596,8 +596,8 @@ export class CalenderConstructionAreaComponent implements OnInit
    */
   openDetailDialog(): void {
       this.dialog.open(DetailDialogComponent, {
-      width: '500px',
-      height: '800px',
+      //width: '900px',
+      //height: '600px',
       data: {
         constructionArea: this.constructionArea, employeeList: this.constructionAreaDay.employeeList,
         vehicleList: this.constructionAreaDay.vehicleList,

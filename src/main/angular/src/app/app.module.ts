@@ -32,7 +32,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatListModule,
-  MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatIconModule
+  MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatIconModule, MatTabsModule
 } from "@angular/material";
 
 import { MatGridListModule }  from '@angular/material/grid-list';
@@ -127,6 +127,7 @@ import {DetailDialogComponent} from "./calendar/detail-dialog/detail-dialog.comp
     MatCardModule,
     MatGridListModule,
     MatListModule,
+    MatTabsModule,
     FlexLayoutModule,
     MatSidenavModule,
     AppRoutingModule,

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{data.constructionArea.name}}</h1>
+<!--<h1 mat-dialog-title>{{data.constructionArea.name}}</h1>
 <div mat-dialog-content>
   <mat-list>
     <mat-list-item *ngIf="data.constructionArea.permanent"> Dauerbaustelle: Ja</mat-list-item>
@@ -25,5 +25,42 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Schließen</button>
-</div>
+</div>-->
 
+<div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
+  <!-- TOP Component:  Basis Infos -->
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <!-- Hier jeweils eine komponente als eine spalte einfügen -->
+    <p>Foto</p>
+    <p>Basisinfo 1</p>
+    <p>Basisinfo 2</p>
+  </div>
+
+  <hr>
+  <!-- Bottom Component:  Info / Fotos / Anhänge -->
+  <div fxFill>
+    <mat-tab-group>
+      <mat-tab label="Infos">
+        <div fxLayout="row"fxLayoutAlign="space-around center" >
+          <!-- Hier jeweils eine komponente als eine spalte einfügen -->
+          <p>Bauabschnitte</p>
+          <p>Bauherr</p>
+        </div>
+      </mat-tab>
+      <mat-tab label="Anhänge">
+        <div fxLayout="column" fxLayoutAlign="space-between center">
+          <!-- Hier jeweils eine komponente als eine Zeile einfügen -->
+          <p>Upload 1</p>
+          <p>Upload 2</p>
+        </div>
+      </mat-tab>
+      <mat-tab label="Fotos">
+        <div fxLayout="row" fxLayoutAlign="space-around center" >
+          <!-- Hier jeweils eine komponente als eine spalte einfügen -->
+          <p>Foto1</p>
+          <p>Foto 2</p>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
