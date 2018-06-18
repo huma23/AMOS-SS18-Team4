@@ -30,19 +30,19 @@ public class ConstructionAreaTest {
                 "2018-06-11",
                 new ConstructionLadder("Max","Test"),
                 false,
-                new HashMap<String, ConstructionAreaDay>());
+                new HashMap<String, ConstructionAreaDay>(),  new Customer());
         construction1 = new ConstructionArea("Nürnberg",
                 "2010-06-01",
                 "2010-06-08",
                 new ConstructionLadder("Test","Test"),
                 true,
-                new HashMap<String, ConstructionAreaDay>());
+                new HashMap<String, ConstructionAreaDay>(), new Customer());
         construction2 = new ConstructionArea("Herzogenaurach",
                 "2018-01-03",
                 "2018-01-20",
                 new ConstructionLadder("Test","Test"),
                 false,
-                new HashMap<String, ConstructionAreaDay>());
+                new HashMap<String, ConstructionAreaDay>(),  new Customer());
 
         vehicle = new Vehicle("BMW", "Test", "M3");
         material = new Material("Farbe", "Blau", "Test");

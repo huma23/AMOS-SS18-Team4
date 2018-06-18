@@ -85,6 +85,7 @@ import { ResourceConstructionAreaComponent } from './Resourcenpanel/resource-con
 import { AddResourceService} from "./services/add-resource.service";
 import { DoubleDropRessourceComponent } from './calendar/double-drop-ressource/double-drop-ressource.component';
 import {DetailDialogComponent} from "./calendar/detail-dialog/detail-dialog.component";
+import { DetailDialogInfoComponent } from './calendar/detail-dialog-info/detail-dialog-info.component';
 
 
 
@@ -111,7 +112,8 @@ import {DetailDialogComponent} from "./calendar/detail-dialog/detail-dialog.comp
     TestDdkomponentComponent,
     ResourceConstructionAreaComponent,
     DoubleDropRessourceComponent,
-    DetailDialogComponent
+    DetailDialogComponent,
+    DetailDialogInfoComponent
   ],
   imports: [
     BrowserModule,
