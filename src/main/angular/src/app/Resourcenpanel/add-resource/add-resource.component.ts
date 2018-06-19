@@ -35,7 +35,7 @@ export class AddResourceComponent implements OnInit {
 
 
 
-  formContent = new ConstructionAreaForm("", "", "", null, true, null);
+  formContent = new ConstructionAreaForm("", "", "","","","", null, true, null);
   startDate:string;
   endDate:string;
   selectedBauleiter:ConstructionLadder;

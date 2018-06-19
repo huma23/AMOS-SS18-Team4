@@ -1,16 +1,17 @@
 
 <div fxLayout="row" fxLayoutAlign="space-around">
-  <div fxFlex="33%">
-    <img width="300" src="http://www.4freephotos.com/ger/medium/2015/Wood-sculpting-tools-5785.jpg">
+  <div fxFlex="20%">
+    <img width ="100%"src="http://www.4freephotos.com/ger/medium/2015/Wood-sculpting-tools-5785.jpg">
   </div>
-<div fxFlex="33%">
-  <ul style="list-style-type:none">   
-      <li>Max Mustermann Straße t.b.d </li>
-      <li>99999  Musterstadt</li>
-      <li>ProjektZeitraum: {{constructionArea.startDate}} - {{constructionArea.endDate}}</li>
+<div fxFlex="40%">
+  <ul style="list-style-type:none">
+      <li>{{constructionArea.name}}</li>
+      <li>{{constructionArea.strasse}}</li>
+      <li>{{constructionArea.plz}} {{constructionArea.ort}}</li>
+      <li>ProjektZeitraum: {{this.getProjectTime()}}</li>
     </ul>
   </div>
-  <div fxFlex="33%">
+  <div fxFlex="40%">
     <ul style="list-style-type:none">
       <li>Bauleiter: {{constructionArea.bauleiter.firstName}} {{constructionArea.bauleiter.lastName}} </li>
       <li>Mitarbeiter :Sane, Wagner, Tah, Petersen</li>
