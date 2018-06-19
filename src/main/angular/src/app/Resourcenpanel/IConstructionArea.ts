@@ -7,6 +7,9 @@ import {Customer} from "../../model/customer";
 export interface IConstructionArea{
   id: string,
   name:string,
+  strasse:string,
+  ort:string,
+  plz:string,
   startDate: string,
   endDate: string,
   bauleiter: ConstructionLadder,

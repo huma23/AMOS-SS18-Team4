@@ -19,6 +19,12 @@ public class ConstructionArea extends PersistentObject{
     ConstructionLadder bauleiter;
     @Index
     boolean permanent;
+    @Index
+    String strasse;
+    @Index
+    String ort; 
+    @Index 
+    String plz;
     Map<String, ConstructionAreaDay> days;
     Customer customer;
 
@@ -26,13 +32,18 @@ public class ConstructionArea extends PersistentObject{
         this.days = new HashMap<>();
     }
 
-    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer){
+    public ConstructionArea(String name, String startDate, String endDate,
+     String strasse ,String ort, String plz, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer){
         this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.bauleiter = bauleiter;
-        this.permanent = permanent;
-        this.customer = customer;
+        this.startDate  = startDate;
+        this.endDate    = endDate;
+        this.strasse     = strasse;
+        this.ort        = ort;
+        this.plz        = plz;
+        this.bauleiter  = bauleiter;
+        this.permanent  = permanent;
+        this.customer   = customer;
+        
         setDays(map);
     }
 
@@ -47,10 +58,29 @@ public class ConstructionArea extends PersistentObject{
     public String getEndDate() {
         return endDate;
     }
+    public String getStrasse(){
+        return strasse;
+    }
+    public String getOrt(){
+        return ort;
+    }
+    public String getPlz(){
+        return plz;
+    }
 
     public void setName(String name) {
         this.name = name;
     }
+    public void setStrasse (String strasse){
+        this.strasse = strasse;
+    }
+    public void setOrt(String ort){
+        this.ort = ort;
+    }
+    public void setPlz(String plz){
+        this.plz = plz;
+    }
+
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;

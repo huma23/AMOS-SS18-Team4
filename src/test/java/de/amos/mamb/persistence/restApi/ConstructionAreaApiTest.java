@@ -38,10 +38,12 @@ public class ConstructionAreaApiTest extends TestBase {
     private List<Vehicle> vehicles;
     private List<Material> materials;
     private String constructionAreaJson1 = "{\"name\":\"test date\",\"startDate\":\"2018-06-11\",\"endDate\":\"2018-06-13\"," +
+            "\"strasse\":\"TestStraße 1\", \"ort\":\"Testort\",\"plz\":\"55555\","+
             "\"bauleiter\":{\"firstName\":\"Bob\",\"lastName\":\"Baumeister\"},\"permanent\":false," +
             "\"days\":{\"2018-06-11\":{\"employeeList\":[],\"materialList\":[],\"vehicleList\":[]},\"2018-06-12\":{\"employeeList\":[]," +
             "\"materialList\":[],\"vehicleList\":[{\"bezeichnung\":\"BMW\",\"size\":\"2\",\"modell\":\"Test\"}]}}}";
     private String constructionAreaJson2 = "{\"name\":\"test date 3 days\",\"startDate\":\"2018-06-12\",\"endDate\":\"2018-06-14\"," +
+            "\"strasse\":\"BergStraße 1\", \"ort\":\"Tal\",\"plz\":\"44444\","+
             "\"bauleiter\":{\"firstName\":\"Hans\",\"lastName\":\"Muster\"},\"permanent\":false," +
             "\"days\":{\"2018-06-14\":{\"employeeList\":[],\"materialList\":[],\"vehicleList\":[]},\"2018-06-13\":{\"employeeList\":[]," +
             "\"materialList\":[],\"vehicleList\":[]},\"2018-06-12\":{\"employeeList\":[],\"materialList\":[],\"vehicleList\":[]}}}";
@@ -72,24 +74,36 @@ public class ConstructionAreaApiTest extends TestBase {
         construction = new ConstructionArea("Neustadt",
                 "2010-06-09",
                 "2018-01-25",
+                "Max-Muster-Straße 27",
+                "Münster",
+                "99999",
                 new ConstructionLadder("Max","Test"),
                 true,
                 new HashMap<String, ConstructionAreaDay>(), new Customer());
         construction1 = new ConstructionArea("Nürnberg",
                 "2010-06-01",
                 "2010-06-08",
+                "Muster-Max-Straße 99",
+                "Freiburg",
+                "55555",
                 new ConstructionLadder("Test","Test"),
                 true,
                 new HashMap<String, ConstructionAreaDay>(), new Customer());
         construction2 = new ConstructionArea("Herzogenaurach",
                 "2000-01-03",
                 "2018-05-07",
+                "Jogi-Löw-Weg",
+                "90441",
+                "Zittertal",
                 new ConstructionLadder("Test","Test"),
                 false,
                 new HashMap<String, ConstructionAreaDay>(), new Customer());
         construction3 = new ConstructionArea("Erlangen",
                 "1999-02-01",
                 "2017-12-31",
+                "Jogi-Löw-Weg",
+                "90441",
+                "Zittertal",
                 new ConstructionLadder("Test", "Test2"),
                 true,
                 new HashMap<String, ConstructionAreaDay>(), new Customer());
