@@ -1,4 +1,4 @@
-import {IConstructionArea, IConstructionAreaDay} from "../app/Resourcenpanel/IConstructionArea";
+import {IConstructionArea, IConstructionAreaDay, IFileInfo} from "../app/Resourcenpanel/IConstructionArea";
 import {ConstructionLadder} from "./constructionLadder";
 import {Employee} from "./employee";
 import {Vehicle} from "./vehicle";
@@ -17,5 +17,7 @@ export class ConstructionArea implements IConstructionArea{
               public customer: Customer,
               public days: {
                 [key: string] : IConstructionAreaDay
-              }){}
+              },
+              public attachments: IFileInfo[]
+              ){}
 }

@@ -50,11 +50,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Anhänge">
-        <div fxLayout="column" fxLayoutAlign="space-between center">
-          <!-- Hier jeweils eine komponente als eine Zeile einfügen -->
-          <p>Upload 1</p>
-          <p>Upload 2</p>
-        </div>
+        <pl-detail-dialog-files [constructionArea]="data.constructionArea"></pl-detail-dialog-files>
       </mat-tab>
       <mat-tab label="Fotos">
         <div fxLayout="row" fxLayoutAlign="space-around center" >

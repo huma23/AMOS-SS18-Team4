@@ -34,7 +34,8 @@ from '@angular/common/http';
 import { CalenderStoreService }
 from './calender-store.service';
 import {IConstructionLadder} from "../Resourcenpanel/IConstructionLadder";
-import {IConstructionArea} from "../Resourcenpanel/IConstructionArea";
+import {IConstructionArea, IFileInfo} from "../Resourcenpanel/IConstructionArea";
+import {FormGroup} from "@angular/forms";
 
 
 const httpOptions = {
@@ -172,5 +173,13 @@ export class ConstructionAreaService
    */
   public getConstructionLadders():Observable<IConstructionLadder[]>{
     return this.httpClient.get<IConstructionLadder[]>(BACKEND_URLS.CONSTRUCTIONLADDER_URL);
+  }
+
+  public uploadFileRequest(form:FormGroup, id: string, name: string):Observable<IFileInfo>{
+    debugger;
+    let formData = new FormData();
+    formData.append('file', form.value, name);
+    let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_UPLOAD_ATT_PART;
+    return this.httpClient.post<IFileInfo>(url, formData);
   }
 }

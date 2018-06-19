@@ -14,11 +14,18 @@ export interface IConstructionArea{
   customer: Customer,
   days: {
     [key: string] : IConstructionAreaDay
-  }
+  },
+  attachments: IFileInfo[]
 }
 
 export interface IConstructionAreaDay{
   employeeList: Employee[],
   vehicleList: Vehicle[],
   materialList: Material[]
+}
+
+export interface IFileInfo {
+  id: string,
+  name: string,
+  date: string
 }
