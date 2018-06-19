@@ -48,16 +48,20 @@
       </mat-form-field>
 
 
-      <select name="bauleiter" [(ngModel)]="selectedBauleiter" [ngModelOptions]="{standalone: true}">
+      <select  name="bauleiter" [(ngModel)]="selectedBauleiter" [ngModelOptions]="{standalone: true}">
       <option value="" disabled selected>>Wähle einen Mitarbeiter</option>
       <option *ngFor="let ladder of constructionLadders" [ngValue]="ladder">{{ladder.firstName.concat(" ", ladder.lastName)}}</option>
       </select>
 
       <select name="kunde" [(ngModel)]="selectedCustomer" [ngModelOptions]="{standalone: true}">
-        <option value="" disabled selected>>Wähle einen Kunden aus</option>
+        <option  value="" disabled selected>>Wähle einen Kunden aus</option>
         <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.firstName.concat(" ", customer.lastName)}}</option>
       </select>
 
+      <select  [(ngModel)]="selectedState" id="selectedState" name="form" >
+        <option value="" disabled selected>>Wähle einen Zustand aus></option>
+        <option *ngFor="let prog of states" [value]="prog" >{{prog}}</option>
+      </select>
 
   <!--
       <select name="mitarbeiter" [(ngModel)]="selectedMitarbeiter" [ngModelOptions]="{standalone: true}">

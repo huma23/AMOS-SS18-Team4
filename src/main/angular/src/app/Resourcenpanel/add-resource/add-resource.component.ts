@@ -15,6 +15,7 @@ import {IMaterial} from "../IMaterial";
 import * as moment from "moment";
 import {ConstructionAreaForm} from "../../../model/constructionAreaForm";
 import {ICustomer} from "../ICustomer";
+import {ProgressType} from "../../../model/ProgressType";
 
 @Component({
   selector: 'pl-add-resource',
@@ -30,16 +31,15 @@ export class AddResourceComponent implements OnInit {
   vehicles: IVehicle[];
   materials: IMaterial[];
   customers: ICustomer[];
+  states: any;
 
 
-
-
-
-  formContent = new ConstructionAreaForm("", "", "", null, true, null);
+  formContent = new ConstructionAreaForm("", "", "", null, true, null, ProgressType.Aktiv);
   startDate:string;
   endDate:string;
   selectedBauleiter:ConstructionLadder;
   selectedCustomer: Customer;
+  selectedState: any;
 
   constructor(private _resourceService:ResourceService) {
   }
@@ -69,6 +69,7 @@ export class AddResourceComponent implements OnInit {
       .subscribe( data => this.materials = data);
     this._resourceService.getCustomer()
       .subscribe(data => this.customers = data);
+    this.states = ProgressType.values();
   }
 
   //add "Mitarbeiter" through POST Request to the DB
@@ -113,6 +114,7 @@ export class AddResourceComponent implements OnInit {
 
     this.formContent.bauleiter = this.selectedBauleiter;
     this.formContent.customer = this.selectedCustomer;
+    this.formContent.state = this.selectedState;
 
     JSON.stringify(this.formContent);
     this._resourceService.saveConstructionAreaForm(this.formContent).subscribe((res:ConstructionArea) => console.log(res));

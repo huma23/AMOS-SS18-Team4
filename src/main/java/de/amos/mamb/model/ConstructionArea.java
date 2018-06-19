@@ -21,19 +21,22 @@ public class ConstructionArea extends PersistentObject{
     boolean permanent;
     Map<String, ConstructionAreaDay> days;
     Customer customer;
+    String state;
 
     public ConstructionArea(){
         this.days = new HashMap<>();
     }
 
-    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer){
+    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer, String state){
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.bauleiter = bauleiter;
         this.permanent = permanent;
         this.customer = customer;
+        this.state = state;
         setDays(map);
+
     }
 
     public String getName() {
@@ -72,13 +75,13 @@ public class ConstructionArea extends PersistentObject{
 
     public void setPermanent(boolean permanent) {this.permanent = permanent; }
 
-    public Customer getCustomer() {
-        return customer;
-    }
+    public Customer getCustomer() { return customer; }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    public void setCustomer(Customer customer) { this.customer = customer; }
+
+    public String getState() { return state; }
+
+    public void setState(String state) { this.state = state; }
 
     public Map<String, ConstructionAreaDay> getDays() {
         return days;
