@@ -34,7 +34,7 @@ export class AddResourceComponent implements OnInit {
   states: any;
 
 
-  formContent = new ConstructionAreaForm("", "", "", null, true, null, ProgressType.Aktiv);
+
   formContent = new ConstructionAreaForm("", "", "","","","", null, true, null, ProgressType.Aktiv);
   startDate:string;
   endDate:string;

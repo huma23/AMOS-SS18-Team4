@@ -33,14 +33,7 @@ public class ConstructionArea extends PersistentObject{
         this.days = new HashMap<>();
     }
 
-    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer, String state){
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.bauleiter = bauleiter;
-        this.permanent = permanent;
-        this.customer = customer;
-        this.state = state;
+
     public ConstructionArea(String name, String startDate, String endDate,
      String strasse ,String ort, String plz, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer, String state){
         this.name = name;
@@ -53,8 +46,7 @@ public class ConstructionArea extends PersistentObject{
         this.permanent  = permanent;
         this.customer   = customer;
         this.state = state;
-        
->>>>>>> dev
+
         setDays(map);
 
     }
