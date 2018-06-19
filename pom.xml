@@ -20,7 +20,7 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>1.9.63</version>
                 <configuration>
-                    <appId>planungstafel-dev</appId> <!-- Override appengine-web.xml <project> -->
+                    <appId>planungstafel-200916</appId> <!-- Override appengine-web.xml <project> -->
                     <version>1</version>
                     <fullScanSeconds>1</fullScanSeconds>
                     <retainUploadDir>true</retainUploadDir>
@@ -286,7 +286,10 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+        </dependency>
         <!-- Objectify -->
         <dependency>
             <groupId>com.googlecode.objectify</groupId>

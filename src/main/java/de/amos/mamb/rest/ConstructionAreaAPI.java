@@ -25,12 +25,21 @@ package de.amos.mamb.rest;
 import com.google.gson.Gson;
 import de.amos.mamb.model.*;
 import de.amos.mamb.persistence.PersistenceManager;
+import de.amos.mamb.rest.command.ObjectCommand;
 import de.amos.mamb.rest.command.ResponseCommand;
 import de.amos.mamb.rest.json.AddResourceData;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -308,5 +317,79 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 return 400;
             }
         });
+    }
+
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Path("/{id}/upload")
+    public Response uploadFile(@FormDataParam("file") InputStream uploadedInputStream,
+                               @FormDataParam("file") FormDataContentDisposition fileDetail,
+                               @PathParam("id") String id){
+
+        return executeRequest(new ResponseCommand() {
+            @Override
+            public String execute() {
+
+                Date date = new Date();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String dateString = formatter.format(date);
+                String fileName = fileDetail.getFileName();
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+
+                try {
+                    FileWrapper wrapper = new FileWrapper(id, fileName, dateString, uploadedInputStream);
+                    manager.saveObject(wrapper);
+
+                    Long idL = new Long(id);
+                    ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
+
+                    FileInfo info = new FileInfo(wrapper.getId().toString(), fileName, dateString);
+                    area.getAttachments().add(info);
+                    manager.saveObject(area);
+
+                    Gson gson = new Gson();
+                    String json = gson.toJson(info);
+
+                    return json;
+
+                } catch (IOException e) {
+                    return Result.FAILED;
+                }
+            }
+
+            @Override
+            public int httpOnSuccess() {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed() {
+                return 400;
+            }
+        });
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    @Path("/attachment/{fileId}")
+    public Response downloadFile(@PathParam("fileId") String fileId){
+
+        PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+        Long idL = new Long(fileId);
+        FileWrapper fileWrapper = manager.getEntityWithId(idL, FileWrapper.class);
+        String fileName = fileWrapper.getName();
+
+        StreamingOutput fileStream = new StreamingOutput() {
+            @Override
+            public void write(OutputStream outputStream) throws IOException, WebApplicationException {
+                outputStream.write(fileWrapper.getFileData());
+                outputStream.flush();
+            }
+        };
+
+        return Response
+                .ok(fileStream)
+                .header("content-disposition", "attachment; filename = " + fileName)
+                .build();
     }
 }

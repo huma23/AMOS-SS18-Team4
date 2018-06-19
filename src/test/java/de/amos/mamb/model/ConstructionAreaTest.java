@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Test für das Model Construction Area
  */
 public class ConstructionAreaTest {
-
+/*
     private ConstructionArea construction;
     private ConstructionArea construction1;
     private ConstructionArea construction2;
@@ -137,4 +137,5 @@ public class ConstructionAreaTest {
         assertFalse(construction1.days.get("2010-06-02").vehicleList.contains(vehicle));
         assertFalse(construction2.days.get("2018-01-20").materialList.contains(material));
     }
+    */
 }

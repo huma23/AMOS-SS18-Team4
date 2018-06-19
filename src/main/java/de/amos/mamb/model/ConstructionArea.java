@@ -21,18 +21,21 @@ public class ConstructionArea extends PersistentObject{
     boolean permanent;
     Map<String, ConstructionAreaDay> days;
     Customer customer;
+    ArrayList<FileInfo> attachments;
 
     public ConstructionArea(){
         this.days = new HashMap<>();
+        this.attachments = new ArrayList<>();
     }
 
-    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer){
+    public ConstructionArea(String name, String startDate, String endDate, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer, ArrayList<FileInfo> attachments){
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.bauleiter = bauleiter;
         this.permanent = permanent;
         this.customer = customer;
+        this.attachments = attachments;
         setDays(map);
     }
 
@@ -137,5 +140,13 @@ public class ConstructionArea extends PersistentObject{
         if(days.keySet().contains(day)){
             days.get(day).removeResource(object);
         }
+    }
+
+    public ArrayList<FileInfo> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(ArrayList<FileInfo> attachments) {
+        this.attachments = attachments;
     }
 }
