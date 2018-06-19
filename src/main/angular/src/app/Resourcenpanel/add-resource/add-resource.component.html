@@ -34,7 +34,10 @@
 <form *ngIf="constructionLadders?.length > 0" (ngSubmit)="addConstruction(formContent)">
 
       <input name="name" matInput placeholder="name"  [(ngModel)]="formContent.name" required>
-
+      <input name="strasse" matInput placeholder="Strasse" [(ngModel)]="formContent.strasse" required>
+      <input name="ort" matInput placeholder="Ort" [(ngModel)]="formContent.ort" required>
+      <input name="plz" matInput placeholder="Postleitzahl" [(ngModel)]="formContent.plz" required>
+    
       <mat-form-field>
         <input matInput [matDatepicker]="pickerStart" placeholder="startdate" name="startDate">
         <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
@@ -58,6 +61,7 @@
         <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.firstName.concat(" ", customer.lastName)}}</option>
       </select>
 
+<<<<<<< HEAD
       <select  [(ngModel)]="selectedState" id="selectedState" name="form" >
         <option value="" disabled selected>>Wähle einen Zustand aus></option>
         <option *ngFor="let prog of states" [value]="prog" >{{prog}}</option>
@@ -79,6 +83,8 @@
         <option *ngFor="let material of materials" [ngValue]="material">{{material.bezeichnung}}</option>
       </select>
       -->
+=======
+>>>>>>> dev
       <input type="submit"  value="Submit Form">
 </form>
 <p style="color:red" *ngIf="!constructionLadders?.length > 0">Anlegen einer Baustelle ist nicht möglich, weil kein Bauleiter angelegt ist!</p>

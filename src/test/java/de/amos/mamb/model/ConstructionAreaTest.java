@@ -28,18 +28,27 @@ public class ConstructionAreaTest {
         construction = new ConstructionArea("Neustadt",
                 "2018-06-09",
                 "2018-06-11",
+                "Max-Muster-Straße 27",
+                "Münster",
+                "99999",
                 new ConstructionLadder("Max","Test"),
                 false,
                 new HashMap<String, ConstructionAreaDay>(),  new Customer(),"Aktiv");
         construction1 = new ConstructionArea("Nürnberg",
                 "2010-06-01",
                 "2010-06-08",
+                "Muster-Max-Straße 99",
+                "Freiburg",
+                "55555",
                 new ConstructionLadder("Test","Test"),
                 true,
                 new HashMap<String, ConstructionAreaDay>(), new Customer(), "Aktiv");
         construction2 = new ConstructionArea("Herzogenaurach",
                 "2018-01-03",
                 "2018-01-20",
+                "Jogi-Löw-Weg",
+                "90441",
+                "Zittertal",
                 new ConstructionLadder("Test","Test"),
                 false,
                 new HashMap<String, ConstructionAreaDay>(),  new Customer(), "Aktiv");
@@ -51,6 +60,7 @@ public class ConstructionAreaTest {
         skills.add("oneSkill");
         employee = new Employee("dummy", "dummy", 2, skills);
     }
+
 
     @Test
     public void setDaysTest(){
