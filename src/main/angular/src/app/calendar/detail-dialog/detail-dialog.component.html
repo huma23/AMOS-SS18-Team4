@@ -2,9 +2,9 @@
 
 <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
   <!-- TOP Component:  Basis Infos -->
-  
+
     <pl-base-information [constructionArea]="data.constructionArea"></pl-base-information>
-  
+
   <hr>
   <!-- Bottom Component:  Info / Fotos / Anhänge -->
   <div fxFill>
@@ -13,7 +13,7 @@
         <div fxLayout="row"fxLayoutAlign="space-around center" >
           <!-- Hier jeweils eine komponente als eine spalte einfügen -->
           <p>Bauabschnitte</p>
-          <p>Bauherr</p>
+          <!-- Bauherr / Kundeninformationen -->
           <pl-detail-dialog-info [constructionArea]="data.constructionArea"></pl-detail-dialog-info>
         </div>
       </mat-tab>
