@@ -175,11 +175,11 @@ export class ConstructionAreaService
     return this.httpClient.get<IConstructionLadder[]>(BACKEND_URLS.CONSTRUCTIONLADDER_URL);
   }
 
-  public uploadFileRequest(form:FormGroup, id: string, name: string):Observable<IFileInfo>{
+  public uploadFileRequest(file:File, id: string, name: string):Observable<IFileInfo>{
     debugger;
     let formData = new FormData();
-    formData.append('file', form.value, name);
-    let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_UPLOAD_ATT_PART;
+    formData.append('file', file);
+    let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_UPLOAD_ATT_PART + "/" + name;
     return this.httpClient.post<IFileInfo>(url, formData);
   }
 }

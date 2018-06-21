@@ -4,7 +4,10 @@ import com.google.common.io.ByteStreams;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -34,8 +37,8 @@ public class FileWrapper extends PersistentObject{
 
     public FileWrapper(String constructionAreaId, String name, String date, InputStream stream) throws IOException {
         this.constructionAreaId = constructionAreaId;
-        this.name = name;
         this.date = date;
+        this.name = name;
         readData(stream);
     }
 

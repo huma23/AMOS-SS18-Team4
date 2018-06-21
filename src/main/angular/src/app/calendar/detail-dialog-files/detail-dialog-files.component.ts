@@ -45,7 +45,7 @@ export class DetailDialogFilesComponent implements OnInit {
   onSubmit(){
     debugger;
 
-    this.service.uploadFileRequest(this.formGroup, this.constructionArea.id, this.fileName).subscribe(
+    this.service.uploadFileRequest(this.formGroup.value.file, this.constructionArea.id, this.fileName).subscribe(
       (info: IFileInfo) => {
         this.constructionArea.attachments.push(info);
       },

@@ -23,17 +23,16 @@
 package de.amos.mamb.rest;
 
 import com.google.gson.Gson;
-import de.amos.mamb.model.*;
+import de.amos.mamb.model.ConstructionArea;
+import de.amos.mamb.model.FileInfo;
+import de.amos.mamb.model.FileWrapper;
+import de.amos.mamb.model.PersistentObject;
 import de.amos.mamb.persistence.PersistenceManager;
-import de.amos.mamb.rest.command.ObjectCommand;
 import de.amos.mamb.rest.command.ResponseCommand;
 import de.amos.mamb.rest.json.AddResourceData;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
@@ -320,11 +319,11 @@ public class ConstructionAreaAPI extends AbstractAPI{
     }
 
     @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Path("/{id}/upload")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}/upload/{filename}")
     public Response uploadFile(@FormDataParam("file") InputStream uploadedInputStream,
-                               @FormDataParam("file") FormDataContentDisposition fileDetail,
-                               @PathParam("id") String id){
+                               @PathParam("id") String id,
+                               @PathParam("filename") String filename){
 
         return executeRequest(new ResponseCommand() {
             @Override
@@ -333,17 +332,16 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 Date date = new Date();
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String dateString = formatter.format(date);
-                String fileName = fileDetail.getFileName();
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
 
                 try {
-                    FileWrapper wrapper = new FileWrapper(id, fileName, dateString, uploadedInputStream);
+                    FileWrapper wrapper = new FileWrapper(id, filename, dateString, uploadedInputStream);
                     manager.saveObject(wrapper);
 
                     Long idL = new Long(id);
                     ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
 
-                    FileInfo info = new FileInfo(wrapper.getId().toString(), fileName, dateString);
+                    FileInfo info = new FileInfo(wrapper.getId().toString(), filename, dateString);
                     area.getAttachments().add(info);
                     manager.saveObject(area);
 
