@@ -1,0 +1,20 @@
+<div fxLayout="column" fxFlex="" style="padding: 5px;">
+  <mat-grid-list fxFlex cols="3" rowHeight="6:4">
+    <mat-grid-tile *ngFor="let fileInfo of constructionArea.images">
+      <div fxLayout="column"
+           fxLayoutAlign="space-between center">
+        <a href="https://1-dot-planungstafel-200916.appspot.com/api/constructionArea/image/{{fileInfo.id}}" target="_blank">
+          <img width="300px"
+               src="https://1-dot-planungstafel-200916.appspot.com/api/constructionArea/image/{{fileInfo.id}}"/>
+        </a>
+        <mat-icon (click)="removeImage(fileInfo)">clear</mat-icon>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+      <input type="file" name="file" (change)="onFileChange($event)"/>
+      <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">Upload</button>
+    </form>
+  </div>
+</div>

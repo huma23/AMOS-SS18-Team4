@@ -88,6 +88,7 @@ import {DetailDialogComponent} from "./calendar/detail-dialog/detail-dialog.comp
 import { BaseInformationComponent } from './detail-construction-area/base-information/base-information.component';
 import { DetailDialogInfoComponent } from './calendar/detail-dialog-info/detail-dialog-info.component';
 import { DetailDialogFilesComponent } from './calendar/detail-dialog-files/detail-dialog-files.component';
+import { DetailDialogImagesComponent } from './calendar/detail-dialog-images/detail-dialog-images.component';
 
 
 
@@ -118,6 +119,7 @@ import { DetailDialogFilesComponent } from './calendar/detail-dialog-files/detai
     DetailDialogInfoComponent,
     DetailDialogFilesComponent,
     BaseInformationComponent,
+    DetailDialogImagesComponent,
   ],
   imports: [
     BrowserModule,

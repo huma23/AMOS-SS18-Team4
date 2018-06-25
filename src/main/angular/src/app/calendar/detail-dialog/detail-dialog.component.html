@@ -24,12 +24,8 @@
           <pl-detail-dialog-info [constructionArea]="data.constructionArea"></pl-detail-dialog-info>
         </div>
       </mat-tab>
-      <mat-tab label="Fotos">
-        <div fxLayout="row" fxLayoutAlign="space-around center" >
-          <!-- Hier jeweils eine komponente als eine spalte einfügen -->
-          <p>Foto1</p>
-          <p>Foto 2</p>
-        </div>
+      <mat-tab label="Fotos" >
+          <pl-detail-dialog-images [constructionArea]="data.constructionArea" ></pl-detail-dialog-images>
       </mat-tab>
     </mat-tab-group>
   </div>
