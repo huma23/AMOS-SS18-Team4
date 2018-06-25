@@ -115,4 +115,11 @@ public abstract class PersistenceManager {
      * @return
      */
     public abstract <T extends PersistentObject> List<T> getAllEntities(Class<T> clz);
+
+    /**
+     * Löschen eines Objektes
+     * @param object
+     * @param <T>
+     */
+    public abstract <T extends PersistentObject> void removeObject(T object);
 }

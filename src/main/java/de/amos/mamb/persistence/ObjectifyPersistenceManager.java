@@ -66,6 +66,12 @@ public class ObjectifyPersistenceManager extends PersistenceManager {
     }
 
     @Override
+    public <T extends PersistentObject> void removeObject(T object) {
+
+        ofy().delete().entity(object).now();
+    }
+
+    @Override
     public <T extends PersistentObject> List<T> getEntityWithAttribute(String attribute, Object value, Class<T> clz){
 
         List<T> list = ofy().load().type(clz).filter(attribute, value).list();
