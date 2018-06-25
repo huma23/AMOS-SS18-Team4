@@ -28,14 +28,17 @@ public class ConstructionArea extends PersistentObject{
     Map<String, ConstructionAreaDay> days;
     Customer customer;
     String state;
+    List<Note> notes;
 
     public ConstructionArea(){
-        this.days = new HashMap<>();
+        this.days   = new HashMap<>();
+        this.notes  = new ArrayList<Note>();
     }
 
 
     public ConstructionArea(String name, String startDate, String endDate,
-     String strasse ,String ort, String plz, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer, String state){
+     String strasse ,String ort, String plz, ConstructionLadder bauleiter, boolean permanent, Map<String,
+            ConstructionAreaDay> map, Customer customer, String state, List<Note>notes){
         this.name = name;
         this.startDate  = startDate;
         this.endDate    = endDate;
@@ -45,8 +48,8 @@ public class ConstructionArea extends PersistentObject{
         this.bauleiter  = bauleiter;
         this.permanent  = permanent;
         this.customer   = customer;
-        this.state = state;
-
+        this.state      = state;
+        this.notes      = notes;
         setDays(map);
 
     }
@@ -54,6 +57,8 @@ public class ConstructionArea extends PersistentObject{
     public String getName() {
         return name;
     }
+
+
 
     public String getStartDate() {
         return startDate;
@@ -171,5 +176,17 @@ public class ConstructionArea extends PersistentObject{
         if(days.keySet().contains(day)){
             days.get(day).removeResource(object);
         }
+    }
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public void addNote(Note note)
+    {
+        this.notes.add(note);
     }
 }

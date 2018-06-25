@@ -41,7 +41,8 @@ import java.util.List;
  * REST-Schnittstelle der URL /api/constructionArea/
  */
 @Path("constructionArea")
-public class ConstructionAreaAPI extends AbstractAPI{
+public class ConstructionAreaAPI extends AbstractAPI
+{
 
     /**
      * Liefert eine Liste aller Dauerbaustellen zurück.
@@ -52,11 +53,14 @@ public class ConstructionAreaAPI extends AbstractAPI{
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/permanent")
-    public Response getPermanentConstructionArea(){
+    public Response getPermanentConstructionArea()
+    {
 
-        return executeRequest(new ResponseCommand() {
+        return executeRequest(new ResponseCommand()
+        {
             @Override
-            public String execute() {
+            public String execute()
+            {
 
                 PersistenceManager manger = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 List<ConstructionArea> entities = manger.getEntityWithAttribute("permanent ==", true, ConstructionArea.class);
@@ -67,12 +71,14 @@ public class ConstructionAreaAPI extends AbstractAPI{
             }
 
             @Override
-            public int httpOnSuccess() {
+            public int httpOnSuccess()
+            {
                 return 200;
             }
 
             @Override
-            public int httpOnCommandFailed() {
+            public int httpOnCommandFailed()
+            {
                 return 400;
             }
         });
@@ -88,11 +94,14 @@ public class ConstructionAreaAPI extends AbstractAPI{
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{year}/{week}")
-    public Response getConstructionAreasFromDate(@PathParam("year") int year, @PathParam("week") int week){
+    public Response getConstructionAreasFromDate(@PathParam("year") int year, @PathParam("week") int week)
+    {
 
-        return executeRequest(new ResponseCommand() {
+        return executeRequest(new ResponseCommand()
+        {
             @Override
-            public String execute() {
+            public String execute()
+            {
 
                 //Datumsformat
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -117,8 +126,9 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 List<ConstructionArea> listStartDateFilterd = manager.getEntityWithTwoAttributes("startDate >=", searchedDateBegin, "startDate <=", searchedDateEnd, ConstructionArea.class);
                 List<ConstructionArea> listEndDateFiltered = manager.getEntityWithTwoAttributes("endDate >=", searchedDateBegin, "endDate <=", searchedDateEnd, ConstructionArea.class);
 
-                for(ConstructionArea area : listEndDateFiltered){
-                    if(!listStartDateFilterd.contains(area))
+                for (ConstructionArea area : listEndDateFiltered)
+                {
+                    if (!listStartDateFilterd.contains(area))
                         listStartDateFilterd.add(area);
                 }
 
@@ -128,12 +138,14 @@ public class ConstructionAreaAPI extends AbstractAPI{
             }
 
             @Override
-            public int httpOnSuccess() {
+            public int httpOnSuccess()
+            {
                 return 200;
             }
 
             @Override
-            public int httpOnCommandFailed() {
+            public int httpOnCommandFailed()
+            {
                 return 400;
             }
         });
@@ -141,14 +153,18 @@ public class ConstructionAreaAPI extends AbstractAPI{
 
     /**
      * Liefert eine Liste aller Bauleiter zurück
+     *
      * @return
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getConstructionAreas() {
-        return executeRequest(new ResponseCommand() {
+    public Response getConstructionAreas()
+    {
+        return executeRequest(new ResponseCommand()
+        {
             @Override
-            public String execute() {
+            public String execute()
+            {
 
                 PersistenceManager manger = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 List<ConstructionArea> entities = manger.getAllEntities(ConstructionArea.class);
@@ -159,16 +175,19 @@ public class ConstructionAreaAPI extends AbstractAPI{
             }
 
             @Override
-            public int httpOnSuccess() {
+            public int httpOnSuccess()
+            {
                 return 200;
             }
 
             @Override
-            public int httpOnCommandFailed() {
+            public int httpOnCommandFailed()
+            {
                 return 400;
             }
         });
     }
+
     /**
      * API Endpoint zum speichern einer Baustelle über den PersistentManager
      *
@@ -177,20 +196,25 @@ public class ConstructionAreaAPI extends AbstractAPI{
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveConstructionArea(String area) {
-        return executeRequest(new ResponseCommand() {
+    public Response saveConstructionArea(String area)
+    {
+        return executeRequest(new ResponseCommand()
+        {
             @Override
-            public int httpOnSuccess() {
+            public int httpOnSuccess()
+            {
                 return 201;
             }
 
             @Override
-            public int httpOnCommandFailed() {
+            public int httpOnCommandFailed()
+            {
                 return 400;
             }
 
             @Override
-            public String execute() {
+            public String execute()
+            {
                 Gson gson = new Gson();
                 ConstructionArea constructionArea = gson.fromJson(area, ConstructionArea.class);
                 constructionArea.setDays(constructionArea.getDays());
@@ -205,11 +229,14 @@ public class ConstructionAreaAPI extends AbstractAPI{
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/addResource")
-    public Response addResource(@PathParam("id") String id, String addResourceData){
+    public Response addResource(@PathParam("id") String id, String addResourceData)
+    {
 
-        return executeRequest(new ResponseCommand() {
+        return executeRequest(new ResponseCommand()
+        {
             @Override
-            public String execute() {
+            public String execute()
+            {
                 Gson gson = new Gson();
                 AddResourceData data = gson.fromJson(addResourceData, AddResourceData.class);
 
@@ -218,22 +245,28 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
                 PersistentObject object = null;
 
-                if(data.getEmployee() != null){
+                if (data.getEmployee() != null)
+                {
                     object = data.getEmployee();
                 }
 
-                if(data.getMaterial() != null){
+                if (data.getMaterial() != null)
+                {
                     object = data.getMaterial();
                 }
 
-                if(data.getVehicle() != null){
+                if (data.getVehicle() != null)
+                {
                     object = data.getVehicle();
                 }
 
-                if(object != null){
-                    if(data.isPermanent()){
+                if (object != null)
+                {
+                    if (data.isPermanent())
+                    {
                         area.addResourceToEveryDay(object);
-                    } else {
+                    } else
+                    {
                         area.addResourceToDay(object, data.getDay());
                     }
 
@@ -245,12 +278,14 @@ public class ConstructionAreaAPI extends AbstractAPI{
             }
 
             @Override
-            public int httpOnSuccess() {
+            public int httpOnSuccess()
+            {
                 return 200;
             }
 
             @Override
-            public int httpOnCommandFailed() {
+            public int httpOnCommandFailed()
+            {
                 return 400;
             }
         });
@@ -259,11 +294,14 @@ public class ConstructionAreaAPI extends AbstractAPI{
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{id}/removeResource")
-    public Response removeResource(@PathParam("id") String id, String addResourceData){
+    public Response removeResource(@PathParam("id") String id, String addResourceData)
+    {
 
-        return executeRequest(new ResponseCommand() {
+        return executeRequest(new ResponseCommand()
+        {
             @Override
-            public String execute() {
+            public String execute()
+            {
                 Gson gson = new Gson();
                 AddResourceData data = gson.fromJson(addResourceData, AddResourceData.class);
 
@@ -272,22 +310,28 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
                 PersistentObject object = null;
 
-                if(data.getEmployee() != null){
+                if (data.getEmployee() != null)
+                {
                     object = data.getEmployee();
                 }
 
-                if(data.getMaterial() != null){
+                if (data.getMaterial() != null)
+                {
                     object = data.getMaterial();
                 }
 
-                if(data.getVehicle() != null){
+                if (data.getVehicle() != null)
+                {
                     object = data.getVehicle();
                 }
 
-                if(object != null){
-                    if(data.isPermanent()){
+                if (object != null)
+                {
+                    if (data.isPermanent())
+                    {
                         area.removeResourceToEveryDay(object);
-                    } else {
+                    } else
+                    {
                         area.removeResourceToDay(object, data.getDay());
                     }
 
@@ -299,14 +343,56 @@ public class ConstructionAreaAPI extends AbstractAPI{
             }
 
             @Override
-            public int httpOnSuccess() {
+            public int httpOnSuccess()
+            {
                 return 200;
             }
 
             @Override
-            public int httpOnCommandFailed() {
+            public int httpOnCommandFailed()
+            {
                 return 400;
             }
         });
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}/addNote")
+    public Response addNote(@PathParam("id") String id, String note)
+    {
+        return executeRequest(new ResponseCommand(){
+            @Override
+            public int httpOnSuccess()
+            {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed()
+            {
+                return 400;
+            }
+
+            @Override
+            public String execute()
+            {
+                Gson gson       = new Gson();
+                Note newNote    = gson.fromJson(note,Note.class);
+
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                Long idL = new Long(id);
+                ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
+
+                if (!newNote.isValid())
+                    return Result.FAILED;
+
+                area.addNote(newNote);
+                manager.saveObject(area);
+                return Result.NO_STRING;
+            }
+        });
+
+    }
 }
+

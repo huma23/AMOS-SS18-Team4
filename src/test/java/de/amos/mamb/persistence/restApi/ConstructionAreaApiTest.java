@@ -81,7 +81,7 @@ public class ConstructionAreaApiTest extends TestBase {
                 true,
                 new HashMap<String, ConstructionAreaDay>(),
                 new Customer(),
-                "Aktiv");
+                "Aktiv",   new ArrayList<Note>());
         construction1 = new ConstructionArea("Nürnberg",
                 "2010-06-01",
                 "2010-06-08",
@@ -92,7 +92,7 @@ public class ConstructionAreaApiTest extends TestBase {
                 true,
                 new HashMap<String, ConstructionAreaDay>(),
                 new Customer(),
-                "Aktiv");
+                "Aktiv",  new ArrayList<Note>());
         construction2 = new ConstructionArea("Herzogenaurach",
                 "2000-01-03",
                 "2018-05-07",
@@ -103,7 +103,7 @@ public class ConstructionAreaApiTest extends TestBase {
                 false,
                 new HashMap<String, ConstructionAreaDay>(),
                 new Customer()
-                ,"Aktiv");
+                ,"Aktiv",   new ArrayList<Note>());
         construction3 = new ConstructionArea("Erlangen",
                 "1999-02-01",
                 "2017-12-31",
@@ -114,7 +114,7 @@ public class ConstructionAreaApiTest extends TestBase {
                 true,
                 new HashMap<String, ConstructionAreaDay>(),
                 new Customer(),
-                "Aktiv");
+                "Aktiv",  new ArrayList<Note>());
     }
 
     /**
