@@ -31,7 +31,7 @@ export class DetailDialogFilesComponent implements OnInit {
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
-      this.fileName = file.name;
+      //this.fileName = file.name;
       this.file = file;
 
       reader.onload = () => {
@@ -45,9 +45,7 @@ export class DetailDialogFilesComponent implements OnInit {
   }
 
   onSubmit(){
-    debugger;
-
-    this.service.uploadFileRequest(this.file, this.constructionArea.id, this.fileName).subscribe(
+    this.service.uploadFileRequest(this.file, this.constructionArea.id).subscribe(
       (info: IFileInfo) => {
         this.constructionArea.attachments.push(info);
       },
