@@ -3,9 +3,9 @@
     <mat-grid-tile *ngFor="let fileInfo of constructionArea.images">
       <div fxLayout="column"
            fxLayoutAlign="space-between center">
-        <a href="https://1-dot-planungstafel-200916.appspot.com/api/constructionArea/image/{{fileInfo.id}}" target="_blank">
+        <a href="/api/constructionArea/image/{{fileInfo.id}}" target="_blank">
           <img width="300px"
-               src="https://1-dot-planungstafel-200916.appspot.com/api/constructionArea/image/{{fileInfo.id}}"/>
+               src="/api/constructionArea/image/{{fileInfo.id}}"/>
         </a>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <p>{{fileInfo.date}}</p>
