@@ -20,7 +20,8 @@ export interface IConstructionArea{
   days: {
     [key: string] : IConstructionAreaDay
   },
-  attachments: IFileInfo[]
+  attachments: IFileInfo[],
+  images: IFileInfo[]
 }
 
 export interface IConstructionAreaDay{

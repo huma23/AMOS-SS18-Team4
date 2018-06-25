@@ -28,15 +28,18 @@ public class ConstructionArea extends PersistentObject{
     Map<String, ConstructionAreaDay> days;
     Customer customer;
     ArrayList<FileInfo> attachments;
+    ArrayList<FileInfo> images;
     String state;
 
     public ConstructionArea(){
         this.days = new HashMap<>();
         this.attachments = new ArrayList<>();
+        this.images = new ArrayList<>();
     }
 
-    public ConstructionArea(String name, String startDate, String endDate,
-     String strasse ,String ort, String plz, ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map, Customer customer, String state, ArrayList<FileInfo> attachments){
+    public ConstructionArea(String name, String startDate, String endDate, String strasse ,String ort, String plz,
+                            ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map,
+                            Customer customer, String state, ArrayList<FileInfo> attachments, ArrayList<FileInfo> images){
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -44,6 +47,7 @@ public class ConstructionArea extends PersistentObject{
         this.permanent = permanent;
         this.customer = customer;
         this.attachments = attachments;
+        this.images = images;
         this.strasse     = strasse;
         this.ort        = ort;
         this.plz        = plz;
@@ -180,5 +184,13 @@ public class ConstructionArea extends PersistentObject{
 
     public void setAttachments(ArrayList<FileInfo> attachments) {
         this.attachments = attachments;
+    }
+
+    public ArrayList<FileInfo> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<FileInfo> images) {
+        this.images = images;
     }
 }

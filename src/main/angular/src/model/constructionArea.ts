@@ -23,6 +23,7 @@ export class ConstructionArea implements IConstructionArea{
               public days: {
                 [key: string] : IConstructionAreaDay
               },
-              public attachments: IFileInfo[]
+              public attachments: IFileInfo[],
+              public images: IFileInfo[]
               ){}
 }
