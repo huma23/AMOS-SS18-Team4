@@ -8,15 +8,23 @@ import java.util.Objects;
 @Entity
 public class Customer extends PersistentObject{
 
+    @Index
     String firstName;
     @Index
     String lastName;
+    @Index
     String street;
+    @Index
     int houseNumber;
+    @Index
     int postalCode;
+    @Index
     String city;
+    @Index
     String email;
+    @Index
     int phoneNumber;
+    @Index
     int mobilePhone;
 
     public Customer(){

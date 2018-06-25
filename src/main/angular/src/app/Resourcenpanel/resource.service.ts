@@ -113,7 +113,7 @@ export class ResourceService{
     return this.http.get<ICustomer[]>(this._customerUri);
   }
 
-  saveCustomer(customer: ICustomer):Observable<ICustomer>{
+  saveCustomer(customer: Customer):Observable<ICustomer>{
     let body = JSON.stringify(customer);
     return this.http.post<Customer>(this._customerUri, body, httpOptions);
   }
