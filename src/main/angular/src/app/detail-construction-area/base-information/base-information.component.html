@@ -1,9 +1,9 @@
 
 <div fxLayout="row" fxLayoutAlign="space-around">
-  <div fxFlex="20%">
-    <img width ="100%" src="http://www.4freephotos.com/ger/medium/2015/Wood-sculpting-tools-5785.jpg">
+  <div>
+    <img width ="250px" src="http://www.4freephotos.com/ger/medium/2015/Wood-sculpting-tools-5785.jpg">
   </div>
-<div fxFlex="40%">
+<div>
   <ul style="list-style-type:none">
       <li>{{constructionArea.name}}</li>
       <li>{{constructionArea.strasse}}</li>
@@ -14,21 +14,21 @@
   <div fxFlex="40%">
     <ul style="list-style-type:none">
       <li>Bauleiter: {{constructionArea.bauleiter.firstName}} {{constructionArea.bauleiter.lastName}} </li>
-      <li>Mitarbeiter: 
+      <li>Mitarbeiter:
         <span *ngIf="this.hasEmployeeUsage(); else NoEmplUsed ">
           <span *ngFor="let empl of this.getUsedEmployees(); let i = index">
             {{empl.lastName}} <span *ngIf="i != this.getUsedEmployees().length-1">, </span>
           </span>
         </span>
       </li>
-      <li>Fahrzeuge: 
+      <li>Fahrzeuge:
         <span *ngIf="this.hasVehicleUsage(); else NoVehicleUsed">
           <span *ngFor="let car of this.getUsedVehicles(); let i = index">
                 {{car.bezeichnung}} <span *ngIf="i != this.getUsedVehicles().length-1">, </span>
           </span>
         </span>
       </li>
-      <li>Betriebsmittel: 
+      <li>Betriebsmittel:
         <span *ngIf="this.hasMaterialUsage(); else NoMatUsed ">
           <span *ngFor="let mat of this.getUsedMaterials(); let i = index">
             {{mat.bezeichnung}} <span *ngIf="i != this.getUsedMaterials().length-1">, </span>

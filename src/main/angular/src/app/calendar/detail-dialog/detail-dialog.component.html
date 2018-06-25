@@ -10,15 +10,19 @@
   <div fxFill>
     <mat-tab-group>
       <mat-tab label="Infos">
-        <div fxLayout="row"fxLayoutAlign="space-around center" >
+        <div fxLayout="row" fxLayoutAlign="space-between center" >
           <!-- Hier jeweils eine komponente als eine spalte einfügen -->
-          <p>Bauabschnitte</p>
+          <div fxLayout="column" fxLayoutAlign="space-around stretch">
+            <!-- Fortschritt -->
+            <p>dummy fortschritt</p>
+            <!-- Kommentare -->
+            <p>dummy kommentare</p>
+            <!-- Anhänge -->
+            <pl-detail-dialog-files [constructionArea]="data.constructionArea"></pl-detail-dialog-files>
+          </div>
           <!-- Bauherr / Kundeninformationen -->
           <pl-detail-dialog-info [constructionArea]="data.constructionArea"></pl-detail-dialog-info>
         </div>
-      </mat-tab>
-      <mat-tab label="Anhänge">
-        <pl-detail-dialog-files [constructionArea]="data.constructionArea"></pl-detail-dialog-files>
       </mat-tab>
       <mat-tab label="Fotos">
         <div fxLayout="row" fxLayoutAlign="space-around center" >
