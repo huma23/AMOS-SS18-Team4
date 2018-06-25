@@ -1,41 +1,9 @@
-<!--<h1 mat-dialog-title>{{data.constructionArea.name}}</h1>
-<div mat-dialog-content>
-  <mat-list>
-    <mat-list-item *ngIf="data.constructionArea.permanent"> Dauerbaustelle: Ja</mat-list-item>
-    <mat-list-item>Bauleiter: {{data.constructionArea.bauleiter.firstName + ' ' + data.constructionArea.bauleiter.lastName }}</mat-list-item>
-    <mat-list-item>Startdatum: {{data.constructionArea.startDate}}</mat-list-item>
-    <mat-list-item>Enddatum: {{data.constructionArea.endDate}}</mat-list-item>
-    <mat-list-item>Kunde: {{data.constructionArea.customer.firstName + '' + data.constructionArea.customer.lastName}}</mat-list-item>
 
-    <div *ngIf="data.employeeList.length > 0">
-      <h4>Mitarbeiter: </h4>
-      <mat-list-item *ngFor='let empl of data.employeeList'> {{empl.firstName + ' ' + empl.lastName}}</mat-list-item>
-    </div>
-
-    <div *ngIf="data.materialList.length > 0">
-      <h4>Betriebsmittel: </h4>
-      <mat-list-item *ngFor='let mat of data.materialList'> {{mat.bezeichnung}}</mat-list-item>
-    </div>
-
-    <div *ngIf="data.vehicleList.length > 0">
-      <h4>Fahrzeuge: </h4>
-      <mat-list-item *ngFor='let vh of data.vehicleList'> {{vh.bezeichnung}}</mat-list-item>
-    </div>
-
-  </mat-list>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Schließen</button>
-</div>-->
 
 <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
   <!-- TOP Component:  Basis Infos -->
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <!-- Hier jeweils eine komponente als eine spalte einfügen -->
-    <p>Foto</p>
-    <p>Basisinfo 1</p>
-    <p>Basisinfo 2</p>
-  </div>
+
+    <pl-base-information [constructionArea]="data.constructionArea"></pl-base-information>
 
   <hr>
   <!-- Bottom Component:  Info / Fotos / Anhänge -->
@@ -45,7 +13,7 @@
         <div fxLayout="row"fxLayoutAlign="space-around center" >
           <!-- Hier jeweils eine komponente als eine spalte einfügen -->
           <p>Bauabschnitte</p>
-          <p>Bauherr</p>
+          <!-- Bauherr / Kundeninformationen -->
           <pl-detail-dialog-info [constructionArea]="data.constructionArea"></pl-detail-dialog-info>
         </div>
       </mat-tab>

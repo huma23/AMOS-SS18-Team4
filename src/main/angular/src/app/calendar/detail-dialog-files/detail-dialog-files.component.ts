@@ -18,6 +18,7 @@ export class DetailDialogFilesComponent implements OnInit {
   });
 
   fileName : string;
+  file: File;
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef, private service : ConstructionAreaService) { }
 
@@ -31,6 +32,7 @@ export class DetailDialogFilesComponent implements OnInit {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
       this.fileName = file.name;
+      this.file = file;
 
       reader.onload = () => {
         this.formGroup.patchValue({
@@ -45,7 +47,7 @@ export class DetailDialogFilesComponent implements OnInit {
   onSubmit(){
     debugger;
 
-    this.service.uploadFileRequest(this.formGroup.value.file, this.constructionArea.id, this.fileName).subscribe(
+    this.service.uploadFileRequest(this.file, this.constructionArea.id, this.fileName).subscribe(
       (info: IFileInfo) => {
         this.constructionArea.attachments.push(info);
       },

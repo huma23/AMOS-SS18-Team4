@@ -1,17 +1,16 @@
-<h3>Kontaktinformationen</h3>
-<mat-list>
 
-  <h4>Bauherr:</h4>
+
+<h4>Kontaktinformationen</h4>
+
+  <h5>Bauherr:</h5>
   <mat-list-item>
     {{constructionArea.customer.firstName + ' ' + constructionArea.customer.lastName}}
   </mat-list-item>
-  <h4> Adresse:</h4>
-  <mat-list-item>{{constructionArea.customer.street + ' ' + constructionArea.customer.houseNumber}}</mat-list-item>
-  <mat-list-item>{{constructionArea.customer.postalCode + ' ' + constructionArea.customer.city}}</mat-list-item>
+  <h5> Adresse:</h5>
+  <mat-list-item>Straße: {{constructionArea.customer.street + ' ' + constructionArea.customer.houseNumber}}</mat-list-item>
+  <mat-list-item>Ort: {{constructionArea.customer.postalCode + ' ' + constructionArea.customer.city}}</mat-list-item>
+  <h5>Kontaktdaten:</h5>
+  <mat-list-item>Telefon: {{constructionArea.customer.phoneNumber}}</mat-list-item>
+  <mat-list-item>Mobile: {{constructionArea.customer.mobilePhone}}</mat-list-item>
+  <mat-list-item>Mail: {{constructionArea.customer.email}}</mat-list-item>
 
-  <h4>Kontaktdaten:</h4>
-  <mat-list-item>Telefon {{constructionArea.customer.phoneNumber}}</mat-list-item>
-  <mat-list-item>Mobile {{constructionArea.customer.mobilePhone}}</mat-list-item>
-  <mat-list-item>Mail {{constructionArea.customer.email}}</mat-list-item>
-
-</mat-list>

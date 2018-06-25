@@ -34,6 +34,9 @@
 <form *ngIf="constructionLadders?.length > 0" (ngSubmit)="addConstruction(formContent)">
 
       <input name="name" matInput placeholder="name"  [(ngModel)]="formContent.name" required>
+      <input name="strasse" matInput placeholder="Strasse" [(ngModel)]="formContent.strasse" required>
+      <input name="ort" matInput placeholder="Ort" [(ngModel)]="formContent.ort" required>
+      <input name="plz" matInput placeholder="Postleitzahl" [(ngModel)]="formContent.plz" required>
 
       <mat-form-field>
         <input matInput [matDatepicker]="pickerStart" placeholder="startdate" name="startDate">
@@ -48,16 +51,20 @@
       </mat-form-field>
 
 
-      <select name="bauleiter" [(ngModel)]="selectedBauleiter" [ngModelOptions]="{standalone: true}">
+      <select  name="bauleiter" [(ngModel)]="selectedBauleiter" [ngModelOptions]="{standalone: true}">
       <option value="" disabled selected>>Wähle einen Mitarbeiter</option>
       <option *ngFor="let ladder of constructionLadders" [ngValue]="ladder">{{ladder.firstName.concat(" ", ladder.lastName)}}</option>
       </select>
 
       <select name="kunde" [(ngModel)]="selectedCustomer" [ngModelOptions]="{standalone: true}">
-        <option value="" disabled selected>>Wähle einen Kunden aus</option>
+        <option  value="" disabled selected>>Wähle einen Kunden aus</option>
         <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.firstName.concat(" ", customer.lastName)}}</option>
       </select>
 
+      <select  [(ngModel)]="selectedState" id="selectedState" name="form" >
+        <option value="" disabled selected>>Wähle einen Zustand aus></option>
+        <option *ngFor="let prog of states" [value]="prog" >{{prog}}</option>
+      </select>
 
   <!--
       <select name="mitarbeiter" [(ngModel)]="selectedMitarbeiter" [ngModelOptions]="{standalone: true}">

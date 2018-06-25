@@ -30,15 +30,16 @@ import de.amos.mamb.model.PersistentObject;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ResponseCommand;
 import de.amos.mamb.rest.json.AddResourceData;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -320,6 +321,7 @@ public class ConstructionAreaAPI extends AbstractAPI{
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Path("/{id}/upload/{filename}")
     public Response uploadFile(@FormDataParam("file") InputStream uploadedInputStream,
                                @PathParam("id") String id,
@@ -387,7 +389,7 @@ public class ConstructionAreaAPI extends AbstractAPI{
 
         return Response
                 .ok(fileStream)
-                .header("content-disposition", "attachment; filename = " + fileName)
+                .header("Content-Disposition", "attachment; filename = " + fileName)
                 .build();
     }
 }
