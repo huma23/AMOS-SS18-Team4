@@ -4,6 +4,7 @@ import {Vehicle} from "../../model/vehicle";
 import {Material} from "../../model/material";
 import {Customer} from "../../model/customer";
 import {ProgressType} from "../../model/ProgressType";
+import {Note}         from "../../model/Note";
 
 export interface IConstructionArea{
   id: string,
@@ -19,7 +20,8 @@ export interface IConstructionArea{
   state: ProgressType,
   days: {
     [key: string] : IConstructionAreaDay
-  }
+  },
+  notes: Note[]
 }
 
 export interface IConstructionAreaDay{
