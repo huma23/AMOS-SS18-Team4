@@ -32,7 +32,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatListModule,
-  MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatIconModule, MatTabsModule
+  MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatIconModule, MatTabsModule, MatProgressBar, MatProgressBarModule
 } from "@angular/material";
 
 import { MatGridListModule }  from '@angular/material/grid-list';
@@ -87,6 +87,8 @@ import { DoubleDropRessourceComponent } from './calendar/double-drop-ressource/d
 import {DetailDialogComponent} from "./calendar/detail-dialog/detail-dialog.component";
 import { BaseInformationComponent } from './detail-construction-area/base-information/base-information.component';
 import { DetailDialogInfoComponent } from './calendar/detail-dialog-info/detail-dialog-info.component';
+import { NotesComponent } from './detail-construction-area/notes/notes.component';
+import { ProgressComponent } from './detail-construction-area/progress/progress.component';
 
 
 
@@ -116,7 +118,9 @@ import { DetailDialogInfoComponent } from './calendar/detail-dialog-info/detail-
     DoubleDropRessourceComponent,
     DetailDialogComponent,
     BaseInformationComponent,
-    DetailDialogInfoComponent
+    DetailDialogInfoComponent,
+    NotesComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
@@ -140,7 +144,8 @@ import { DetailDialogInfoComponent } from './calendar/detail-dialog-info/detail-
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    NgDragDropModule.forRoot()
+    NgDragDropModule.forRoot(),
+    MatProgressBarModule
   ],
   providers:
   [

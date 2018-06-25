@@ -2,7 +2,6 @@
 
 <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
   <!-- TOP Component:  Basis Infos -->
-
     <pl-base-information [constructionArea]="data.constructionArea"></pl-base-information>
 
   <hr>
@@ -12,9 +11,35 @@
       <mat-tab label="Infos">
         <div fxLayout="row"fxLayoutAlign="space-around center" >
           <!-- Hier jeweils eine komponente als eine spalte einfügen -->
-          <p>Bauabschnitte</p>
+          <div fxFlex="66%">
+            <div fxLayout="column" fxLayoutAlign="space-evenly stretch" style="margin-right: 5%;">         
+              <mat-card>
+                <h4>Fortschritt</h4>
+                <mat-card-content>
+                  <mat-progress-bar mode="determinate" value="40">
+                  </mat-progress-bar>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-icon-button>
+                    <mat-icon>create</mat-icon>
+                    </button>
+                </mat-card-actions>
+              </mat-card>
+              <mat-card>
+                <h4>Status: AKTIV</h4>
+                <mat-card-actions>
+                  <button mat-icon-button>
+                    <mat-icon>create</mat-icon>
+                  </button>
+                </mat-card-actions>
+              </mat-card>
+              <pl-notes [notes]="data.constructionArea.notes" [id]="data.constructionArea.id"></pl-notes>
+            </div>
+        </div>
+        <div fxFlex="33%">
           <!-- Bauherr / Kundeninformationen -->
           <pl-detail-dialog-info [constructionArea]="data.constructionArea"></pl-detail-dialog-info>
+          </div>
         </div>
       </mat-tab>
       <mat-tab label="Anhänge">
