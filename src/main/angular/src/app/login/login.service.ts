@@ -115,6 +115,8 @@ export class PlLoginService
   {
     if (this.authService.removeToken())
       this.loggedIn = false;
+    
+    this.authService.removeUser();
   }
 
    /**
@@ -192,5 +194,13 @@ export class PlLoginService
   toString() : string
   {
     return String(this.loggedIn);
+  }
+  setUser(userName : string) : void 
+  {
+    this.authService.setUser(userName);
+  }
+  getUser() : string
+  {
+    return this.authService.getUser();
   }
 }

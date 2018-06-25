@@ -45,7 +45,7 @@ export class AuthService
   // Statische Variablen, verwendet als Keys innerhalb des localeStorages
   static TokenIdentifier : string = 'PlAccessToken';
   static TokenExpiration : string = 'PLExpirationTime';
-
+  static UserNameSaved   : string = 'PLUserName';
   // Only for feature Test, Logic for refresh and validate on Expiration will come
   private gotValidToken : boolean;
 
@@ -174,5 +174,19 @@ export class AuthService
     }
 
     return false;
+  }
+
+  public setUser(userName : string) : void
+  {
+    localStorage.setItem(AuthService.UserNameSaved, userName);
+  }
+  public removeUser() : void
+  {
+    localStorage.removeItem(AuthService.UserNameSaved);
+
+  }
+  public getUser() : string
+  {
+    return localStorage.getItem(AuthService.UserNameSaved);
   }
 }
