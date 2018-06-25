@@ -129,7 +129,8 @@ export class AddResourceComponent implements OnInit {
   }
 
   addCustomer(firstName, lastName, street, houseNumber, postalCode, city, email, phoneNumber, mobilePhone){
-    let customer = new Customer(firstName, lastName, street, houseNumber, postalCode, city, email, phoneNumber, mobilePhone)
+    let customer = new Customer(firstName, lastName, street, houseNumber, postalCode, city, email, phoneNumber, mobilePhone);
+    debugger;
     this._resourceService.saveCustomer(customer).subscribe((res:Customer) => console.log(res));
   }
 }
