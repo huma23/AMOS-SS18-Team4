@@ -1,5 +1,6 @@
 package de.amos.mamb.rest;
 
+import com.google.gson.Gson;
 import de.amos.mamb.model.Customer;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ObjectCommand;
@@ -22,13 +23,13 @@ public class CustomerAPI extends AbstractAPI {
      * Liefert eine Liste aller Kunden zurück.
      *
      *
-     * @param response
+     * @param
      * @return
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Customer> getCustomer(@Context HttpServletResponse response){
-        return executeRequest(response,new ObjectCommand<List<Customer>>() {
+    public Response getCustomer(  ){
+        return executeRequest(new ResponseCommand() {
             @Override
             public int httpOnSuccess() {
                 return 200;
@@ -40,10 +41,12 @@ public class CustomerAPI extends AbstractAPI {
             }
 
             @Override
-            public List<Customer> execute() {
+            public String execute() {
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 List<Customer> customerList = manager.getAllEntities(Customer.class);
-                return customerList;
+                Gson gson = new Gson();
+                String json = gson.toJson(customerList);
+                return json;
             }
         });
     }
@@ -56,7 +59,7 @@ public class CustomerAPI extends AbstractAPI {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveCustomer(Customer customer){
+    public Response saveCustomer(String customer){
         return executeRequest(new ResponseCommand() {
             @Override
             public int httpOnSuccess() {
@@ -70,9 +73,11 @@ public class CustomerAPI extends AbstractAPI {
 
             @Override
             public String execute() {
+                Gson gson = new Gson();
+                Customer cust = gson.fromJson(customer, Customer.class);
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
 
-                manager.saveObject(customer);
+                manager.saveObject(cust);
                 return Result.NO_STRING;
             }
         });
