@@ -22,6 +22,9 @@
  */
 package de.amos.mamb.rest;
 
+import com.google.appengine.api.images.Image;
+import com.google.appengine.api.images.ImagesService;
+import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.gson.Gson;
 import de.amos.mamb.model.ConstructionArea;
 import de.amos.mamb.model.FileInfo;
@@ -32,6 +35,7 @@ import de.amos.mamb.rest.command.ResponseCommand;
 import de.amos.mamb.rest.json.AddResourceData;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
@@ -322,29 +326,40 @@ public class ConstructionAreaAPI extends AbstractAPI{
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Path("/{id}/upload/{filename}")
+    @Path("/{id}/upload/{type}")
     public Response uploadFile(@FormDataParam("file") InputStream uploadedInputStream,
                                @PathParam("id") String id,
-                               @PathParam("filename") String filename){
+                               @FormDataParam("file") FormDataContentDisposition fileDetail,
+                               @PathParam("type") String type){
 
         return executeRequest(new ResponseCommand() {
             @Override
             public String execute() {
 
+                //check if it is an image or normal attachment
+                boolean isImageUpload = type.equals("image")? true : false;
+
                 Date date = new Date();
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String dateString = formatter.format(date);
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                String filename = fileDetail.getFileName();
 
                 try {
-                    FileWrapper wrapper = new FileWrapper(id, filename, dateString, uploadedInputStream);
+                    FileWrapper wrapper = new FileWrapper(id, filename, dateString, uploadedInputStream, isImageUpload);
                     manager.saveObject(wrapper);
 
                     Long idL = new Long(id);
                     ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
 
                     FileInfo info = new FileInfo(wrapper.getId().toString(), filename, dateString);
-                    area.getAttachments().add(info);
+
+                    if(isImageUpload){
+                        area.getImages().add(info);
+                    } else {
+                        area.getAttachments().add(info);
+                    }
+
                     manager.saveObject(area);
 
                     Gson gson = new Gson();
@@ -391,5 +406,80 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 .ok(fileStream)
                 .header("Content-Disposition", "attachment; filename = " + fileName)
                 .build();
+    }
+
+    @GET
+    @Produces({ "image/png", "image/jpg" })
+    @Path("/image/{imageId}")
+    public Response getImage(@PathParam("imageId") String imageId){
+
+        PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+        Long idL = new Long(imageId);
+        FileWrapper fileWrapper = manager.getEntityWithId(idL, FileWrapper.class);
+
+        StreamingOutput imageStream = new StreamingOutput() {
+            @Override
+            public void write(OutputStream outputStream) throws IOException, WebApplicationException {
+                outputStream.write(fileWrapper.getFileData());
+                outputStream.flush();
+            }
+        };
+
+        return Response
+                .ok(imageStream)
+                .build();
+    }
+
+    @DELETE
+    @Path("/image/{imageId}")
+    public Response removeImage(@PathParam("imageId") String imageId){
+
+        return executeRequest(new ResponseCommand() {
+
+            @Override
+            public int httpOnSuccess() {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed() {
+                return 404;
+            }
+
+            @Override
+            public String execute() {
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                Long idL = new Long(imageId);
+                FileWrapper fileWrapper = manager.getEntityWithId(idL, FileWrapper.class);
+
+                if(fileWrapper == null){
+                    return Result.FAILED;
+                }
+
+                Long idAreaL = new Long(fileWrapper.getConstructionAreaId());
+                ConstructionArea area = manager.getEntityWithId(idAreaL, ConstructionArea.class);
+
+                if(area == null){
+                    return Result.FAILED;
+                }
+
+                FileInfo toRemove = null;
+                for(FileInfo info : area.getImages()){
+                    if(info.getId().equals(imageId)){
+                        toRemove = info;
+                        break;
+                    }
+                }
+
+                if(toRemove != null){
+                    area.getImages().remove(toRemove);
+                }
+
+                manager.saveObject(area);
+                manager.removeObject(fileWrapper);
+
+                return Result.NO_STRING;
+            }
+        });
     }
 }

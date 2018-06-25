@@ -33,8 +33,10 @@ export const BACKEND_URLS =
 {
   CONSTRUCTIONLADDER_URL : "/api/constructionLadder",
   CONSTRUCTION_AREA_URL: "/api/constructionArea",
-  CONSTRUCTION_AREA_PERMANENT_URL: this.CONSTRUCTION_AREA_URL + "/permanent",
+  CONSTRUCTION_AREA_PERMANENT_URL: "/api/constructionArea/permanent",
   CONSTRUCTION_AREA_ADD_RESOURCE_PART: "/addResource",
   CONSTRUCTION_AREA_REMOVE_RESOURCE_PART: "/removeResource",
-  CONSTRUCTION_AREA_UPLOAD_ATT_PART: "/upload"
+  CONSTRUCTION_AREA_UPLOAD_ATTACHMENT: "/upload/attachment",
+  CONSTRUCTION_AREA_UPLOAD_IMAGE: "/upload/image",
+  CONSTRUCTION_AREA_IMAGE: "/api/constructionArea/image"
 };

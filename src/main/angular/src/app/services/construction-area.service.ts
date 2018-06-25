@@ -175,11 +175,22 @@ export class ConstructionAreaService
     return this.httpClient.get<IConstructionLadder[]>(BACKEND_URLS.CONSTRUCTIONLADDER_URL);
   }
 
-  public uploadFileRequest(file:File, id: string, name: string):Observable<IFileInfo>{
-    debugger;
+  public uploadFileRequest(file:File, id: string):Observable<IFileInfo>{
     let formData = new FormData();
-    formData.append('file', file);
-    let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_UPLOAD_ATT_PART + "/" + name;
+    formData.append('file', file, file.name);
+    let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_UPLOAD_ATTACHMENT;
     return this.httpClient.post<IFileInfo>(url, formData);
+  }
+
+  public uploadImageRequest(file:File, id: string):Observable<IFileInfo>{
+    let formData = new FormData();
+    formData.append('file', file, file.name);
+    let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_UPLOAD_IMAGE;
+    return this.httpClient.post<IFileInfo>(url, formData);
+  }
+
+  public removeImageRequest(id:string):Observable<any>{
+    let url = BACKEND_URLS.CONSTRUCTION_AREA_IMAGE + "/" + id;
+    return this.httpClient.delete(url, httpOptions);
   }
 }
