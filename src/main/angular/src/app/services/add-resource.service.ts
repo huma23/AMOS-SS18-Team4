@@ -52,6 +52,13 @@ export class AddResourceService {
     let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_ADD_NOTE;
     this.send(note,url,id);
   }
+  public changeProgressFromArea(id:string, progress:string)
+  {
+    let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_CH_PROGRESS;
+    let data : any =  {};
+    data.progress = progress;
+    this.send(data, url,id);
+  }
 
   private createEmployeeData(empl: IEmployee, day: string, permanent: boolean): any{
     var data : any = {};

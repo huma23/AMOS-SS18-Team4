@@ -32,6 +32,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatListModule,
+  MatSelectModule,
   MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatIconModule, MatTabsModule, MatProgressBar, MatProgressBarModule
 } from "@angular/material";
 
@@ -145,7 +146,8 @@ import { ProgressComponent } from './detail-construction-area/progress/progress.
     MatProgressSpinnerModule,
     MatIconModule,
     NgDragDropModule.forRoot(),
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSelectModule
   ],
   providers:
   [
