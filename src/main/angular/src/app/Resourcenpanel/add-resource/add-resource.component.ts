@@ -16,6 +16,7 @@ import * as moment from "moment";
 import {ConstructionAreaForm} from "../../../model/constructionAreaForm";
 import {ICustomer} from "../ICustomer";
 import {ProgressType} from "../../../model/ProgressType";
+import {Note} from "../../../model/Note";
 
 @Component({
   selector: 'pl-add-resource',
@@ -35,7 +36,7 @@ export class AddResourceComponent implements OnInit {
 
 
 
-  formContent = new ConstructionAreaForm("", "", "","","","", null, true, null, ProgressType.Aktiv);
+  formContent = new ConstructionAreaForm("", "", "","","","", null, true, null, ProgressType.Aktiv,null,"0");
   startDate:string;
   endDate:string;
   selectedBauleiter:ConstructionLadder;
@@ -116,7 +117,7 @@ export class AddResourceComponent implements OnInit {
     this.formContent.bauleiter = this.selectedBauleiter;
     this.formContent.customer = this.selectedCustomer;
     this.formContent.state = this.selectedState;
-
+    this.formContent.notes = new Array<Note>();
     JSON.stringify(this.formContent);
     this._resourceService.saveConstructionAreaForm(this.formContent).subscribe((res:ConstructionArea) => console.log(res));
   }

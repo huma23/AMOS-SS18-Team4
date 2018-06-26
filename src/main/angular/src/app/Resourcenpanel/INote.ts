@@ -22,23 +22,12 @@
  *
  */
 
- /**
- *
- * Exportiert ein Objekt, in dem die Pfade auf die REST-API hinterlegt sind.
- * TODO Restlichen URLS eintragen
- *
- */
 
-export const BACKEND_URLS =
+export interface INote
 {
-  CONSTRUCTIONLADDER_URL : "/api/constructionLadder",
-  CONSTRUCTION_AREA_URL: "/api/constructionArea",
-  CONSTRUCTION_AREA_PERMANENT_URL: "/api/constructionArea/permanent",
-  CONSTRUCTION_AREA_ADD_RESOURCE_PART: "/addResource",
-  CONSTRUCTION_AREA_REMOVE_RESOURCE_PART: "/removeResource",
-  CONSTRUCTION_AREA_UPLOAD_ATTACHMENT: "/upload/attachment",
-  CONSTRUCTION_AREA_UPLOAD_IMAGE: "/upload/image",
-  CONSTRUCTION_AREA_IMAGE: "/api/constructionArea/image",
-  CONSTRUCTION_AREA_ADD_NOTE:"/addNote", 
-  CONSTRUCTION_AREA_CH_PROGRESS:"/changeProgress"
-};
+    title           : string,
+    message         : string,
+    dateNoteCreated : string, 
+    creator         : string
+}
+  

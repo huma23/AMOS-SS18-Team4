@@ -4,6 +4,7 @@ import {Vehicle} from "../../model/vehicle";
 import {Material} from "../../model/material";
 import {Customer} from "../../model/customer";
 import {ProgressType} from "../../model/ProgressType";
+import {Note}         from "../../model/Note";
 
 export interface IConstructionArea{
   id: string,
@@ -21,7 +22,9 @@ export interface IConstructionArea{
     [key: string] : IConstructionAreaDay
   },
   attachments: IFileInfo[],
-  images: IFileInfo[]
+  images: IFileInfo[],
+  notes: Note[],
+  progress : string
 }
 
 export interface IConstructionAreaDay{

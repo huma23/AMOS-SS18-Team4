@@ -33,7 +33,8 @@ public class ConstructionAreaTest {
                 "99999",
                 new ConstructionLadder("Max","Test"),
                 false,
-                new HashMap<String, ConstructionAreaDay>(),  new Customer(),"Aktiv");
+                new HashMap<String, ConstructionAreaDay>(),  new Customer(),"Aktiv",
+                new ArrayList<Note>(), "0");
         construction1 = new ConstructionArea("Nürnberg",
                 "2010-06-01",
                 "2010-06-08",
@@ -42,7 +43,9 @@ public class ConstructionAreaTest {
                 "55555",
                 new ConstructionLadder("Test","Test"),
                 true,
-                new HashMap<String, ConstructionAreaDay>(), new Customer(), "Aktiv");
+                new HashMap<String, ConstructionAreaDay>(), new Customer(), "Aktiv",
+                new ArrayList<Note>(), "0");
+
         construction2 = new ConstructionArea("Herzogenaurach",
                 "2018-01-03",
                 "2018-01-20",
@@ -51,7 +54,9 @@ public class ConstructionAreaTest {
                 "Zittertal",
                 new ConstructionLadder("Test","Test"),
                 false,
-                new HashMap<String, ConstructionAreaDay>(),  new Customer(), "Aktiv");
+                new HashMap<String, ConstructionAreaDay>(),  new Customer(), "Aktiv"
+                ,new ArrayList<Note>(),"0"
+               );
 
         vehicle = new Vehicle("BMW", "Test", "M3");
         material = new Material("Farbe", "Blau", "Test");

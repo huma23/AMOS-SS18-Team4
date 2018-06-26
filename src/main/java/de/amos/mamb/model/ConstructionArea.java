@@ -30,35 +30,45 @@ public class ConstructionArea extends PersistentObject{
     ArrayList<FileInfo> attachments;
     ArrayList<FileInfo> images;
     String state;
+    List<Note> notes;
+    @Index
+    String progress;
 
     public ConstructionArea(){
+<<<<<<< HEAD
         this.days = new HashMap<>();
         this.attachments = new ArrayList<>();
-        this.images = new ArrayList<>();
+        this.images = new ArrayList<>(); 
+        this.notes  = new ArrayList<Note>();
     }
 
     public ConstructionArea(String name, String startDate, String endDate, String strasse ,String ort, String plz,
                             ConstructionLadder bauleiter, boolean permanent, Map<String, ConstructionAreaDay> map,
-                            Customer customer, String state, ArrayList<FileInfo> attachments, ArrayList<FileInfo> images){
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.bauleiter = bauleiter;
-        this.permanent = permanent;
-        this.customer = customer;
-        this.attachments = attachments;
-        this.images = images;
-        this.strasse     = strasse;
-        this.ort        = ort;
-        this.plz        = plz;
-        this.state = state;
-
+                            Customer customer, String state, ArrayList<FileInfo> attachments, ArrayList<FileInfo> images,
+                            List<Note>notes, String progress){
+        this.name           = name;
+        this.startDate      = startDate;
+        this.endDate        = endDate;
+        this.bauleiter      = bauleiter;
+        this.permanent      = permanent;
+        this.customer       = customer;
+        this.attachments    = attachments;
+        this.images         = images;
+        this.strasse        = strasse;
+        this.ort            = ort;
+        this.plz            = plz;
+        this.state          = state;
+        this.notes          = notes;
+        this.progress       = progress;
+        
         setDays(map);
     }
 
     public String getName() {
         return name;
     }
+
+
 
     public String getStartDate() {
         return startDate;
@@ -192,5 +202,22 @@ public class ConstructionArea extends PersistentObject{
 
     public void setImages(ArrayList<FileInfo> images) {
         this.images = images;
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public void addNote(Note note)
+    {
+        this.notes.add(note);
+    }
+    public void setProgress(String _newValue){
+        this.progress = _newValue;
+    }
+    public String getProgress(){
+        return this.progress;
     }
 }

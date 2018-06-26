@@ -5,6 +5,7 @@ import {Vehicle} from "./vehicle";
 import {Material} from "./material";
 import {Customer} from "./customer";
 import {ProgressType} from "./ProgressType";
+import {Note} from "./Note";
 
 export class ConstructionArea implements IConstructionArea{
 
@@ -24,6 +25,7 @@ export class ConstructionArea implements IConstructionArea{
                 [key: string] : IConstructionAreaDay
               },
               public attachments: IFileInfo[],
-              public images: IFileInfo[]
-              ){}
+              public images: IFileInfo[],
+              public notes: Note[], 
+              public progress: string){}
 }

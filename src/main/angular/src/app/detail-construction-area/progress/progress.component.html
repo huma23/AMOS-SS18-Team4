@@ -1,0 +1,26 @@
+<mat-card>
+    <h4>Fortschritt</h4>
+    <mat-card-content>
+      <mat-progress-bar mode="determinate" [value]="this.progressBarValueNumeric">
+    </mat-progress-bar>
+    
+    <div *ngIf="showEdit">
+    <mat-select placeholder ="Mögliche Werte" [(value)]="selectedValue">
+      <mat-option *ngFor="let val of moeglicheWerte" value={{val}}>{{val}}%</mat-option>
+    </mat-select>
+    <button mat-icon-button (click)="changeProgressState()" type="submit">
+      <mat-icon>done</mat-icon>
+    </button>
+    <button mat-icon-button (click)="cancel()" color="warn">
+      <mat-icon>clear</mat-icon> 
+    </button>
+  </div>
+  
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="!showEdit">
+      <button mat-icon-button (click)= "showEditView()">
+        <mat-icon>create</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>

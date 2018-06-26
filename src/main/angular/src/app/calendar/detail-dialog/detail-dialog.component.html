@@ -2,7 +2,6 @@
 
 <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
   <!-- TOP Component:  Basis Infos -->
-
     <pl-base-information [constructionArea]="data.constructionArea"></pl-base-information>
 
   <hr>
@@ -11,17 +10,22 @@
     <mat-tab-group>
       <mat-tab label="Infos">
         <div fxLayout="row" fxLayoutAlign="space-between center" >
+          <div fxFlex="66%">
           <!-- Hier jeweils eine komponente als eine spalte einfügen -->
-          <div fxLayout="column" fxLayoutAlign="space-around stretch">
-            <!-- Fortschritt -->
-            <p>dummy fortschritt</p>
-            <!-- Kommentare -->
-            <p>dummy kommentare</p>
-            <!-- Anhänge -->
+          <div fxLayout="column" fxLayoutAlign="space-evenly stretch" style="margin-right: 5%;">
+
+            <pl-progress [progressBarValue]="data.constructionArea.progress" [id]="data.constructionArea.id"></pl-progress>
+            <mat-card>
+                <h4>Status: {{data.constructionArea.state}}</h4>
+            </mat-card>
+            <pl-notes [notes]="data.constructionArea.notes" [id]="data.constructionArea.id"></pl-notes>
             <pl-detail-dialog-files [constructionArea]="data.constructionArea"></pl-detail-dialog-files>
+           
           </div>
+        </div>
           <!-- Bauherr / Kundeninformationen -->
           <pl-detail-dialog-info [constructionArea]="data.constructionArea"></pl-detail-dialog-info>
+        
         </div>
       </mat-tab>
       <mat-tab label="Fotos" >

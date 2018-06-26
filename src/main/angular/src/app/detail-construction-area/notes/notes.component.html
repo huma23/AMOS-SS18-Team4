@@ -1,0 +1,37 @@
+<mat-card>
+  <h4>Notizen</h4>
+  <mat-list dense *ngIf="hasNotes;else NoNotes">
+    <mat-list-item *ngFor="let singleNote of notes">
+        <img matListAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Hundi">
+        <h4 matLine>{{singleNote.title}}</h4>
+   
+        <p matLine>
+            {{singleNote.message}}
+        </p>
+        <p matLine style="color: red">{{singleNote.creator}} hinzugefügt am: {{singleNote.dateNoteCreated}}</p>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+  <form *ngIf="editMode" (submit)="addNoteToArea(title.value, message.value)" class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Titel" #title>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Leave a comment" #message></textarea>
+  </mat-form-field>
+    <button mat-icon-button type="submit">
+      <mat-icon>done</mat-icon>
+     </button>
+     <button mat-icon-button (click)="cancelAddNote()" color="warn">
+        <mat-icon>clear</mat-icon> 
+      </button>
+  </form>
+  <mat-card-actions *ngIf="!editMode">
+    <button mat-icon-button (click)="openEditMode()" color="accent">
+      <mat-icon>create</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+<ng-template #NoNotes>
+  <mat-card-content>Keine Notizen</mat-card-content>
+</ng-template>

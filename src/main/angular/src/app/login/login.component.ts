@@ -89,6 +89,7 @@ export class LoginComponent implements OnInit
         console.log("Token received \n " + token.token + "\n"+token.timestampt);
         this.loginService.setToken(token);
         this.loginService.setLogin(true);
+        this.loginService.setUser(form.email);
         this.router.navigateByUrl("/app");
 
       },
