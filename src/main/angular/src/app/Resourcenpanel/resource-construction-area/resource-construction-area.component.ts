@@ -7,6 +7,9 @@ import {IMaterial} from "../IMaterial";
 import {IVehicle} from "../IVehicle";
 import {IEmployee} from "../IEmployee";
 import {AddResourceService} from "../../services/add-resource.service";
+import {MatDialog} from "@angular/material";
+import {DetailDialogComponent} from "../../calendar/detail-dialog/detail-dialog.component";
+import {ConstructionArea} from "../../../model/constructionArea";
 
 @Component({
   selector: 'pl-resource-construction-area',
@@ -20,7 +23,7 @@ export class ResourceConstructionAreaComponent implements OnInit {
 
   private resourceService : AddResourceService;
 
-  constructor(_resService: AddResourceService){
+  constructor(_resService: AddResourceService,  public dialog: MatDialog){
     this.resourceService = _resService;
   }
 
@@ -90,4 +93,19 @@ export class ResourceConstructionAreaComponent implements OnInit {
       });
     }
   }
+
+  openDetailDialog(area:ConstructionArea): void {
+    let areaday = area.days;
+    this.dialog.open(DetailDialogComponent, {
+      height: '90%',
+      width:'90%',
+      data: {
+        constructionArea: area,
+        employeeList: areaday.employeeList,
+        vehicleList: areaday.vehicleList,
+        materialList: areaday.materialList
+      }
+    });
+  }
+
 }

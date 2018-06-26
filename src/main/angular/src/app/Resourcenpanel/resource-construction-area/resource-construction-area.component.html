@@ -4,6 +4,7 @@
           (onDrop)="onDropItem($event, area)"
           *ngFor="let area of constructionAreaList | ascending">
   <mat-card-subtitle>{{area.name}}</mat-card-subtitle>
+  <mat-icon style="float:right;" (click)="openDetailDialog(area)">open_in_new</mat-icon>
   <mat-card-content>
     <mat-card-subtitle>Mitarbeiter</mat-card-subtitle>
     <div class ="area-section-content"
