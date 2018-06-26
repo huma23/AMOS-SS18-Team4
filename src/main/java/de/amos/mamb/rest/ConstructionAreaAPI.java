@@ -22,9 +22,7 @@
  */
 package de.amos.mamb.rest;
 
-import com.google.appengine.api.images.Image;
-import com.google.appengine.api.images.ImagesService;
-import com.google.appengine.api.images.ImagesServiceFactory;
+import de.amos.mamb.model.*;
 import com.google.gson.Gson;
 import de.amos.mamb.model.ConstructionArea;
 import de.amos.mamb.model.FileInfo;
@@ -33,13 +31,11 @@ import de.amos.mamb.model.PersistentObject;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ResponseCommand;
 import de.amos.mamb.rest.json.AddResourceData;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;

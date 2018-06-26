@@ -101,7 +101,7 @@ export class CalenderConstructionAreaComponent implements OnInit
 
     if (this.constructionAreaDay.vehicleList === (null || undefined))
       this.constructionAreaDay.vehicleList = new Array<Vehicle>();
-
+    console.log(this.constructionArea);
   }
 /**
    * @method
@@ -596,10 +596,11 @@ export class CalenderConstructionAreaComponent implements OnInit
    */
   openDetailDialog(): void {
       this.dialog.open(DetailDialogComponent, {
-      //width: '900px',
-      //height: '600px',
+      height: '90%',
+      width:'90%',
       data: {
-        constructionArea: this.constructionArea, employeeList: this.constructionAreaDay.employeeList,
+        constructionArea: this.constructionArea, 
+        employeeList: this.constructionAreaDay.employeeList,
         vehicleList: this.constructionAreaDay.vehicleList,
         materialList: this.constructionAreaDay.materialList
       }

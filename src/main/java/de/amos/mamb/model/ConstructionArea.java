@@ -35,7 +35,7 @@ public class ConstructionArea extends PersistentObject{
     String progress;
 
     public ConstructionArea(){
-<<<<<<< HEAD
+
         this.days = new HashMap<>();
         this.attachments = new ArrayList<>();
         this.images = new ArrayList<>(); 
@@ -202,6 +202,7 @@ public class ConstructionArea extends PersistentObject{
 
     public void setImages(ArrayList<FileInfo> images) {
         this.images = images;
+    }
     public List<Note> getNotes() {
         return notes;
     }
