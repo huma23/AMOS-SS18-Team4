@@ -394,5 +394,43 @@ public class ConstructionAreaAPI extends AbstractAPI
         });
 
     }
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}/changeProgress")
+    public Response changeProgress(@PathParam("id") String id, String progress)
+    {
+        return executeRequest(new ResponseCommand(){
+            @Override
+            public int httpOnSuccess()
+            {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed()
+            {
+                return 400;
+            }
+
+            @Override
+            public String execute()
+            {
+                Gson gson           = new Gson();
+                DummyProgress newProgress  = gson.fromJson(progress,DummyProgress.class);
+                
+                if (newProgress == null)
+                    return Result.FAILED; 
+
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                Long idL = new Long(id);
+                
+                
+                ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
+                area.setProgress(newProgress.getProgress());
+                manager.saveObject(area);
+                return Result.NO_STRING;
+            }
+        });
+    }
 }
 
