@@ -21,7 +21,8 @@ export interface IConstructionArea{
   days: {
     [key: string] : IConstructionAreaDay
   },
-  notes: Note[]
+  notes: Note[],
+  progress : string
 }
 
 export interface IConstructionAreaDay{

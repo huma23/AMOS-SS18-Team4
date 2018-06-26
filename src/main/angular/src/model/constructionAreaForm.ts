@@ -1,6 +1,8 @@
 import {ConstructionLadder} from "./constructionLadder";
 import {Customer} from "./customer";
 import {ProgressType} from "./ProgressType";
+import {Note} from "./Note";
+
 
 export class ConstructionAreaForm{
 
@@ -14,6 +16,8 @@ export class ConstructionAreaForm{
     public bauleiter: ConstructionLadder,
     public permanent: boolean,
     public customer: Customer,
-    public state: ProgressType
+    public state: ProgressType,
+    public notes: Note[],
+    public progress:string
   ){}
 }

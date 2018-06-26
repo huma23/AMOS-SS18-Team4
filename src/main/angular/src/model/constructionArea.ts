@@ -24,5 +24,6 @@ export class ConstructionArea implements IConstructionArea{
               public days: {
                 [key: string] : IConstructionAreaDay
               },
-              public notes: Note[] ){}
+              public notes: Note[], 
+              public progress: string){}
 }
