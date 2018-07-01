@@ -1,10 +1,10 @@
 <div *ngFor="let cManager of constructionManagers">
   <mat-grid-list class="pl-grid-list" cols ="7" rowHeight="2:3">
-    <mat-grid-tile style="border-bottom: 2px solid">
+    <mat-grid-tile style="border-bottom: 2px dashed;">
       {{cManager.firstName}}  {{cManager.lastName}}
     </mat-grid-tile>
 
-    <mat-grid-tile *ngFor="let day of calWeeks" style ="border-right: 2px solid">
+    <mat-grid-tile *ngFor="let day of calWeeks" style ="border-right: 2px solid; border-bottom: 2px dashed;">
       <pl-calendar-week-item [date]="day" [bauleiter]="cManager"></pl-calendar-week-item>
     </mat-grid-tile>
   </mat-grid-list>
