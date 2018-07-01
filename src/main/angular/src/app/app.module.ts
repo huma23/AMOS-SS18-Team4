@@ -92,6 +92,7 @@ import { DetailDialogFilesComponent } from './calendar/detail-dialog-files/detai
 import { DetailDialogImagesComponent } from './calendar/detail-dialog-images/detail-dialog-images.component';
 import { NotesComponent } from './detail-construction-area/notes/notes.component';
 import { ProgressComponent } from './detail-construction-area/progress/progress.component';
+import { StateComponent } from './detail-construction-area/state/state.component';
 
 
 
@@ -126,7 +127,8 @@ import { ProgressComponent } from './detail-construction-area/progress/progress.
     DetailDialogImagesComponent,
     DetailDialogInfoComponent,
     NotesComponent,
-    ProgressComponent
+    ProgressComponent,
+    StateComponent
   ],
   imports: [
     BrowserModule,
