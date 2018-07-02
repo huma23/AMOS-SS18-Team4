@@ -12,18 +12,15 @@ import {PlToolbarSharedService} from "./toolbar-shared.service";
 export class PlToolbarComponent
 {
   title = 'Planungstafel';
-  loggedIn = false;
 
-  constructor(private authService: AuthService,
+  constructor(public authService: AuthService,
               private router:Router,
               public shared:PlToolbarSharedService){
-    this.loggedIn = authService.hasValidToken();
   }
 
   callLogout(){
     this.authService.removeToken();
     this.router.navigateByUrl("/login");
-    this.loggedIn = false;
   }
 
   showLeft(bool : boolean){
