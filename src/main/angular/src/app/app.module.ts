@@ -43,7 +43,7 @@ import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AppService } from "./app.service";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { PlToolbarComponent } from "./toolbar/toolbar.component";
+import {PlToolbarComponent} from "./toolbar/toolbar.component";
 import { MainCalendarComponent } from './calendar/main-calendar/main-calendar.component';
 import { CalendarHeaderComponent } from './calendar/calendar-header/calendar-header.component';
 import { CalendarContentComponent } from './calendar/calendar-content/calendar-content.component';
@@ -92,6 +92,7 @@ import { DetailDialogFilesComponent } from './calendar/detail-dialog-files/detai
 import { DetailDialogImagesComponent } from './calendar/detail-dialog-images/detail-dialog-images.component';
 import { NotesComponent } from './detail-construction-area/notes/notes.component';
 import { ProgressComponent } from './detail-construction-area/progress/progress.component';
+import {PlToolbarSharedService} from "./toolbar/toolbar-shared.service";
 
 
 
@@ -179,7 +180,8 @@ import { ProgressComponent } from './detail-construction-area/progress/progress.
       VehicleResolver,
       ConstructionAreaResolver,
       ConstructionLadderResolver,
-      AddResourceService
+      AddResourceService,
+      PlToolbarSharedService
   ],
   entryComponents:[DoubleDropRessourceComponent, DetailDialogComponent],
   bootstrap: [AppComponent]
