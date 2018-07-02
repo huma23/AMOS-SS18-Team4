@@ -21,17 +21,17 @@
  *
  */
 
-import {AfterViewInit, Component, OnInit, ViewChild} 
-from '@angular/core';
+import {Component, OnInit}
+  from '@angular/core';
 
 import { ActivatedRoute, Router }
 from '@angular/router';
 
 import { CalenderStoreService }
 from '../services/calender-store.service';
+import {PlToolbarSharedService} from "../toolbar/toolbar-shared.service";
 
-import {MatDrawer}
-from "@angular/material";
+
 
 
 
@@ -69,7 +69,8 @@ from "@angular/material";
 
   constructor( private route: ActivatedRoute,
                private cSS : CalenderStoreService,
-               private router : Router)
+               private router : Router,
+               public sharedToolbar: PlToolbarSharedService)
   {
     // sorgt dafür, dass die Komponente neugeladen wird, auch wenn sich nur die Parameter ändern
     this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
@@ -89,7 +90,6 @@ from "@angular/material";
    */
   ngOnInit()
   {
-
 
     // speichert die aktuelle Belegung der Parameter im Routenpfad /app/:year/:week
     const params = this.route.snapshot.params;

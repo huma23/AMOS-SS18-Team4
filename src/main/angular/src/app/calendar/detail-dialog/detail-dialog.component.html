@@ -15,17 +15,15 @@
           <div fxLayout="column" fxLayoutAlign="space-evenly stretch" style="margin-right: 5%;">
 
             <pl-progress [progressBarValue]="data.constructionArea.progress" [id]="data.constructionArea.id"></pl-progress>
-            <mat-card>
-                <h4>Status: {{data.constructionArea.state}}</h4>
-            </mat-card>
+            <pl-state [constructionArea]="data.constructionArea"></pl-state>
             <pl-notes [notes]="data.constructionArea.notes" [id]="data.constructionArea.id"></pl-notes>
             <pl-detail-dialog-files [constructionArea]="data.constructionArea"></pl-detail-dialog-files>
-           
+
           </div>
         </div>
           <!-- Bauherr / Kundeninformationen -->
           <pl-detail-dialog-info [constructionArea]="data.constructionArea"></pl-detail-dialog-info>
-        
+
         </div>
       </mat-tab>
       <mat-tab label="Fotos" >

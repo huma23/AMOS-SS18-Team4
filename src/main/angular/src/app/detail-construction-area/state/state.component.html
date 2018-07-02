@@ -1,0 +1,15 @@
+<mat-card>
+  <h4 >Status: {{constructionArea.state}}</h4>
+  <div *ngIf="edit === false">
+    <mat-icon  (click)="toggleEdit()">edit</mat-icon>
+  </div>
+  <div *ngIf="edit === true">
+    <p>Zustand wählen: </p>
+    <select  [(ngModel)]="selectedState" id="selectedState" >
+      <option value="" disabled selected>>Wähle einen Zustand aus></option>
+      <option *ngFor="let state of states" [value]="state" >{{state}}</option>
+    </select><br>
+    <mat-icon (click)="toggleEdit()">done</mat-icon>
+  </div>
+
+</mat-card>

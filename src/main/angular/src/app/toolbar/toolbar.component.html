@@ -1,5 +1,14 @@
 <mat-toolbar color="accent">
+  <button *ngIf="shared.showLeft" (click)="showLeft(false)" mat-button><mat-icon>keyboard_arrow_left</mat-icon></button>
+  <button *ngIf="!shared.showLeft" (click)="showLeft(true)" mat-button><mat-icon>keyboard_arrow_right</mat-icon></button>
+
   <span>{{title}}</span>
+
   <span class="fill-space"> </span>
-  <button  mat-button *ngIf="loggedIn" (click)="callLogout()" >Logout</button>
+
+  <button mat-button *ngIf="loggedIn" (click)="callLogout()" >Logout</button>
+
+  <button *ngIf="shared.showRight" (click)="showRight(false)" mat-button><mat-icon>keyboard_arrow_right</mat-icon></button>
+  <button *ngIf="!shared.showRight" (click)="showRight(true)" mat-button><mat-icon>keyboard_arrow_left</mat-icon></button>
+
 </mat-toolbar>
