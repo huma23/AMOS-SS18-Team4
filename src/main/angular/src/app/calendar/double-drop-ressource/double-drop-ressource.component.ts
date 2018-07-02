@@ -22,7 +22,8 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { Validators,  FormBuilder, FormGroup }from "@angular/forms";
 
 @Component({
   selector: 'pl-double-drop-ressource',
@@ -50,12 +51,19 @@ export class DoubleDropRessourceComponent
   public dialogText          : string;
   public dialogSpecificType  : string;
 
-  public dialogTextEnding : string = "wurde bereits für ein anderes Projekt eingetragen.\n Dennoch zuordnen?";
+  public dialogTextMiddle : string = "wurde bereits dem Projekt:  ";
+  public dialogTextEnding : string = " zugeordnet. Dennoch zuordnen\n?";
 
+  public showScheduleRessoureTime : boolean = false;
+
+  public hours    : Array<number>  = new Array( 7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22 );
+  public minutes  : Array<number>  = new Array( 0,15,30,45);
+
+  public scheduleRessForm : FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<DoubleDropRessourceComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any)
+    @Inject(MAT_DIALOG_DATA) public data: any , public fb : FormBuilder)
     { 
       switch (data.type)
       {
@@ -72,6 +80,42 @@ export class DoubleDropRessourceComponent
           this.dialogSpecificType = data.droppedItem.bezeichnung;         
         break;
       }
+
+      this.scheduleRessForm = this.fb.group({
+        hoursFromAreaOne    : [0, Validators.required],  
+        minutesFromAreaOne  : [0, Validators.required],
+        hoursToAreaOne      : [0, Validators.required],
+        minutesToAreaOne    : [0, Validators.required],
+        hoursFromAreaTwo    : [0, Validators.required],
+        minutesFromAreaTwo  : [0, Validators.required],
+        hoursToAreaTwo      : [0, Validators.required], 
+        minutesToAreaTwo    : [0, Validators.required]
+      });
+
+
+    }
+
+    /**
+   * @method
+   * onCloseDialog
+   *
+   * 
+   * 
+   * @param
+   * result : boolean
+   * 
+   *
+   * @return
+   * void
+   *
+   * @description
+   *
+   *
+   *
+   */
+    public showRessourceTimePlanSched() : void
+    {
+      this.showScheduleRessoureTime = true;
     }
 
 /**
@@ -92,8 +136,36 @@ export class DoubleDropRessourceComponent
    *
    *
    */
+
+    public hoursFromArea2GreaterThanHoursToOne() : boolean
+    {
+      console.log("hoursFromArea2GreaterThanHoursToOne()");
+      console.log(this.scheduleRessForm.get('hoursToAreaOne'));
+      console.log(this.scheduleRessForm.get('hoursFromAreaTwo'));
+
+      return this.scheduleRessForm.get('hoursToAreaOne') <= 
+        this.scheduleRessForm.get('hoursFromAreaTwo');
+    }
+
+
     public onCloseDialog(result : boolean)
     {
       this.dialogRef.close(result);
     }
+    public abortScheduleTimeRess(): void
+    {
+      this.dialogRef.close(false);
+    }
+
+    public onSubmit()
+    {
+      console.log(JSON.stringify(this.scheduleRessForm.value));
+    }
+
+    public compareHours(objOne, objTwo) : boolean
+    {
+      return Number(objOne) > Number(objTwo);
+    }
 }
+
+
