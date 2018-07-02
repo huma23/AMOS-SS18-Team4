@@ -92,6 +92,7 @@ import { DetailDialogFilesComponent } from './calendar/detail-dialog-files/detai
 import { DetailDialogImagesComponent } from './calendar/detail-dialog-images/detail-dialog-images.component';
 import { NotesComponent } from './detail-construction-area/notes/notes.component';
 import { ProgressComponent } from './detail-construction-area/progress/progress.component';
+import {PlToolbarSharedService} from "./toolbar/toolbar-shared.service";
 import { StateComponent } from './detail-construction-area/state/state.component';
 
 
@@ -181,7 +182,8 @@ import { StateComponent } from './detail-construction-area/state/state.component
       VehicleResolver,
       ConstructionAreaResolver,
       ConstructionLadderResolver,
-      AddResourceService
+      AddResourceService,
+      PlToolbarSharedService
   ],
   entryComponents:[DoubleDropRessourceComponent, DetailDialogComponent],
   bootstrap: [AppComponent]

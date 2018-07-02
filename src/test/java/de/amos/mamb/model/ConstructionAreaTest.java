@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Test für das Model Construction Area
  */
 public class ConstructionAreaTest {
-/*
+
     private ConstructionArea construction;
     private ConstructionArea construction1;
     private ConstructionArea construction2;
@@ -33,8 +33,13 @@ public class ConstructionAreaTest {
                 "99999",
                 new ConstructionLadder("Max","Test"),
                 false,
-                new HashMap<String, ConstructionAreaDay>(),  new Customer(),"Aktiv",
-                new ArrayList<Note>(), "0");
+                new HashMap<String, ConstructionAreaDay>(),
+                new Customer(),
+                "Aktiv",
+                new ArrayList<FileInfo>(),
+                new ArrayList<FileInfo>(),
+                new ArrayList<Note>(),
+                "0");
         construction1 = new ConstructionArea("Nürnberg",
                 "2010-06-01",
                 "2010-06-08",
@@ -43,7 +48,10 @@ public class ConstructionAreaTest {
                 "55555",
                 new ConstructionLadder("Test","Test"),
                 true,
-                new HashMap<String, ConstructionAreaDay>(), new Customer(), "Aktiv",
+                new HashMap<String, ConstructionAreaDay>(),
+                new Customer(), "Aktiv",
+                new ArrayList<FileInfo>(),
+                new ArrayList<FileInfo>(),
                 new ArrayList<Note>(), "0");
 
         construction2 = new ConstructionArea("Herzogenaurach",
@@ -54,8 +62,10 @@ public class ConstructionAreaTest {
                 "Zittertal",
                 new ConstructionLadder("Test","Test"),
                 false,
-                new HashMap<String, ConstructionAreaDay>(),  new Customer(), "Aktiv"
-                ,new ArrayList<Note>(),"0"
+                new HashMap<String, ConstructionAreaDay>(),  new Customer(), "Aktiv",
+                new ArrayList<FileInfo>(),
+                new ArrayList<FileInfo>(),
+                new ArrayList<Note>(),"0"
                );
 
         vehicle = new Vehicle("BMW", "Test", "M3");
@@ -152,5 +162,4 @@ public class ConstructionAreaTest {
         assertFalse(construction1.days.get("2010-06-02").vehicleList.contains(vehicle));
         assertFalse(construction2.days.get("2018-01-20").materialList.contains(material));
     }
-    */
 }
