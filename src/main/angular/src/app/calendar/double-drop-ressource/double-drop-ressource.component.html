@@ -1,10 +1,100 @@
 <h1 mat-dialog-title>Achtung !</h1>
 <div mat-dialog-content>
-  <p>{{dialogText}}: </p>
-  <p style="color: red"> {{dialogSpecificType}}</p>
-  <p>{{dialogTextEnding}}</p>
+  <div  fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10%">
+    <div>
+      <p>{{dialogText}}: </p>
+      <p style="color: red"> {{dialogSpecificType}}</p>
+      <p>{{dialogTextMiddle}}</p> 
+      <p style="color: red">{{data.otherProject.name}}</p> 
+      <p>{{dialogTextEnding}}</p>
+    </div>
+<div *ngIf="showScheduleRessoureTime">
+  <h3>Uhrzeit für die Resspurce {{dialogSpecificType}} planen</h3>  
+  <p style="color: red"> {{dialogSpecificType}}</p>  einplanen
+  <form (ngSubmit)="onSubmit(formContent)" class="example-form" fxLayout="column" fxLayoutAlign="space-around center" #exAForm="ngForm">     
+    <h4>Baustelle 1 </h4>
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+    <h5>Von</h5>
+    <mat-form-field>
+      <mat-select placeholder="Stunde">
+        <mat-option *ngFor="let opt of hours" value="opt" ngDefaultControl [(ngModel)]="formContent.hoursFromAreaOne" name="hoursFromAreaOne" required>{{opt.toString()}}</mat-option> 
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Minuten">
+        <mat-option *ngFor="let opt of minutes; let i = index;" value="opt" required ngDefaultControl [(ngModel)]="formContent.minutesFromAreaOne" name="minutesFromAreaOne">
+          <span *ngIf="i == 0">0</span>{{opt.toString()}}
+        </mat-option>    
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center" >
+      <h5>Bis</h5>
+      <mat-form-field>
+        <mat-select placeholder="Stunde">
+          <mat-option *ngFor="let opt of hours" value="opt"  ngDefaultControl [(ngModel)]= "formContent.hoursToAreaOne" name="hoursToAreaOne" required>
+           <span *ngIf="((opt > formContent.hoursFromAreaOne) && (formContent.hoursFromAreaOne != 0))"> {{opt.toString()}}</span>
+          </mat-option> 
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Minuten">
+          <mat-option *ngFor="let opt of minutes; let i = index;" value="opt" required ngDefaultControl [(ngModel)]= "formContent.minutesToAreaOne" name="minutesToAreaOne">
+            <span *ngIf="i == 0">0</span>{{opt.toString()}}
+          </mat-option>    
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <h4>Baustelle 2 </h4>
+    <div fxLayout="row" fxLayoutAlign="space-around center" > 
+      <h5>Von</h5>
+      <mat-form-field>
+        <mat-select placeholder="Stunde">
+          <mat-option *ngFor="let opt of hours" value="opt"  ngDefaultControl [(ngModel)]="formContent.hoursFromAreaTwo"  name="hoursFromAreaTwo" required>
+          <span *ngIf="opt >= formContent.hoursToAreaTwo">  {{opt.toString()}} </span>
+          </mat-option> 
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Minuten">
+          <mat-option *ngFor="let opt of minutes; let i = index;" value="opt" required ngDefaultControl [(ngModel)]="formContent.minutesFromAreaTwo" name="minutesFromAreaTwo">
+            <span *ngIf="i == 0">0</span>{{opt.toString()}}
+          </mat-option>    
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+        <h5>Bis</h5>
+        <mat-form-field>
+          <mat-select placeholder="Stunde">
+            <mat-option *ngFor="let opt of hours" value="opt" ngDefaultControl [(ngModel)]= "formContent.hoursToAreaTwo" name="hoursToAreaTwo" required>
+             <span *ngIf="opt > formContent.hoursFromAreaTwo"> {{opt.toString()}}</span>
+            </mat-option> 
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Minuten">
+            <mat-option *ngFor="let opt of minutes; let i = index;" value="opt" ngDefaultControl required [(ngModel)]= "formContent.minutesToAreaTwo" name="minutesToAreaTwo">
+              <span *ngIf="i == 0">0</span>{{opt.toString()}}
+            </mat-option>    
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+      <button mat-button type="submit">
+      Speichern
+      </button>
+      <button mat-button (click)="abortScheduleTimeRess()">
+        Abbrechen
+      </button>
+  
+    </div>
+</form>
+</div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCloseDialog(false)">Nein, nicht hinzufügen</button>
-  <button mat-button (click)="onCloseDialog(true)">Ja, hinzufügen</button>
+  <button mat-button *ngIf="!showScheduleRessoureTime" (click)="onCloseDialog(true)">Ja</button>
+  <button mat-button *ngIf="!showScheduleRessoureTime" (click)="onCloseDialog(false)">Nein</button>
+  <button mat-icon-button title="Uhrzeiten planen" *ngIf="!showScheduleRessoureTime" (click)="showRessourceTimePlanSched()"><mat-icon>alarm</mat-icon></button>
 </div>

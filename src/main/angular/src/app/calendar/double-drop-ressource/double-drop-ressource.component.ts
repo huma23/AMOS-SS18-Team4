@@ -23,6 +23,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { FormControl, Validators, FormsModule }from "@angular/forms";
 
 @Component({
   selector: 'pl-double-drop-ressource',
@@ -50,7 +51,17 @@ export class DoubleDropRessourceComponent
   public dialogText          : string;
   public dialogSpecificType  : string;
 
-  public dialogTextEnding : string = "wurde bereits für ein anderes Projekt eingetragen.\n Dennoch zuordnen?";
+  public dialogTextMiddle : string = "wurde bereits dem Projekt:  ";
+  public dialogTextEnding : string = " zugeordnet. Dennoch zuordnen\n?";
+
+  public showScheduleRessoureTime : boolean = false;
+
+  public hours    : Array<number>  = new Array(7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22);
+  public minutes  : Array<number>  = new Array( 0,15,30,45);
+
+  public formContent          : ScheduleTimedRessourceForm;
+  public hoursFormControl     : FormControl;
+  public crossAreaFormControl : FormControl;
 
 
   constructor(
@@ -72,6 +83,34 @@ export class DoubleDropRessourceComponent
           this.dialogSpecificType = data.droppedItem.bezeichnung;         
         break;
       }
+
+      this.formContent          = new ScheduleTimedRessourceForm(0,0,0,0,0,0,0,0);
+
+
+
+    }
+
+    /**
+   * @method
+   * onCloseDialog
+   *
+   * 
+   * 
+   * @param
+   * result : boolean
+   * 
+   *
+   * @return
+   * void
+   *
+   * @description
+   *
+   *
+   *
+   */
+    public showRessourceTimePlanSched() : void
+    {
+      this.showScheduleRessoureTime = true;
     }
 
 /**
@@ -96,4 +135,35 @@ export class DoubleDropRessourceComponent
     {
       this.dialogRef.close(result);
     }
+    public abortScheduleTimeRess(): void
+    {
+      this.dialogRef.close(false);
+    }
+
+    public onSubmit(form: ScheduleTimedRessourceForm)
+    {
+      console.log(JSON.stringify(form));
+    }
+
+    public compareHours(objOne, objTwo) : boolean
+    {
+      return Number(objOne) > Number(objTwo);
+    }
+}
+
+
+export class ScheduleTimedRessourceForm
+{
+  constructor
+  (
+    public hoursFromAreaOne   : number, 
+    public minutesFromAreaOne : number,
+    public hoursToAreaOne     : number, 
+    public minutesToAreaOne   : number,
+    public hoursFromAreaTwo   : number, 
+    public minutesFromAreaTwo : number,
+    public hoursToAreaTwo     : number, 
+    public minutesToAreaTwo   : number,
+  )
+  {}
 }
