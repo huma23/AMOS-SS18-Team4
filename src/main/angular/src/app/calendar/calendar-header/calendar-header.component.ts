@@ -1,7 +1,7 @@
 /**
- *  @license 
- *  
- * 
+ *  @license
+ *
+ *
  * Copyright [2018] [(MAMB Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)]
 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,16 +15,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * Copyright (c) 2018 by MAMB (Manuel HUbert, Marcel Werle, Artur Mandybura and Benjamin Stone)
- * 
- * 
+ *
+ *
  */
 
 import {Input , Component, OnInit }
 from '@angular/core';
 
-import { CalenderStoreService } 
+import { CalenderStoreService }
 from '../../services/calender-store.service';
 
 @Component({
@@ -41,22 +41,22 @@ export class CalendarHeaderComponent implements OnInit {
   @Input ()
   public currentYear        : number;
 
-  private csService         : CalenderStoreService;
+  public csService         : CalenderStoreService;
 
   public nextWeek          : number;
   public lastWeek          : number;
   public hasLastWeek       : boolean;
   public hasNextWeek       : boolean;
 
-  public daysOfTheWeek      : Array<string> = 
-  [ 
+  public daysOfTheWeek      : Array<string> =
+  [
       "filler",
       "Montag",
       "Dienstag",
-      "Mittwoch", 
-      "Donnerstag", 
-      "Freitag", 
-      "Samstag" 
+      "Mittwoch",
+      "Donnerstag",
+      "Freitag",
+      "Samstag"
   ];
 
 
@@ -72,7 +72,7 @@ export class CalendarHeaderComponent implements OnInit {
       this.lastWeek = this.currentWeekNumber - 1;
       this.hasLastWeek = true;
     }
-    else 
+    else
     {
       this.hasLastWeek = false;
     }
@@ -80,14 +80,16 @@ export class CalendarHeaderComponent implements OnInit {
     let weeksOfTheYear = this.csService.getWeeksOfTheYear(this.currentYear);
     if (this.currentWeekNumber < weeksOfTheYear)
     {
-      this.nextWeek = this.currentWeekNumber*1 + 1*1;  
+      this.nextWeek = this.currentWeekNumber*1 + 1*1;
       this.hasNextWeek = true;
     }
-    else 
+    else
     {
       this.hasNextWeek = false;
-    } 
+    }
   }
-  
 
+  selectDay(i:number){
+    this.csService.setSelectedDay(i);
+  }
 }

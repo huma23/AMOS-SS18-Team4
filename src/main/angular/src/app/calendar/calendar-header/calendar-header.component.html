@@ -14,7 +14,7 @@
   <div *ngFor="let headerItem of currentWeekHeader; let i = index">
     <span *ngIf="i != 0">
         <mat-grid-tile style=" border-right: 2px dashed red;">
-          <mat-card>
+          <mat-card [ngClass]="this.csService.getSelectedDay() == i? 'pl-selected-day':''" (click)="selectDay(i)">
            {{daysOfTheWeek[i]}}
            <br/> {{headerItem}}
           </mat-card>

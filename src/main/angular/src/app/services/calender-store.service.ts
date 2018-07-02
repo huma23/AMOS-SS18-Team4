@@ -50,6 +50,8 @@ export class CalenderStoreService
 
   public  currentWeek : number;
   public  currentYear : number;
+  private  selectedDay : number;
+  public  selectedDayString : string;
   private httpClient  : HttpClient;
 
   constructor(_httpClient: HttpClient)
@@ -60,8 +62,22 @@ export class CalenderStoreService
     moment.locale('de');
     this.currentWeek        = moment().isoWeek();
     this.currentYear        = moment().year();
-
+    this.selectedDay        = moment().isoWeekday();
+    this.selectedDayString  = this.createSelectedDateString();
     //------------------------------------------------------------------------------
+  }
+
+  createSelectedDateString():string{
+    return moment().day(this.selectedDay).format("DD.MM.YYYY");
+  }
+
+  setSelectedDay(d : number){
+    this.selectedDay = d;
+    this.selectedDayString = this.createSelectedDateString();
+  }
+
+  getSelectedDay(): number {
+    return this.selectedDay;
   }
 
   /**
@@ -143,13 +159,13 @@ export class CalenderStoreService
     return this.getCalenderWeekInFormat(year, week, "Do MMM");
   }
 
-  
+
   /**
    * @method
-   * 
+   *
    *
    * @param
-   *  
+   *
    *
    * @return
    * String Array
@@ -163,17 +179,17 @@ export class CalenderStoreService
     return this.getCalenderWeekInFormat(year, week, "YYYY-MM-DD");
   }
 
-  
+
   /**
    * @method
-   * 
+   *
    *
    * @param
-   * 
-   * 
+   *
+   *
    *
    * @return
-   * 
+   *
    *
    * @description
    *
@@ -193,20 +209,20 @@ export class CalenderStoreService
 
     return searchedWeekResult;
   }
-  
+
   /**
    * @method
    * getWeeksOfTheYear
    *
    * @param
    * year   :  Jahr für das die Wochen geholt werden soll
-   * 
+   *
    *
    * @return
    * number
    *
    * @description
-   * Gibt die Anzahl der Wochen in dem angefragten Jahr zurück. 
+   * Gibt die Anzahl der Wochen in dem angefragten Jahr zurück.
    *
    *
    */

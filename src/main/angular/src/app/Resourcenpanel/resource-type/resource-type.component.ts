@@ -9,6 +9,7 @@ import {IConstructionLadder} from "../IConstructionLadder";
 import {IMaterial} from "../IMaterial";
 import {ActivatedRoute} from "@angular/router";
 import {EmployeeResolver} from "./resource-type-resolver.service";
+import {CalenderStoreService} from "../../services/calender-store.service";
 
 @Component({
   selector: 'app-resource-type',
@@ -26,10 +27,8 @@ export class ResourceTypeComponent implements OnInit {
 
   public items: ResourceItem[];
 
-  constructor(private route:ActivatedRoute) {
+  constructor(private route:ActivatedRoute, public csService:CalenderStoreService) {
   }
-
-
 
   ngOnInit() {
     //get all employees, vehicles and materials

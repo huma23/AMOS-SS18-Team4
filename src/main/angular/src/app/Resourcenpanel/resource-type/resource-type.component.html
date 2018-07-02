@@ -1,6 +1,7 @@
 <h3>Verfügbare Ressourcen</h3>
 <span style="width:2px;"></span>
 <mat-icon (click)="refreshResources()">refresh</mat-icon>
+<p>{{csService.selectedDayString}}</p>
 <div class = borderOutside>
   <app-resource [employeeList]="employees" [vehicleList]="vehicles" [materialList]="materials">
   </app-resource>
