@@ -111,7 +111,7 @@ export class CalenderStoreService
 
     //Hole den aktuellen Wochenheader und füge noch die Kalenderwoche hinzu
     let calHeader : string [] = this.getCalenderWeekHeader(year,week);
-    calHeader.unshift(week.toString());
+    //calHeader.unshift(week.toString());
     result = new CalendarWeek(
       week,
       this.currentYear,
@@ -143,13 +143,13 @@ export class CalenderStoreService
     return this.getCalenderWeekInFormat(year, week, "Do MMM");
   }
 
-  
+
   /**
    * @method
-   * 
+   *
    *
    * @param
-   *  
+   *
    *
    * @return
    * String Array
@@ -163,17 +163,17 @@ export class CalenderStoreService
     return this.getCalenderWeekInFormat(year, week, "YYYY-MM-DD");
   }
 
-  
+
   /**
    * @method
-   * 
+   *
    *
    * @param
-   * 
-   * 
+   *
+   *
    *
    * @return
-   * 
+   *
    *
    * @description
    *
@@ -193,20 +193,20 @@ export class CalenderStoreService
 
     return searchedWeekResult;
   }
-  
+
   /**
    * @method
    * getWeeksOfTheYear
    *
    * @param
    * year   :  Jahr für das die Wochen geholt werden soll
-   * 
+   *
    *
    * @return
    * number
    *
    * @description
-   * Gibt die Anzahl der Wochen in dem angefragten Jahr zurück. 
+   * Gibt die Anzahl der Wochen in dem angefragten Jahr zurück.
    *
    *
    */

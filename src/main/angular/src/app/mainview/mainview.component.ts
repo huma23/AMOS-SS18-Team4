@@ -39,7 +39,8 @@ import {PlToolbarSharedService} from "../toolbar/toolbar-shared.service";
 ({
   selector: 'pl-mainview',
   templateUrl: './mainview.component.html',
-  styleUrls: ['./mainview.component.css']
+  styleUrls: ['./mainview.component.css'],
+  host: {'class': 'pl-flex'}
 })
 
 /**

@@ -1,4 +1,5 @@
-<div *ngFor="let cManager of constructionManagers">
+<!--<div *ngFor="let cManager of constructionManagers">
+
   <mat-grid-list class="pl-grid-list" cols ="7" rowHeight="2:3">
     <mat-grid-tile style="border-bottom: 2px dashed;">
       {{cManager.firstName}}  {{cManager.lastName}}
@@ -8,4 +9,34 @@
       <pl-calendar-week-item [date]="day" [bauleiter]="cManager"></pl-calendar-week-item>
     </mat-grid-tile>
   </mat-grid-list>
+  -->
+<table>
+  <tbody>
+      <tr>
+        <td style="width:10%; height: 80px; text-align:center;">
+          KW:{{calendarWeek}}
+          <br/>
+          <span *ngIf= "hasLastWeek">
+                <a [routerLink]="['/app',calendarYear, lastWeek]">{{lastWeek}}</a>
+                </span>
+          <span *ngIf="hasNextWeek">
+                  <a [routerLink]="['/app',calendarYear, nextWeek]">{{nextWeek}}</a>
+                </span>
+        </td>
+        <td *ngFor="let headerItem of currentWeekHeader; let i = index" style="width: 15%; border-left: 1px solid; text-align:center;">
+          {{daysOfTheWeek[i]}}<br/>{{headerItem}}
+        </td>
+      </tr>
+      <tr *ngFor="let cManager of constructionManagers">
+        <td style="width: 10%; border-top: 1px dashed; min-height:150px;">
+          {{cManager.firstName}}  {{cManager.lastName}}
+        </td>
+        <td *ngFor="let day of calWeeks" style ="width: 15%; border-left: 1px solid; border-top: 1px dashed;">
+          <pl-calendar-week-item [date]="day" [bauleiter]="cManager"></pl-calendar-week-item>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<!--
 </div>
+-->

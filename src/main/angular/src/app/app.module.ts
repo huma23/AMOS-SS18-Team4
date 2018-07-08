@@ -45,7 +45,6 @@ import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { PlToolbarComponent } from "./toolbar/toolbar.component";
 import { MainCalendarComponent } from './calendar/main-calendar/main-calendar.component';
-import { CalendarHeaderComponent } from './calendar/calendar-header/calendar-header.component';
 import { CalendarContentComponent } from './calendar/calendar-content/calendar-content.component';
 import { CalenderStoreService } from './services/calender-store.service';
 import { CalendarWeekItemComponent } from './calendar/calendar-week-item/calendar-week-item.component';
@@ -103,7 +102,6 @@ import { StateComponent } from './detail-construction-area/state/state.component
   declarations: [
     AppComponent,
     MainCalendarComponent,
-    CalendarHeaderComponent,
     CalenderConstructionAreaComponent,
     CalendarContentComponent,
     CalendarWeekItemComponent,
