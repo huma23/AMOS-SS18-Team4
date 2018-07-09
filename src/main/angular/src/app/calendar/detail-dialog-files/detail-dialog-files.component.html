@@ -1,15 +1,18 @@
-<div fxLayout="column" fxLayoutAlign="space-between start">
-  <h4>Anhänge</h4>
-  <div fxFill fxLayout="column" fxLayoutAlign="space-between center" *ngFor="let fileInfo of constructionArea.attachments">
-    <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
-      <a target="_blank" href="/api/constructionArea/attachment/{{fileInfo.id}}" rel="noopener">{{fileInfo.name}}</a>
-      <p>{{fileInfo.date}}</p>
+<mat-card>
+  <div fxLayout="column" fxLayoutAlign="space-between start">
+    <h4>Anhänge</h4>
+    <div fxFill fxLayout="column" fxLayoutAlign="space-between center" *ngFor="let fileInfo of constructionArea.attachments">
+      <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+        <a target="_blank" href="/api/constructionArea/attachment/{{fileInfo.id}}" rel="noopener">{{fileInfo.name}}</a>
+        <p>{{fileInfo.date}}</p>
+      </div>
+    </div>
+    <div fxFill fxLayout="row" fxLayoutAlign="end center">
+      <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+        <input type="file" name="file" (change)="onFileChange($event)"/>
+        <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">Upload</button>
+      </form>
     </div>
   </div>
-  <div fxFill fxLayout="row" fxLayoutAlign="end center">
-    <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
-      <input type="file" name="file" (change)="onFileChange($event)"/>
-      <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">Upload</button>
-    </form>
-  </div>
-</div>
+
+</mat-card>
