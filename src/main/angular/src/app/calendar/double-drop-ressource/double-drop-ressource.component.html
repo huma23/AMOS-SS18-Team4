@@ -12,7 +12,7 @@
   <h3>Uhrzeit für die Ressource {{dialogSpecificType}} planen</h3>
   <p style="color: red"> {{dialogSpecificType}}</p>  einplanen
   <form (ngSubmit)="onSubmit()" [formGroup]="scheduleRessForm" class="example-form" fxLayout="column" fxLayoutAlign="space-around center">
-    <h4>Baustelle 1: {{"aktuelle"+actualConstructionArea.name+ actualConstructionArea.id}} </h4>
+    <h4>Baustelle 1: {{actualConstructionArea.name}} </h4>
     <div fxLayout="row" fxLayoutAlign="space-around center" >
     <h5>Von</h5>
     <mat-form-field>
