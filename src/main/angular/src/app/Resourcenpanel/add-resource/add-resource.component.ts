@@ -17,6 +17,9 @@ import {ConstructionAreaForm} from "../../../model/constructionAreaForm";
 import {ICustomer} from "../ICustomer";
 import {ProgressType} from "../../../model/ProgressType";
 import {Note} from "../../../model/Note";
+import {EmployeeForm} from "../../../model/employeeForm";
+import {VehicleForm} from "../../../model/vehicleForm";
+import {MaterialForm} from "../../../model/materialForm";
 
 @Component({
   selector: 'pl-add-resource',
@@ -76,7 +79,7 @@ export class AddResourceComponent implements OnInit {
 
   //add "Mitarbeiter" through POST Request to the DB
   addEmployee(firstName,lastName,age,skills){
-    let emp = new Employee(firstName,lastName,age,[skills]);
+    let emp = new EmployeeForm(firstName,lastName,age,[skills]);
     console.log(emp +","+JSON.stringify(emp));
     this._resourceService.saveEmployee(emp).subscribe((res:Employee)=>console.log(res));
 
@@ -84,7 +87,7 @@ export class AddResourceComponent implements OnInit {
 
   //add "Fahrzeug" through POST Request to the DB
   addVehicle(bezeichnung,size,modell){
-    let vehicle = new Vehicle(bezeichnung,size,modell);
+    let vehicle = new VehicleForm(bezeichnung,size,modell);
     console.log(vehicle +","+JSON.stringify(vehicle));
     this._resourceService.saveVehicle(vehicle).subscribe((res:Vehicle)=>console.log(res));
 
@@ -92,7 +95,7 @@ export class AddResourceComponent implements OnInit {
 
   //add "Betriebsmittel" through POST Request to the DB
   addMaterial(bezeichnung,description,location){
-    let material = new Material(bezeichnung,description,location);
+    let material = new MaterialForm(bezeichnung,description,location);
     console.log(material +","+JSON.stringify(material));
     this._resourceService.saveMaterials(material).subscribe((res:Material)=>console.log(res));
 

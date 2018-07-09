@@ -85,6 +85,7 @@ export class AddResourceService {
   }
 
   private sendAddResourceData(data: any, id:string):void{
+    debugger;
     let url = BACKEND_URLS.CONSTRUCTION_AREA_URL + "/" + id + BACKEND_URLS.CONSTRUCTION_AREA_ADD_RESOURCE_PART;
     this.send(data, url, id);
   }

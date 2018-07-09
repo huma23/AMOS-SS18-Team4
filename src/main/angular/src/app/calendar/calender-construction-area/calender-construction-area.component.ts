@@ -527,15 +527,15 @@ export class CalenderConstructionAreaComponent implements OnInit
     if (dropObject.hasOwnProperty('skills'))
     {
       return  new Employee(dropObject.firstName, dropObject.lastName,
-        dropObject.age, dropObject.skills);
+        dropObject.age, dropObject.skills, dropObject.id);
     }
     else if (dropObject.hasOwnProperty('modell'))
     {
-      return new  Vehicle(dropObject.bezeichnung,dropObject.size, dropObject.modell);
+      return new  Vehicle(dropObject.bezeichnung,dropObject.size, dropObject.modell, dropObject.id);
     }
     else if (dropObject.hasOwnProperty('description'))
     {
-      return new Material(dropObject.bezeichnung, dropObject.description, dropObject.location);
+      return new Material(dropObject.bezeichnung, dropObject.description, dropObject.location, dropObject.id);
     }
   }
  /**
@@ -609,7 +609,7 @@ export class CalenderConstructionAreaComponent implements OnInit
       height: '90%',
       width:'90%',
       data: {
-        constructionArea: this.constructionArea, 
+        constructionArea: this.constructionArea,
         employeeList: this.constructionAreaDay.employeeList,
         vehicleList: this.constructionAreaDay.vehicleList,
         materialList: this.constructionAreaDay.materialList
@@ -617,7 +617,7 @@ export class CalenderConstructionAreaComponent implements OnInit
     });
   }
 
-  testCalcTime(data:(Employee | Material | Vehicle)) : void 
+  testCalcTime(data:(Employee | Material | Vehicle)) : void
   {
     debugger
     if (data instanceof Employee)
