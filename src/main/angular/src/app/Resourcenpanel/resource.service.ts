@@ -16,6 +16,7 @@ import {ConstructionLadder} from "../../model/constructionLadder";
 import {ConstructionAreaForm} from "../../model/constructionAreaForm";
 import {ICustomer} from "./ICustomer";
 import {Customer} from "../../model/customer";
+import {Reservation} from "../../model/Reservation";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -116,6 +117,13 @@ export class ResourceService{
   saveCustomer(customer: Customer):Observable<ICustomer>{
     let body = JSON.stringify(customer);
     return this.http.post<Customer>(this._customerUri, body, httpOptions);
+  }
+
+  saveReservation(res:Reservation, constructionAreaId, date):Observable<Reservation>{
+    debugger;
+    let body = JSON.stringify(res);
+    return this.http.post<Reservation>("/api/constructionArea/"+constructionAreaId+"/addReservation/"+date, body, httpOptions).do(data => console.log(data));
+
   }
 
 }
