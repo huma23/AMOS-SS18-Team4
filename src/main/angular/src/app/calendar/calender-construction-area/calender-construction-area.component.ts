@@ -209,7 +209,7 @@ export class CalenderConstructionAreaComponent implements OnInit
             console.log(doubleUsedRessource);
             console.log(this.constructionArea);
 
-            this.dialogIfDropDoubleRessource(RessourceType.Mitarbeiter, newRessource,this.constructionArea, doubleUsedRessource, this.date)
+            this.dialogIfDropDoubleRessource(RessourceType.Mitarbeiter, newRessource, this.constructionArea, doubleUsedRessource, this.date)
             .subscribe((dialogAnswer : boolean) =>
             {
               if(dialogAnswer)

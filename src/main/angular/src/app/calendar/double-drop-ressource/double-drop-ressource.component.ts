@@ -171,7 +171,8 @@ export class DoubleDropRessourceComponent
         return false;
       }
       //fromOne < toOne && toOne <= fromTwo && fromTwo < toTwo
-      if(hoursFromAreaOne < hoursToAreaOne && hoursToAreaOne <= hoursFromAreaTwo && hoursFromAreaTwo < hoursToAreaTwo && hoursToAreaTwo > hoursToAreaOne)
+      if((hoursFromAreaOne < hoursToAreaOne && hoursToAreaOne <= hoursFromAreaTwo && hoursFromAreaTwo < hoursToAreaTwo && hoursToAreaTwo > hoursToAreaOne) ||
+        (hoursFromAreaOne < hoursToAreaOne && hoursToAreaOne >= hoursFromAreaTwo && hoursFromAreaTwo < hoursToAreaTwo && hoursToAreaTwo < hoursToAreaOne) )
       {
         return true;
       }
@@ -210,6 +211,21 @@ export class DoubleDropRessourceComponent
       console.log(JSON.stringify(this.scheduleRessForm.value));
       this._resourceservice.saveReservation(reservationAreaOne, this.actualConstructionArea.id, this.data.date).subscribe(data=>console.log(JSON.stringify(data)));
       this._resourceservice.saveReservation(reservationAreaTwo, this.otherConstructionArea.id, this.data.date).subscribe(data=>console.log(JSON.stringify(data)));
+      debugger;
+      switch (this.data.type)
+      {
+        case 0:
+          this.actualConstructionArea.days[this.data.date].employeeList.push(this.data.droppedItem);
+          break;
+        case 1:
+          this.actualConstructionArea.days[this.data.date].vehicleList.push(this.data.droppedItem);
+          break;
+        case 2:
+          this.actualConstructionArea.days[this.data.date].materialList.push(this.data.droppedItem);
+          break;
+      }
+      this._resourceservice.saveConstructionArea(this.actualConstructionArea).subscribe(data=>console.log(JSON.stringify((data))));
+
     }
 
     public compareHours(objOne, objTwo) : boolean
