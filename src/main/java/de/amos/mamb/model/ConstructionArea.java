@@ -221,4 +221,29 @@ public class ConstructionArea extends PersistentObject{
     public String getProgress(){
         return this.progress;
     }
+
+    public List<Reservation> getReservations(String date) {
+
+        if(days.keySet().contains(date)){
+            return days.get(date).getReservations();
+        }
+
+        return null;
+    }
+
+    public void addReservations(String date, Reservation res) {
+
+        if(days.keySet().contains(date)){
+            days.get(date).addReservation(res);
+        }
+    }
+
+    public boolean removeReservation(String date, Long resIdL) {
+
+        if(days.keySet().contains(date)){
+            return days.get(date).removeReservation(resIdL);
+        } else {
+            return false;
+        }
+    }
 }

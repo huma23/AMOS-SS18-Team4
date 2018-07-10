@@ -8,17 +8,20 @@ public class ConstructionAreaDay {
     List<Employee> employeeList;
     List<Material> materialList;
     List<Vehicle> vehicleList;
+    List<Reservation> reservations;
 
     public ConstructionAreaDay() {
         this.employeeList = new ArrayList<>();
         this.materialList = new ArrayList<>();
         this.vehicleList = new ArrayList<>();
+        this.reservations = new ArrayList<>();
     }
 
-    public ConstructionAreaDay(List<Employee> employeeList, List<Material> materialList, List<Vehicle> vehicleList) {
+    public ConstructionAreaDay(List<Employee> employeeList, List<Material> materialList, List<Vehicle> vehicleList, List<Reservation> reservations) {
         this.employeeList = employeeList;
         this.materialList = materialList;
         this.vehicleList = vehicleList;
+        this.reservations = reservations;
     }
 
     public List<Employee> getEmployeeList() {
@@ -43,6 +46,14 @@ public class ConstructionAreaDay {
 
     public void setVehicleList(List<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public void addResource(PersistentObject object){
@@ -73,5 +84,34 @@ public class ConstructionAreaDay {
         if(object instanceof Vehicle){
             vehicleList.remove((Vehicle) object);
         }
+    }
+
+    public void addReservation(Reservation newReservation){
+
+        boolean found = false;
+        for(Reservation res : reservations){
+            if(res.getResourceId().equals(newReservation.getResourceId())){
+                res.setStartTime(newReservation.getStartTime());
+                res.setEndTime(newReservation.getEndTime());
+                found = true;
+                break;
+            }
+        }
+
+        if(!found){
+            reservations.add(newReservation);
+        }
+    }
+
+    public boolean removeReservation(Long resIdL){
+
+        for(Reservation res : reservations){
+            if(res.getResourceId().equals(resIdL)){
+                reservations.remove(res);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

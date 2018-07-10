@@ -207,11 +207,14 @@ export class CalenderConstructionAreaComponent implements OnInit
           if(doubleUsedRessource != null)
           {
             console.log(doubleUsedRessource);
-            this.dialogIfDropDoubleRessource(RessourceType.Mitarbeiter, newRessource, doubleUsedRessource)
+            console.log(this.constructionArea);
+
+            this.dialogIfDropDoubleRessource(RessourceType.Mitarbeiter, newRessource, this.constructionArea, doubleUsedRessource, this.date)
             .subscribe((dialogAnswer : boolean) =>
             {
               if(dialogAnswer)
               {
+
                 this.addRessourceToLists(RessourceType.Mitarbeiter, newRessource);
               }
             });
@@ -230,7 +233,7 @@ export class CalenderConstructionAreaComponent implements OnInit
           if(doubleUsedRessource != null)
           {
             console.log(doubleUsedRessource);
-            this.dialogIfDropDoubleRessource(RessourceType.Material, newRessource,doubleUsedRessource)
+            this.dialogIfDropDoubleRessource(RessourceType.Material, newRessource, this.constructionArea, doubleUsedRessource,this.date)
             .subscribe((dialogAnswer : boolean) =>
             {
               if(dialogAnswer)
@@ -253,7 +256,7 @@ export class CalenderConstructionAreaComponent implements OnInit
           if(doubleUsedRessource != null)
           {
             console.log(doubleUsedRessource);
-            this.dialogIfDropDoubleRessource(RessourceType.Fahrzeug, newRessource,doubleUsedRessource)
+            this.dialogIfDropDoubleRessource(RessourceType.Fahrzeug, newRessource,this.constructionArea, doubleUsedRessource, this.date)
             .subscribe((dialogAnswer : boolean) =>
             {
               if(dialogAnswer)
@@ -419,9 +422,9 @@ export class CalenderConstructionAreaComponent implements OnInit
    *
    *
    */
-  private dialogIfDropDoubleRessource(type:RessourceType, droppedItem: any, otherProject : ConstructionArea ) : Observable<any>
+  private dialogIfDropDoubleRessource(type:RessourceType, droppedItem: any, actualProject: ConstructionArea, otherProject : ConstructionArea, date: string) : Observable<any>
   {
-    let injectObject = {type, droppedItem, otherProject};
+    let injectObject = {type, droppedItem, actualProject, otherProject, date};
    console.log(injectObject);
     let dialogRef = this.dialog.open(DoubleDropRessourceComponent,
     {
@@ -527,15 +530,15 @@ export class CalenderConstructionAreaComponent implements OnInit
     if (dropObject.hasOwnProperty('skills'))
     {
       return  new Employee(dropObject.firstName, dropObject.lastName,
-        dropObject.age, dropObject.skills);
+        dropObject.age, dropObject.skills, dropObject.id);
     }
     else if (dropObject.hasOwnProperty('modell'))
     {
-      return new  Vehicle(dropObject.bezeichnung,dropObject.size, dropObject.modell);
+      return new  Vehicle(dropObject.bezeichnung,dropObject.size, dropObject.modell, dropObject.id);
     }
     else if (dropObject.hasOwnProperty('description'))
     {
-      return new Material(dropObject.bezeichnung, dropObject.description, dropObject.location);
+      return new Material(dropObject.bezeichnung, dropObject.description, dropObject.location, dropObject.id);
     }
   }
  /**
@@ -609,7 +612,7 @@ export class CalenderConstructionAreaComponent implements OnInit
       height: '90%',
       width:'90%',
       data: {
-        constructionArea: this.constructionArea, 
+        constructionArea: this.constructionArea,
         employeeList: this.constructionAreaDay.employeeList,
         vehicleList: this.constructionAreaDay.vehicleList,
         materialList: this.constructionAreaDay.materialList
@@ -617,9 +620,8 @@ export class CalenderConstructionAreaComponent implements OnInit
     });
   }
 
-  testCalcTime(data:(Employee | Material | Vehicle)) : void 
+  testCalcTime(data:(Employee | Material | Vehicle)) : void
   {
-    debugger
     if (data instanceof Employee)
       console.log("TimeCalc on Employee");
 

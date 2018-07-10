@@ -36,11 +36,11 @@ export class ResourceTypeComponent implements OnInit {
 
     this.constructionAreas = this.route.snapshot.data['constructionAreas'];
     this.permanent = this.route.snapshot.data['permanent'];
-    //debugger;
+    // debugger;
     this.employees = this.route.snapshot.data['employees']
     this.vehicles = this.route.snapshot.data['vehicles'];
     this.materials = this.route.snapshot.data['materials'];
-    this.filterUnusedResources();
+    // this.filterUnusedResources();
   }
 
   refreshResources(){
@@ -51,7 +51,7 @@ export class ResourceTypeComponent implements OnInit {
     this.employees = this.route.snapshot.data['employees'];
     this.vehicles = this.route.snapshot.data['vehicles'];
     this.materials = this.route.snapshot.data['materials'];
-    this.filterUnusedResources();
+    // this.filterUnusedResources();
   }
 
   //delete all employees from the employee array which are used in a constructionArea

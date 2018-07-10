@@ -29,6 +29,7 @@ import de.amos.mamb.model.ConstructionArea;
 import de.amos.mamb.model.ConstructionAreaDay;
 import de.amos.mamb.model.Employee;
 
+import de.amos.mamb.model.Reservation;
 import de.amos.mamb.persistence.PersistenceManager;
 import de.amos.mamb.rest.command.ObjectCommand;
 import de.amos.mamb.rest.command.ResponseCommand;
@@ -57,8 +58,8 @@ public class EmployeeAPI extends AbstractAPI {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Employee> getEmployees(@Context HttpServletResponse response){
-        return executeRequest(response,new ObjectCommand<List<Employee>>() {
+    public Response getEmployees(){
+        return executeRequest(new ResponseCommand() {
             @Override
             public int httpOnSuccess() {
                 return 200;
@@ -70,10 +71,13 @@ public class EmployeeAPI extends AbstractAPI {
             }
 
             @Override
-            public List<Employee> execute() {
+            public String execute() {
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 List<Employee> employeeList = manager.getAllEntities(Employee.class);
-                return employeeList;
+
+                Gson gson = new Gson();
+                String json = gson.toJson(employeeList);
+                return json;
             }
         });
     }

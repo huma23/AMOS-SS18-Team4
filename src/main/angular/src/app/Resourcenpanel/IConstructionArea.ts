@@ -5,6 +5,7 @@ import {Material} from "../../model/material";
 import {Customer} from "../../model/customer";
 import {ProgressType} from "../../model/ProgressType";
 import {Note}         from "../../model/Note";
+import {Reservation} from "../../model/Reservation";
 
 export interface IConstructionArea{
   id: string,
@@ -30,7 +31,8 @@ export interface IConstructionArea{
 export interface IConstructionAreaDay{
   employeeList: Employee[],
   vehicleList: Vehicle[],
-  materialList: Material[]
+  materialList: Material[],
+  reservations: Reservation[],
 }
 
 export interface IFileInfo {
