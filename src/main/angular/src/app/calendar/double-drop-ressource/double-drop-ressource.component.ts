@@ -81,7 +81,7 @@ export class DoubleDropRessourceComponent
       {
         case 0:
           this.dialogText         = this.mitarbeiterString;
-          this.dialogSpecificType = data.droppedItem.firstName + data.droppedItem.lastName ;
+          this.dialogSpecificType = data.droppedItem.firstName + " "+data.droppedItem.lastName ;
         break;
         case 1:
           this.dialogText         = this.vehicelString;
@@ -103,7 +103,6 @@ export class DoubleDropRessourceComponent
         hoursToAreaTwo      : [0, Validators.required],
         minutesToAreaTwo    : [0, Validators.required]
       });
-      debugger;
       this.actualConstructionArea = data.actualProject;
       this.otherConstructionArea = data.otherProject;
       this.id = data.droppedItem.id;
@@ -132,7 +131,6 @@ export class DoubleDropRessourceComponent
    */
     public showRessourceTimePlanSched() : void
     {
-      debugger;
       this.showScheduleRessoureTime = true;
     }
 
