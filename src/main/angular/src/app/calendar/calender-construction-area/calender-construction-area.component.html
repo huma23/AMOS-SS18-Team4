@@ -1,7 +1,7 @@
 <mat-card id="pl-calender-construction-area-card" droppable [dropScope]="['mitarbeiter','fahrzeuge', 'betriebsmittel']" (onDrop)="onDropItem($event)">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-subtitle >{{constructionArea.name}}</mat-card-subtitle>
+      <mat-card-title >{{constructionArea.name}}</mat-card-title>
     </mat-card-title-group>
     <div fxFlex></div>
     <mat-icon fxFlex (click) ="openDetailDialog()" style="font-size: 85%;">open_in_new</mat-icon>
