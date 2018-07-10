@@ -13,20 +13,20 @@
         <div fxLayout="row" fxLayoutAlign="space-evenly start">
             {{empl.firstName}} {{empl.lastName}}
           <mat-icon fxFlex (click)="removeEmployee(constructionArea, empl)" style="font-size: 85%;">clear</mat-icon>
-          <mat-icon fxFlex (click)="testCalcTime(empl)" style="font-size: 85%;">alarm</mat-icon>
+          
         </div>
       </div>
     <mat-card-subtitle>Betriebsmittel</mat-card-subtitle>
     <div class ="area-section-content" *ngFor="let material of constructionAreaDay.materialList" draggable [dragScope]="'betriebsmittel'" [dragData]="material">
       <mat-icon (click)="removeMaterial(constructionArea, material)">clear</mat-icon>
       {{material.bezeichnung}}
-      <mat-icon (click)="testCalcTime(material)">alarm</mat-icon>
+     
       </div>
     <mat-card-subtitle>Fahrzeuge</mat-card-subtitle>
     <div class="area-section-content" *ngFor="let car of constructionAreaDay.vehicleList"  draggable [dragScope]="'fahrzeuge'" [dragData]="car">
       <mat-icon (click)="removeCar(constructionArea, car)">clear</mat-icon>
       {{car.bezeichnung}}
-      <mat-icon (click)="testCalcTime(car)">alarm</mat-icon>
+      
     </div>
   </mat-card-content>
 </mat-card>

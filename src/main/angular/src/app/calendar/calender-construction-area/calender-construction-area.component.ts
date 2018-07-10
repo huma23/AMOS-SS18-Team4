@@ -620,21 +620,4 @@ export class CalenderConstructionAreaComponent implements OnInit
     });
   }
 
-  testCalcTime(data:(Employee | Material | Vehicle)) : void
-  {
-    if (data instanceof Employee)
-      console.log("TimeCalc on Employee");
-
-      if (data instanceof Vehicle)
-      console.log("TimeCalc on Vehicle");
-
-      if (data instanceof Material)
-      console.log("TimeCalc on Material");
-
-      console.log("Data Dropped : " + data);
-      console.log(data);
-      console.log(Employee.toString());
-      console.log(JSON.stringify(Employee));
-
-  }
 }
