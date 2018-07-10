@@ -56,8 +56,8 @@ public class MaterialAPI extends AbstractAPI {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Material> getMaterials(@Context HttpServletResponse response){
-        return executeRequest(response,new ObjectCommand<List<Material>>() {
+    public Response getMaterials(){
+        return executeRequest(new ResponseCommand() {
             @Override
             public int httpOnSuccess() {
                 return 200;
@@ -69,10 +69,14 @@ public class MaterialAPI extends AbstractAPI {
             }
 
             @Override
-            public List<Material> execute() {
+            public String execute() {
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 List<Material> materialList = manager.getAllEntities(Material.class);
-                return materialList;
+
+                Gson gson = new Gson();
+                String json = gson.toJson(materialList);
+
+                return json;
             }
         });
     }

@@ -39,8 +39,25 @@ export class CalendarContentComponent implements OnInit {
   @Input()
   public calendarYear : number;
 
+  @Input()
+  public currentWeekHeader  : Array<string> ;
+
   public calWeeks: string[];
   public constructionManagers: IConstructionLadder[];
+  public nextWeek          : number;
+  public lastWeek          : number;
+  public hasLastWeek       : boolean;
+  public hasNextWeek       : boolean;
+
+  public daysOfTheWeek      : Array<string> =
+    [
+      "Montag",
+      "Dienstag",
+      "Mittwoch",
+      "Donnerstag",
+      "Freitag",
+      "Samstag"
+    ];
 
   constructor(private csService : CalenderStoreService, private route : ActivatedRoute) { }
 
@@ -48,5 +65,26 @@ export class CalendarContentComponent implements OnInit {
   {
     this.calWeeks = this.csService.getCalenderWeekHeaderDBFormat(this.calendarYear, this.calendarWeek);
     this.constructionManagers = this.route.snapshot.data['constructionLadders'];
+
+    if (this.calendarWeek != 1)
+    {
+      this.lastWeek = this.calendarWeek - 1;
+      this.hasLastWeek = true;
+    }
+    else
+    {
+      this.hasLastWeek = false;
+    }
+
+    let weeksOfTheYear = this.csService.getWeeksOfTheYear(this.calendarYear);
+    if (this.calendarWeek < weeksOfTheYear)
+    {
+      this.nextWeek = this.calendarWeek*1 + 1*1;
+      this.hasNextWeek = true;
+    }
+    else
+    {
+      this.hasNextWeek = false;
+    }
   }
 }

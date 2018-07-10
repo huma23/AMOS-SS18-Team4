@@ -54,13 +54,12 @@ public class VehicleAPI extends AbstractAPI{
      * Liefert eine Liste aller Fahrzeuge zurück.
      *
      *
-     * @param response
      * @return
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Vehicle> getVehicles(@Context HttpServletResponse response){
-        return executeRequest(response,new ObjectCommand<List<Vehicle>>() {
+    public Response getVehicles(){
+        return executeRequest(new ResponseCommand() {
             @Override
             public int httpOnSuccess() {
                 return 200;
@@ -72,10 +71,14 @@ public class VehicleAPI extends AbstractAPI{
             }
 
             @Override
-            public List<Vehicle> execute() {
+            public String execute() {
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 List<Vehicle> vehicleList = manager.getAllEntities(Vehicle.class);
-                return vehicleList;
+
+                Gson gson = new Gson();
+                String json = gson.toJson(vehicleList);
+
+                return json;
             }
         });
     }

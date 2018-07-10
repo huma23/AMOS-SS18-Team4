@@ -1,23 +1,21 @@
-<div id="pl-main-view" fxLayout="column"  fxFill>
+<div id="pl-main-view" fxLayout="column"  fxFill="">
+    <mat-sidenav-container id="pl-drawer-container" fxFill>
 
-  <div fxFlex>
-    <mat-drawer-container id="pl-drawer-container" fxFill>
-
-      <mat-drawer #drawerLeft mode="side" opened="true" class="pl-drawer">
+      <mat-sidenav #drawerLeft mode="side" opened="{{sharedToolbar.showLeft}}" class="pl-drawer">
         <div id="content">
           <app-resource-type></app-resource-type>
         </div>
-      </mat-drawer>
+      </mat-sidenav>
 
-      <mat-drawer #drawerRight mode="side" position="end" class="pl-drawer" opened="true">
+      <mat-sidenav #drawerRight mode="side" position="end" class="pl-drawer" opened="{{sharedToolbar.showRight}}">
         <div id="contentRight">
           <app-resource-duration></app-resource-duration>
         </div>
-      </mat-drawer>
+      </mat-sidenav>
 
-      <mat-drawer-content id="pl-content">
+      <mat-sidenav-content id="pl-content">
         <pl-main-calendar [calendarWeek]="calWeek" [calendarYear]="calYear" fxFill=""></pl-main-calendar>
-      </mat-drawer-content>
-    </mat-drawer-container>
-  </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
 </div>

@@ -36,14 +36,17 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 import java.io.*;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 
 /**
@@ -336,7 +339,8 @@ public class ConstructionAreaAPI extends AbstractAPI{
                 boolean isImageUpload = type.equals("image")? true : false;
 
                 Date date = new Date();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                formatter.setTimeZone(TimeZone.getTimeZone("CET"));
                 String dateString = formatter.format(date);
                 PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
                 String filename = fileDetail.getFileName();
@@ -555,5 +559,77 @@ public class ConstructionAreaAPI extends AbstractAPI{
             }
         });
     }
-       
+
+    @POST
+    @Path("/{areaId}/removeReservation/{date}/{resourceId}")
+    public Response removeReservation(@PathParam("areaId") String areaId,
+                                      @PathParam("date") String date,
+                                      @PathParam("resourceId") String resourceId){
+
+        return executeRequest(new ResponseCommand() {
+            @Override
+            public String execute() {
+
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                Long idL = new Long(areaId);
+                ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
+                Long resIdL = new Long(resourceId);
+
+                boolean found = area.removeReservation(date, resIdL);
+
+                if(found){
+                    manager.saveObject(area);
+                    return Result.NO_STRING;
+                }
+
+                return Result.FAILED;
+            }
+
+            @Override
+            public int httpOnSuccess() {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed() {
+                return 400;
+            }
+        });
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id}/addReservation/{date}")
+    public Response addReservation(@PathParam("id") String id,
+                                   @PathParam("date") String date,
+                                   String reservation){
+
+        return executeRequest(new ResponseCommand() {
+            @Override
+            public String execute() {
+
+                Gson gson = new Gson();
+                Reservation res = gson.fromJson(reservation, Reservation.class);
+
+                PersistenceManager manager = PersistenceManager.getInstance(PersistenceManager.ManagerType.OBJECTIFY_MANAGER);
+                Long idL = new Long(id);
+
+                ConstructionArea area = manager.getEntityWithId(idL, ConstructionArea.class);
+                area.addReservations(date, res);
+
+                manager.saveObject(area);
+                return Result.NO_STRING;
+            }
+
+            @Override
+            public int httpOnSuccess() {
+                return 200;
+            }
+
+            @Override
+            public int httpOnCommandFailed() {
+                return 400;
+            }
+        });
+    }
 }

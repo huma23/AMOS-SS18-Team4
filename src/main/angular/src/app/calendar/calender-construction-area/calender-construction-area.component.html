@@ -1,21 +1,32 @@
 <mat-card id="pl-calender-construction-area-card" droppable [dropScope]="['mitarbeiter','fahrzeuge', 'betriebsmittel']" (onDrop)="onDropItem($event)">
-  <mat-card-subtitle >{{constructionArea.name}}
-    <mat-icon style="size: 5px; float:right;" (click) ="openDetailDialog()">open_in_new</mat-icon></mat-card-subtitle>
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-subtitle >{{constructionArea.name}}</mat-card-subtitle>
+    </mat-card-title-group>
+    <div fxFlex></div>
+    <mat-icon fxFlex (click) ="openDetailDialog()" style="font-size: 85%;">open_in_new</mat-icon>
+  </mat-card-header>
   <mat-card-content>
   <mat-card-subtitle>Mitarbeiter</mat-card-subtitle>
-    <div class ="area-section-content" *ngFor="let empl of constructionAreaDay.employeeList" draggable [dragScope]="'mitarbeiter'" [dragData]="empl">
-      <mat-icon (click)="removeEmployee(constructionArea, empl)">clear</mat-icon>
-      {{empl.firstName}} {{empl.lastName}}
-    </div>
+
+      <div class ="area-section-content" *ngFor="let empl of constructionAreaDay.employeeList" draggable [dragScope]="'mitarbeiter'" [dragData]="empl">
+        <div fxLayout="row" fxLayoutAlign="space-evenly start">
+            {{empl.firstName}} {{empl.lastName}}
+          <mat-icon fxFlex (click)="removeEmployee(constructionArea, empl)" style="font-size: 85%;">clear</mat-icon>
+          
+        </div>
+      </div>
     <mat-card-subtitle>Betriebsmittel</mat-card-subtitle>
     <div class ="area-section-content" *ngFor="let material of constructionAreaDay.materialList" draggable [dragScope]="'betriebsmittel'" [dragData]="material">
       <mat-icon (click)="removeMaterial(constructionArea, material)">clear</mat-icon>
       {{material.bezeichnung}}
+     
       </div>
     <mat-card-subtitle>Fahrzeuge</mat-card-subtitle>
     <div class="area-section-content" *ngFor="let car of constructionAreaDay.vehicleList"  draggable [dragScope]="'fahrzeuge'" [dragData]="car">
       <mat-icon (click)="removeCar(constructionArea, car)">clear</mat-icon>
       {{car.bezeichnung}}
-      </div>
+      
+    </div>
   </mat-card-content>
 </mat-card>

@@ -16,6 +16,7 @@ import {ConstructionLadder} from "../../model/constructionLadder";
 import {ConstructionAreaForm} from "../../model/constructionAreaForm";
 import {ICustomer} from "./ICustomer";
 import {Customer} from "../../model/customer";
+import {Reservation} from "../../model/Reservation";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -46,7 +47,7 @@ export class ResourceService{
     return this.http.get<Employee[]>(this._employeeUri+ "/" + year + "/" + week);
   }
 
-  saveEmployee(employee:Employee):Observable<Employee>{
+  saveEmployee(employee:any):Observable<Employee>{
     let body = JSON.stringify(employee);
     return this.http.post<Employee>(this._employeeUri, body, httpOptions).do(data => console.log(data));
 
@@ -61,7 +62,7 @@ export class ResourceService{
     return this.http.get<Vehicle[]>(this._vehicleUri + "/" + year + "/" + week);
   }
 
-  saveVehicle(vehicle:Vehicle):Observable<IVehicle> {
+  saveVehicle(vehicle:any):Observable<IVehicle> {
     let body = JSON.stringify(vehicle)
     return this.http.post<Vehicle>(this._vehicleUri, body, httpOptions);
   }
@@ -75,7 +76,7 @@ export class ResourceService{
     return this.http.get<Material[]>(this._materialUri+ "/" + year+ "/" + week);
   }
 
-  saveMaterials(material:Material):Observable<IMaterial>{
+  saveMaterials(material:any):Observable<IMaterial>{
     let body = JSON.stringify(material);
     return this.http.post<Material>(this._materialUri, body, httpOptions);
   }
@@ -116,6 +117,13 @@ export class ResourceService{
   saveCustomer(customer: Customer):Observable<ICustomer>{
     let body = JSON.stringify(customer);
     return this.http.post<Customer>(this._customerUri, body, httpOptions);
+  }
+
+  saveReservation(res:Reservation, constructionAreaId, date):Observable<Reservation>{
+    debugger;
+    let body = JSON.stringify(res);
+    return this.http.post<Reservation>("/api/constructionArea/"+constructionAreaId+"/addReservation/"+date, body, httpOptions).do(data => console.log(data));
+
   }
 
 }

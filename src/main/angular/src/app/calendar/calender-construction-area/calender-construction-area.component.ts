@@ -40,6 +40,8 @@ from 'rxjs/Observable';
 import { DropEvent } from "ng-drag-drop";
 import { element } from "protractor";
 import {DetailDialogComponent} from "../detail-dialog/detail-dialog.component";
+import { ConstructionArea } from "../../../model/constructionArea";
+
 
 enum RessourceType
 {
@@ -101,7 +103,6 @@ export class CalenderConstructionAreaComponent implements OnInit
 
     if (this.constructionAreaDay.vehicleList === (null || undefined))
       this.constructionAreaDay.vehicleList = new Array<Vehicle>();
-    console.log(this.constructionArea);
   }
 /**
    * @method
@@ -195,19 +196,25 @@ export class CalenderConstructionAreaComponent implements OnInit
 
     let newRessource = this.convertDragnDropObjectToRessource(droppedObject);
 
+    let doubleUsedRessource : ConstructionArea;
     let startDialog: boolean ;
 
       if( newRessource instanceof Employee )
       {
         if (!this.checkIfRessourceAlreadyWithinProject(RessourceType.Mitarbeiter, newRessource))
         {
-          if(this.checkIfRessourceIsDoubleUsed(RessourceType.Mitarbeiter,newRessource))
+          doubleUsedRessource = this.checkIfRessourceIsDoubleUsed(RessourceType.Mitarbeiter,newRessource);
+          if(doubleUsedRessource != null)
           {
-            this.dialogIfDropDoubleRessource(RessourceType.Mitarbeiter, newRessource)
+            console.log(doubleUsedRessource);
+            console.log(this.constructionArea);
+
+            this.dialogIfDropDoubleRessource(RessourceType.Mitarbeiter, newRessource, this.constructionArea, doubleUsedRessource, this.date)
             .subscribe((dialogAnswer : boolean) =>
             {
               if(dialogAnswer)
               {
+
                 this.addRessourceToLists(RessourceType.Mitarbeiter, newRessource);
               }
             });
@@ -222,9 +229,11 @@ export class CalenderConstructionAreaComponent implements OnInit
       {
         if (!this.checkIfRessourceAlreadyWithinProject(RessourceType.Material, newRessource))
         {
-          if(this.checkIfRessourceIsDoubleUsed(RessourceType.Material,newRessource))
+          doubleUsedRessource = this.checkIfRessourceIsDoubleUsed(RessourceType.Material,newRessource);
+          if(doubleUsedRessource != null)
           {
-            this.dialogIfDropDoubleRessource(RessourceType.Material, newRessource)
+            console.log(doubleUsedRessource);
+            this.dialogIfDropDoubleRessource(RessourceType.Material, newRessource, this.constructionArea, doubleUsedRessource,this.date)
             .subscribe((dialogAnswer : boolean) =>
             {
               if(dialogAnswer)
@@ -243,9 +252,11 @@ export class CalenderConstructionAreaComponent implements OnInit
       {
         if (!this.checkIfRessourceAlreadyWithinProject(RessourceType.Fahrzeug, newRessource))
         {
-          if(this.checkIfRessourceIsDoubleUsed(RessourceType.Fahrzeug,newRessource))
+          doubleUsedRessource = this.checkIfRessourceIsDoubleUsed(RessourceType.Fahrzeug,newRessource);
+          if(doubleUsedRessource != null)
           {
-            this.dialogIfDropDoubleRessource(RessourceType.Fahrzeug, newRessource)
+            console.log(doubleUsedRessource);
+            this.dialogIfDropDoubleRessource(RessourceType.Fahrzeug, newRessource,this.constructionArea, doubleUsedRessource, this.date)
             .subscribe((dialogAnswer : boolean) =>
             {
               if(dialogAnswer)
@@ -411,13 +422,14 @@ export class CalenderConstructionAreaComponent implements OnInit
    *
    *
    */
-  private dialogIfDropDoubleRessource(type:RessourceType, droppedItem: any ) : Observable<any>
+  private dialogIfDropDoubleRessource(type:RessourceType, droppedItem: any, actualProject: ConstructionArea, otherProject : ConstructionArea, date: string) : Observable<any>
   {
-    let injectObject = {type, droppedItem};
-    console.log(injectObject);
+    let injectObject = {type, droppedItem, actualProject, otherProject, date};
+   console.log(injectObject);
     let dialogRef = this.dialog.open(DoubleDropRessourceComponent,
     {
-      width: '350px',
+      maxHeight: '90%',
+      maxWidth:'90%',
       data: injectObject,
       disableClose:false
     });
@@ -443,9 +455,10 @@ export class CalenderConstructionAreaComponent implements OnInit
    *
    *
    */
-  private checkIfRessourceIsDoubleUsed(type : RessourceType, ressource : any) : boolean
+  private checkIfRessourceIsDoubleUsed(type : RessourceType, ressource : any) : (ConstructionArea | null)
   {
-    let result : boolean = false;
+    let result : ConstructionArea = null
+    ;
 
     this.allAreasofThisDay.forEach(singleArea =>
     {
@@ -458,7 +471,7 @@ export class CalenderConstructionAreaComponent implements OnInit
           return ressource.equals(element);
         });
         if (foundMaterial.length > 0)
-        result = true;
+        result = singleArea;
         break;
 
         case RessourceType.Fahrzeug:
@@ -469,7 +482,7 @@ export class CalenderConstructionAreaComponent implements OnInit
         });
 
         if (foundVehicel.length > 0)
-        result = true;
+        result = singleArea;
 
         break;
 
@@ -482,7 +495,7 @@ export class CalenderConstructionAreaComponent implements OnInit
         });
 
         if (foundEmpl.length > 0)
-          result = true;
+          result = singleArea;
         break;
       }
 
@@ -517,15 +530,15 @@ export class CalenderConstructionAreaComponent implements OnInit
     if (dropObject.hasOwnProperty('skills'))
     {
       return  new Employee(dropObject.firstName, dropObject.lastName,
-        dropObject.age, dropObject.skills);
+        dropObject.age, dropObject.skills, dropObject.id);
     }
     else if (dropObject.hasOwnProperty('modell'))
     {
-      return new  Vehicle(dropObject.bezeichnung,dropObject.size, dropObject.modell);
+      return new  Vehicle(dropObject.bezeichnung,dropObject.size, dropObject.modell, dropObject.id);
     }
     else if (dropObject.hasOwnProperty('description'))
     {
-      return new Material(dropObject.bezeichnung, dropObject.description, dropObject.location);
+      return new Material(dropObject.bezeichnung, dropObject.description, dropObject.location, dropObject.id);
     }
   }
  /**
@@ -599,11 +612,12 @@ export class CalenderConstructionAreaComponent implements OnInit
       height: '90%',
       width:'90%',
       data: {
-        constructionArea: this.constructionArea, 
+        constructionArea: this.constructionArea,
         employeeList: this.constructionAreaDay.employeeList,
         vehicleList: this.constructionAreaDay.vehicleList,
         materialList: this.constructionAreaDay.materialList
       }
     });
   }
+
 }
